@@ -1,15 +1,26 @@
 import React from "react";
 import list from "../../public/list.json";
-// importing slik react liblary for crauser
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Cards from "./Cards";
+ // Import CSS file for custom styling
 
 function Freebook() {
-  const filterData = list.filter((data) => data.Category === "Free");
-  // crauser setting is pasted here
-  var settings = {
+  // Define semester categories
+  const semesters = [
+    "1st Sem",
+    "Second Semester",
+    "Third Semester",
+    "Fourth Semester",
+    "Fifth Semester",
+    "Sixth Semester",
+    "Seventh Semester",
+    "Eighth Semester",
+  ];
+
+  // Carousel settings
+  const settings = {
     dots: true,
     infinite: false,
     speed: 500,
@@ -43,22 +54,27 @@ function Freebook() {
       },
     ],
   };
+
   return (
-    <>
-      <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
-        <div>
-          <h2 className="font-bold text-xl pb-2">Free Offered Books</h2>
-          <p>RANDOM Paragrph for Describing these notes</p>
-        </div>
-        <div>
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
+      <h2 className="font-bold text-2xl mt-8 mb-4">Free Offered Books</h2>
+      <p className="mb-8">
+        Explore our collection of free books available for students. These resources cover various subjects and are offered to help you in your studies. Dive into the wealth of knowledge without any cost.
+      </p>
+      {/* Map through semesters and create a slider for each */}
+      {semesters.map((semester, index) => (
+        <div key={index} className="semester-slider mt-8">
+          {/* Filter books for the current semester */}
           <Slider {...settings}>
-            {filterData.map((item) => (
-              <Cards item={item} key={item.id}/>
-            ))}
+            {list
+              .filter((item) => item.Category === semester)
+              .map((item) => (
+                <Cards item={item} key={item.id} />
+              ))}
           </Slider>
         </div>
-      </div>
-    </>
+      ))}
+    </div>
   );
 }
 
