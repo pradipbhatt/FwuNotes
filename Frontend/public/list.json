@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "Mathematics",
+        "title": "Advanced Calculus Notes",
+        "Price": 0,
+        "Category": "Free",
+        "image": "https://clipart-library.com/images_k/math-clipart-transparent/math-clipart-transparent-6.png"
+    },
+    {
+        "id": 2,
+        "name": "Physics",
+        "title": "Quantum Mechanics",
+        "Price": 30,
+        "Category": "Economics",
+        "image": "https://img.freepik.com/free-vector/physics-realistic-background_23-2148161562.jpg?w=740&t=st=1716880242~exp=1716880842~hmac=a10be0be12313f9ad12e5bcd6e87672bb16e5dc6e3a47c6e828cbb72c6b33e9b"
+    },
+    {
+        "id": 3,
+        "name": "Computer Science",
+        "title": "Algorithms and Data Structures",
+        "Price": 50,
+        "Category": "Sports",
+        "image": "https://img.freepik.com/free-vector/computer-code-background-with-scripts_23-2147934051.jpg?w=740&t=st=1716881242~exp=1716881842~hmac=87b6d324bdb08c4b7b41e25db41dcf9b5c74a1122a906569c51768eabdfd58b5"
+    },
+    {
+        "id": 4,
+        "name": "Chemistry",
+        "title": "Organic Chemistry",
+        "Price": 0,
+        "Category": "Free",
+        "image": "https://img.freepik.com/free-vector/chemistry-lab-background_23-2148161537.jpg?w=740&t=st=1716881842~exp=1716882442~hmac=a117ef12dd9a62b4cbb76dfc3d5f1466a1bb3cbe605ed1f6b843c3d2f6e3e5e6"
+    },
+    {
+        "id": 5,
+        "name": "Electronics",
+        "title": "Circuit Analysis",
+        "Price": 30,
+        "Category": "Economics",
+        "image": "https://img.freepik.com/free-vector/electronics-background-realistic-style_23-2148161555.jpg?w=740&t=st=1716882442~exp=1716883042~hmac=b4e2c3f48af13b8de50b8076d9e03c6b8c4c973a4e8dcd0f2bc1a11d29b3ef65"
+    },
+    {
+        "id": 6,
+        "name": "Mechanical Engineering",
+        "title": "Thermodynamics",
+        "Price": 50,
+        "Category": "Sports",
+        "image": "https://img.freepik.com/free-vector/thermodynamics-concept-illustration_114360-1937.jpg?w=740&t=st=1716883042~exp=1716883642~hmac=c5a29c99e2e2a4748f72b45e38fce11d5c58c0d3a9a9a95cf02b7af88d3ea5f8"
+    },
+    {
+        "id": 7,
+        "name": "Civil Engineering",
+        "title": "Structural Analysis",
+        "Price": 0,
+        "Category": "Free",
+        "image": "https://img.freepik.com/free-vector/thermodynamics-concept-illustration_114360-1937.jpg?w=740&t=st=1716883042~exp=1716883642~hmac=c5a29c99e2e2a4748f72b45e38fce11d5c58c0d3a9a9a95cf02b7af88d3ea5f8"
+    },
+    {
+        "id": 8,
+        "name": "Software Engineering",
+        "title": "Software Design Patterns",
+        "Price": 30,
+        "Category": "Economics",
+        "image": "https://img.freepik.com/free-vector/software-developer-concept_23-2147984161.jpg?w=740&t=st=1716884242~exp=1716884842~hmac=65b6e2d1205ef7b7180e97c6f717db9c8057a7a90cf1c1c7c824a1280c91bb7f"
+    },
+    {
+        "id": 9,
+        "name": "Electrical Engineering",
+        "title": "Power Systems",
+        "Price": 50,
+        "Category": "Sports",
+        "image": "https://img.freepik.com/free-vector/electrical-circuit-diagram-background_23-2148161538.jpg?w=740&t=st=1716884842~exp=1716885442~hmac=f5e8ffbd92b7c053c81873ebed138407b8a9b3e3b8bdfd178b8b7d394cf7178b"
+    },
+    {
+        "id": 10,
+        "name": "Biomedical Engineering",
+        "title": "Biomedical Signal Processing",
+        "Price": 0,
+        "Category": "Free",
+        "image": "https://img.freepik.com/free-vector/biomedical-science-concept_23-2148161574.jpg?w=740&t=st=1716885442~exp=1716886042~hmac=2a9a2df86c5c8f396ce02b165fe4fa99b5db39e3e086e17bca437bf3189bc378"
+    },
+    {
+        "id": 11,
+        "name": "Environmental Engineering",
+        "title": "Water Resource Management",
+        "Price": 30,
+        "Category": "Economics",
+        "image": "https://img.freepik.com/free-vector/water-resource-management-concept-illustration_114360-7658.jpg?w=740&t=st=1716886042~exp=1716886642~hmac=7d63d1af2b2d6ea90c05e77f9371e7e2f4a57d6ab3a7fd6e5ea1a6cfb0c85e2f"
+    },
+    {
+        "id": 12,
+        "name": "Material Science",
+        "title": "Introduction to Nanotechnology",
+        "Price": 50,
+        "Category": "Sports",
+        "image": "https://img.freepik.com/free-vector/nanotechnology-concept-illustration_114360-4594.jpg?w=740&t=st=1716886642~exp=1716887242~hmac=4e1b39dfb10c2522824c7d9e4527c9e63d0ae9791c95dfb3fbcf7c1d3965fddf"
+    }
+]
