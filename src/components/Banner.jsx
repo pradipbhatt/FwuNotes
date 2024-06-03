@@ -1,5 +1,5 @@
 import React from "react";
-import banner from "../../public/Banner.png";
+import banner2 from "../../public/Banner2.png";
 
 function Banner() {
   return (
@@ -9,12 +9,12 @@ function Banner() {
           <div className="space-y-8">
             <h1 className="text-2xl md:text-4xl font-bold">
               Welcome to the{" "}
-              <span className="text-purple-500">Far Western University </span> 
+              <span className="text-purple-500">Far Western University </span>
               School of Engineering Notes Portal!
             </h1>
             <p className="text-sm md:text-xl">
-              Access all the resources you need to excel in your studies. 
-              Find notes, tutorials, books, solutions, handwritten notes, 
+              Access all the resources you need to excel in your studies.
+              Find notes, tutorials, books, solutions, handwritten notes,
               and guidance from seniors, all in one place.
             </p>
             <label className="input input-bordered flex items-center gap-2">
@@ -34,8 +34,8 @@ function Banner() {
         </div>
         <div className="order-1 w-full mt-20 md:w-1/2">
           <img
-            src={banner}
-            className="md:w-[550px] md:h-[460px] md:ml-12"
+            src={banner2}
+            className="md:w-[500px] md:h-[500px] md:ml-12"
             alt="Far Western University"
           />
         </div>

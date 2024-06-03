@@ -48,7 +48,7 @@ function Navbar() {
         <a href="/Mock">Mock Test</a>
       </li>
       <li>
-        <a>About</a>
+        <a  href="/About">About</a>
       </li>
     </>
   );
