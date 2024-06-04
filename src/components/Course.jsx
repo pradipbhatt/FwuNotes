@@ -26,7 +26,7 @@ function Course() {
         <div className="mt-28 items-center justify-center text-center">
           <h1 className="text-2xl md:text-4xl">
             We're delighted to have you{" "}
-            <span className="text-purple-500"> Here! :</span>
+            <span className="text-orange-500"> Here! :</span>
           </h1>
           <p className="mt-12">
             Thank you for being here! Here you'll find details about various
@@ -36,7 +36,7 @@ function Course() {
             more information, visit our website.
           </p>
           <Link to="/">
-            <button className="mt-6 bg-purple-500 text-white px-4 py-2 rounded-md hover:bg-pink-700 duration-300">
+            <button className="mt-6 bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 duration-300">
               Back
             </button>
           </Link>

@@ -52,14 +52,14 @@ function Login() {
               ✕
             </Link>
 
-            <h3 className="font-bold text-2xl text-gray-800 mb-6 text-center">Login</h3>
+            <h3 className="font-bold text-2xl text-gray-100 mb-6 text-center">Login</h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Email</label>
+                <label className="block text-sm font-medium text-gray-100">Email</label>
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 text-black bg-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
                   {...register("email", { required: true })}
                 />
                 {errors.email && (
@@ -67,11 +67,11 @@ function Login() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Password</label>
+                <label className="block text-sm font-medium text-gray-100">Password</label>
                 <input
                   type="password"
                   placeholder="Enter your password"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-pink-500 text-black bg-white"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
                   {...register("password", { required: true })}
                 />
                 {errors.password && (
@@ -79,7 +79,7 @@ function Login() {
                 )}
               </div>
               <div className="flex justify-around mt-6">
-                <button className="bg-pink-500 text-white rounded-md px-4 py-2 hover:bg-pink-700 duration-200">
+                <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer">
                   Login
                 </button>
                 <p className="text-sm text-gray-600">

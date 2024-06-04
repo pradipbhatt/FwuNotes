@@ -47,7 +47,7 @@ function About() {
               <h2 className="card-title">Pradip Bhatt</h2>
               <p>A passionate Computer Engineer From Far West Nepal.</p>
               <div className="card-actions">
-                <button className="btn btn-primary" onClick={handleContactClick}>Contact Now</button>
+                <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer" onClick={handleContactClick}>Contact Now</button>
               </div>
             </div>
           </div>

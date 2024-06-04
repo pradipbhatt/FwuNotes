@@ -9,12 +9,12 @@ function Banner() {
           <div className="space-y-8">
             <h1 className="text-2xl md:text-4xl font-bold">
               Welcome to the{" "}
-              <span className="text-purple-500">Far Western University </span>
-              School of Engineering Notes Portal!
+              <span className="text-orange-500">Far Western University </span>
+              School of Engineering Notes & Mock Test Portal !
             </h1>
             <p className="text-sm md:text-xl">
               Access all the resources you need to excel in your studies.
-              Find notes, tutorials, books, solutions, handwritten notes,
+              Find notes, tutorials, books, solutions, handwritten notes accoroding to SOE FWU Syllabus, <span className="text-orange-500">Mock Test </span>
               and guidance from seniors, all in one place.
             </p>
             <label className="input input-bordered flex items-center gap-2">
@@ -30,7 +30,7 @@ function Banner() {
               <input type="text" className="grow" placeholder="Email" />
             </label>
           </div>
-          <button className="btn mt-6 btn-primary">Get Started</button>
+          <button className="bg-orange-500 text-white px-3 py-2 mt-8 rounded-md hover:bg-orange-700 duration-300 cursor-pointer">Get Started</button>
         </div>
         <div className="order-1 w-full mt-20 md:w-1/2">
           <img

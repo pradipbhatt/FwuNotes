@@ -106,7 +106,7 @@ const Mock4 = () => {
                 ))}
               </div>
               <button
-                className="px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-500 text-white rounded"
+                className="px-4 py-2 mt-4 bg-orange-500 hover:bg-orange-500 text-white rounded"
                 onClick={handleRestartQuiz}
               >
                 Restart Quiz
@@ -159,7 +159,7 @@ const Mock4 = () => {
                   Previous
                 </button>
                 <button
-                  className="w-1/2 px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded disabled:bg-gray-400"
+                  className="w-1/2 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded disabled:bg-gray-400"
                   onClick={handleNextQuestion}
                   disabled={selectedAnswer === null}
                 >

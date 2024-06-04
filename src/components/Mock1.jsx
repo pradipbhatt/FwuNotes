@@ -692,7 +692,7 @@ const Mock1 = () => {
                 ))}
               </div>
               <button
-                className="px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-500 text-white rounded"
+                className="px-4 py-2 mt-4 bg-orange-500 hover:bg-orange-500 text-white rounded"
                 onClick={handleRestartQuiz}
               >
                 Restart Quiz
@@ -738,14 +738,14 @@ const Mock1 = () => {
               </div>
               <div className="mt-4 flex justify-between">
                 <button
-                  className="bg-purple-800 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                  className="bg-orange-800 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                   onClick={handlePreviousQuestion}
                   disabled={currentQuestion === 0}
                 >
                   Previous
                 </button>
                 <button
-                  className="bg-purple-800 hover:bg-purple-400 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
+                  className="bg-orange-800 hover:bg-orange-400 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400"
                   onClick={handleNextQuestion}
                   disabled={selectedAnswer === null}
                 >

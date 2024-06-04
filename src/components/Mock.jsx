@@ -17,10 +17,10 @@ const Mock = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Navbar />
-      <div className="flex justify-center items-center mt-8">
-        <img src={logo} alt="Logo" className="w-1/2 h-32 md:w-1/2 md:h-30 mt-20" />
+      <div className="flex justify-center items-center mt-8 ">
+        <img src={logo} alt="Logo" className="sm:w-full md:w-1/2 md:h-32 md:w-1/2 md:h-30 mt-20 "/>
       </div>
-      <div className="flex-grow flex justify-center items-center bg-gray-100 p-4">
+      <div className="flex-grow flex justify-center items-center bg-gray-800 p-4 dark:bg-gray-100">
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {years.map((year) => (
             <Card key={year} className="p-6 flex flex-col items-center shadow-md hover:shadow-lg transition-shadow duration-300">

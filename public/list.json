@@ -67,7 +67,7 @@
       "id": 7,
       "name": "Engineering Math II",
       "title": "SH 121",
-      "Price": 0,
+      "Price": 10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP._dGVL4vbWuc5yOp3jZtz_AAAAA%26pid%3DApi&f=1&ipt=cd863e5240eb50a1e6be69e002e323e54be6cc2a618e1cd8013ca4ab4b357d73&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1kMhcuBdcDCqtocut4Ne10VX5iXa1lSyU?usp=drive_link"
@@ -76,7 +76,7 @@
       "id": 8,
       "name": "Engineering Chemistry",
       "title": "SH 122",
-      "Price": 0,
+      "Price": 10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.lzpjdXQs94cn9SCm9uluiwHaKe%26pid%3DApi&f=1&ipt=7594e0ffa0748717d6dea24a27a2dfc07ee18bf5e5dd909992cafd76ddc804d8&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1-SAjtXXc0ah5z40RtXuP_Xrouwgm-uA9?usp=drive_link"
@@ -85,7 +85,7 @@
       "id": 9,
       "name": "Thermodynamics",
       "title": "ME 123",
-      "Price": 0,
+      "Price": 10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Fv5bt7qLJWSjC37nDMaaQgHaHa%26pid%3DApi&f=1&ipt=128a38d9bd208eae58782e95b1c934144f618df9ab744fc8d5ee8476bb2fe0f1&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/10T98SsDUU12oyvQfyIosgxx7WH108qaV?usp=drive_link"
@@ -94,7 +94,7 @@
       "id": 10,
       "name": "Applied Mechanics",
       "title": "CE 124",
-      "Price": 0,
+      "Price": 10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.QonFWuyKJitC5MeyNDHTdwAAAA%26pid%3DApi&f=1&ipt=571fe83d2ff0fac3ad9c4fd686eaf326a74a20b010cfccc3cc90f2c488b6c563&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1ynL8PPbYBrBtwUdnCkNZy_fLcgvRPP0k?usp=drive_link"
@@ -103,7 +103,7 @@
       "id": 11,
       "name": "Object-Oriented Programming",
       "title": "CT 125",
-      "Price": 0,
+      "Price": 10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.OKzvN1CevG6IlHr6dKTszAHaD4%26pid%3DApi&f=1&ipt=22992785ddab489c980c8255a303d640c552cf95d1464058f6a87897386d43a2&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/10xiF_NNz35VYXkIzkhXI6ycuU4MhTzks?usp=drive_link"
@@ -112,10 +112,10 @@
       "id": 12,
       "name": "Discrete Structure",
       "title": "CT 126",
-      "Price": 0,
+      "Price":10,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.8_ELWgPoV1ObBgDlDEd2JQHaD4%26pid%3DApi&f=1&ipt=d0a55fdc7c3ca3d61a14dff51e617681e4e81129b99897d519162c52ee49e638&ipo=images",
-      "pdfUrl": "https://drive.google.com/drive/folders/1mY0vKWegk5SZJVBQF1Db3yXr2kvpcrH_?usp=drive_link"
+      "pdfUrl": "https://drive.google.com/file/d/1pF2sBTD9RQxZCA9azQKajvW3Va2P2Ve4/view"
     },
 
 
@@ -154,7 +154,7 @@
       "Price": 0,
       "Category": "Third Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.j0q8yyB0GAXy0MKejHpgoAHaJQ%26pid%3DApi&f=1&ipt=80cc986d352786985fc1c14795f71ab2d614395194948e3615011d8ff7ad0a47&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/u/2/folders/10EXlnFuZkvqJlGdiTvW3PYk2_Nmjn3aE"
     },
     {
       "id": 17,
@@ -181,7 +181,7 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ygtFsxmkjg4U8jH3appIdQHaL-%26pid%3DApi&f=1&ipt=968f133890492480847645174103f0476ae9a6b3c292da9bbbe02d80fe474d28&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1b4BKOHNSSsWS29L-o8dJm41c_yWwzxHr?usp=drive_link"
     },
     {
       "id": 20,
@@ -190,7 +190,7 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.madrasshoppe.com%2F40420-medium_default%2Fintroduction-to-microprocessors.jpg&f=1&nofb=1&ipt=79b0a4d3ba6675f69a7746c7c254f7cbb3ba2af75978e0db40aebd19793fbf12&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/11FQNBOwxU_LCOD7NgfrainYjx8J7jH0Q?usp=drive_link"
     },
     {
       "id": 21,
@@ -199,7 +199,7 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ACf4AK9jI199QRQgJWIoWQAAAA%26pid%3DApi&f=1&ipt=c0ba40c29a87ac13a474572a6fca1ddd906f9966f6e986b49782b64764bfb13e&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1KikG2BuV8KJyAXnK7yMD8VxO3B1YgWH_?usp=drive_link"
     },
     {
       "id": 22,
@@ -208,7 +208,7 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.PQp1dHoJ9K90lV-wyaW2NAHaKS%26pid%3DApi&f=1&ipt=603c5c4e69b605f862dc1077c3509f06de8572d94e5837dfbf4e15c781b4b36a&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1ah15j8GF5ZAljh3ZJm5m6FT-ArBmAZuU?usp=drive_link"
     },
     {
       "id": 23,
@@ -217,7 +217,7 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Qp4Ko3ul01973vWv61aEMwHaHa%26pid%3DApi&f=1&ipt=e4f5e8b05d6a84f282808064a134b16a86a1424890370dee5042edab81ea58e5&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/11qqVzGjoEyR7JB5YjcIBTEK53OzxRbE5?usp=drive_link"
     },
     {
       "id": 24,
@@ -226,15 +226,28 @@
       "Price": 0,
       "Category": "Fourth Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.mgSgLiQ3uO7QK2SmiOowvAAAAA%26pid%3DApi&f=1&ipt=d6323a8497e88caf102f0d3df7a77e48a1f6228b07490a1ea3ab93a59e08bf67&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1b4Q2WkeYRrJgNYVuuMeLo2xwY5whXzmv?usp=drive_link"
     },
+
+
+
+    {
+      "id": 24,
+      "name": "Past Questions",
+      "title": "SH 246",
+      "Price": 0,
+      "Category": "Fourth Semester",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.mgSgLiQ3uO7QK2SmiOowvAAAAA%26pid%3DApi&f=1&ipt=d6323a8497e88caf102f0d3df7a77e48a1f6228b07490a1ea3ab93a59e08bf67&ipo=images",
+      "pdfUrl": "https://drive.google.com/file/d/1MgIQCYcPNt3Y7oyLjFVHyJZ3p1PJ8f8c/view"
+    },
+
     {
     "name": "Probability and Statistic",
     "title": "SH 351",
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.LgoccT-JPb9hZUiylePyzwHaHa%26pid%3DApi&f=1&ipt=291f4dac133257b1b5a5e1b73e530080ac4d0ffe41ce90052ca5855072efde20&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1NPZYDtSgCxkc098NbQjbflh_mVTxpj9j?usp=drive_link"
   },
   {
     "id": 26,
@@ -243,7 +256,7 @@
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.O7UNC7ddVql6waCsjJpCxQAAAA%26pid%3DApi&f=1&ipt=a02daa1ea5ba4a771916f7e1b864901286a623df91794d49112485abbc52f563&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1GFRpAvNGkfZhe0fmnMn94FPndqVdnwiq?usp=drive_link"
   },
   {
     "id": 27,
@@ -252,7 +265,7 @@
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.ilXt6iu8ioWkU2daoawQNQAAAA%26pid%3DApi&f=1&ipt=7b65388e7f15a9505af2128190ddbcc6410987ae27f12ba998f65dfb57015bc4&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/15_UfdL85plhNYNihXvO4nmZa15y9Vqyu?usp=drive_link"
   },
   {
     "id": 28,
@@ -261,7 +274,7 @@
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.SlvrW-_-ADJB9I_aINZdGQAAAA%26pid%3DApi&f=1&ipt=d4a8587f449742a4cf25f1003ca102d217297153c0fde2d71b8f46098028a1bf&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1MmUYhJzbQOTHsARMuG2350f2E-My98Og?usp=drive_link"
   },
   {
     "id": 29,
@@ -270,7 +283,7 @@
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.z4UMXWl9luKzuindF7nvpQAAAA%26pid%3DApi&f=1&ipt=06d483e28cd209f5eae444a423e11625679a6fb6c91396221511b17b1971faff&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/15_kPW9gFOTKnKucnPXUUtAsNdG2va53U?usp=drive_link"
   },
   {
     "id": 30,
@@ -279,7 +292,7 @@
     "Price": 0,
     "Category": "Fifth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.L6o9cxOSPQRlXBy5flR1hQAAAA%26pid%3DApi&f=1&ipt=b3b16d95a03bcd4a1fcb5825bf11b55b1b9d3903d931ec11654c2194b68c0811&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1Mr8YQWpvi20rIXND3Sd9KQVThAFRXUE3?usp=drive_link"
   },
   {
     "id": 31,
@@ -288,7 +301,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.uhW_ZY5Cj84UFEbW67Sj0wAAAA%26pid%3DApi&f=1&ipt=c42173af04b5931018dd612d83235b881a4f9b664c0782bc021596df8424cb0a&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1fB3Z18SRLD04mX3TyW0C73WBMgbUhLRQ?usp=drive_link"
   },
   {
     "id": 32,
@@ -297,7 +310,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.9lMxGVhB-qM-Fn0ucBD5gQAAAA%26pid%3DApi&f=1&ipt=8ace4cdc896ec83202f781a32cab56048bcf219465f0d8bff9d0c4537ffb786f&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1ffh4WmpyE_kneHMtKIhZZM1xUO8Fwxck?usp=drive_link"
   },
   {
     "id": 33,
@@ -306,7 +319,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.explicit.bing.net%2Fth%3Fid%3DOIP.5bWDFoQyrDiriXftWI71TwHaJ4%26pid%3DApi&f=1&ipt=63ca10722ead8fc9e94fa1e90096f9d2504ded365014f99d9fb09feb1600b0a1&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1-NC1lRhdd7L9d75Yq1jsFTTjVTU4TEtv?usp=drive_link"
   },
   {
     "id": 34,
@@ -315,7 +328,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.f-sjpTHyG2BEtN5XKYzBTQHaKY%26pid%3DApi&f=1&ipt=0b21d350fd6cc28469efbaae8f7096d7f7778ec18ae12be0520a63a776fc3ed7&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1g50uTPoqdvdAgaprDDeXtSZlhUjqKsgr?usp=drive_link"
   },
   {
     "id": 35,
@@ -324,7 +337,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.hDERi9cxPja5IjbL728YawHaJj%26pid%3DApi&f=1&ipt=2608d9945351362da0b5e72ba746500d82fc2547fd3d1e1e74d9abb2fa1b3ca8&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1h8UTNbOITqBnqgJrLiqeZrAdwNGmZtLj?usp=drive_link"
   },
   {
     "id": 36,
@@ -333,7 +346,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.c1Vddi74caIyRZbCH8OGPQHaL6%26pid%3DApi&f=1&ipt=a9cbaa2344c1ea1f7b99ccac3a34b06e51aba65d9de670c2a45155f2a1d3cde2&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1gxRe8_7ExEdVg5e8R4bSYZuOv85bhR8y?usp=drive_link"
   },
   {
     "id": 37,
@@ -342,7 +355,7 @@
     "Price": 0,
     "Category": "Sixth Semester",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.F-heKWPpfMidUGmFukI80gHaFj%26pid%3DApi&f=1&ipt=d955160856e1a1a9c61e91ae355a5f0f807ebc26cb3d8c6a03ae727cd4bc4137&ipo=images",
-    "pdfUrl": "pdf_url_here"
+    "pdfUrl": "https://drive.google.com/drive/folders/1r8fUDRdwpmH2LBS5MDdfITezU1GOyuXt?usp=drive_link"
   },
   {
     "id": 38,

@@ -10,13 +10,13 @@ function Freebook() {
   // Define semester categories
   const semesters = [
     "1st Sem",
-    "Second Semester",
-    "Third Semester",
-    "Fourth Semester",
-    "Fifth Semester",
-    "Sixth Semester",
-    "Seventh Semester",
-    "Eighth Semester",
+    // "Second Semester",
+    // "Third Semester",
+    // "Fourth Semester",
+    // "Fifth Semester",
+    // "Sixth Semester",
+    // "Seventh Semester",
+    // "Eighth Semester",
   ];
 
   // Carousel settings
@@ -73,8 +73,11 @@ function Freebook() {
               ))}
           </Slider>
         </div>
+        
       ))}
+      <h2 className="font-bold text-2xl mt-8 mb-4 ">Get Login and Go to Courses Section to get Complete Notes Resources ⭐❤️ </h2>
     </div>
+    
   );
 }
 

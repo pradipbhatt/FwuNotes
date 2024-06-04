@@ -12,19 +12,19 @@ function Cards({ item }) {
           <img
             src={item.image}
             alt={item.name}
-            className="h-full object-cover"
+            className="h-full object-cover mt-5"
           />
         </figure>
         <div className="card-body">
           <h2 className="card-title">
             {item.name}
-            <div className="badge badge-primary w-full ">{item.Category}</div>
+            <div className="badge bg-green-500 h-10 text-black w-full ">{item.Category}</div>
           </h2>
           <p>{item.title}</p>
           <div className="card-actions justify-between">
             <div className="badge badge-outline">${item.Price}</div>
             <div onClick={handleReadNowClick}>
-              <button className="bg-blue-500 text-white px-2 py-1 rounded-full border-2 border-blue-500 flex items-center gap-2">
+              <button className="bg-orange-500 text-white px-2 py-1 rounded-full border-2 border-orange-500 flex items-center gap-2">
                 <span className="text-xs">Read Now</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
