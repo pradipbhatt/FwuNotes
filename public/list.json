@@ -70,7 +70,7 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP._dGVL4vbWuc5yOp3jZtz_AAAAA%26pid%3DApi&f=1&ipt=cd863e5240eb50a1e6be69e002e323e54be6cc2a618e1cd8013ca4ab4b357d73&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1kMhcuBdcDCqtocut4Ne10VX5iXa1lSyU?usp=drive_link"
     },
     {
       "id": 8,
@@ -79,7 +79,7 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.lzpjdXQs94cn9SCm9uluiwHaKe%26pid%3DApi&f=1&ipt=7594e0ffa0748717d6dea24a27a2dfc07ee18bf5e5dd909992cafd76ddc804d8&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1-SAjtXXc0ah5z40RtXuP_Xrouwgm-uA9?usp=drive_link"
     },
     {
       "id": 9,
@@ -88,7 +88,7 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Fv5bt7qLJWSjC37nDMaaQgHaHa%26pid%3DApi&f=1&ipt=128a38d9bd208eae58782e95b1c934144f618df9ab744fc8d5ee8476bb2fe0f1&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/10T98SsDUU12oyvQfyIosgxx7WH108qaV?usp=drive_link"
     },
     {
       "id": 10,
@@ -97,7 +97,7 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.QonFWuyKJitC5MeyNDHTdwAAAA%26pid%3DApi&f=1&ipt=571fe83d2ff0fac3ad9c4fd686eaf326a74a20b010cfccc3cc90f2c488b6c563&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1ynL8PPbYBrBtwUdnCkNZy_fLcgvRPP0k?usp=drive_link"
     },
     {
       "id": 11,
@@ -106,7 +106,7 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.OKzvN1CevG6IlHr6dKTszAHaD4%26pid%3DApi&f=1&ipt=22992785ddab489c980c8255a303d640c552cf95d1464058f6a87897386d43a2&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/10xiF_NNz35VYXkIzkhXI6ycuU4MhTzks?usp=drive_link"
     },
     {
       "id": 12,
@@ -115,8 +115,11 @@
       "Price": 0,
       "Category": "Second Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.8_ELWgPoV1ObBgDlDEd2JQHaD4%26pid%3DApi&f=1&ipt=d0a55fdc7c3ca3d61a14dff51e617681e4e81129b99897d519162c52ee49e638&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://drive.google.com/drive/folders/1mY0vKWegk5SZJVBQF1Db3yXr2kvpcrH_?usp=drive_link"
     },
+
+
+    
     {
       "id": 13,
       "name": "Engineering Math III",
@@ -133,7 +136,7 @@
       "Price": 0,
       "Category": "Third Semester",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.igQlBqEVOur4qkcx_iUNXAHaHa%26pid%3DApi&f=1&ipt=449540a5d591be49eab7703fca01e6e1310077c5bad2e6d3c1ac894e9de2fe05&ipo=images",
-      "pdfUrl": "pdf_url_here"
+      "pdfUrl": "https://ajar-parsnip-154.notion.site/DSA-Notes-72dbc67e035f46ce9cd4b9c6b79dc302"
     },
     {
       "id": 15,
