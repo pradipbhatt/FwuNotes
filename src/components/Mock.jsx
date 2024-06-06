@@ -29,7 +29,7 @@ const Mock = () => {
           <p className="text-gray-600 mb-6">
             The admission guidelines for Far Western University's Faculty of Engineering are designed to provide a comprehensive overview of the admission process. The guidelines cover the eligibility criteria, application procedure, and other important details that prospective students need to know.
           </p>
-          <Link to={`/Mock5/`}>
+          <Link to={`/AdmissionGuidelines/`}>
             <button
               className="bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75"
               onClick={() => handleTestNowClick()}

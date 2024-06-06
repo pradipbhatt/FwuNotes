@@ -16,6 +16,7 @@ import Mock0 from "./components/Mock0";
 import Mock6 from "./components/Mock6";
 import Mock7 from "./components/Mock7";
 import Mock5 from "./components/Mock5";
+import AdmissionGuidelines from "./components/AdmissionGuidelines";
 
 function App() {
   const [authUser, setAuthUser] = useAuth();
@@ -31,6 +32,7 @@ function App() {
           />
           <Route path="/Mock" element={authUser ? <Mock /> : <Navigate to="/signup" />} />
           {/* <Route path="/Mock-1" element={<Mock-1/>} /> */}
+          <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines/>} />
 
           <Route path="/Mock1" element={<Mock1 />} />
 
