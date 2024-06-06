@@ -114,7 +114,10 @@ const Mock4 = () => {
             </div>
           ) : (
             <>
-              <div className="mb-4">
+              <div className="mb-4 mt-10">
+              <h1 className="text-xl mb-3 text-center">Far Western University</h1>
+               <h1 className="text-2xl text-center">School of Engineering</h1>
+               <h1 className="text-xl text-center">Mock Test 2079 A</h1>
                 <h5 className="text-xl mb-2">
                   Question {currentQuestion + 1}/{quizData2077.length}
                 </h5>

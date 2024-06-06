@@ -6,11 +6,15 @@ import Mock from "./components/Mock";
 import Signup from "./components/Signup";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
+// import Mock1 from "./components/Mock-1";
 import Mock1 from "./components/Mock1";
 import Mock2 from "./components/Mock2";
 import Mock3 from "./components/Mock3";
 import Mock4 from "./components/Mock4";
 import About from "./components/About";
+import Mock0 from "./components/Mock0";
+import Mock6 from "./components/Mock6";
+import Mock7 from "./components/Mock7";
 import Mock5 from "./components/Mock5";
 
 function App() {
@@ -26,6 +30,7 @@ function App() {
             element={authUser ? <Courses /> : <Navigate to="/signup" />}
           />
           <Route path="/Mock" element={<Mock />} />
+          {/* <Route path="/Mock-1" element={<Mock-1/>} /> */}
 
           <Route path="/Mock1" element={<Mock1 />} />
 
@@ -34,8 +39,11 @@ function App() {
           <Route path="/Mock3" element={<Mock3 />} />
 
           <Route path="/Mock4" element={<Mock4 />} />
+          <Route path="/Mock0" element={<Mock0 />} />
           <Route path="/Mock5" element={<Mock5 />} />
-          
+          <Route path="/Mock6" element={<Mock6 />} />
+          <Route path="/Mock7" element={<Mock7 />} />
+
           <Route path="/About" element={<About />} />
 
           <Route path="/signup" element={<Signup />} />
