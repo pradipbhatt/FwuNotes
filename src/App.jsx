@@ -29,7 +29,7 @@ function App() {
             path="/course"
             element={authUser ? <Courses /> : <Navigate to="/signup" />}
           />
-          <Route path="/Mock" element={<Mock />} />
+          <Route path="/Mock" element={authUser ? <Mock /> : <Navigate to="/signup" />} />
           {/* <Route path="/Mock-1" element={<Mock-1/>} /> */}
 
           <Route path="/Mock1" element={<Mock1 />} />
