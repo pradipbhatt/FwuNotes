@@ -16,7 +16,9 @@ import Mock0 from "./components/Mock0";
 import Mock6 from "./components/Mock6";
 import Mock7 from "./components/Mock7";
 import Mock5 from "./components/Mock5";
+import Compare from "./components/Compare";
 import AdmissionGuidelines from "./components/AdmissionGuidelines";
+import Shadharan from "./components/shadharan/Shadharan";
 
 function App() {
   const [authUser, setAuthUser] = useAuth();
@@ -45,9 +47,9 @@ function App() {
           <Route path="/Mock5" element={<Mock5 />} />
           <Route path="/Mock6" element={<Mock6 />} />
           <Route path="/Mock7" element={<Mock7 />} />
-
           <Route path="/About" element={<About />} />
-
+          <Route path="/Compare" element={<Compare />} />
+          <Route path="/components/Shadharan" element={<Shadharan />}/>
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <Toaster />
