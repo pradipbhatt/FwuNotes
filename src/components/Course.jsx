@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 function Course() {
   const [book, setBook] = useState([]);
+  const [coursesBySemester, setCoursesBySemester] = useState({});
 
   useEffect(() => {
     const getBook = async () => {
@@ -18,6 +19,18 @@ function Course() {
       }
     };
     getBook();
+  }, []);
+
+  useEffect(() => {
+    const groupedCourses = list.reduce((acc, course) => {
+      const semester = course.semester || "Notes Based on Semester";
+      if (!acc[semester]) {
+        acc[semester] = [];
+      }
+      acc[semester].push(course);
+      return acc;
+    }, {});
+    setCoursesBySemester(groupedCourses);
   }, []);
 
   return (
@@ -41,10 +54,17 @@ function Course() {
             </button>
           </Link>
         </div>
-        {/* Courses */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3">
-          {list.map((item) => (
-            <Cards key={item.id} item={item} />
+        {/* Courses by Semester */}
+        <div className="mt-12">
+          {Object.keys(coursesBySemester).map((semester) => (
+            <div key={semester} className="mb-12">
+              <h2 className="text-xl font-bold mb-4">{semester}</h2>
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                {coursesBySemester[semester].map((item) => (
+                  <Cards key={item.id} item={item} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -67,8 +67,8 @@
       "id": 7,
       "name": "Engineering Math II",
       "title": "SH 121",
-      "Price": 10,
-      "Category": "Second Semester",
+      "Price": 0,
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP._dGVL4vbWuc5yOp3jZtz_AAAAA%26pid%3DApi&f=1&ipt=cd863e5240eb50a1e6be69e002e323e54be6cc2a618e1cd8013ca4ab4b357d73&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1kMhcuBdcDCqtocut4Ne10VX5iXa1lSyU?usp=drive_link"
     },
@@ -76,17 +76,17 @@
       "id": 8,
       "name": "Engineering Chemistry",
       "title": "SH 122",
-      "Price": 10,
-      "Category": "Second Semester",
+      "Price": 0,
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.lzpjdXQs94cn9SCm9uluiwHaKe%26pid%3DApi&f=1&ipt=7594e0ffa0748717d6dea24a27a2dfc07ee18bf5e5dd909992cafd76ddc804d8&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1-SAjtXXc0ah5z40RtXuP_Xrouwgm-uA9?usp=drive_link"
     },
     {
       "id": 9,
-      "name": "Thermodynamics",
+      "name": "Thermo",
       "title": "ME 123",
-      "Price": 10,
-      "Category": "Second Semester",
+      "Price": 0,
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Fv5bt7qLJWSjC37nDMaaQgHaHa%26pid%3DApi&f=1&ipt=128a38d9bd208eae58782e95b1c934144f618df9ab744fc8d5ee8476bb2fe0f1&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/10T98SsDUU12oyvQfyIosgxx7WH108qaV?usp=drive_link"
     },
@@ -94,8 +94,8 @@
       "id": 10,
       "name": "Applied Mechanics",
       "title": "CE 124",
-      "Price": 10,
-      "Category": "Second Semester",
+      "Price": 0,
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.QonFWuyKJitC5MeyNDHTdwAAAA%26pid%3DApi&f=1&ipt=571fe83d2ff0fac3ad9c4fd686eaf326a74a20b010cfccc3cc90f2c488b6c563&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1ynL8PPbYBrBtwUdnCkNZy_fLcgvRPP0k?usp=drive_link"
     },
@@ -104,7 +104,7 @@
       "name": "Object-Oriented Programming",
       "title": "CT 125",
       "Price": 10,
-      "Category": "Second Semester",
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.OKzvN1CevG6IlHr6dKTszAHaD4%26pid%3DApi&f=1&ipt=22992785ddab489c980c8255a303d640c552cf95d1464058f6a87897386d43a2&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/10xiF_NNz35VYXkIzkhXI6ycuU4MhTzks?usp=drive_link"
     },
@@ -113,7 +113,7 @@
       "name": "Discrete Structure",
       "title": "CT 126",
       "Price":10,
-      "Category": "Second Semester",
+      "Category": "2ndSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.8_ELWgPoV1ObBgDlDEd2JQHaD4%26pid%3DApi&f=1&ipt=d0a55fdc7c3ca3d61a14dff51e617681e4e81129b99897d519162c52ee49e638&ipo=images",
       "pdfUrl": "https://drive.google.com/file/d/1pF2sBTD9RQxZCA9azQKajvW3Va2P2Ve4/view"
     },
@@ -125,7 +125,7 @@
       "name": "Engineering Math III",
       "title": "SH 231",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.TK12d26ae-uxeEMIFgQjHAHaJl%26pid%3DApi&f=1&ipt=28bbc74613dc42ce219765fa6f77bd29d38b67338d40dd912c24e7a53d93afa9&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/13iOWV5DTsxl-zarBPQAmBTBEL33Bq4QM?usp=drive_link"
     },
@@ -134,7 +134,7 @@
       "name": "Data Structure and Algorithm",
       "title": "CT 232",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.igQlBqEVOur4qkcx_iUNXAHaHa%26pid%3DApi&f=1&ipt=449540a5d591be49eab7703fca01e6e1310077c5bad2e6d3c1ac894e9de2fe05&ipo=images",
       "pdfUrl": "https://ajar-parsnip-154.notion.site/DSA-Notes-72dbc67e035f46ce9cd4b9c6b79dc302"
     },
@@ -143,7 +143,7 @@
       "name": "Theory of Computation",
       "title": "CT 233",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.uLYtY9uGFjfF_Bdxj_d7uQAAAA%26pid%3DApi&f=1&ipt=08658534f9c3d1b56e8d891fec0b6068a53bff2cd9b1003e3c117cf26046925a&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/146g2-PzTodXoCRc2EeDdnmjc_MphCuQ9?usp=drive_link"
     },
@@ -152,7 +152,7 @@
       "name": "Electrical Circuit Theory Course",
       "title": "EE 234",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.j0q8yyB0GAXy0MKejHpgoAHaJQ%26pid%3DApi&f=1&ipt=80cc986d352786985fc1c14795f71ab2d614395194948e3615011d8ff7ad0a47&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/14-3YU6A0ToSeDgDvsZUhmiovjYE-FroG?usp=drive_link"
     },
@@ -161,16 +161,16 @@
       "name": "Digital Logic",
       "title": "EX 235",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.-1gksthqOzKZiF0vAsHQkQHaI5%26pid%3DApi&f=1&ipt=31dc5d8cad1cfb5cb85c4eb6962a03090aaa7b59f8ef8467cd55e67ea61e46de&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1433uNEEjiuSVEudWWE-wOT61y1JsVkeu?usp=drive_link"
     },
     {
       "id": 18,
-      "name": "Electromagnetics",
+      "name": "EMX",
       "title": "EX 236",
       "Price": 0,
-      "Category": "Third Semester",
+      "Category": "3rdSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.vV69MpqXGJhYmllEZoe-zwAAAA%26pid%3DApi&f=1&ipt=af15c544edc820bb39792ff09f0a68bc9a5a9198e40b3857df7f6b780650216c&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/142Ri1AfvKSNlODFqXrivtXAPiToz-82o?usp=drive_link"
     },
@@ -179,17 +179,17 @@
       "name": "Applied Mathematics",
       "title": "SH 241",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ygtFsxmkjg4U8jH3appIdQHaL-%26pid%3DApi&f=1&ipt=968f133890492480847645174103f0476ae9a6b3c292da9bbbe02d80fe474d28&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1b4BKOHNSSsWS29L-o8dJm41c_yWwzxHr?usp=drive_link"
     },
     {
       "id": 20,
-      "name": "Microprocessor",
+      "name": "Micro Kamal sirprocessor Kamal sir",
       "title": "EX 242",
       "Price": 0,
-      "Category": "Fourth Semester",
-      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.madrasshoppe.com%2F40420-medium_default%2Fintroduction-to-microprocessors.jpg&f=1&nofb=1&ipt=79b0a4d3ba6675f69a7746c7c254f7cbb3ba2af75978e0db40aebd19793fbf12&ipo=images",
+      "Category": "4thSem",
+      "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fwww.madrasshoppe.com%2F40420-medium_default%2Fintroduction-to-Micro Kamal sirprocessor Kamal sirs.jpg&f=1&nofb=1&ipt=79b0a4d3ba6675f69a7746c7c254f7cbb3ba2af75978e0db40aebd19793fbf12&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/11FQNBOwxU_LCOD7NgfrainYjx8J7jH0Q?usp=drive_link"
     },
     {
@@ -197,7 +197,7 @@
       "name": "Algorithmic Mathematics",
       "title": "CT 243",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.ACf4AK9jI199QRQgJWIoWQAAAA%26pid%3DApi&f=1&ipt=c0ba40c29a87ac13a474572a6fca1ddd906f9966f6e986b49782b64764bfb13e&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1KikG2BuV8KJyAXnK7yMD8VxO3B1YgWH_?usp=drive_link"
     },
@@ -206,7 +206,7 @@
       "name": "Electrical Machine",
       "title": "EE 244",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.PQp1dHoJ9K90lV-wyaW2NAHaKS%26pid%3DApi&f=1&ipt=603c5c4e69b605f862dc1077c3509f06de8572d94e5837dfbf4e15c781b4b36a&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1ah15j8GF5ZAljh3ZJm5m6FT-ArBmAZuU?usp=drive_link"
     },
@@ -215,16 +215,16 @@
       "name": "Electronic Device and Circuit",
       "title": "EX 245",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Qp4Ko3ul01973vWv61aEMwHaHa%26pid%3DApi&f=1&ipt=e4f5e8b05d6a84f282808064a134b16a86a1424890370dee5042edab81ea58e5&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/11qqVzGjoEyR7JB5YjcIBTEK53OzxRbE5?usp=drive_link"
     },
     {
       "id": 24,
-      "name": "Communication English",
+      "name": "English",
       "title": "SH 246",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.mgSgLiQ3uO7QK2SmiOowvAAAAA%26pid%3DApi&f=1&ipt=d6323a8497e88caf102f0d3df7a77e48a1f6228b07490a1ea3ab93a59e08bf67&ipo=images",
       "pdfUrl": "https://drive.google.com/drive/folders/1b4Q2WkeYRrJgNYVuuMeLo2xwY5whXzmv?usp=drive_link"
     },
@@ -236,7 +236,7 @@
       "name": "Past Questions",
       "title": "SH 246",
       "Price": 0,
-      "Category": "Fourth Semester",
+      "Category": "4thSem",
       "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.mgSgLiQ3uO7QK2SmiOowvAAAAA%26pid%3DApi&f=1&ipt=d6323a8497e88caf102f0d3df7a77e48a1f6228b07490a1ea3ab93a59e08bf67&ipo=images",
       "pdfUrl": "https://drive.google.com/file/d/1MgIQCYcPNt3Y7oyLjFVHyJZ3p1PJ8f8c/view"
     },
@@ -245,16 +245,16 @@
     "name": "Probability and Statistic",
     "title": "SH 351",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.LgoccT-JPb9hZUiylePyzwHaHa%26pid%3DApi&f=1&ipt=291f4dac133257b1b5a5e1b73e530080ac4d0ffe41ce90052ca5855072efde20&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1NPZYDtSgCxkc098NbQjbflh_mVTxpj9j?usp=drive_link"
   },
   {
     "id": 26,
-    "name": "Instrumentation",
+    "name": "InstruMnt",
     "title": "EX 352",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.O7UNC7ddVql6waCsjJpCxQAAAA%26pid%3DApi&f=1&ipt=a02daa1ea5ba4a771916f7e1b864901286a623df91794d49112485abbc52f563&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1GFRpAvNGkfZhe0fmnMn94FPndqVdnwiq?usp=drive_link"
   },
@@ -263,7 +263,7 @@
     "name": "Computer Graphics",
     "title": "EX 353",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.ilXt6iu8ioWkU2daoawQNQAAAA%26pid%3DApi&f=1&ipt=7b65388e7f15a9505af2128190ddbcc6410987ae27f12ba998f65dfb57015bc4&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/15_UfdL85plhNYNihXvO4nmZa15y9Vqyu?usp=drive_link"
   },
@@ -272,7 +272,7 @@
     "name": "Object-Oriented Software Engineering",
     "title": "CT 354",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.SlvrW-_-ADJB9I_aINZdGQAAAA%26pid%3DApi&f=1&ipt=d4a8587f449742a4cf25f1003ca102d217297153c0fde2d71b8f46098028a1bf&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1MmUYhJzbQOTHsARMuG2350f2E-My98Og?usp=drive_link"
   },
@@ -281,7 +281,7 @@
     "name": "Computer Architecture and Design",
     "title": "CT 355",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.z4UMXWl9luKzuindF7nvpQAAAA%26pid%3DApi&f=1&ipt=06d483e28cd209f5eae444a423e11625679a6fb6c91396221511b17b1971faff&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/15_kPW9gFOTKnKucnPXUUtAsNdG2va53U?usp=drive_link"
   },
@@ -290,7 +290,7 @@
     "name": "Operating System",
     "title": "CT 356",
     "Price": 0,
-    "Category": "Fifth Semester",
+    "Category": "5thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.L6o9cxOSPQRlXBy5flR1hQAAAA%26pid%3DApi&f=1&ipt=b3b16d95a03bcd4a1fcb5825bf11b55b1b9d3903d931ec11654c2194b68c0811&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1Mr8YQWpvi20rIXND3Sd9KQVThAFRXUE3?usp=drive_link"
   },
@@ -299,7 +299,7 @@
     "name": "Project and Organization Management",
     "title": "CT 361",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.uhW_ZY5Cj84UFEbW67Sj0wAAAA%26pid%3DApi&f=1&ipt=c42173af04b5931018dd612d83235b881a4f9b664c0782bc021596df8424cb0a&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1fB3Z18SRLD04mX3TyW0C73WBMgbUhLRQ?usp=drive_link"
   },
@@ -308,7 +308,7 @@
     "name": "Research Methodology",
     "title": "CT 362",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.9lMxGVhB-qM-Fn0ucBD5gQAAAA%26pid%3DApi&f=1&ipt=8ace4cdc896ec83202f781a32cab56048bcf219465f0d8bff9d0c4537ffb786f&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1ffh4WmpyE_kneHMtKIhZZM1xUO8Fwxck?usp=drive_link"
   },
@@ -317,7 +317,7 @@
     "name": "Artificial Intelligence",
     "title": "CT 363",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.explicit.bing.net%2Fth%3Fid%3DOIP.5bWDFoQyrDiriXftWI71TwHaJ4%26pid%3DApi&f=1&ipt=63ca10722ead8fc9e94fa1e90096f9d2504ded365014f99d9fb09feb1600b0a1&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1-NC1lRhdd7L9d75Yq1jsFTTjVTU4TEtv?usp=drive_link"
   },
@@ -326,7 +326,7 @@
     "name": "Database Management System",
     "title": "CT 364",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.f-sjpTHyG2BEtN5XKYzBTQHaKY%26pid%3DApi&f=1&ipt=0b21d350fd6cc28469efbaae8f7096d7f7778ec18ae12be0520a63a776fc3ed7&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1g50uTPoqdvdAgaprDDeXtSZlhUjqKsgr?usp=drive_link"
   },
@@ -335,7 +335,7 @@
     "name": "Communication System",
     "title": "EX 365",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.hDERi9cxPja5IjbL728YawHaJj%26pid%3DApi&f=1&ipt=2608d9945351362da0b5e72ba746500d82fc2547fd3d1e1e74d9abb2fa1b3ca8&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1h8UTNbOITqBnqgJrLiqeZrAdwNGmZtLj?usp=drive_link"
   },
@@ -344,7 +344,7 @@
     "name": "Engineering Economics",
     "title": "SH 366",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.c1Vddi74caIyRZbCH8OGPQHaL6%26pid%3DApi&f=1&ipt=a9cbaa2344c1ea1f7b99ccac3a34b06e51aba65d9de670c2a45155f2a1d3cde2&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1gxRe8_7ExEdVg5e8R4bSYZuOv85bhR8y?usp=drive_link"
   },
@@ -353,7 +353,7 @@
     "name": "Minor Project",
     "title": "CT 367",
     "Price": 0,
-    "Category": "Sixth Semester",
+    "Category": "6thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.F-heKWPpfMidUGmFukI80gHaFj%26pid%3DApi&f=1&ipt=d955160856e1a1a9c61e91ae355a5f0f807ebc26cb3d8c6a03ae727cd4bc4137&ipo=images",
     "pdfUrl": "https://drive.google.com/drive/folders/1r8fUDRdwpmH2LBS5MDdfITezU1GOyuXt?usp=drive_link"
   },
@@ -362,7 +362,7 @@
     "name": "Computer Networks",
     "title": "CT 471",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.UZvj3Ff5of-XFpCB1x8EgwAAAA%26pid%3DApi&f=1&ipt=5235034e23a7acd206b3ad920689f5dae5fb985ffbcbf53db31ecad532b94cfe&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -371,7 +371,7 @@
     "name": "Distributed Computing",
     "title": "CT 472",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.gG5g5dGFXa61JcnXVA3UBgAAAA%26pid%3DApi&f=1&ipt=21334163584732b89b31ae6effd9b73424333104a7f4125ea4453f1101f2645a&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -380,7 +380,7 @@
     "name": "Information System",
     "title": "CT 473",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.QLxv5C9vdW44Isi_Dm93WAHaJe%26pid%3DApi&f=1&ipt=e4a59a0432b0473f40be6a06c6d51dec0d8c916ccc5c4f1aed0985449a48dfcf&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -389,7 +389,7 @@
     "name": "Data Mining and Data Warehousing",
     "title": "CT 474",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.U3UPPaLOKUz0L_mE2A7U1QHaJv%26pid%3DApi&f=1&ipt=fe1384c0d61d8cc1c856c59c805c3aba39760d3ecc6a53f225352f24b752a9d6&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -398,7 +398,7 @@
     "name": "Simulation and Modelling",
     "title": "CT 475",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.fleIc4VuAiBJ-djAXxfdMAHaK3%26pid%3DApi&f=1&ipt=164edfad34254bae0ee98baf20fce8f40147b496539ae9309bf0f5f9b6a1f6dd&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -407,7 +407,7 @@
     "name": "Elective I",
     "title": "CT Elective I",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.VpRPFbLYtJksbtZ22jdfIQHaLG%26pid%3DApi&f=1&ipt=2b826109aa2de5d28396ca284d87654b03f64e6e1eaeceba0c63aeb62e2cd405&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -416,7 +416,7 @@
     "name": "Project - Part A",
     "title": "CT 476",
     "Price": 0,
-    "Category": "Seventh Semester",
+    "Category": "7thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.Ghyy5AXp7aF0z7DnX34URgHaHa%26pid%3DApi&f=1&ipt=d2aeb261712c3dda0b55349301d283f37f9053761fe8077324d6f5950b8cc678&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -425,7 +425,7 @@
     "name": "Digital Signal Analysis and Processing",
     "title": "CT 481",
     "Price": 0,
-    "Category": "Eighth Semester",
+    "Category": "8thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.IE-LoChXeqSbkuL1DrBOegHaJQ%26pid%3DApi&f=1&ipt=fea2a84ebe1247f42610499246e51beb0a81d8ba81f3a39890d9763e99e37c33&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -434,7 +434,7 @@
     "name": "Engineering Professional Practice",
     "title": "CE 482",
     "Price": 0,
-    "Category": "Eighth Semester",
+    "Category": "8thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.9L2vHfvqlcuU5WN9pfo8EAHaL0%26pid%3DApi&f=1&ipt=b827f0919f98bb416b8e82d7f4cac55d212bb075b8d9b09e8c5ccaf0eef8881f&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -443,7 +443,7 @@
     "name": "Information Security",
     "title": "CT 483",
     "Price": 0,
-    "Category": "Eighth Semester",
+    "Category": "8thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.7wEW5lRAGCoNynFwgUPYjwHaLL%26pid%3DApi&f=1&ipt=107467bb9506fcbd9ad885f53c5b452b97f1fd46b8ab1a68caada6b6c8ad76a2&ipo=images",
     "pdfUrl": "pdf_url_here"
   },
@@ -452,7 +452,7 @@
     "name": "Big Data",
     "title": "CT 484",
     "Price": 0,
-    "Category": "Eighth Semester",
+    "Category": "8thSem",
     "image": "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.explicit.bing.net%2Fth%3Fid%3DOIP.2GdfcCtykIROKs0PYLgwfwAAAA%26pid%3DApi&f=1&ipt=c9f172e122eb3c3d2642e61b6c45260c68e71807f7a4b17db2fadba710e1f30a&ipo=images",
     "pdfUrl": "pdf_url_here"
   }
