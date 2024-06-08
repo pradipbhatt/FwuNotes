@@ -53,10 +53,14 @@ function Login() {
               ✕
             </Link>
 
-            <h3 className="font-bold text-2xl text-gray-100 mb-6 text-center">Login</h3>
+            <h3 className="font-bold text-2xl text-gray-100 mb-6 text-center">
+              Login
+            </h3>
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-100">Email</label>
+                <label className="block text-sm font-medium text-gray-100">
+                  Email
+                </label>
                 <input
                   type="email"
                   placeholder="Enter your email"
@@ -64,11 +68,15 @@ function Login() {
                   {...register("email", { required: true })}
                 />
                 {errors.email && (
-                  <span className="text-sm text-red-500">This field is required</span>
+                  <span className="text-sm text-red-500">
+                    This field is required
+                  </span>
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-100">Password</label>
+                <label className="block text-sm font-medium text-gray-100">
+                  Password
+                </label>
                 <div className="relative">
                   <input
                     type={showPassword ? "text" : "password"}
@@ -85,7 +93,9 @@ function Login() {
                   </button>
                 </div>
                 {errors.password && (
-                  <span className="text-sm text-red-500">This field is required</span>
+                  <span className="text-sm text-red-500">
+                    This field is required
+                  </span>
                 )}
               </div>
               <div className="flex justify-around mt-6">
@@ -94,7 +104,10 @@ function Login() {
                 </button>
                 <p className="text-sm text-gray-600">
                   Not registered?{" "}
-                  <Link to="/signup" className="underline text-blue-500 cursor-pointer">
+                  <Link
+                    to="/signup"
+                    className="underline text-blue-500 cursor-pointer"
+                  >
                     Signup
                   </Link>
                 </p>
