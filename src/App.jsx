@@ -35,13 +35,9 @@ function App() {
           <Route path="/Mock" element={authUser ? <Mock /> : <Navigate to="/signup" />} />
           {/* <Route path="/Mock-1" element={<Mock-1/>} /> */}
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines/>} />
-
           <Route path="/Mock1" element={<Mock1 />} />
-
           <Route path="/Mock2" element={<Mock2 />} />
-
           <Route path="/Mock3" element={<Mock3 />} />
-
           <Route path="/Mock4" element={<Mock4 />} />
           <Route path="/Mock0" element={<Mock0 />} />
           <Route path="/Mock5" element={<Mock5 />} />

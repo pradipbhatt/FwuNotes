@@ -7,10 +7,9 @@ import 'leaflet/dist/leaflet.css';
 const Compare = () => {
   const [products, setProducts] = useState([]);
   const [selected1, setSelected1] = useState(0);
-  const [selected2, setSelected2] = useState(1); // Ensure different initial values for comparison
+  const [selected2, setSelected2] = useState(0);
   const [compare, setCompare] = useState(false);
 
-  // Fetching data from ./School.json
   useEffect(() => {
     fetch('/School.json')
       .then(response => response.json())

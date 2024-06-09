@@ -1,5 +1,5 @@
 [
-    {
+  {
       "id": 0,
       "title": "",
       "price": "RS60000",
@@ -16,14 +16,14 @@
       "teachers": "N/A",
       "teacherQualifications": "N/A",
       "passoutRate": "N/A"
-    },
-    {
+  },
+  {
       "id": 1,
       "title": "Radiant Secondary School",
-      "price": 62000,
+      "price": "RS62000",
       "infrastructure": "Cafeteria, Library, Sports, WiFi-Campus, Internet, Transportation, Auditorium, Labs, Science Lab, Conference, Multimedia, Online Journal, Counselling, Scholarships, Tour",
       "affiliation": "NEB",
-      "description": "Radiant Secondary School Mahendranagar was established in 2000 as a privately owned academic institution located in Science Campus Road Bhimdutt Municipality-18, Mahendranagar, Kanchanpur, Sudurpaschim Province of Nepal. ",
+      "description": "Radiant Secondary School Mahendranagar was established in 2000 as a privately owned academic institution located in Science Campus Road Bhimdutt Municipality-18, Mahendranagar, Kanchanpur, Sudurpaschim Province of Nepal. This Secondary school is affiliated with the National Examinations Board (NEB) and approved by the Ministry of Education, Nepal and offers Ten Plus Two (10+2) in Management and Science programs Radiant Secondary School, Mahendranagar, Kanchanpur provides Ten Plus Two programs with moderate fee structures. It also offers various scholarship facility for the deserving and marginalized students of the society. Radiant School provides Sports, Cafeteria, Internet, Laboratory, Journal, auditorium, Counselling, Library, Multimedia, Educational Tours, Conference, and Scholarships facilities.",
       "brand": "Science and Management",
       "image": "https://www.collegenp.com/uploads/2018/10/Radiant-Secondary-School-Mahendranagar.jpg",
       "location": { "lat": 28.9716, "lng": 80.1776 },
@@ -36,14 +36,14 @@
       "teachers": 50,
       "teacherQualifications": "Masters, PhD",
       "passoutRate": "95%"
-    },
-    {
+  },
+  {
       "id": 2,
       "title": "Janajyoti Multiple Campus Mahendranagar",
-      "price": 62000,
+      "price": "RS62000",
       "infrastructure": "Library, Sports, WiFi-Campus, Internet, Labs, Science Lab, Conference, Multimedia, Online Journal, Counselling, Scholarships, Tour, IT Infrastructure, Computer Lab, Classrooms",
-      "affiliation": "Tribhuvan University (TU) National Examinations Board (NEB)",
-      "description": "Janjyoti Multiple Campus Mahendranagar was established in 2001 AD (2058 BS) by a team of education enthusiasts. It is located in Bhimdattnagar-18, Bhansi, Kanchanpur district of Nepal. It is affiliated to Tribhuvan University and National Examinations Board (NEB). It has sole aim to raise the quality of education in the Far-Western Development Region.",
+      "affiliation": "Tribhuvan University (TU), National Examinations Board (NEB)",
+      "description": "Janjyoti Multiple Campus Mahendranagar was established in 2001 AD (2058 BS) by a team of education enthusiasts. It is located in Bhimdattnagar-18, Bhansi, Kanchanpur district of Nepal. It is affiliated to Tribhuvan University and National Examinations Board (NEB). It has sole aim to raise the quality of education in the Far-Western Development Region. JMC has been imparting quality education and focuses on preparing competent and responsible citizens for facing the challenges. This is done by positive and holistic approach to education.Janjyoti Multiple Campus has established with the private investment to fulfill the demand of education in the Far-Western Region of Nepal. The campus has been catering high quality education at the very minimal fee. The campus focuses on quality and students' discipline.Janjyoti Mulktiple Campus offers plus two programs: Education, Management, Humanities and Science affiliated to National Examinations Board (NEB) of Nepal, and B.Ed., BBS, One Year Bachelor of Education, Bachelor in Arts, Master of Arts in Nepali and Master in Education affiliated to Tribhuvan University.",
       "brand": "Science and Management",
       "image": "https://www.collegenp.com/uploads/2018/05/Janajyoti-Multiple-Campus-mahendranagar.jpg",
       "location": { "lat": 28.9647, "lng": 80.1817 },
@@ -56,11 +56,11 @@
       "teachers": 40,
       "teacherQualifications": "Masters, PhD",
       "passoutRate": "90%"
-    },
-    {
+  },
+  {
       "id": 3,
       "title": "Kanchan Vidya Mandir",
-      "price": 50000,
+      "price": "RS50000",
       "infrastructure": "Library, Sports, WiFi-Campus, Internet, Labs, Science Lab, Multimedia, Counselling, Scholarships, Tour, IT Infrastructure, Computer Lab",
       "affiliation": "NEB",
       "description": "Kanchan Vidya Mandir is a reputed school in Mahendranagar providing quality education with a focus on holistic development of students. It offers programs in Management and Science streams with well-equipped facilities.",
@@ -76,11 +76,11 @@
       "teachers": 35,
       "teacherQualifications": "Masters, PhD",
       "passoutRate": "85%"
-    },
-    {
+  },
+  {
       "id": 4,
       "title": "Everest School of Management",
-      "price": 55000,
+      "price": "RS55000",
       "infrastructure": "Library, Sports, WiFi-Campus, Internet, Labs, Science Lab, Conference, Multimedia, Online Journal, Counselling, Scholarships, Tour, IT Infrastructure, Computer Lab, Classrooms",
       "affiliation": "Tribhuvan University (TU)",
       "description": "Everest School of Management, located in Mahendranagar, is known for its excellent academic programs and state-of-the-art facilities. The school offers undergraduate and graduate programs in management and other disciplines.",
@@ -96,6 +96,59 @@
       "teachers": 30,
       "teacherQualifications": "Masters, PhD",
       "passoutRate": "88%"
-    }
-  ]
-  
+  },
+  {
+      "id": 5,
+      "title": "Morning Glory Secondary School, Mahendranagar",
+      "price": "RS60000",
+      "infrastructure": "Library, Sports, Internet, Auditorium, Science Lab, Health Care, Conference, Multimedia, Journal, Counseling, Scholarships, Tour",
+      "affiliation": "National Examinations Board (NEB)",
+      "description": "Morning Glory Secondary School, located in Janaki Tole, Mahendranagar, Kanchanpur, Nepal, offers quality education with a range of programs including Science, Management, and Humanities for grades 1-12. Established in 2005, it features modern facilities, interactive classrooms, and a strong emphasis on both academic and extracurricular activities.",
+      "brand": "Science and Management",
+      "image": "https://www.collegenp.com/uploads/2018/10/Morning-Glory-Secondary-School-11.jpg",
+      "location": { "lat": 28.9635, "lng": 80.1839 },
+      "courses": [
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Management",
+          "Ten Plus Two (+2) Humanities"
+      ],
+      "contact": {
+          "phone": "+977-99-520666, 524772",
+          "email": "glorymng30@gmail.com",
+          "website": "http://morningglory.edu.np"
+      },
+      "rank": "N/A",
+      "alumniTotal": "N/A",
+      "alumniEngineers": "N/A",
+      "alumniDoctors": "N/A",
+      "teachers": 20,
+      "teacherQualifications": "Bachelors, Masters, PhD",
+      "passoutRate": "N/A"
+  },
+  {
+      "id": 6,
+      "title": "Little Buddha Higher Secondary School",
+      "price": "RS60000",
+      "infrastructure": "AC classrooms, Effective playground, Effective library, Parking facilities, Webcam security, Bus facility, Experienced teachers",
+      "description": "Little Buddha Higher Secondary School is a reputed school located in Mahendranagar, Kanchanpur. It offers excellent educational facilities with experienced teachers and a range of infrastructure facilities to support student learning.",
+      "brand": "Science and Management",
+      "image": "https://www.collegenp.com/uploads/2018/10/Little-Buddha-Higher-Secondary-School-Mahendranagar.jpg",
+      "location": { "lat": 28.9635, "lng": 80.1839 },
+      "courses": [
+          "Ten Plus Two (+2) Science",
+          "Ten Plus Two (+2) Management"
+      ],
+      "contact": {
+          "phone": "+977-99-520666, 524772",
+          "email": "littlebuddhamng@gmail.com",
+          "website": "http://littlebuddha.edu.np"
+      },
+      "rank": "N/A",
+      "alumniTotal": "N/A",
+      "alumniEngineers": "N/A",
+      "alumniDoctors": "N/A",
+      "teachers": 20,
+      "teacherQualifications": "Bachelors, Masters, PhD",
+      "passoutRate": "N/A"
+  }
+]
