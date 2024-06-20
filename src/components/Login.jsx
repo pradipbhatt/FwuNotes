@@ -5,7 +5,8 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function Login() {
-  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false); // State to track loading status
   const {
     register,
     handleSubmit,
@@ -13,30 +14,31 @@ function Login() {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const userInfo = {
-      email: data.email,
-      password: data.password,
-    };
-    await axios
-      .post("https://fwu-soe.onrender.com/user/login", userInfo)
-      .then((res) => {
-        console.log(res.data);
-        if (res.data) {
-          toast.success("Logged in Successfully");
-          document.getElementById("my_modal_3").close();
-          setTimeout(() => {
-            window.location.reload();
-            localStorage.setItem("Users", JSON.stringify(res.data.user));
-          }, 1000);
-        }
-      })
-      .catch((err) => {
-        if (err.response) {
-          console.log(err);
-          toast.error("Error: " + err.response.data.message);
-          setTimeout(() => {}, 2000);
-        }
-      });
+    setLoading(true); // Set loading to true when login starts
+    try {
+      toast.loading("Logging in, please wait..."); // Display loading toast
+      const userInfo = {
+        email: data.email,
+        password: data.password,
+      };
+      const res = await axios.post("https://fwu-soe.onrender.com/user/login", userInfo);
+      console.log(res.data);
+      if (res.data) {
+        toast.success("Logged in Successfully");
+        document.getElementById("my_modal_3").close();
+        setTimeout(() => {
+          window.location.reload();
+          localStorage.setItem("Users", JSON.stringify(res.data.user));
+        }, 1000);
+      }
+    } catch (err) {
+      if (err.response) {
+        console.log(err);
+        toast.error("Error: " + err.response.data.message);
+      }
+    } finally {
+      setLoading(false); // Set loading to false regardless of success or failure
+    }
   };
 
   return (
@@ -44,7 +46,6 @@ function Login() {
       <dialog id="my_modal_3" className="modal">
         <div className="modal-box">
           <form onSubmit={handleSubmit(onSubmit)} method="dialog">
-            {/* if there is a button in form, it will close the modal */}
             <Link
               to="/"
               className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-gray-500 hover:text-gray-700"
@@ -99,8 +100,12 @@ function Login() {
                 )}
               </div>
               <div className="flex justify-around mt-6">
-                <button className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer">
-                  Login
+                <button
+                  type="submit"
+                  className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
+                  disabled={loading} // Disable button when loading
+                >
+                  {loading ? "Logging in..." : "Login"}
                 </button>
                 <p className="text-sm text-gray-600">
                   Not registered?{" "}
@@ -116,6 +121,18 @@ function Login() {
           </form>
         </div>
       </dialog>
+
+      {/* Preloader Modal */}
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
+          <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
+            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-orange-500" role="status">
+              <span className="sr-only">Logging in...</span>
+            </div>
+            <p className="mt-4 text-lg text-gray-800">Logging in, please wait...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
