@@ -15,7 +15,7 @@ function Banner() {
 
   return (
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden">
-      {/* Desktop view (video iframe) */}
+      {/* Desktop and Tablet view (video iframe) */}
       <div className="hidden md:block">
         <iframe
           src="https://www.youtube.com/embed/LYtaYsFkJJY?si=C3f_eMwMPr27Elbn&autoplay=1&mute=1&loop=1&controls=0&showinfo=0&autohide=1&modestbranding=1&playlist=LYtaYsFkJJY"
@@ -86,7 +86,7 @@ function Banner() {
         </div>
       </div>
 
-      {/* Overlay for content on desktop */}
+      {/* Overlay for content on desktop and tablet */}
       <div className="hidden md:flex absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-10">
         <div className="max-w-screen-lg mx-auto p-8 text-white">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 leading-tight font-cursive">
