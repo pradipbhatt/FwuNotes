@@ -32,7 +32,7 @@ const Testimonials = () => {
   ];
 
   return (
-    <div className="py-20 px-4 bg-gray-100">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20">
       <h1 className="text-3xl font-serif text-center mb-12">Testimonials</h1>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {testimonials.map((testimonial, index) => (

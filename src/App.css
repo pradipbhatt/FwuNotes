@@ -1,5 +1,5 @@
 .App {
-    font-family: sans-serif;
+    font-family:  'Times New Roman', Times, serif;
     text-align: center;
   }
   
@@ -20,4 +20,7 @@
     padding: 10px 20px;
     font-size: 16px;
   }
-  
+  /* global.css */
+body {
+  font-family: 'Times New Roman', Times, serif;
+}
