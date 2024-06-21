@@ -17,7 +17,7 @@ function Freebook() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500, // Slide change speed in milliseconds (1 second)
+    speed: 2000, // Slide change speed in milliseconds (1 second)
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
