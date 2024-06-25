@@ -51,7 +51,7 @@ function Signup() {
           >
             ✕
           </Link>
-          <h3 className="font-bold text-2xl text-gray-800 mb-6 text-center">Signup</h3>
+          <h3 className="font-bold text-2xl text-gray-800 mb-6 text-center">Signup using .cse@fwu.edu.np</h3>
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700">Name</label>
@@ -69,13 +69,13 @@ function Signup() {
               <label className="block text-sm font-medium text-gray-700">Email</label>
               <input
                 type="email"
-                placeholder="Enter your email"
+                placeholder="Enter your email @fwu.edu.np"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
                 {...register("email", { 
                   required: "Email is required",
                   pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Enter a valid email"
+                    value: /^[a-zA-Z0-9._%+-]+@fwu\.edu\.np$/,
+                    message: "Enter a valid email with @fwu.edu.np domain"
                   }
                 })}
               />
@@ -121,7 +121,7 @@ function Signup() {
               <p className="text-sm text-gray-600">
                 Have an account?{" "}
                 <Link
-                  to="/login"
+                  to="/"
                   className="underline text-blue-500 cursor-pointer"
                 >
                   Login

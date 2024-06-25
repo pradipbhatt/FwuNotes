@@ -32,7 +32,8 @@ function App() {
             path="/course"
             element={authUser ? <Courses /> : <Navigate to="/signup" />}
           />
-          <Route path="/Mock" element={authUser ? <Mock /> : <Navigate to="/signup" />} />
+          {/* <Route path="/Mock" element={authUser ? <Mock /> : <Navigate to="/signup" />} /> */}
+          <Route path="/Mock" element={<Mock />} />
           {/* <Route path="/Mock-1" element={<Mock-1/>} /> */}
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines/>} />
           <Route path="/Mock1" element={<Mock1 />} />
@@ -44,8 +45,8 @@ function App() {
           <Route path="/Mock6" element={<Mock6 />} />
           <Route path="/Mock7" element={<Mock7 />} />
           <Route path="/About" element={<About />} />
-          <Route path="/Compare" element={<Compare />} />
-          <Route path="/components/Shadharan" element={<Shadharan />}/>
+          {/* <Route path="/Compare" element={<Compare />} /> */}
+          {/* <Route path="/components/Shadharan" element={<Shadharan />}/> */}
           <Route path="/signup" element={<Signup />} />
         </Routes>
         <Toaster />

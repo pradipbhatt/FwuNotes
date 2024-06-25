@@ -55,7 +55,7 @@ function Login() {
             </Link>
 
             <h3 className="font-bold text-2xl text-gray-100 mb-6 text-center">
-              Login
+              Login using College Mail
             </h3>
             <div className="space-y-4">
               <div>
@@ -64,7 +64,7 @@ function Login() {
                 </label>
                 <input
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder="Enter your email @fwu.edu.np"
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
                   {...register("email", { required: true })}
                 />
