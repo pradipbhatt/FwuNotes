@@ -126,7 +126,7 @@ function Navbar() {
             </div>
             {/* Navbar brand name */}
             <a className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
-              soeNotes
+              SoeNotes
             </a>
           </div>
           <div className="navbar-end flex items-center space-x-3">
