@@ -23,7 +23,7 @@ const UploadedList = ({ allImage, showPdf }) => {
             style={{ aspectRatio: "1 / 1", width: "300px" }} // Smaller cards
           >
             <img
-              src={`https://picsum.photos/seed/${item.id}/150/150`} // Random image based on item.id
+              src={`https://picsum.photos/seed/${item.id}/100/100`} // Random image based on item.id
               alt={item.title}
               className="w-full h-2/3 object-cover"
             />
@@ -42,7 +42,7 @@ const UploadedList = ({ allImage, showPdf }) => {
         ))}
       {selectedPdf && (
         <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-90 z-50 overflow-y-auto">
-          <div className=" w-full h-full bg-gray-100 rounded-lg shadow-lg overflow-scroll">
+          <div className="w-full sm:w-3/4 lg:w-3/8 h-full bg-gray-100 rounded-lg shadow-lg overflow-y-auto">
             <div className="flex justify-end p-4">
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-md"
