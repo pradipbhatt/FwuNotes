@@ -68,7 +68,7 @@ function Navbar() {
       </li>
       <li>
         <a href="/notes-uploaded" className="hover:text-orange-500">
-          Course
+         SoeNotes
         </a>
       </li>
       <li>
