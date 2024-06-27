@@ -11,7 +11,7 @@ const PdfComp = ({ pdfFile }) => {
   };
 
   return (
-    <div className="pdf-container">
+    <div className="pdf-container h-full overflow-y-auto p-1 ">
       <Document
         file={pdfFile}
         onLoadSuccess={onDocumentLoadSuccess}

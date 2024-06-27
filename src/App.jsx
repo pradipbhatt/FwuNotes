@@ -19,6 +19,7 @@ import Mock5 from "./components/Mock5";
 import AdmissionGuidelines from "./components/AdmissionGuidelines";
 // import Shadharan from "./components/shadharan/Shadharan";
 import PdfUploadPage from "./components/PdfUploadPage";
+import NotesUploaded from "./components/NotesUploaded";
 
 function App() {
   const [authUser] = useAuth();
@@ -28,8 +29,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/course"
-            element={authUser ? <Courses /> : <Navigate to="/signup" />}
+            path="/notes-uploaded"
+            element={authUser ? <NotesUploaded /> : <Navigate to="/signup" />}
           />
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
@@ -44,7 +45,7 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/pdf-upload" element={<PdfUploadPage />} />
-          
+          <Route path="/notes-uploaded" element={<NotesUploaded />} />
         </Routes>
         <Toaster />
       </div>

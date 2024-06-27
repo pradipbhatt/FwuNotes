@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthProvider";
 import { HiMenu, HiX, HiSun, HiMoon, HiSearch } from "react-icons/hi"; // Import icons from react-icons
 
 function Navbar() {
-  const [authUser, setAuthUser] = useAuth();
+  const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
 
@@ -32,11 +32,7 @@ function Navbar() {
   // Add sticky class to navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setSticky(true);
-      } else {
-        setSticky(false);
-      }
+      setSticky(window.scrollY > 0);
     };
     window.addEventListener("scroll", handleScroll);
     return () => {
@@ -71,7 +67,7 @@ function Navbar() {
         </a>
       </li>
       <li>
-        <a href="/course" className="hover:text-orange-500">
+        <a href="/notes-uploaded" className="hover:text-orange-500">
           Course
         </a>
       </li>
@@ -89,7 +85,6 @@ function Navbar() {
   );
 
   return (
-    // Navbar container with fixed positioning and transition
     <div
       className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out  
       ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
@@ -104,16 +99,8 @@ function Navbar() {
                 className="btn btn-ghost lg:hidden"
                 onClick={() => setShowMenuLeft(!showMenuLeft)}
               >
-                {/* Hamburger Icon */}
-                {showMenuLeft ? (
-                  // Close Icon
-                  <HiX className="h-5 w-5" />
-                ) : (
-                  // Menu Icon
-                  <HiMenu className="h-5 w-5" />
-                )}
+                {showMenuLeft ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
               </div>
-              {/* Dropdown menu for small screens */}
               {showMenuLeft && (
                 <ul
                   tabIndex={0}
@@ -124,19 +111,16 @@ function Navbar() {
                 </ul>
               )}
             </div>
-            {/* Navbar brand name */}
             <a className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
               SoeNotes
             </a>
           </div>
           <div className="navbar-end flex items-center space-x-3">
-            {/* Navigation items for larger screens */}
             <div className="navbar-center hidden lg:flex">
               <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-black">
                 {navItems}
               </ul>
             </div>
-            {/* Search bar */}
             <div className="hidden md:flex items-center">
               <label className="flex items-center gap-2 px-3 py-2 border rounded-md bg-gray-100 dark:bg-slate-300">
                 <input
@@ -147,7 +131,6 @@ function Navbar() {
                 <HiSearch className="w-4 h-4 opacity-70" />
               </label>
             </div>
-            {/* Theme toggle switch */}
             <label className="swap swap-rotate">
               <input
                 type="checkbox"
@@ -155,18 +138,14 @@ function Navbar() {
                 checked={theme === "dark"}
                 onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
               />
-              {/* Sun icon for light mode */}
               {theme === "light" ? (
                 <HiSun className="swap-off fill-current w-7 h-7" />
               ) : (
-                // Moon icon for dark mode
                 <HiMoon className="swap-on fill-current w-7 h-7" />
               )}
             </label>
-            {/* Conditional rendering based on authentication status */}
             {authUser ? (
               <div className="relative" ref={profileRef}>
-                {/* Profile Icon with dropdown */}
                 <button
                   className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
                   onClick={() => setShowMenuRight(!showMenuRight)}
@@ -177,7 +156,6 @@ function Navbar() {
                     alt="Your profile"
                   />
                 </button>
-                {/* Dropdown menu */}
                 {showMenuRight && (
                   <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                     <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
