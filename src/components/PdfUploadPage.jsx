@@ -3,6 +3,7 @@ import axios from "axios";
 import UploadForm from "./UploadForm";
 import UploadedList from "./UploadedList";
 import PdfComp from "./PdfComp";
+import Navbar from "./Navbar";
 
 const PdfUploadPage = () => {
   const [allImage, setAllImage] = useState(null);
@@ -26,11 +27,16 @@ const PdfUploadPage = () => {
   };
 
   return (
-    <div className="max-w-full mx-auto p-4">
-      <UploadForm getPdf={getPdf} />
-      <UploadedList allImage={allImage} showPdf={showPdf} />
-      {pdfFile && <PdfComp pdfFile={pdfFile} />}
-    </div>
+    <>
+      <Navbar />
+      <div className="max-w-full mx-auto p-4">
+        <div className="mt-20">
+          <UploadForm getPdf={getPdf} />
+        </div>
+        <UploadedList allImage={allImage} showPdf={showPdf} />
+        {pdfFile && <PdfComp pdfFile={pdfFile} />}
+      </div>
+    </>
   );
 };
 
