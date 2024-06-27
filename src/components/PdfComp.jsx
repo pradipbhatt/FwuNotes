@@ -29,7 +29,7 @@ const PdfComp = ({ pdfFile }) => {
   return (
     <div
       ref={containerRef}
-      className="pdf-container h-full p-4 sm:p-6 lg:p-10 flex flex-col items-center justify-start overflow-y-auto"
+      className="pdf-container h-full p-4 sm:p-6 lg:p-20 flex flex-col items-center justify-start overflow-y-auto"
     >
       <Document
         file={pdfFile}
