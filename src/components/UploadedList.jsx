@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import axios from "axios";
 import PdfComp from "./PdfComp";
 
-const UploadedList = ({ allImage, showPdf }) => {
+const UploadedList = ({ allImage, showPdf, getPdf, hideDeleteButton }) => {
   const [selectedPdf, setSelectedPdf] = useState(null);
 
   const handlePdfClick = (pdf) => {
@@ -12,31 +13,55 @@ const UploadedList = ({ allImage, showPdf }) => {
     setSelectedPdf(null);
   };
 
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://soe-notes-pdf-backend.onrender.com/${id}`);
+      getPdf(); // Refresh the list after deletion
+    } catch (error) {
+      console.error("Error deleting file:", error);
+    }
+  };
+
   return (
-    <div className="max-w-full mx-auto p-1 grid grid-cols-1 sm:grid-cols-4 gap-4 mt-20">
+    <div className="max-w-full mx-auto p-1 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-20">
       {allImage &&
         allImage.map((item) => (
           <div
-            key={item.id}
+            key={item._id}
             className="bg-white rounded-lg shadow-md overflow-hidden transition transform hover:scale-105 hover:shadow-xl cursor-pointer relative flex flex-col"
-            onClick={() => handlePdfClick(item.pdf)}
-            style={{ aspectRatio: "1 / 1", width: "320px" }} // Smaller cards
+            style={{ aspectRatio: "1 / 1", width: "370px" }} // Smaller cards
           >
             <img
-              src={`https://www.pngall.com/wp-content/uploads/2016/03/Book-PNG-8.png`} // Increased image size to 200x200
-              alt={item.title}
+              src={item.image}
+              alt={item.bookTitle}
               className="w-full h-2/3 object-cover"
+              onClick={() => handlePdfClick(item.pdf)}
             />
             <div className="p-2 flex-grow">
-              <h2 className="text-sm font-bold mb-2">{item.title}</h2>
+              <h2 className="text-sm font-bold mb-2 text-orange-900">{item.bookTitle}</h2>
+              <p className="text-xs text-orange-900">By: {item.createdBy}</p>
+              <p className="text-xs text-orange-900">
+                {new Date(item.createdTime).toLocaleString()}
+              </p>
             </div>
-            <div className="p-2 flex justify-center">
+            <div className="p-2 flex justify-between">
               <button
                 className="bg-green-500 text-white px-2 py-1 rounded-md"
                 onClick={() => handlePdfClick(item.pdf)}
               >
                 Read Now
               </button>
+              {!hideDeleteButton && (
+                <button
+                  className="bg-red-500 text-white px-2 py-1 rounded-md"
+                  onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering the PDF view
+                    handleDelete(item._id);
+                  }}
+                >
+                  Delete
+                </button>
+              )}
             </div>
           </div>
         ))}

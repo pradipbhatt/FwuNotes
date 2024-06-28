@@ -6,37 +6,31 @@ import PdfComp from "./PdfComp";
 import Navbar from "./Navbar";
 
 const PdfUploadPage = () => {
-  const [allImage, setAllImage] = useState(null);
-  const [pdfFile, setPdfFile] = useState(null);
+  const [allImage, setAllImage] = useState([]);
+
+  const getPdf = async () => {
+    try {
+      const res = await axios.get("https://soe-notes-pdf-backend.onrender.com/get-files");
+      setAllImage(res.data.data);
+    } catch (error) {
+      console.error("Error fetching files:", error);
+    }
+  };
 
   useEffect(() => {
     getPdf();
   }, []);
 
-  const getPdf = async () => {
-    try {
-      const result = await axios.get("https://soe-notes-pdf-backend.onrender.com/get-files");
-      setAllImage(result.data.data);
-    } catch (error) {
-      console.error("Error fetching PDF files:", error);
-    }
-  };
-
-  const showPdf = (pdf) => {
-    setPdfFile(`https://soe-notes-pdf-backend.onrender.com/files/${pdf}`);
-  };
-
   return (
-    <>
+    <div className="relative min-h-screen">
       <Navbar />
-      <div className="max-w-full mx-auto p-4">
-        <div className="mt-20">
-          <UploadForm getPdf={getPdf} />
-        </div>
-        <UploadedList allImage={allImage} showPdf={showPdf} />
-        {pdfFile && <PdfComp pdfFile={pdfFile} />}
+      <div className="container mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-4 text-orange-900">Upload PDFs</h1>
+        <UploadForm getPdf={getPdf} />
+        <h2 className="text-xl font-bold mt-8 mb-4 text-orange-900">Uploaded PDFs</h2>
+        <UploadedList allImage={allImage} getPdf={getPdf} />
       </div>
-    </>
+    </div>
   );
 };
 

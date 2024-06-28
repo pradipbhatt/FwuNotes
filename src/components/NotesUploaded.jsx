@@ -37,7 +37,7 @@ const NotesUploaded = () => {
             <div className="loader">Loading...</div>
           </div>
         ) : (
-          <UploadedList allImage={allImage} showPdf={showPdf} />
+          <UploadedList allImage={allImage} showPdf={showPdf} getPdf={getPdf} hideDeleteButton={true} />
         )}
         {pdfFile && (
           <div className="fixed inset-0 bg-gray-900 bg-opacity-90 z-50 flex items-center justify-center w-full h-full">
