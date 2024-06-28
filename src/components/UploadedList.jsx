@@ -13,7 +13,7 @@ const UploadedList = ({ allImage, showPdf }) => {
   };
 
   return (
-    <div className="max-w-full mx-auto p-4 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-20">
+    <div className="max-w-full mx-auto p-1 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-20">
       {allImage &&
         allImage.map((item) => (
           <div
@@ -23,7 +23,7 @@ const UploadedList = ({ allImage, showPdf }) => {
             style={{ aspectRatio: "1 / 1", width: "320px" }} // Smaller cards
           >
             <img
-              src={`https://picsum.photos/seed/${item.id}/100/100`} // Random image based on item.id
+              src={`https://picsum.photos/seed/${item.id}/200/200`} // Increased image size to 200x200
               alt={item.title}
               className="w-full h-2/3 object-cover"
             />
@@ -41,8 +41,10 @@ const UploadedList = ({ allImage, showPdf }) => {
           </div>
         ))}
       {selectedPdf && (
-        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-90 z-50 overflow-y-auto">
-          <div className="w-full sm:w-3/4 lg:w-full h-full bg-gray-100 rounded-lg shadow-lg overflow-y-auto">
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-900 bg-opacity-90 z-50 overflow-y-auto pdf-container">
+          <div className="w-full sm:w-3/4 lg:w-full h-full bg-gray-100 rounded-lg shadow-lg overflow-y-auto"
+            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }} // Inline styles for hiding scrollbar
+          >
             <div className="flex justify-end p-4">
               <button
                 className="bg-red-500 text-white px-4 py-2 rounded-md"

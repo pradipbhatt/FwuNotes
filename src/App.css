@@ -24,3 +24,12 @@
 body {
   font-family: 'Times New Roman', Times, serif;
 }
+.pdf-container::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.pdf-container {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
