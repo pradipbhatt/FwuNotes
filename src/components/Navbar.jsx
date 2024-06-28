@@ -2,34 +2,18 @@ import React, { useEffect, useState, useRef } from "react";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
-import { HiMenu, HiX, HiSun, HiMoon, HiSearch } from "react-icons/hi"; // Import icons from react-icons
+import { HiMenu, HiX, HiSun, HiMoon, HiSearch } from "react-icons/hi";
 
-function Navbar() {
+function Navbar({ allImage }) {
   const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
 
-  const [showMenuLeft, setShowMenuLeft] = useState(false); // State for left dropdown menu
-  const [showMenuRight, setShowMenuRight] = useState(false); // State for right dropdown menu
-
-  const profileRef = useRef(null); // Ref for the profile dropdown
-
-  // Apply the selected theme to the document element and body
-  useEffect(() => {
-    if (theme === "dark") {
-      element.classList.add("dark");
-      localStorage.setItem("theme", "dark");
-      document.body.classList.add("dark");
-    } else {
-      element.classList.remove("dark");
-      localStorage.setItem("theme", "light");
-      document.body.classList.remove("dark");
-    }
-  }, [theme]);
+  const [showMenuLeft, setShowMenuLeft] = useState(false);
+  const [showMenuRight, setShowMenuRight] = useState(false);
+  const profileRef = useRef(null);
 
   const [sticky, setSticky] = useState(false);
-
-  // Add sticky class to navbar on scroll
   useEffect(() => {
     const handleScroll = () => {
       setSticky(window.scrollY > 0);
@@ -40,13 +24,12 @@ function Navbar() {
     };
   }, []);
 
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         profileRef.current &&
         !profileRef.current.contains(event.target) &&
-        event.target.closest(".navbar-end") === null // Check if the click is outside of the .navbar-end section
+        event.target.closest(".navbar-end") === null
       ) {
         setShowMenuRight(false);
       }
@@ -58,6 +41,43 @@ function Navbar() {
     };
   }, []);
 
+  // State for search functionality
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  // Fetch search results from API
+  useEffect(() => {
+    const fetchSearchResults = async () => {
+      try {
+        setLoading(true);
+        // Replace with your actual API endpoint
+        const response = await fetch(`https://your-api-endpoint?q=${searchQuery}`);
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setSearchResults(data.results); // Assuming API returns an array of results
+      } catch (error) {
+        console.error("Error fetching search results:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    // Fetch only if searchQuery is not empty
+    if (searchQuery.trim() !== "") {
+      fetchSearchResults();
+    } else {
+      setSearchResults([]); // Clear results if searchQuery is empty
+    }
+  }, [searchQuery]);
+
   // Define navigation items
   const navItems = (
     <>
@@ -68,7 +88,7 @@ function Navbar() {
       </li>
       <li>
         <a href="/notes-uploaded" className="hover:text-orange-500">
-         SoeNotes
+          SoeNotes
         </a>
       </li>
       <li>
@@ -87,7 +107,8 @@ function Navbar() {
   return (
     <div
       className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out  
-      ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
+        ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}
+      `}
     >
       <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
         <div className="navbar flex justify-between items-center py-4">
@@ -99,7 +120,11 @@ function Navbar() {
                 className="btn btn-ghost lg:hidden"
                 onClick={() => setShowMenuLeft(!showMenuLeft)}
               >
-                {showMenuLeft ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
+                {showMenuLeft ? (
+                  <HiX className="h-5 w-5" />
+                ) : (
+                  <HiMenu className="h-5 w-5" />
+                )}
               </div>
               {showMenuLeft && (
                 <ul
@@ -111,13 +136,13 @@ function Navbar() {
                 </ul>
               )}
             </div>
-            <a className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
+            <a className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-white">
               SoeNotes
             </a>
           </div>
           <div className="navbar-end flex items-center space-x-3">
             <div className="navbar-center hidden lg:flex">
-              <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-black">
+              <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-white">
                 {navItems}
               </ul>
             </div>
@@ -127,6 +152,8 @@ function Navbar() {
                   type="text"
                   className="grow outline-none rounded-md px-1 bg-gray-100 dark:bg-slate-300 dark:text-black"
                   placeholder="Search"
+                  value={searchQuery}
+                  onChange={handleSearchChange}
                 />
                 <HiSearch className="w-4 h-4 opacity-70" />
               </label>
@@ -136,7 +163,9 @@ function Navbar() {
                 type="checkbox"
                 className="theme-controller"
                 checked={theme === "dark"}
-                onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                onChange={() =>
+                  setTheme(theme === "dark" ? "light" : "dark")
+                }
               />
               {theme === "light" ? (
                 <HiSun className="swap-off fill-current w-7 h-7" />
@@ -186,6 +215,26 @@ function Navbar() {
           </div>
         </div>
       </div>
+      {/* Display search results */}
+      {searchQuery && (
+        <div className="absolute top-16 left-0 right-0 z-50 bg-white dark:bg-slate-700 dark:text-white shadow-lg py-2 px-4">
+          {loading ? (
+            <p>Loading...</p>
+          ) : searchResults.length === 0 ? (
+            <p>No results found</p>
+          ) : (
+            <ul>
+              {searchResults.map((result) => (
+                <li key={result.id}>
+                  <a href={`/book/${result.id}`} className="block hover:text-blue-500">
+                    {result.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 }
