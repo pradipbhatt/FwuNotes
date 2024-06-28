@@ -13,7 +13,7 @@ const UploadedList = ({ allImage, showPdf }) => {
   };
 
   return (
-    <div className="max-w-full mx-auto p-1 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-20">
+    <div className="max-w-full mx-auto p-1 grid grid-cols-1 sm:grid-cols-4 gap-4 mt-20">
       {allImage &&
         allImage.map((item) => (
           <div
@@ -23,7 +23,7 @@ const UploadedList = ({ allImage, showPdf }) => {
             style={{ aspectRatio: "1 / 1", width: "320px" }} // Smaller cards
           >
             <img
-              src={`https://picsum.photos/seed/${item.id}/200/200`} // Increased image size to 200x200
+              src={`https://www.pngall.com/wp-content/uploads/2016/03/Book-PNG-8.png`} // Increased image size to 200x200
               alt={item.title}
               className="w-full h-2/3 object-cover"
             />
