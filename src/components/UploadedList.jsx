@@ -15,7 +15,8 @@ const UploadedList = ({ allImage, showPdf, getPdf, hideDeleteButton }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://soe-notes-pdf-backend.onrender.com/${id}`);
+      const response = await axios.delete(`https://soe-notes-pdf-backend.onrender.com/delete-file/${id}`);
+      console.log("Delete response:", response.data);
       getPdf(); // Refresh the list after deletion
     } catch (error) {
       console.error("Error deleting file:", error);
