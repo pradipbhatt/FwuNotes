@@ -23,7 +23,7 @@ const PdfComp = ({ pdfFile }) => {
         } else if (window.innerWidth > 768) {
           setScale(1.1); // Tablets
         } else {
-          setScale(0.7); // Mobile devices
+          setScale(0.5); // Mobile devices
         }
       }
     };
