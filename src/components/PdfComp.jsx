@@ -19,7 +19,7 @@ const PdfComp = ({ pdfFile }) => {
         const containerWidth = containerRef.current.offsetWidth;
 
         if (window.innerWidth > 1024) {
-          setScale(1.6); // Large devices
+          setScale(1.5); // Large devices
         } else if (window.innerWidth > 768) {
           setScale(1.1); // Tablets
         } else {

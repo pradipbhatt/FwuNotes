@@ -31,7 +31,7 @@ const NotesUploaded = () => {
   return (
     <>
       <Navbar />
-      <div className="max-w-full mx-auto p-4">
+      <div className="max-w-full mx-auto p-4 mt-20">
         {loading ? (
           <div className="flex justify-center items-center h-screen">
             <div className="loader">Loading...</div>

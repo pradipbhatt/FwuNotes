@@ -3,10 +3,11 @@ import axios from "axios";
 import { ClipLoader } from "react-spinners";
 
 const UploadForm = ({ getPdf }) => {
-  const [bookId, setBookId] = useState("");
+  const [bookId, setBookId] = useState("1");
   const [bookTitle, setBookTitle] = useState("");
-  const [createdBy, setCreatedBy] = useState("");
-  const [image, setImage] = useState("");
+  const [createdBy, setCreatedBy] = useState("Pradip Bhatt");
+  const [image, setImage] = useState("https://pradipbhatt.com.np/medias/parry.jpg");
+  const [semester, setSemester] = useState("");
   const [file, setFile] = useState(null);
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -14,8 +15,8 @@ const UploadForm = ({ getPdf }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!file) {
-      setError("Please select a file to upload.");
+    if (!file || !bookId || !bookTitle || !createdBy || !semester) {
+      setError("Please fill out all required fields.");
       return;
     }
 
@@ -25,6 +26,7 @@ const UploadForm = ({ getPdf }) => {
     formData.append("bookTitle", bookTitle);
     formData.append("createdBy", createdBy);
     formData.append("image", image);
+    formData.append("semester", semester);
     formData.append("file", file);
 
     try {
@@ -34,11 +36,17 @@ const UploadForm = ({ getPdf }) => {
         },
       });
       setError(""); // Clear any previous errors
+      setBookId("");
+      setBookTitle("");
+      setCreatedBy("");
+      setImage("");
+      setSemester("");
+      setFile(null);
       getPdf(); // Refresh the list
-      setIsLoading(false); // Stop loading
     } catch (error) {
       console.error("Error uploading file:", error);
       setError("An error occurred while uploading the file. Please try again.");
+    } finally {
       setIsLoading(false); // Stop loading
     }
   };
@@ -47,7 +55,7 @@ const UploadForm = ({ getPdf }) => {
     <div className="flex justify-center items-center h-screen">
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col space-y-4 bg-orange-100 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow w-3/5"
+        className="flex flex-col space-y-4 bg-orange-100 p-6 rounded-lg shadow-lg hover:shadow-2xl transition-shadow w-full max-w-md"
       >
         {error && <p className="text-red-500 dark:text-red-400">{error}</p>}
         <input
@@ -60,7 +68,7 @@ const UploadForm = ({ getPdf }) => {
         />
         <input
           type="text"
-          placeholder="NoteName"
+          placeholder="Note Name"
           value={bookTitle}
           onChange={(e) => setBookTitle(e.target.value)}
           required
@@ -79,6 +87,13 @@ const UploadForm = ({ getPdf }) => {
           placeholder="Image URL"
           value={image}
           onChange={(e) => setImage(e.target.value)}
+          className="border rounded-md p-2 dark:bg-gray-700 dark:text-white dark:border-gray-600"
+        />
+        <input
+          type="text"
+          placeholder="Semester"
+          value={semester}
+          onChange={(e) => setSemester(e.target.value)}
           required
           className="border rounded-md p-2 dark:bg-gray-700 dark:text-white dark:border-gray-600"
         />
