@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import UploadForm from "./UploadForm";
 import UploadedList from "./UploadedList";
-import PdfComp from "./PdfComp";
-import Navbar from "./Navbar";
+import PdfComp from "../PdfComp";
+import Navbar from "../Navbar";
 
 const PdfUploadPage = () => {
   const [allImage, setAllImage] = useState([]);

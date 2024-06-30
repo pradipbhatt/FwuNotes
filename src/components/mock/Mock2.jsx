@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 
 const quizData2077 = [ // Define quiz data for 2077
@@ -1126,7 +1126,7 @@ const Mock2 = () => {
             <div className="flex flex-col justify-center items-center mb-4 mt-10">
   <h1 className="text-xl mb-3 text-center">Far Western University</h1>
   <h1 className="text-2xl text-center">School of Engineering</h1>
-  <h1 className="text-xl text-center">Mock Test 2079 A</h1>
+  <h1 className="text-xl text-center">Mock Test 2078</h1>
   {/* <h1 className="text-xl text-center"></h1> */}
   <h5 className="text-xl mb-2 text-center">
     Question {currentQuestion + 1}/{quizData2077.length}

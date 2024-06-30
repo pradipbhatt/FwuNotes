@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Link } from "react-router-dom"; // Import Link from React Router
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
@@ -99,7 +100,7 @@ function Navbar() {
         </a>
       </li>
       <li>
-        <a href="/notes-uploaded" className="hover:text-orange-500">
+        <a href="/courses" className="hover:text-orange-500">
           SoeNotes
         </a>
       </li>
@@ -143,9 +144,9 @@ function Navbar() {
                 </ul>
               )}
             </div>
-            <a href="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
+            <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
               SoeNotes
-            </a>
+            </Link>
           </div>
           <div className="navbar-end flex items-center space-x-3">
             <div className="navbar-center hidden lg:flex">
@@ -193,10 +194,10 @@ function Navbar() {
                 {showMenuRight && (
                   <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                     <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                      Profile
+                      <Link to="/profile">Profile</Link>
                     </li>
                     <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                      Settings
+                      <Link to="/settings">Settings</Link>
                     </li>
                     <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-600">
                       <Logout />
@@ -233,12 +234,12 @@ function Navbar() {
             <ul>
               {searchResults.map((result) => (
                 <li key={result.id}>
-                  <a
-                    href={`/book/${result.id}`}
+                  <Link
+                    to={`/book/${result.id}`}
                     className="block hover:text-blue-500"
                   >
                     {result.title}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

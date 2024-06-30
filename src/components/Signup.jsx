@@ -22,6 +22,7 @@ function Signup() {
         fullname: data.fullname,
         email: data.email,
         password: data.password,
+        registrationNumber: data.registrationNumber,
       };
       const res = await axios.post("https://fwu-soe.onrender.com/user/signup", userInfo);
       console.log(res.data);
@@ -81,6 +82,18 @@ function Signup() {
               />
               {errors.email && (
                 <span className="text-sm text-red-500">{errors.email.message}</span>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Registration Number</label>
+              <input
+                type="text"
+                placeholder="Enter your registration number"
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+                {...register("registrationNumber", { required: "Registration number is required" })}
+              />
+              {errors.registrationNumber && (
+                <span className="text-sm text-red-500">{errors.registrationNumber.message}</span>
               )}
             </div>
             <div>

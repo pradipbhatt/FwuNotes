@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 const quizData2077 = [
   // Define quiz data for 2077

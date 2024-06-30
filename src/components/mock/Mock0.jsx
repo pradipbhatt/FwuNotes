@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
 
 const quizData2077 = [ // Define quiz data for 2077
@@ -27,7 +27,7 @@ const quizData2077 = [ // Define quiz data for 2077
   // Add more quiz data as needed
 ];
 
-const Mock5 = () => {
+const Mock4 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -116,8 +116,8 @@ const Mock5 = () => {
             <>
               <div className="mb-4 mt-10">
               <h1 className="text-xl mb-3 text-center">Far Western University</h1>
-               <h1 className="text-2xl text-center">School of Engineering</h1>
-               <h1 className="text-xl text-center">Mock Test 2079 A</h1>
+              <h1 className="text-2xl text-center">School of Engineering</h1>
+              <h1 className="text-xl text-center">Mock Test 2079 A</h1>
                 <h5 className="text-xl mb-2">
                   Question {currentQuestion + 1}/{quizData2077.length}
                 </h5>
@@ -178,5 +178,5 @@ const Mock5 = () => {
   );
 };
 
-export default Mock5;
+export default Mock4;
 

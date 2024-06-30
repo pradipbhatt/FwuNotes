@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Navbar from './Navbar';
-import Footer from './Footer';
-import { Button } from '@mui/material';
-import logo from '../../public/logo1.png'; // Adjust the import path as necessary
-
+import { Link, NavLink } from 'react-router-dom';
+import logo from '../../../public/logo1.png'; // Adjust the import path as necessary
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 const years = [2075,2076,2077, 2078, 2079, 2080];
 // const years = [2077, 2078, 2079, 2080, 2081]; if you wamt to add more cards add by this.
 
@@ -17,7 +15,7 @@ const Mock = () => {
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
+     <Navbar/>
       <div className="flex justify-center items-center mt-8">
         <img src={logo} alt="Logo" className="sm:w-full md:w-1/2 md:h-32 md:w-1/2 md:h-30 mt-20" />
       </div>
@@ -125,7 +123,7 @@ const Mock = () => {
         </div>
       </div>
 
-      <Footer />
+     <Footer/>
     </div>
   );
 };

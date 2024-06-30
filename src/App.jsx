@@ -1,25 +1,27 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./home/Home";
-import Courses from "./courses/Courses";
-import Mock from "./components/Mock";
+import Mock from "./components/mock/Mock";
 import Signup from "./components/Signup";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
-import Mock1 from "./components/Mock1";
-import Mock2 from "./components/Mock2";
-import Mock3 from "./components/Mock3";
-import Mock4 from "./components/Mock4";
+import Mock1 from "./components/mock/Mock1";
+import Mock2 from "./components/mock/Mock2";
+import Mock3 from "./components/mock/Mock3";
+import Mock4 from "./components/mock/Mock4";
 import About from "./components/About";
-import Mock0 from "./components/Mock0";
-import Mock6 from "./components/Mock6";
-import Mock7 from "./components/Mock7";
-import Mock5 from "./components/Mock5";
-// import Compare from "./components/Compare";
-import AdmissionGuidelines from "./components/AdmissionGuidelines";
-// import Shadharan from "./components/shadharan/Shadharan";
-import PdfUploadPage from "./components/PdfUploadPage";
-import NotesUploaded from "./components/NotesUploaded";
+import Mock0 from "./components/mock/Mock0";
+import Mock6 from "./components/mock/Mock6";
+import Mock7 from "./components/mock/Mock7";
+import Mock5 from "./components/mock/Mock5";
+import AdmissionGuidelines from "./components/mock/AdmissionGuidelines";
+import PdfUploadPage from "./components/soenotes/PdfUploadPage";
+import NotesUploaded from "./components/soenotes/NotesUploaded";
+import Courses from "../src/courses/Courses";
+import Profile from "./components/Profile";
+import Settings from "./components/Settings";
+import AdminDashboard from "./components/AdminDashboard.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
   const [authUser] = useAuth();
@@ -43,9 +45,20 @@ function App() {
           <Route path="/Mock6" element={<Mock6 />} />
           <Route path="/Mock7" element={<Mock7 />} />
           <Route path="/About" element={<About />} />
+          <Route path="/courses" element={<Courses/>} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/pdf-upload" element={<PdfUploadPage />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/settings" element={<Settings />} />
+          <Route path="/pdf-upload" element={  <ProtectedRoute> <PdfUploadPage /> </ProtectedRoute>} />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminDashboard />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Toaster />
       </div>
