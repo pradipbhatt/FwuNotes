@@ -31,8 +31,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route
-            path="/notes-uploaded"
-            element={authUser ? <NotesUploaded /> : <Navigate to="/signup" />}
+            path="/courses"
+            element={authUser ? <Courses /> : <Navigate to="/signup" />}
           />
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
