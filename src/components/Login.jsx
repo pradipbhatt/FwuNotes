@@ -121,18 +121,6 @@ function Login() {
           </form>
         </div>
       </dialog>
-
-      {/* Preloader Modal */}
-      {loading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
-            <div className="spinner-border animate-spin inline-block w-8 h-8 border-4 rounded-full text-orange-500" role="status">
-              <span className="sr-only">Logging in...</span>
-            </div>
-            <p className="mt-4 text-lg text-gray-800">Logging in, please wait...</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
