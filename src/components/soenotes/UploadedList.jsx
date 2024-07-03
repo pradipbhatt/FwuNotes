@@ -4,7 +4,7 @@ import PdfComp from "./PdfComp";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const UploadedList = ({ getPdf, hideDeleteButton }) => {
+const UploadedList = ({ hideDeleteButton }) => {
   const [pdfList, setPdfList] = useState([]);
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [selectedPdfId, setSelectedPdfId] = useState(null);
@@ -157,7 +157,7 @@ const UploadedList = ({ getPdf, hideDeleteButton }) => {
                 Close PDF
               </button>
             </div>
-            <PdfComp pdfFile={`https://soe-notes-pdf-backend.onrender.com/files/${selectedPdf}`} />
+            <PdfComp pdfFile={`${selectedPdf}`} />
           </div>
         </div>
       )}

@@ -53,7 +53,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/settings" element={<Settings />} />
-          <Route path="/pdf-upload" element={  <ProtectedRoute> <PdfUploadPage /> </ProtectedRoute>} />
+          <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
           <Route
             path="/admin"
