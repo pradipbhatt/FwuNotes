@@ -100,7 +100,7 @@ function Navbar() {
         </a>
       </li>
       <li>
-        <a href="/courses" className="hover:text-orange-500">
+        <a href="/showbook" className="hover:text-orange-500">
           SoeNotes
         </a>
       </li>
