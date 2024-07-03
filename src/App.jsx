@@ -22,6 +22,8 @@ import Profile from "./components/Profile";
 import Settings from "./components/Settings";
 import AdminDashboard from "./components/AdminDashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
+import Addbook from "./pages/Addbook.jsx";
+import BooksUploaded from "./pages/BooksUploaded.jsx";
 
 function App() {
   const [authUser] = useAuth();
@@ -30,6 +32,8 @@ function App() {
       <div className="dark:bg-slate-100 dark:text-black">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/addbook" element={<Addbook/>} />
+          <Route path="/books-upload" element={<BooksUploaded/>} />
           <Route
             path="/courses"
             element={authUser ? <Courses /> : <Navigate to="/signup" />}
