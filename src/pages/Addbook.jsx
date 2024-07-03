@@ -102,23 +102,23 @@ function AddBook() {
           <h2 className="text-xl font-semibold mb-4">Add New Book</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label htmlFor="bookTitle" className="block text-sm font-medium text-gray-100">Book Title</label>
+              <label htmlFor="bookTitle" className="block text-sm font-medium text-gray-800">Book Title</label>
               <input type="text" id="bookTitle" name="bookTitle" value={formData.bookTitle} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-black" />
             </div>
             <div>
-              <label htmlFor="createdBy" className="block text-sm font-medium text-gray-100">Created By</label>
+              <label htmlFor="createdBy" className="block text-sm font-medium text-gray-800">Created By</label>
               <input type="text" id="createdBy" name="createdBy" value={formData.createdBy} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-black" />
             </div>
             <div>
-              <label htmlFor="image" className="block text-sm font-medium text-gray-100">Image URL</label>
+              <label htmlFor="image" className="block text-sm font-medium text-gray-800">Image URL</label>
               <input type="url" id="image" name="image" value={formData.image} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-black" />
             </div>
             <div>
-              <label htmlFor="pdfLink" className="block text-sm font-medium text-gray-100">PDF Link</label>
+              <label htmlFor="pdfLink" className="block text-sm font-medium text-gray-800">PDF Link</label>
               <input type="url" id="pdfLink" name="pdfLink" value={formData.pdfLink} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-black" />
             </div>
             <div>
-              <label htmlFor="semester" className="block text-sm font-medium text-gray-100">Semester</label>
+              <label htmlFor="semester" className="block text-sm font-medium text-gray-800">Semester</label>
               <input type="text" id="semester" name="semester" value={formData.semester} onChange={handleChange} required className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm bg-white text-black" />
             </div>
           </div>

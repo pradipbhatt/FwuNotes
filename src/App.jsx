@@ -33,10 +33,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addbook" element={  <ProtectedRoute><Addbook/></ProtectedRoute>} />
-          <Route path="/showbook" element={<BooksUploaded/>} />
+          {/* <Route path="/showbook" element={<BooksUploaded/>} /> */}
           <Route
-            path="/courses"
-            element={authUser ? <Courses /> : <Navigate to="/signup" />}
+            path="/showbook"
+            element={authUser ? <BooksUploaded/> : <Navigate to="/signup" />}
           />
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
