@@ -15,7 +15,7 @@ const Testimonials = () => {
       name: 'Jelina Bhatt',
       title: 'CSE Student',
       company: 'Far Western University',
-      img: 'https://scontent.fktm19-1.fna.fbcdn.net/v/t39.30808-6/319815297_3320856574854383_2441959363397401367_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=A25eu2uw0c4Q7kNvgHfO8QI&_nc_ht=scontent.fktm19-1.fna&oh=00_AYCTH5BzDu1pqUcnBezA39-rY9k8Hv4eC29hHOHT__Kpbw&oe=6679EA52', // Replace with actual image URL
+      img: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-6/291759961_587583433092843_1552650560748294747_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=86c6b0&_nc_ohc=jk2bvqPuHsQQ7kNvgHg60Bc&_nc_ht=scontent.fktm1-1.fna&gid=A_S5Xw_pQapORxRIjiu0SXU&oh=00_AYBjN3x7PHr0une2QYBy9-adrXjDlm4H7qY8_-VsOaXyGA&oe=668B591B', // Replace with actual image URL
       quoteTitle: 'Resourceful Support',
       quote: 'SOE Notes brings a new perspective to comparing educational institutions and providing essential resources.',
       rating: 4
@@ -24,7 +24,7 @@ const Testimonials = () => {
       name: 'Bijay Saud',
       title: 'CSE Student',
       company: 'Far Western University',
-      img: 'https://scontent.fktm19-1.fna.fbcdn.net/v/t39.30808-6/341151557_101011719647949_7538820499509787011_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ur8vr9aVQI8Q7kNvgEsyuHb&_nc_ht=scontent.fktm19-1.fna&oh=00_AYDEh3F2oz2AlhRXnpWpAfo-qVw1D7sfLbC1o4v2yC-yPQ&oe=6679E296', // Replace with actual image URL
+      img: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-6/341151557_101011719647949_7538820499509787011_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tIWHbf3-jPcQ7kNvgHg6z3Z&_nc_ht=scontent.fktm1-1.fna&oh=00_AYBiSGMcJ8MK8Uqzdaxk2yXl10ES95S68s66IBjgQA1qxg&oe=668B7696', // Replace with actual image URL
       quoteTitle: 'Handwritten Notes Provider',
       quote: 'The handwritten notes provided by Bijay have been crucial in supporting our education.',
       rating: 5
