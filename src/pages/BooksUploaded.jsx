@@ -66,7 +66,7 @@ function BooksUploaded() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
               {groupedBooks[semester].map((book, index) => (
                 <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300">
-                  <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-105 transition duration-300" />
+                  <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
                   <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
                   <p className="text-gray-700 mb-1">By: {book.createdBy}</p>
                   <p className="text-gray-700 mb-1">Semester: {book.semester}</p>
@@ -79,7 +79,7 @@ function BooksUploaded() {
                         padding: '0 10px',
                         backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
                         boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
-                        transition: 'background-image 3s ease, transform 0.4s ease',
+                        transition: 'background-image 3s ease, transform 1s ease',
                       }}
                       onMouseEnter={(e) => {
                         e.target.style.backgroundImage = 'linear-gradient(to right, #45f2fe, #4facfe)';
