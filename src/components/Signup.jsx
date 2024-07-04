@@ -23,8 +23,14 @@ function Signup() {
         email: data.email,
         password: data.password,
         registrationNumber: data.registrationNumber,
+        isAdmin: true, // Assuming you set isAdmin based on your logic
       };
-      const res = await axios.post("https://fwu-soe.onrender.com/user/signup", userInfo);
+      const res = await axios.post("https://fwu-soe.onrender.com/user/signup", userInfo, {
+        headers: {
+          "Content-Type": "application/json",
+          "is-admin": true, // Sending isAdmin as header to identify admin action
+        },
+      });
       console.log(res.data);
       if (res.data) {
         toast.success("Successfully signed up");

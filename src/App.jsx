@@ -20,7 +20,7 @@ import NotesUploaded from "./components/soenotes/NotesUploaded";
 import Courses from "../src/courses/Courses";
 import Profile from "./components/Profile";
 import Settings from "./components/Settings";
-import AdminDashboard from "./components/AdminDashboard.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Addbook from "./pages/Addbook.jsx";
 import BooksUploaded from "./pages/BooksUploaded.jsx";
