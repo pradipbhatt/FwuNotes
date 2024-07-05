@@ -24,6 +24,7 @@ import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Addbook from "./pages/Addbook.jsx";
 import BooksUploaded from "./pages/BooksUploaded.jsx";
+import { Analytics } from '@vercel/analytics/react';
 
 function App() {
   const [authUser] = useAuth();
