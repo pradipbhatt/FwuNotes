@@ -151,7 +151,7 @@ const Mock = () => {
         </div>
       </div>
 
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
