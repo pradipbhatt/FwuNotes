@@ -33,8 +33,7 @@ function App() {
       <div className="dark:bg-slate-100 dark:text-black">
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/addbook" element={  <ProtectedRoute><Addbook/></ProtectedRoute>} />
-          {/* <Route path="/showbook" element={<BooksUploaded/>} /> */}
+          <Route path="/addbook" element={ <ProtectedRoute><Addbook/></ProtectedRoute> } />
           <Route
             path="/showbook"
             element={authUser ? <BooksUploaded/> : <Navigate to="/signup" />}
@@ -67,6 +66,7 @@ function App() {
         </Routes>
         <Toaster />
       </div>
+      <Analytics />
     </>
   );
 }
