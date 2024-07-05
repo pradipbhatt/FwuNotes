@@ -99,7 +99,7 @@ function Navbar() {
       </li>
       <li>
         <a href="/mock" className="hover:text-orange-500">
-          Mock Test
+        Entrance Test
         </a>
       </li>
       <li>
@@ -267,10 +267,10 @@ function Navbar() {
             className={`flex flex-col items-center space-y-1 ${
               activeTab === "mocktest" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
             }`}
-            onClick={() => setActiveTab("mocktest")}
+            onClick={() => setActiveTab("Entrance Test")}
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Mock Test</span>
+            <span className="text-xs">Entrance Test</span>
           </Link>
           <Link
             to="/profile"
