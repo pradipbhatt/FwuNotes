@@ -1040,7 +1040,7 @@ const quizData2077 = [ // Define quiz data for 2077
 // Total time in seconds for 150 questions in 3 hours
 const TOTAL_TIME = 3 * 60 * 60;
 
-const Mock5 = () => {
+const Mock8 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
@@ -1196,4 +1196,4 @@ const Mock5 = () => {
   );
 };
 
-export default Mock5;
+export default Mock8;

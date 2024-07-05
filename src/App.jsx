@@ -25,6 +25,9 @@ import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Addbook from "./pages/Addbook.jsx";
 import BooksUploaded from "./pages/BooksUploaded.jsx";
 import { Analytics } from '@vercel/analytics/react';
+import Mock8 from "./components/mock/Mock8.jsx";
+import Mock9 from "./components/mock/Mock9.jsx";
+import Mock10 from "./components/mock/Mock10.jsx";
 
 function App() {
   const [authUser] = useAuth();
@@ -48,6 +51,9 @@ function App() {
           <Route path="/Mock5" element={<Mock5 />} />
           <Route path="/Mock6" element={<Mock6 />} />
           <Route path="/Mock7" element={<Mock7 />} />
+          <Route path="/Mock8" element={<Mock8 />} />
+          <Route path="/Mock9" element={<Mock9 />} />
+          <Route path="/Mock10" element={<Mock10 />} />
           <Route path="/About" element={<About />} />
           <Route path="/courses" element={<Courses/>} />
           <Route path="/signup" element={<Signup />} />
