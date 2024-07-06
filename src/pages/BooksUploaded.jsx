@@ -5,6 +5,7 @@ import Footer from '../components/Footer';
 function BooksUploaded() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
+  const [currentPage, setCurrentPage] = useState(1); // Pagination state
 
   // Function to fetch books from the backend
   const getBooks = () => {
@@ -60,6 +61,14 @@ function BooksUploaded() {
 
   const groupedBooks = groupBooksBySemester();
 
+  // Get the total number of semesters
+  const totalSemesters = Object.keys(groupedBooks).length;
+
+  // Function to handle page change
+  const handlePageChange = (newPage) => {
+    setCurrentPage(newPage);
+  };
+
   return (
     <>
       <Navbar />
@@ -75,44 +84,60 @@ function BooksUploaded() {
             <p className="text-gray-700 mt-4">Please wait, notes are loading...</p>
           </div>
         ) : (
-          Object.keys(groupedBooks).map((semester, index) => (
-            <div key={index} className="mb-8">
-              <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                {groupedBooks[semester].map((book, index) => (
-                  <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300">
-                    <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
-                    <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
-                    <p className="text-gray-700 mb-1">By: {book.createdBy}</p>
-                    <p className="text-gray-700 mb-1">Semester: {book.semester}</p>
-                    <div className="flex justify-between mt-4">
-                      <button
-                        onClick={() => handleShowPDF(book.pdfLink)}
-                        className="bg-blue-500 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-300 text-xs md:text-sm"
-                        style={{
-                          height: '32px',
-                          padding: '0 10px',
-                          backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
-                          boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
-                          transition: 'background-image 3s ease, transform 1s ease',
-                        }}
-                        onMouseEnter={(e) => {
-                          e.target.style.backgroundImage = 'linear-gradient(to right, #45f2fe, #4facfe)';
-                          e.target.style.transform = 'scale(1.05)';
-                        }}
-                        onMouseLeave={(e) => {
-                          e.target.style.backgroundImage = 'linear-gradient(to right, #4facfe, #00f2fe)';
-                          e.target.style.transform = 'scale(1)';
-                        }}
-                      >
-                        Show PDF
-                      </button>
-                    </div>
+          <>
+            {Object.keys(groupedBooks).map((semester, index) => (
+              index + 1 === currentPage && (
+                <div key={index} className="mb-8">
+                  <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                    {groupedBooks[semester].map((book, index) => (
+                      <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300">
+                        <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
+                        <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
+                        <p className="text-gray-700 mb-1">By: {book.createdBy}</p>
+                        <p className="text-gray-700 mb-1">Semester: {book.semester}</p>
+                        <div className="flex justify-between mt-4">
+                          <button
+                            onClick={() => handleShowPDF(book.pdfLink)}
+                            className="bg-blue-500 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-300 text-xs md:text-sm"
+                            style={{
+                              height: '32px',
+                              padding: '0 10px',
+                              backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
+                              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
+                              transition: 'background-image 3s ease, transform 1s ease',
+                            }}
+                            onMouseEnter={(e) => {
+                              e.target.style.backgroundImage = 'linear-gradient(to right, #45f2fe, #4facfe)';
+                              e.target.style.transform = 'scale(1.05)';
+                            }}
+                            onMouseLeave={(e) => {
+                              e.target.style.backgroundImage = 'linear-gradient(to right, #4facfe, #00f2fe)';
+                              e.target.style.transform = 'scale(1)';
+                            }}
+                          >
+                            Show PDF
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                ))}
-              </div>
+                </div>
+              )
+            ))}
+
+            <div className="flex justify-center mt-8">
+              {Array.from({ length: totalSemesters }, (_, index) => (
+                <button
+                  key={index}
+                  onClick={() => handlePageChange(index + 1)}
+                  className={`mx-1 px-3 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                >
+                  {index + 1}
+                </button>
+              ))}
             </div>
-          ))
+          </>
         )}
       </div>
       <Footer />
