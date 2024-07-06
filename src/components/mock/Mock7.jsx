@@ -3,6 +3,8 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 import logo from "../../../public/fwu.png";
 
+// Total time in seconds for 150 questions in 3 hours
+const TOTAL_TIME = 3 * 60 * 60;
 const quizData2077 = [ // Define quiz data for 2077
   {
     question: "The value of sin50° + sin10° is:",
@@ -1015,16 +1017,7 @@ const quizData2077 = [ // Define quiz data for 2077
     ],
     explanation: "The correct answer is 'unavoidable,' which means something that cannot be avoided or prevented."
   },
-  {
-    question: "The view was wonderful. If .......... a camera with me, I would have taken some photographs.",
-    answers: [
-      { text: "I’d had", correct: true },
-      { text: "I would have", correct: false },
-      { text: "I would have had", correct: false },
-      { text: "I had", correct: false }
-    ],
-    explanation: "The correct answer is 'I’d had,' which is the correct past perfect tense for the hypothetical situation presented."
-  },
+  
   {
     question: "Our flat is ........ the second floor of the building.",
     answers: [
@@ -1037,14 +1030,12 @@ const quizData2077 = [ // Define quiz data for 2077
   }
 ];
 
-// Total time in seconds for 150 questions in 3 hours
-const TOTAL_TIME = 3 * 60 * 60;
-
-const Mock3 = () => {
+const Mock7 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [score, setScore] = useState(0);
   const [showScore, setShowScore] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
+  const [correctAnswer, setCorrectAnswer] = useState(null);
   const [timer, setTimer] = useState(TOTAL_TIME);
 
   useEffect(() => {
@@ -1065,13 +1056,18 @@ const Mock3 = () => {
       setScore((prevScore) => prevScore + 1);
     }
     setSelectedAnswer(text);
+    const correctAnswer = quizData2077[currentQuestion].answers.find(
+      (answer) => answer.correct
+    ).text;
+    setCorrectAnswer(correctAnswer);
     setTimeout(() => {
       handleNextQuestion();
-    }, 1000); // wait for 1 second before moving to the next question
+    }, 5000); // wait for 1 second before moving to the next question
   };
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
+    setCorrectAnswer(null);
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < quizData2077.length) {
       setCurrentQuestion(nextQuestion);
@@ -1085,6 +1081,7 @@ const Mock3 = () => {
     setScore(0);
     setShowScore(false);
     setSelectedAnswer(null);
+    setCorrectAnswer(null);
     setTimer(TOTAL_TIME);
   };
 
@@ -1157,7 +1154,9 @@ const Mock3 = () => {
                             ? answerOption.correct
                               ? "bg-green-500 hover:bg-green-600 text-white"
                               : "bg-red-500 hover:bg-red-600 text-white"
-                            : "bg-purple-500 hover:bg-purple-600 text-white"
+                            : correctAnswer === answerOption.text
+                              ? "bg-green-500 text-white"
+                              : "bg-purple-500 hover:bg-purple-600 text-white"
                         }`}
                         onClick={() =>
                           handleAnswerOptionClick(
@@ -1191,9 +1190,10 @@ const Mock3 = () => {
             )}
           </div>
         </div>
+        <Footer />
       </div>
     </>
   );
 };
 
-export default Mock3;
+export default Mock7;

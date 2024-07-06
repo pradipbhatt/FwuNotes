@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
 import logo from "../../../public/fwu.png";
 
 const quizData2077 = [
