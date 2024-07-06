@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import arrowUp from '../../public/up-arrow.png'; // Make sure to import your arrow image
 
 function BooksUploaded() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true); // Loading state
-  const [currentPage, setCurrentPage] = useState(1); // Pagination state
+  const [currentPage, setCurrentPage] = useState(0); // Pagination state
+  const [showScroll, setShowScroll] = useState(false); // State to show/hide scroll-to-top button
 
   // Function to fetch books from the backend
   const getBooks = () => {
@@ -24,6 +26,18 @@ function BooksUploaded() {
 
   useEffect(() => {
     getBooks();
+
+    // Show or hide the scroll button based on the scroll position
+    const handleScroll = () => {
+      if (window.scrollY > 300) {
+        setShowScroll(true);
+      } else {
+        setShowScroll(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   // Function to open PDF link in a new tab
@@ -69,6 +83,11 @@ function BooksUploaded() {
     setCurrentPage(newPage);
   };
 
+  // Function to scroll to the top of the page
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <>
       <Navbar />
@@ -86,7 +105,7 @@ function BooksUploaded() {
         ) : (
           <>
             {Object.keys(groupedBooks).map((semester, index) => (
-              index + 1 === currentPage && (
+              index === currentPage && (
                 <div key={index} className="mb-8">
                   <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
@@ -127,13 +146,13 @@ function BooksUploaded() {
             ))}
 
             <div className="flex justify-center mt-8">
-              {Array.from({ length: totalSemesters }, (_, index) => (
+              {Array.from({ length: totalSemesters + 1 }, (_, index) => (
                 <button
                   key={index}
-                  onClick={() => handlePageChange(index + 1)}
-                  className={`mx-1 px-3 py-2 rounded ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                  onClick={() => handlePageChange(index)}
+                  className={`mx-1 px-3 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
                 >
-                  {index + 1}
+                  {index}
                 </button>
               ))}
             </div>
@@ -141,6 +160,14 @@ function BooksUploaded() {
         )}
       </div>
       <Footer />
+      {showScroll && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full shadow-lg focus:outline-none"
+        >
+          <img src={arrowUp} alt="Scroll to top" className="w-6 h-6" />
+        </button>
+      )}
     </>
   );
 }
