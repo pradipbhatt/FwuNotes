@@ -7,1026 +7,1004 @@ import logo from "../../../public/fwu.png";
 const TOTAL_TIME = 3 * 60 * 60;
 const quizData2077 = [ // Define quiz data for 2077
   {
-    question: "The value of sin50° + sin10° is:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "0", correct: false },
-      { text: "-1", correct: false },
-      { text: "2", correct: true }
+    "question": "If A, B and C are the sets of letters needed to spell the words “STUDENT”, “PREPARE” and “ENGINEER”, then the number of elements in (A ∪ C) ∩ B is ...",
+    "answers": [
+      {"text": "6", "correct": false},
+      {"text": "5", "correct": false},
+      {"text": "3", "correct": true},
+      {"text": "2", "correct": false}
     ],
-    explanation: "The value of sin50° + sin10° is equal to 2 based on trigonometric identities."
+    "explanation": "The letters in A are {S, T, U, D, E, N}, in B are {P, R, E, P, A, R, E}, and in C are {E, N, G, I, N, E, E, R}. The union of A and C is {S, T, U, D, E, N, G, I, R} and the intersection with B gives the common elements {E, R}. The number of common elements is 3."
   },
   {
-    question: "The value of sin a + sin b + sin c in terms of area of triangle is:",
-    answers: [
-      { text: "∆s / 2R", correct: false },
-      { text: "4∆s / abc", correct: false },
-      { text: "4∆ / abc", correct: true },
-      { text: "4s / abc∆", correct: false }
+    "question": "Among the following, the logical statement is ...",
+    "answers": [
+      {"text": "Wish you every success in life.", "correct": false},
+      {"text": "May god bless you", "correct": false},
+      {"text": "The surface of the sun is very cold.", "correct": true},
+      {"text": "Hurray! I passed the entrance exam.", "correct": false}
     ],
-    explanation: "The value of sin a + sin b + sin c in terms of the area of a triangle is 4∆ / abc."
+    "explanation": "A logical statement is one that can be classified as true or false. 'The surface of the sun is very cold' is a false statement, making it a logical statement."
   },
   {
-    question: "All the values of x satisfying the equation tan(ax) = cot(bx) are given by:",
-    answers: [
-      { text: "x = nπ + (a+b)π", correct: false },
-      { text: "x = nπ - (a+b)π", correct: false },
-      { text: "x = nπ / (a+b)", correct: true },
-      { text: "x = (2n+1)π / 2(a+b)", correct: false }
+    "question": "The domain of the function f(x) = √(x - 1) + √(8 - x) is ...",
+    "answers": [
+      {"text": "[1, 8]", "correct": true},
+      {"text": "(-1, 8)", "correct": false},
+      {"text": "[1, 8)", "correct": false},
+      {"text": "(1, 8)", "correct": false}
     ],
-    explanation: "The values of x satisfying the equation tan(ax) = cot(bx) are given by x = nπ / (a+b)."
+    "explanation": "For the square root functions to be defined, x - 1 ≥ 0 and 8 - x ≥ 0. Therefore, 1 ≤ x ≤ 8. The domain is [1, 8]."
   },
   {
-    question: "In a triangle ABC, the value of a sin(B-C) / (b² - c²) is:",
-    answers: [
-      { text: "2R", correct: false },
-      { text: "1/2R", correct: true },
-      { text: "2R²", correct: false },
-      { text: "1/2R²", correct: false }
+    "question": "A matrix A = (a) m×n is said to be a row matrix if ...",
+    "answers": [
+      {"text": "m = 1", "correct": true},
+      {"text": "n = 1", "correct": false},
+      {"text": "m > n", "correct": false},
+      {"text": "m < n", "correct": false}
     ],
-    explanation: "The value of a sin(B-C) / (b² - c²) in a triangle is 1/2R."
+    "explanation": "A row matrix is a matrix that has only one row. This means m = 1."
   },
   {
-    question: "If (3, 3) lies on the line joining the points (h, 0) and (0, k), then:",
-    answers: [
-      { text: "h + k = 3", correct: false },
-      { text: "hk = 3", correct: false },
-      { text: "3h - 3k = 1", correct: false },
-      { text: "1/h + 1/k = 1/3", correct: true }
+    "question": "If A = [1 2 -1; 0 3 2; 0 0 2], then the determinant of adj. A is ...",
+    "answers": [
+      {"text": "6", "correct": false},
+      {"text": "-6", "correct": false},
+      {"text": "36", "correct": true},
+      {"text": "-36", "correct": false}
     ],
-    explanation: "If (3, 3) lies on the line joining (h, 0) and (0, k), then 1/h + 1/k = 1/3."
+    "explanation": "The determinant of the adjugate (adj. A) is equal to the determinant of A raised to the power of (n-1), where n is the order of the matrix. Here, det(adj. A) = (det A)^(3-1)."
   },
   {
-    question: "The equation of the straight line in double intercept form is:",
-    answers: [
-      { text: "bx + ay = ab", correct: false },
-      { text: "y = mx + c", correct: false },
-      { text: "y - y1 = m(x - x1)", correct: false },
-      { text: "y - y1 = (y2 - y1) / (x2 - x1) (x - x1)", correct: true }
+    "question": "The value of (√3 + i/2)^69, where i = √-1, is ...",
+    "answers": [
+      {"text": "-i", "correct": false},
+      {"text": "i", "correct": false},
+      {"text": "1", "correct": true},
+      {"text": "-1", "correct": false}
     ],
-    explanation: "The equation of the straight line in double intercept form is y - y1 = (y2 - y1) / (x2 - x1) (x - x1)."
+    "explanation": "Using De Moivre's Theorem, (cos θ + i sin θ)^n = cos(nθ) + i sin(nθ). For (√3 + i/2)^69, θ = π/6, and nθ = 69π/6 = 11.5π. This simplifies to cos(11.5π) + i sin(11.5π), which equals 1."
   },
   {
-    question: "The circumcenter of the triangle whose vertices are (2, -1), (1, 2), and (-2, 1) is:",
-    answers: [
-      { text: "(1/2, 2/3)", correct: false },
-      { text: "(-1/2, 3/2)", correct: false },
-      { text: "(0, 0)", correct: true },
-      { text: "None of the above", correct: false }
+    "question": "If α, β are the roots of the equation x^2 - 2x + 2 = 0, then the value of α^2 + β^2 is ...",
+    "answers": [
+      {"text": "2", "correct": true},
+      {"text": "0", "correct": false},
+      {"text": "1", "correct": false},
+      {"text": "4", "correct": false}
     ],
-    explanation: "The circumcenter of the triangle with vertices (2, -1), (1, 2), and (-2, 1) is (0, 0)."
+    "explanation": "For the quadratic equation ax^2 + bx + c = 0, the sum of the roots α + β = -b/a and the product αβ = c/a. Here, α + β = 2 and αβ = 2. Therefore, α^2 + β^2 = (α + β)^2 - 2αβ = 2^2 - 2*2 = 2."
   },
   {
-    question: "The points of intersection of the lines represented by 3x² – 7xy + 2y² + 9x + 2y - 12 = 0 are:",
-    answers: [
-      { text: "(2, 3)", correct: false },
-      { text: "(3, 2)", correct: false },
-      { text: "(-3, 2)", correct: false },
-      { text: "(1, 2)", correct: true }
+    "question": "If in an infinite G.P., the first term is equal to twice the sum of the remaining terms, then the common ratio is ...",
+    "answers": [
+      {"text": "1", "correct": false},
+      {"text": "1/2", "correct": true},
+      {"text": "1/3", "correct": false},
+      {"text": "-1/3", "correct": false}
     ],
-    explanation: "The points of intersection of the lines represented by the given equation are (1, 2)."
+    "explanation": "In an infinite geometric progression, a/(1 - r) = 2a. Solving for r gives r = 1/2."
   },
   {
-    question: "The angle between the pair of lines represented by x³ – 2xy – cotθ – y² = 0 is:",
-    answers: [
-      { text: "0", correct: false },
-      { text: "π/2", correct: false },
-      { text: "tan⁻¹(±2)", correct: false },
-      { text: "tan⁻¹(±1/2)", correct: true }
+    "question": "The number of three-digit numbers between 200 and 500 with distinct digits using the integers 0, 1, 2, 3, 4, and 5 is ...",
+    "answers": [
+      {"text": "30", "correct": false},
+      {"text": "48", "correct": false},
+      {"text": "60", "correct": true},
+      {"text": "72", "correct": false}
     ],
-    explanation: "The angle between the lines represented by the given equation is tan⁻¹(±1/2)."
+    "explanation": "The hundreds digit can be 2, 3, or 4. The tens and units digits must be different from the hundreds digit and each other, giving 60 possible combinations."
   },
   {
-    question: "Which of the following is the equation of a hyperbola?",
-    answers: [
-      { text: "x² + 4y² - 4x + 24y + 24 = 0", correct: false },
-      { text: "x² + y² - 12x - 6y - 9 = 0", correct: false },
-      { text: "x² - 5xy - 4y² + x + 2y - 2 = 0", correct: true },
-      { text: "9x² - 16y² - 18x - 64y - 199 = 0", correct: false }
+    "question": "The coefficient of the 15th and 23rd terms in the expansion of (1 + x)^n are equal. Then n is ...",
+    "answers": [
+      {"text": "38", "correct": false},
+      {"text": "36", "correct": false},
+      {"text": "40", "correct": true},
+      {"text": "42", "correct": false}
     ],
-    explanation: "The equation x² - 5xy - 4y² + x + 2y - 2 = 0 represents a hyperbola."
+    "explanation": "For the coefficients of the 15th and 23rd terms to be equal in the binomial expansion of (1 + x)^n, nC14 = nC22. Solving for n gives n = 40."
   },
   {
-    question: "The straight lines y = 2x ± 3√5 are always tangent to the circle:",
-    answers: [
-      { text: "x² + y² = 4", correct: false },
-      { text: "x² + y² = 9", correct: false },
-      { text: "x² + y² = 25", correct: true },
-      { text: "x² + y² = 16", correct: false }
+    "question": "The sum to infinity of the series 1 - log_e 2 + (log_e 2)^2 - (log_e 2)^3 + ... is ...",
+    "answers": [
+      {"text": "1/2", "correct": true},
+      {"text": "-1/2", "correct": false},
+      {"text": "2", "correct": false},
+      {"text": "-2", "correct": false}
     ],
-    explanation: "The lines y = 2x ± 3√5 are always tangent to the circle x² + y² = 25."
+    "explanation": "The given series is a geometric series with first term a = 1 and common ratio r = -log_e 2. The sum to infinity of a geometric series is a/(1 - r). Substituting the values gives 1/(1 + log_e 2), which simplifies to 1/2."
   },
   {
-    question: "The angle between the lines whose direction ratios are 2, 3, 4 and 1, -2, 1 is:",
-    answers: [
-      { text: "π/2", correct: false },
-      { text: "π/3", correct: false },
-      { text: "π/4", correct: false },
-      { text: "π/6", correct: true }
+    "question": "The value of tan^(-1)(tan 3π/4) is ...",
+    "answers": [
+      {"text": "-π/4", "correct": false},
+      {"text": "π/4", "correct": false},
+      {"text": "3π/4", "correct": false},
+      {"text": "-3π/4", "correct": true}
     ],
-    explanation: "The angle between the lines with given direction ratios is π/6."
+    "explanation": "The principal value of the inverse tangent function, tan^(-1), lies between -π/2 and π/2. Since tan(3π/4) = -tan(π/4), tan^(-1)(tan 3π/4) = -3π/4."
   },
   {
-    question: "lim x → 2 |x − 2| / (x − 2) is equal to:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "-1", correct: false },
-      { text: "0", correct: false },
-      { text: "does not exist", correct: true }
+    "question": "The principal value of θ which satisfies the equations sin θ = -√3 and cos θ = 1 is ...",
+    "answers": [
+      {"text": "π/3", "correct": false},
+      {"text": "2π/3", "correct": false},
+      {"text": "4π/3", "correct": false},
+      {"text": "5π/3", "correct": true}
     ],
-    explanation: "The limit does not exist as |x − 2| / (x − 2) approaches different values from either side of x = 2."
+    "explanation": "The value of θ that satisfies sin θ = -√3 and cos θ = 1 is 5π/3."
   },
   {
-    question: "lim x → 0 sin(x°) / x is equal to:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "π/180", correct: true },
-      { text: "180/π", correct: false },
-      { text: "none of the above", correct: false }
+    "question": "If sin^(-1) x + cosec^(-1) 5 = π, then x is equal to ...",
+    "answers": [
+      {"text": "4", "correct": false},
+      {"text": "5", "correct": true},
+      {"text": "1", "correct": false},
+      {"text": "3", "correct": false}
     ],
-    explanation: "lim x → 0 sin(x°) / x is equal to π/180 due to conversion between degrees and radians."
+    "explanation": "Given sin^(-1) x + cosec^(-1) 5 = π, solving the equation gives x = 5."
   },
   {
-    question: "lim x → a sin(x − a) / (x³ − a³) is equal to:",
-    answers: [
-      { text: "1/2a", correct: false },
-      { text: "2a²", correct: false },
-      { text: "1", correct: false },
-      { text: "1/3a²", correct: true }
+    "question": "With usual symbols in ∆ABC, the value of r1r2 + r2r3 + r3r1 is equal to ...",
+    "answers": [
+      {"text": "2s", "correct": false},
+      {"text": "s^2", "correct": true},
+      {"text": "2s^2", "correct": false},
+      {"text": "s", "correct": false}
     ],
-    explanation: "The limit is 1/3a² using L'Hôpital's rule and algebraic manipulation."
+    "explanation": "In triangle ABC, the value of r1r2 + r2r3 + r3r1 is equal to s^2."
   },
   {
-    question: "If ax² + 2hxy + by² = 1, then dy/dx is:",
-    answers: [
-      { text: "-(ax + by) / (hx + by)", correct: false },
-      { text: "-2ax / by", correct: false },
-      { text: "-(hx + by) / (ax + by)", correct: true },
-      { text: "hx + by", correct: false }
+    "question": "If cot^2 θ = 3, then the general value of θ is ...",
+    "answers": [
+      {"text": "2nπ ± π/4", "correct": false},
+      {"text": "nπ + (-1)^n π/6", "correct": true},
+      {"text": "2nπ ± π/3", "correct": false},
+      {"text": "nπ ± π/6", "correct": false}
     ],
-    explanation: "The derivative dy/dx for the given implicit equation is -(hx + by) / (ax + by)."
+    "explanation": "The general value of θ when cot^2 θ = 3 is given by nπ + (-1)^n π/6."
   },
   {
-    question: "The derivative of f(x) = |x| at x = 0 is:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "0", correct: false },
-      { text: "-1", correct: false },
-      { text: "none of the above", correct: true }
+    "question": "The point (-4,5) is a vertex of a square and one of its diagonals is 7x - y + 8 = 0. The equation of the other diagonal is ...",
+    "answers": [
+      {"text": "7x - y + 23 = 0", "correct": false},
+      {"text": "x + 7y - 31 = 0", "correct": true},
+      {"text": "x - 7y - 31 = 0", "correct": false},
+      {"text": "x + 7y + 31 = 0", "correct": false}
     ],
-    explanation: "The derivative of |x| at x = 0 does not exist because the left-hand and right-hand limits are different."
+    "explanation": "The equation of the other diagonal can be derived based on the given diagonal and vertex, resulting in x + 7y - 31 = 0."
   },
   {
-    question: "The value of ∫ logx dx is equal to:",
-    answers: [
-      { text: "x logx – x + c", correct: true },
-      { text: "logx + x + c", correct: false },
-      { text: "2 logx – x + c", correct: false },
-      { text: "x²/2 logx – x + c", correct: false }
+    "question": "The value of h if the equation 4x^2 + hxy + y^2 = 0 represents two coincident lines is ...",
+    "answers": [
+      {"text": "±3", "correct": false},
+      {"text": "±5", "correct": false},
+      {"text": "±4", "correct": true},
+      {"text": "±6", "correct": false}
     ],
-    explanation: "The integral of logx with respect to x is x logx – x + c."
+    "explanation": "For the given quadratic equation to represent two coincident lines, h must be ±4."
   },
   {
-    question: "∫ (3x² / (x⁶ + 1)) dx is:",
-    answers: [
-      { text: "x³ / (x² + 1) + c", correct: false },
-      { text: "tan⁻¹(x³) + c", correct: true },
-      { text: "sin⁻¹(x³) + c", correct: false },
-      { text: "cos⁻¹(x³) + c", correct: false }
+    "question": "The length of the tangent from the point (2, -3) to the circle 2x^2 + 2y^2 = 1 is ...",
+    "answers": [
+      {"text": "5", "correct": false},
+      {"text": "5√2", "correct": false},
+      {"text": "5/√2", "correct": true},
+      {"text": "2√5", "correct": false}
     ],
-    explanation: "The integral ∫ (3x² / (x⁶ + 1)) dx evaluates to tan⁻¹(x³) + c."
+    "explanation": "The length of the tangent from a point to a circle is given by the formula √(x1^2 + y1^2 - r^2). For the point (2, -3) and circle 2x^2 + 2y^2 = 1, the length is 5/√2."
   },
   {
-    question: "The maximum value of f(x) = 5 + 4x – x² is:",
-    answers: [
-      { text: "3", correct: false },
-      { text: "6", correct: true },
-      { text: "5", correct: false },
-      { text: "9", correct: false }
+    "question": "The line 3x - 4y = λ touches the circle x^2 + y^2 - 4x - 8y - 5 = 0 if λ is ...",
+    "answers": [
+      {"text": "20", "correct": true},
+      {"text": "15", "correct": false},
+      {"text": "10", "correct": false},
+      {"text": "5", "correct": false}
     ],
-    explanation: "The maximum value of the quadratic function f(x) = 5 + 4x – x² is 6."
+    "explanation": "The line touches the circle if the perpendicular distance from the center to the line equals the radius. Solving for λ gives λ = 20."
   },
   {
-    question: "The solution of the equation dy/dx = (2x + 1) / (5y⁴ + 1) is:",
-    answers: [
-      { text: "x² + x – y⁵ – y = c", correct: false },
-      { text: "2x² + x – 4y³ – y = c", correct: false },
-      { text: "x² - x + y⁵ + y = c", correct: true },
-      { text: "2x² - x + 4y³ + y = c", correct: false }
+    "question": "The focus of the parabola x^2 + 8y = 0 is at ...",
+    "answers": [
+      {"text": "(0, -2)", "correct": true},
+      {"text": "(0, 2)", "correct": false},
+      {"text": "(2, 0)", "correct": false},
+      {"text": "(-2, 0)", "correct": false}
     ],
-    explanation: "The solution of the differential equation dy/dx = (2x + 1) / (5y⁴ + 1) is x² - x + y⁵ + y = c."
+    "explanation": "The focus of the parabola x^2 + 8y = 0, which is in the standard form y = (x^2)/(4a), is at (0, -2)."
   },
   {
-    question: "The area of the ellipse x²/4 + y²/9 = 1 is:",
-    answers: [
-      { text: "2π", correct: false },
-      { text: "4π", correct: false },
-      { text: "6π", correct: true },
-      { text: "8π", correct: false }
+    "question": "The eccentricity of the ellipse lies in the interval ...",
+    "answers": [
+      {"text": "[0,1]", "correct": false},
+      {"text": "(0,1]", "correct": true},
+      {"text": "[0,1)", "correct": false},
+      {"text": "(0,1)", "correct": false}
     ],
-    explanation: "The area of the ellipse x²/4 + y²/9 = 1 is 6π."
+    "explanation": "The eccentricity of an ellipse is a number between 0 and 1, excluding 0."
   },
   {
-    question: "If a⃗ = 2i⃗ + 3j⃗, then |2a⃗| is:",
-    answers: [
-      { text: "√13", correct: false },
-      { text: "√26", correct: false },
-      { text: "2√26", correct: true },
-      { text: "2√13", correct: false }
+    "question": "The length of the latus rectum of the hyperbola x^2 - y^2 = -1 is ...",
+    "answers": [
+      {"text": "2a^2/b", "correct": false},
+      {"text": "2b^2/a", "correct": true},
+      {"text": "b^2/a", "correct": false},
+      {"text": "a^2/b", "correct": false}
     ],
-    explanation: "The magnitude of 2a⃗ is 2√26."
+    "explanation": "For a hyperbola, the length of the latus rectum is given by 2b^2/a. Here, the equation is x^2 - y^2 = -1, so the length is 2b^2/a."
   },
   {
-    question: "(a⃗ - b⃗) × (a⃗ + b⃗) is equal to:",
-    answers: [
-      { text: "0", correct: false },
-      { text: "a⃗ × b⃗", correct: false },
-      { text: "2(b⃗ × a⃗)", correct: true },
-      { text: "|a⃗|² + |b⃗|", correct: false }
+    "question": "The ratio in which the line joining (2,4,5) and (3,5,-9) is divided by the yz-plane is ...",
+    "answers": [
+      {"text": "2:3", "correct": false},
+      {"text": "3:2", "correct": false},
+      {"text": "-2:3", "correct": false},
+      {"text": "-3:2", "correct": true}
     ],
-    explanation: "(a⃗ - b⃗) × (a⃗ + b⃗) equals 2(b⃗ × a⃗) based on vector cross product properties."
+    "explanation": "The yz-plane corresponds to x=0. Using the section formula, the ratio is found to be -3:2."
   },
   {
-    question: "The area of a parallelogram whose diagonals are (2, 3, -3) & (2, -3, 3) is:",
-    answers: [
-      { text: "6√2 sq. units", correct: true },
-      { text: "12√2 sq. units", correct: false },
-      { text: "6 sq. units", correct: false },
-      { text: "12 sq. units", correct: false }
+    "question": "The angle between the planes 2x - y + z = 6 and x + y + 2z = 7 is ...",
+    "answers": [
+      {"text": "π/4", "correct": true},
+      {"text": "π/6", "correct": false},
+      {"text": "π/3", "correct": false},
+      {"text": "π/2", "correct": false}
     ],
-    explanation: "The area of a parallelogram with given diagonals is 6√2 square units."
+    "explanation": "The angle between the planes is given by the dot product of their normal vectors. For these planes, the angle is π/4."
   },
   {
-    question: "The vectors (2, 1, -1) & (λ, -2, 2) are collinear if the value of λ is:",
-    answers: [
-      { text: "2", correct: false },
-      { text: "4", correct: false },
-      { text: "-4", correct: false },
-      { text: "-2", correct: true }
+    "question": "The projection of a line segment on the coordinate axes are 12, 4, and 3 respectively. The length of the line segment is ...",
+    "answers": [
+      {"text": "19", "correct": false},
+      {"text": "16", "correct": true},
+      {"text": "15", "correct": false},
+      {"text": "13", "correct": false}
     ],
-    explanation: "The vectors are collinear if λ = -2."
+    "explanation": "Using the Pythagorean theorem in three dimensions, the length of the line segment is √(12^2 + 4^2 + 3^2) = 16."
   },
   {
-    question: "If n(U) = 360, n(A) = 240, n(B) = 160, then max. value of n(A ∩ B) is:",
-    answers: [
-      { text: "360", correct: false },
-      { text: "240", correct: true },
-      { text: "160", correct: false },
-      { text: "300", correct: false }
+    "question": "The value of the limit lim |x-3| / (x-3) as x approaches 3 is ...",
+    "answers": [
+      {"text": "1", "correct": false},
+      {"text": "-1", "correct": false},
+      {"text": "0", "correct": false},
+      {"text": "does not exist", "correct": true}
     ],
-    explanation: "The maximum value of n(A ∩ B) is 240."
+    "explanation": "The limit does not exist because the left-hand limit and right-hand limit are not equal."
   },
   {
-    question: "Which of the following is false?",
-    answers: [
-      { text: "|x + y| ≥ |x| + |y|", correct: true },
-      { text: "|x − y| ≥ |x| − |y|", correct: false },
-      { text: "|x| + |y| ≥ |x + y|", correct: false },
-      { text: "None of the above", correct: false }
+    "question": "If the function f(x) = { k cos x ; x ≠ π/2 ; π - 2x/3 ; x = π/2 } be continuous at x = π/2, then k is ...",
+    "answers": [
+      {"text": "2", "correct": false},
+      {"text": "3", "correct": true},
+      {"text": "6", "correct": false},
+      {"text": "12", "correct": false}
     ],
-    explanation: "The statement |x + y| ≥ |x| + |y| is false because of the triangle inequality, which states that |x + y| ≤ |x| + |y|."
+    "explanation": "For the function to be continuous at x = π/2, we equate the limit of f(x) as x approaches π/2 to the value of f(π/2), solving gives k = 3."
   },
   {
-    question: "In how many ways can the letters of the word 'LEADER' be arranged?",
-    answers: [
-      { text: "360", correct: false },
-      { text: "720", correct: false },
-      { text: "144", correct: false },
-      { text: "3600", correct: true }
+    "question": "If y = x sin^(-1) x + √(1 - x^2), then dy/dx is ...",
+    "answers": [
+      {"text": "√(1 - x^2)", "correct": false},
+      {"text": "-√(1 - x^2)", "correct": false},
+      {"text": "sin x / √(1 - x^2)", "correct": true},
+      {"text": "sin^(-1) x", "correct": false}
     ],
-    explanation: "The letters of the word 'LEADER' can be arranged in 3600 ways, calculated as 6! / (2!)."
+    "explanation": "Using the product rule and chain rule, dy/dx is found to be sin x / √(1 - x^2)."
   },
   {
-    question: "If n is an integer, then the solution of |2x - 3| > 4 is:",
-    answers: [
-      { text: "x > 7/2 or x < -1/2", correct: true },
-      { text: "x > 1/2 or x < -7/2", correct: false },
-      { text: "-1/2 < x < 7/2", correct: false },
-      { text: "-7/2 < x < 1/2", correct: false }
+    "question": "If f(x) = e^x g(x) and g(0) = 4, g'(0) = 2, then f'(0) is equal to ...",
+    "answers": [
+      {"text": "1", "correct": false},
+      {"text": "2", "correct": false},
+      {"text": "3", "correct": false},
+      {"text": "6", "correct": true}
     ],
-    explanation: "The inequality |2x - 3| > 4 splits into two inequalities: 2x - 3 > 4 or 2x - 3 < -4, leading to x > 7/2 or x < -1/2."
+    "explanation": "Using the product rule, f'(x) = e^x g(x) + e^x g'(x). Evaluating at x = 0 gives f'(0) = 6."
   },
   {
-    question: "The value of the determinant of the matrix \n|1 2 3|\n|4 5 6|\n|7 8 9| is:",
-    answers: [
-      { text: "0", correct: true },
-      { text: "1", correct: false },
-      { text: "-1", correct: false },
-      { text: "10", correct: false }
+    "question": "The side of an expanding square increases at the rate of 1.5 cm/s. The rate of change of its area when the side is 20 cm is ...",
+    "answers": [
+      {"text": "30 cm²/s", "correct": false},
+      {"text": "60 cm²/s", "correct": true},
+      {"text": "45 cm²/s", "correct": false},
+      {"text": "75 cm²/s", "correct": false}
     ],
-    explanation: "The value of the determinant of the given matrix is 0, as its rows are linearly dependent."
+    "explanation": "The rate of change of the area A = s^2 is given by dA/dt = 2s ds/dt. When s = 20 cm, the rate is 60 cm²/s."
   },
   {
-    question: "If A is a 3x3 matrix with |A| = 5, then |3A| is:",
-    answers: [
-      { text: "45", correct: false },
-      { text: "135", correct: false },
-      { text: "405", correct: true },
-      { text: "15", correct: false }
+    "question": "The value of ∫ sec² x √tan x dx is ...",
+    "answers": [
+      {"text": "2√tan x + c", "correct": false},
+      {"text": "2 / √tan x + c", "correct": true},
+      {"text": "√tan x + c", "correct": false},
+      {"text": "1 / (2√tan x) + c", "correct": false}
     ],
-    explanation: "If |A| = 5, then |3A| = 3^3 * |A| = 27 * 5 = 135."
+    "explanation": "Using the substitution method, the integral of sec² x √tan x dx is 2 / √tan x + c."
   },
   {
-    question: "If A = (sin θ -cos θ; cos θ sin θ), then AAT is:",
-    answers: [
-      { text: "I", correct: true },
-      { text: "-I", correct: false },
-      { text: "0", correct: false },
-      { text: "None of the above", correct: false }
+    "question": "The value of ∫ (1 + cos² x) / sin x dx is ...",
+    "answers": [
+      {"text": "-cot x - 2x + c", "correct": true},
+      {"text": "-2 cot x - 2x + c", "correct": false},
+      {"text": "-2 cot x - x + c", "correct": false},
+      {"text": "-2 cot x + x + c", "correct": false}
     ],
-    explanation: "For A = (sin θ -cos θ; cos θ sin θ), AAT = I, where I is the identity matrix."
+    "explanation": "The integral can be solved using partial fraction decomposition, giving -cot x - 2x + c."
   },
   {
-    question: "The value of the complex number (3 + 4i)(3 - 4i) is:",
-    answers: [
-      { text: "25", correct: true },
-      { text: "7", correct: false },
-      { text: "-7", correct: false },
-      { text: "12", correct: false }
+    "question": "The area of the region bounded by the curve y = 2x - x² and the x-axis is ...",
+    "answers": [
+      {"text": "8/3 sq. units", "correct": true},
+      {"text": "4/3 sq. units", "correct": false},
+      {"text": "7/3 sq. units", "correct": false},
+      {"text": "5/3 sq. units", "correct": false}
     ],
-    explanation: "The product of (3 + 4i)(3 - 4i) is 3^2 - (4i)^2 = 9 + 16 = 25."
+    "explanation": "The area can be found by integrating the function y = 2x - x² between the points where it intersects the x-axis."
   },
   {
-    question: "The multiplicative inverse of i is:",
-    answers: [
-      { text: "-i", correct: false },
-      { text: "1", correct: false },
-      { text: "-1/i", correct: false },
-      { text: "-i/|i|²", correct: true }
+    "question": "The order and degree of the differential equation d²y/dx² + (dy/dx)^(1/3) + x^(1/4) = 0 are respectively ...",
+    "answers": [
+      {"text": "2, 3", "correct": true},
+      {"text": "3, 3", "correct": false},
+      {"text": "2, 6", "correct": false},
+      {"text": "2, 4", "correct": false}
     ],
-    explanation: "The multiplicative inverse of i is 1/i, which simplifies to -i/|i|²."
+    "explanation": "The order is the highest derivative and the degree is the power of the highest derivative if it is a polynomial equation in derivatives."
   },
   {
-    question: "The sum of the first n terms of the arithmetic series 2, 5, 8, ... is:",
-    answers: [
-      { text: "n/2 (3 + (n-1)3)", correct: false },
-      { text: "n/2 (4 + (n-1)3)", correct: true },
-      { text: "n/2 (5 + (n-1)3)", correct: false },
-      { text: "n/2 (6 + (n-1)3)", correct: false }
+    "question": "The solution of the differential equation (x² + y²) dy/dx = 4 is ...",
+    "answers": [
+      {"text": "x² + y² = 12x + c", "correct": false},
+      {"text": "x² + y² = 3x + c", "correct": true},
+      {"text": "x³ + y³ = 4x + c", "correct": false},
+      {"text": "x³ + y³ = 12x + c", "correct": false}
     ],
-    explanation: "The sum of the first n terms of the arithmetic series 2, 5, 8, ... is n/2 [2a + (n-1)d] where a=2 and d=3."
+    "explanation": "Solving the differential equation involves separation of variables and integration."
   },
   {
-    question: "The roots of the quadratic equation x² + 4x + 4 = 0 are:",
-    answers: [
-      { text: "-2 and -2", correct: true },
-      { text: "2 and 2", correct: false },
-      { text: "0 and -4", correct: false },
-      { text: "-4 and 0", correct: false }
+    "question": "OACB is a parallelogram with OC⃗ = a⃗ and AB⃗ = b⃗. Then OA⃗ is equal to ...",
+    "answers": [
+      {"text": "a⃗ + b⃗", "correct": true},
+      {"text": "a⃗ - b⃗", "correct": false},
+      {"text": "1/2 (a⃗ - b⃗)", "correct": false},
+      {"text": "1/2 (a⃗ + b⃗)", "correct": false}
     ],
-    explanation: "The roots of the quadratic equation x² + 4x + 4 = 0 are -2 and -2."
+    "explanation": "In a parallelogram, the vector from one vertex to the opposite vertex is the sum of the vectors along two adjacent sides."
   },
   {
-    question: "The equation of the line passing through the point (1, 2) with a slope of 3 is:",
-    answers: [
-      { text: "y = 3x + 2", correct: false },
-      { text: "y = 3x + 1", correct: false },
-      { text: "y = 3x - 1", correct: true },
-      { text: "y = 3x - 2", correct: false }
+    "question": "If a⃗ + b⃗ = c⃗ and |a⃗| = 4, |b⃗| = 6, |c⃗| = 8, then the angle between a⃗ and b⃗ is ...",
+    "answers": [
+      {"text": "π/3", "correct": true},
+      {"text": "cos⁻¹(1/3)", "correct": false},
+      {"text": "cos⁻¹(1/4)", "correct": false},
+      {"text": "π/4", "correct": false}
     ],
-    explanation: "The equation of the line passing through (1, 2) with a slope of 3 is y = 3x - 1."
+    "explanation": "Using the cosine rule for vectors, we can find the angle between a⃗ and b⃗."
   },
   {
-    question: "If x + 1/x = 3, then x² + 1/x² is equal to:",
-    answers: [
-      { text: "9", correct: false },
-      { text: "7", correct: true },
-      { text: "5", correct: false },
-      { text: "3", correct: false }
+    "question": "In a set of observations, the relation between median, the second quartile (Q2), the fifth decile (D5), and the fiftieth percentile (P50) is ...",
+    "answers": [
+      {"text": "M = Q2 = D5 = P50", "correct": true},
+      {"text": "M > Q2 > D5 > P50", "correct": false},
+      {"text": "M < Q2 < D5 < P50", "correct": false},
+      {"text": "M = 4Q2 = 10D5 = 100P50", "correct": false}
     ],
-    explanation: "If x + 1/x = 3, squaring both sides gives x² + 1/x² + 2 = 9, so x² + 1/x² = 7."
+    "explanation": "By definition, the median, the second quartile, the fifth decile, and the fiftieth percentile are all the same value."
   },
   {
-    question: "The roots of the equation x⁴ - 16 = 0 are:",
-    answers: [
-      { text: "2, -2, 4, -4", correct: false },
-      { text: "2, -2, i, -i", correct: false },
-      { text: "2, -2, 2i, -2i", correct: false },
-      { text: "2, -2, 4i, -4i", correct: true }
+    "question": "From 30 tickets marked with numbers 1 to 30, a ticket is drawn at random. The probability that it will be a multiple of 3 or 4 is ...",
+    "answers": [
+      {"text": "1/3", "correct": true},
+      {"text": "1/6", "correct": false},
+      {"text": "1/4", "correct": false},
+      {"text": "1/2", "correct": false}
     ],
-    explanation: "The roots of the equation x⁴ - 16 = 0 are 2, -2, 4i, -4i."
+    "explanation": "Calculate the number of multiples of 3 and 4 in the range 1 to 30 and find the probability."
   },
   {
-    question: "If a polygon has 20 sides, the sum of its interior angles is:",
-    answers: [
-      { text: "3200°", correct: false },
-      { text: "3240°", correct: false },
-      { text: "3240", correct: false },
-      { text: "3240°", correct: true }
+    "question": "The SI unit of work function of a metal used in the photoelectric effect is ...",
+    "answers": [
+      {"text": "Joule (J)", "correct": true},
+      {"text": "Newton (N)", "correct": false},
+      {"text": "Pascal (Pa)", "correct": false},
+      {"text": "Hertz (Hz)", "correct": false}
     ],
-    explanation: "The sum of the interior angles of a polygon with n sides is (n-2) × 180°, so for 20 sides it is 18 × 180° = 3240°."
+    "explanation": "The work function is the minimum energy needed to remove an electron from the surface of a metal, measured in Joules."
   },
   {
-    question: "If f(x) = x² + 2x, then f'(x) is:",
-    answers: [
-      { text: "2x", correct: false },
-      { text: "2x + 2", correct: true },
-      { text: "2x - 2", correct: false },
-      { text: "2", correct: false }
+    "question": "The distance travelled by an object is directly proportional to the time taken. Its acceleration ...",
+    "answers": [
+      {"text": "becomes zero", "correct": true},
+      {"text": "increases", "correct": false},
+      {"text": "decreases", "correct": false},
+      {"text": "remains constant", "correct": false}
     ],
-    explanation: "The derivative f'(x) of the function f(x) = x² + 2x is 2x + 2."
+    "explanation": "If distance is directly proportional to time, the object is moving at a constant speed, implying zero acceleration."
   },
   {
-    question: "The solution to the equation log₅(x - 1) = 3 is:",
-    answers: [
-      { text: "x = 126", correct: false },
-      { text: "x = 126", correct: false },
-      { text: "x = 126", correct: true },
-      { text: "x = 625", correct: false }
+    "question": "A soccer ball is thrown at a 60-degree angle from the ground. It reaches its maximum height in 10 s. Using g = 10 m/s² as the acceleration due to gravity, what is the projected velocity of the object?",
+    "answers": [
+      {"text": "115.5 m/s", "correct": false},
+      {"text": "117 m/s", "correct": true},
+      {"text": "120 m/s", "correct": false},
+      {"text": "11.55 m/s", "correct": false}
     ],
-    explanation: "The solution to the equation log₅(x - 1) = 3 is x = 126, since 5³ = 125 + 1 = 126."
+    "explanation": "Using the vertical motion equation and solving for initial velocity."
   },
-  
   {
-    question: "A bottom of a pond or lake appears closer than it actually is, and seems to ripple. This 'bending' of light due to the water is defined as:",
-    answers: [
-      { text: "interference", correct: false },
-      { text: "diffraction", correct: false },
-      { text: "refraction", correct: true },
-      { text: "reflection", correct: false }
+    "question": "The centre of mass of a body ...",
+    "answers": [
+      {"text": "Lies within or outside the body", "correct": true},
+      {"text": "Lies always at the geometrical centre", "correct": false},
+      {"text": "Lies always inside the body", "correct": false},
+      {"text": "Lies always outside the body", "correct": false}
     ],
-    explanation: "The bending of light as it passes from one medium to another, causing objects to appear closer than they are, is called refraction."
+    "explanation": "The center of mass is the point where the mass of the body is considered to be concentrated and can lie within or outside the physical boundaries of the body."
   },
   {
-    question: "A person can’t see objects clearly beyond 50cm. The power of the lens to correct the vision is:",
-    answers: [
-      { text: "+0.5D", correct: false },
-      { text: "-0.5D", correct: false },
-      { text: "+2D", correct: false },
-      { text: "-2D", correct: true }
+    "question": "It is difficult to move a cycle with brakes on because ...",
+    "answers": [
+      {"text": "sliding friction is more than rolling friction", "correct": true},
+      {"text": "rolling friction is more than sliding friction", "correct": false},
+      {"text": "sliding friction opposes motion on the road", "correct": false},
+      {"text": "rolling friction opposes motion on the road", "correct": false}
     ],
-    explanation: "The power of a lens required to correct a near point of 50cm (0.5m) is calculated as P = 1/f, where f is the focal length in meters. Hence, P = 1/0.5 = 2D. Since it corrects for nearsightedness, it is negative."
+    "explanation": "With the brakes on, sliding friction, which is greater than rolling friction, comes into play, making it difficult to move the cycle."
   },
   {
-    question: "White light is passed through a prism of angle 5°. If the refractive indices of the red and blue colors are 1.641 and 1.659 respectively, the angle of dispersion will be:",
-    answers: [
-      { text: "2°", correct: false },
-      { text: "0.09°", correct: true },
-      { text: "0.9°", correct: false },
-      { text: "4°", correct: false }
+    "question": "A person carrying a box on his head is walking on a level road from one place to another is doing no work. This statement is ...",
+    "answers": [
+      {"text": "Correct", "correct": true},
+      {"text": "Incorrect", "correct": false},
+      {"text": "Partially correct", "correct": false},
+      {"text": "Cannot say", "correct": false}
     ],
-    explanation: "The angle of dispersion is the difference in the angles of refraction for red and blue light, which is calculated using the refractive indices and the prism angle."
+    "explanation": "In the context of physics, work is done when a force causes displacement. If the box is not being displaced vertically, no work is done on the box."
   },
   {
-    question: "The dimensional formula for the Planck's constant is:",
-    answers: [
-      { text: "M1L2T-1", correct: true },
-      { text: "ML2T-1", correct: false },
-      { text: "M1L2T2", correct: false },
-      { text: "M1L2T-1", correct: false }
+    "question": "A particle moves in a circle of radius 20 cm with a linear speed of 10 m/s. Its angular velocity in rad/s is ...",
+    "answers": [
+      {"text": "50", "correct": true},
+      {"text": "40", "correct": false},
+      {"text": "30", "correct": false},
+      {"text": "20", "correct": false}
     ],
-    explanation: "The dimensional formula for Planck's constant, which relates energy and frequency, is M1L2T-1."
+    "explanation": "Angular velocity (ω) is given by v/r, where v is linear speed and r is the radius."
   },
   {
-    question: "A stone is dropped from the top of the tower. If it covers 24.5m in the last second of its motion, the height of the tower is:",
-    answers: [
-      { text: "49m", correct: true },
-      { text: "44.1m", correct: false },
-      { text: "88.4m", correct: false },
-      { text: "72m", correct: false }
+    "question": "In Hooke’s law, F = -kx, the constant k is called the……",
+    "answers": [
+      {"text": "Velocity", "correct": false},
+      {"text": "Speed constant", "correct": false},
+      {"text": "Spring constant", "correct": true},
+      {"text": "Time", "correct": false}
     ],
-    explanation: "Using the equations of motion under gravity, we can calculate the height of the tower given the distance covered in the last second."
+    "explanation": "In Hooke's law, the constant k represents the stiffness of the spring, hence it is called the spring constant."
   },
   {
-    question: "If two masses of 4kg and 16kg are moving with equal kinetic energy, the ratio of their momentum will be:",
-    answers: [
-      { text: "1:4", correct: false },
-      { text: "1:2", correct: true },
-      { text: "4:1", correct: false },
-      { text: "1:√2", correct: false }
+    "question": "If the moment of inertia of a rotating body is increased then what will be the effect on the angular velocity",
+    "answers": [
+      {"text": "It will increase", "correct": true},
+      {"text": "It will decrease", "correct": false},
+      {"text": "There will be no effect", "correct": false},
+      {"text": "First increase and then decrease", "correct": false}
     ],
-    explanation: "Given equal kinetic energy, the momentum ratio p is inversely proportional to the square root of their masses, resulting in a 1:2 ratio."
+    "explanation": "According to the law of conservation of angular momentum, if moment of inertia increases, angular velocity decreases."
   },
   {
-    question: "Time period for a simple pendulum inside a satellite orbiting the earth is:",
-    answers: [
-      { text: "0", correct: true },
-      { text: "infinite", correct: false },
-      { text: "1 sec", correct: false },
-      { text: "9.8 sec", correct: false }
+    "question": "Which of the following represents viscosity?",
+    "answers": [
+      {"text": "Potential energy stored in fluid", "correct": false},
+      {"text": "Resistance of fluid motion", "correct": true},
+      {"text": "Roughness of the surface", "correct": false},
+      {"text": "The pressure difference between the two fluids", "correct": false}
     ],
-    explanation: "In a satellite orbiting the Earth, effective gravity is zero, making the time period of a pendulum infinite."
+    "explanation": "Viscosity refers to the resistance of a fluid to motion. It determines how easily a fluid flows."
   },
   {
-    question: "A radius of the circular path of a particle is double but its frequency of rotation remains constant. If the initial centripetal force be F, then the final centripetal force will be:",
-    answers: [
-      { text: "F", correct: false },
-      { text: "2F", correct: false },
-      { text: "4F", correct: true },
-      { text: "F/2", correct: false }
+    "question": "Every temperature measuring instrument makes use of a physical property of a substance in order to measure temperature objectively, which physical property is used by mercury in glass thermometer?",
+    "answers": [
+      {"text": "Electromotive force", "correct": false},
+      {"text": "Resistance of a piece of metal", "correct": false},
+      {"text": "Pressure of a fixed mass of gas at constant volume", "correct": false},
+      {"text": "Volume of a fixed mass of liquid", "correct": true}
     ],
-    explanation: "Centripetal force F = mω²r. Doubling the radius while keeping the frequency constant quadruples the centripetal force."
+    "explanation": "Mercury in glass thermometers measure temperature based on the change in volume of mercury with temperature, which is a physical property used for temperature measurement."
   },
   {
-    question: "A sphere is rolling. The ratio of the rotational energy to total kinetic energy is given by:",
-    answers: [
-      { text: "7:10", correct: true },
-      { text: "2:5", correct: false },
-      { text: "10:7", correct: false },
-      { text: "2:7", correct: false }
+    "question": "A metal ball of mass 0.5 kg falls freely from a height of 10 m and bounces to a height of 5.5 m from the ground. If the dissipated energy in this process is absorbed by the ball (specific heat capacity of material = 450 J/ kgC), the rise in its temperature is…………………..",
+    "answers": [
+      {"text": "0.002°C", "correct": false},
+      {"text": "0.2°C", "correct": false},
+      {"text": "20°C", "correct": false},
+      {"text": "2°C", "correct": true}
     ],
-    explanation: "For a rolling sphere, the rotational energy is 2/5 of the total kinetic energy, resulting in a 7:10 ratio."
+    "explanation": "The rise in temperature can be calculated using the formula ΔT = Energy absorbed / (mass * specific heat capacity). Given the dissipated energy and the specific heat capacity, the rise in temperature is approximately 2°C."
   },
   {
-    question: "If the liquid doesn’t wet the solid surface, the angle of contact is:",
-    answers: [
-      { text: "acute", correct: false },
-      { text: "obtuse", correct: true },
-      { text: "90°", correct: false },
-      { text: "0", correct: false }
+    "question": "A piece of steel has a length of 30 cm at 15°C. At 90°C its length increases by 0.027 cm. Coefficient of linear expansion of steel piece is:",
+    "answers": [
+      {"text": "6 × 10-6 °C-1", "correct": true},
+      {"text": "12 × 10-6 °C-1", "correct": false},
+      {"text": "24 × 10-6 °C-1", "correct": false},
+      {"text": "36 × 10-6 °C-1", "correct": false}
     ],
-    explanation: "If a liquid doesn’t wet the solid surface, the angle of contact is obtuse (>90°)."
+    "explanation": "The coefficient of linear expansion can be calculated using the formula: α = ΔL / (L₀ * ΔT), where ΔL is the change in length, L₀ is the original length, and ΔT is the change in temperature."
   },
   {
-    question: "If a wire of Young’s modulus Y, longitudinal strain X is produced, then the value of potential energy stored in its unit volume will be:",
-    answers: [
-      { text: "YX²", correct: true },
-      { text: "2YX²", correct: false },
-      { text: "0.5Y²X", correct: false },
-      { text: "0.5YX²", correct: true }
+    "question": "Heat transmission is directly linked with the transport of medium itself, i.e., there is actual motion of heated particles during ……",
+    "answers": [
+      {"text": "Conduction only", "correct": false},
+      {"text": "Convection only", "correct": true},
+      {"text": "Radiation only", "correct": false},
+      {"text": "Conduction as well as radiation", "correct": false}
     ],
-    explanation: "The potential energy stored per unit volume in a strained wire is 0.5YX²."
+    "explanation": "Convection involves the actual motion of heated particles within a fluid (liquid or gas), transferring heat energy from one place to another."
   },
   {
-    question: "1 gm of ice at 0° and 1 gm of steam at 100° are mixed. The resulting temp. is:",
-    answers: [
-      { text: "0°C", correct: true },
-      { text: "230°C", correct: false },
-      { text: "50°C", correct: false },
-      { text: "100°C", correct: false }
+    "question": "What is the power of the lens, if the far point of a short-sighted eye is 200 cm?",
+    "answers": [
+      {"text": "-0.5 D", "correct": false},
+      {"text": "2 D", "correct": true},
+      {"text": "1 D", "correct": false},
+      {"text": "-1.5 D", "correct": false}
     ],
-    explanation: "The heat required to melt 1 gm of ice is equal to the heat released by condensing 1 gm of steam, resulting in 0°C."
+    "explanation": "The power of a lens can be calculated using the formula P = 1 / f, where f is the focal length. Since the far point of a short-sighted eye is at 200 cm (focal length), the power of the lens is 1 / 200 = 2 D."
   },
   {
-    question: "A black body when it is hot emits heat radiation of:",
-    answers: [
-      { text: "IR wavelength", correct: false },
-      { text: "UV wavelength", correct: false },
-      { text: "Particular wavelength", correct: false },
-      { text: "All wavelengths", correct: true }
+    "question": "The angle of the prism is equal to the angle of minimum deviation for a prism of refractive index 1.5. What is the value of the angle of the prism?",
+    "answers": [
+      {"text": "41°", "correct": false},
+      {"text": "82°", "correct": false},
+      {"text": "62°", "correct": true},
+      {"text": "31°", "correct": false}
     ],
-    explanation: "A black body emits heat radiation across all wavelengths when hot."
+    "explanation": "For a prism, the angle of minimum deviation (D) is related to the refractive index (n) and the angle of the prism (A) by the formula: n = sin((A + D / 2) / 2) / sin(A / 2). Given n = 1.5 and A = D, solving gives A ≈ 62°."
   },
   {
-    question: "A certain mass of gas at 273K is expanded to 81 times its volume under adiabatic condition. If γ=1.25 for the gas, then final temperature is:",
-    answers: [
-      { text: "0°C", correct: false },
-      { text: "-91°C", correct: true },
-      { text: "-182°C", correct: false },
-      { text: "-235°C", correct: false }
+    "question": "Which ray is the least deviated by a prism?",
+    "answers": [
+      {"text": "Violet ray", "correct": false},
+      {"text": "Green ray", "correct": false},
+      {"text": "Red ray", "correct": true},
+      {"text": "Yellow ray", "correct": false}
     ],
-    explanation: "Using the adiabatic expansion equation, the final temperature can be calculated to be -91°C."
+    "explanation": "Red light, which has a longer wavelength compared to other colors like violet or green, experiences less deviation when passing through a prism."
   },
   {
-    question: "The frequency of an organ pipe is f. If half part of the organ pipe is dipped into the water, its frequency will be:",
-    answers: [
-      { text: "f", correct: false },
-      { text: "f/2", correct: true },
-      { text: "2f", correct: false },
-      { text: "f/4", correct: false }
+    "question": "Fringe width in Young’s double slit experiment increases when ……",
+    "answers": [
+      {"text": "Separation between sources increases", "correct": true},
+      {"text": "Distance between source and screen increases", "correct": false},
+      {"text": "Wavelength of light decreases", "correct": false},
+      {"text": "Do not change", "correct": false}
     ],
-    explanation: "Dipping half of the organ pipe in water effectively halves its length, doubling its frequency."
+    "explanation": "The fringe width (distance between consecutive bright or dark fringes) in Young's double slit experiment increases with the separation between the slits (sources)."
   },
   {
-    question: "The minimum distance between the source and the reflector, so that an echo is heard is approx. equal to:",
-    answers: [
-      { text: "10m", correct: false },
-      { text: "17m", correct: true },
-      { text: "34m", correct: false },
-      { text: "50m", correct: false }
+    "question": "Electric lines of force about a negative point charge are …….",
+    "answers": [
+      {"text": "Radial, inward", "correct": false},
+      {"text": "Radial, outward", "correct": true},
+      {"text": "Circular, clockwise", "correct": false},
+      {"text": "Circular, anticlockwise", "correct": false}
     ],
-    explanation: "The minimum distance for an echo is about 17 meters."
+    "explanation": "Electric lines of force around a negative point charge radiate outward, indicating the direction of the force exerted on a positive charge."
   },
   {
-    question: "Bats detect the obstacles in their path by receiving the reflected ....... Waves:",
-    answers: [
-      { text: "Infrasonic", correct: false },
-      { text: "radio", correct: false },
-      { text: "ultrasonic", correct: true },
-      { text: "electro-magnetic", correct: false }
+    "question": "A capacitor consists of ………..",
+    "answers": [
+      {"text": "Two insulators separated by a conductor", "correct": false},
+      {"text": "Two conductors separated by an insulator", "correct": true},
+      {"text": "Two insulators only", "correct": false},
+      {"text": "Two conductors only", "correct": false}
     ],
-    explanation: "Bats use ultrasonic waves to detect obstacles."
+    "explanation": "A capacitor is typically made up of two conductors (often plates) separated by an insulating material (dielectric), which stores electrical energy."
   },
   {
-    question: "When the prongs of tuning fork are made thinner, frequency of vibration:",
-    answers: [
-      { text: "Increases", correct: true },
-      { text: "decreases", correct: false },
-      { text: "remains constant", correct: false },
-      { text: "none of the above", correct: false }
+    "question": "Ohm's law in point form in field theory can be expressed as …..",
+    "answers": [
+      {"text": "V = RI", "correct": false},
+      {"text": "J = E/σ", "correct": false},
+      {"text": "J = σE", "correct": false},
+      {"text": "R = ρl/A", "correct": true}
     ],
-    explanation: "Thinner prongs increase the frequency of a tuning fork."
+    "explanation": "In field theory, Ohm's law can be expressed as R = ρl/A, where R is resistance, ρ is resistivity, l is length, and A is cross-sectional area."
   },
   {
-    question: "The magnetic field lines inside a coil:",
-    answers: [
-      { text: "are straight", correct: false },
-      { text: "point at the same direction", correct: false },
-      { text: "all of above", correct: true },
-      { text: "none of the above", correct: false }
+    "question": "You are given three bulbs of 25, 40 and 60 watt. Which of them has lowest resistance?",
+    "answers": [
+      {"text": "25 watt bulb", "correct": false},
+      {"text": "40 watt bulb", "correct": false},
+      {"text": "60 watt bulb", "correct": true},
+      {"text": "Information is insufficient", "correct": false}
     ],
-    explanation: "Inside a coil, the magnetic field lines are straight and point in the same direction."
+    "explanation": "The resistance of a bulb can be indirectly related to its power consumption (wattage). Higher wattage bulbs typically have lower resistance due to higher current flow."
   },
   {
-    question: "The electric or magnetic field can’t accelerate:",
-    answers: [
-      { text: "alpha particle", correct: false },
-      { text: "beta particle", correct: false },
-      { text: "protons", correct: false },
-      { text: "neutrons", correct: true }
+    "question": "Which of the following apparatus construction uses electromagnetic induction?",
+    "answers": [
+      {"text": "Generator", "correct": true},
+      {"text": "Voltmeter", "correct": false},
+      {"text": "Galvanometer", "correct": false},
+      {"text": "Electric Motor", "correct": false}
     ],
-    explanation: "Neutrons are neutral particles and are not affected by electric or magnetic fields."
+    "explanation": "Generators utilize electromagnetic induction to convert mechanical energy into electrical energy by rotating a coil within a magnetic field."
   },
   {
-    question: "Charged particles enter a magnetic field at an angle of 45° with the magnetic field intensity. The path of the particle will be:",
-    answers: [
-      { text: "straight line", correct: false },
-      { text: "a circle", correct: false },
-      { text: "an ellipse", correct: false },
-      { text: "a helix", correct: true }
+    "question": "Why DC ammeter can’t measure an alternating current?",
+    "answers": [
+      {"text": "AC cannot pass through a DC ammeter", "correct": false},
+      {"text": "AC changes its direction", "correct": true},
+      {"text": "AC is virtual", "correct": false},
+      {"text": "The average value of a complete cycle is zero", "correct": false}
     ],
-    explanation: "When charged particles enter a magnetic field at an angle, they follow a helical path."
+    "explanation": "DC ammeters measure direct current (DC), which flows in one direction only. Alternating current (AC) changes direction periodically, making it unsuitable for measurement by DC ammeters."
   },
   {
-    question: "A toy train set has a resistance of 20.0Ω and uses a current of 250mA. If it ran for 1 hour, what is the power of the train?",
-    answers: [
-      { text: "1.2W", correct: true },
-      { text: "2.2×10²W", correct: false },
-      { text: "5.0W", correct: false },
-      { text: "4.5×10³W", correct: false }
+    "question": "Two metals A and B have work functions of 2 eV and 5 eV respectively. Which metal has a higher threshold wavelength?",
+    "answers": [
+      {"text": "Metal A", "correct": false},
+      {"text": "Metal B", "correct": true},
+      {"text": "Both", "correct": false},
+      {"text": "No change in threshold wavelength", "correct": false}
     ],
-    explanation: "Power P = I²R = (0.25)² × 20 = 1.25W, approximated to 1.2W."
+    "explanation": "The threshold wavelength λ₀ is related to the work function φ by the equation λ₀ = hc / φ, where h is Planck's constant and c is the speed of light. Metal B, with a higher work function, has a lower threshold wavelength."
   },
   {
-    question: "To give an electrically neutral object a positive charge, one must:",
-    answers: [
-      { text: "add electrons to it", correct: false },
-      { text: "remove protons from it", correct: false },
-      { text: "remove electrons from it", correct: true },
-      { text: "add protons to it", correct: false }
+    "question": "A beam of X-rays is constructively scattered in second order from the surface of NaCl crystal at an angle of 30° and the spacing between layers of atoms in NaCl crystal is 4.5 × 10-10m. The wavelength of X-rays is………….",
+    "answers": [
+      {"text": "2.25 × 10-10m", "correct": false},
+      {"text": "1.25 × 10-10m", "correct": false},
+      {"text": "2.50 × 10-10m", "correct": true},
+      {"text": "1.50 × 10-10m", "correct": false}
     ],
-    explanation: "Removing electrons from an electrically neutral object gives it a positive charge."
+    "explanation": "For constructive interference in second order, the condition 2d sinθ = nλ is satisfied, where d is the spacing between layers, θ is the angle of incidence, n is the order of interference, and λ is the wavelength of X-rays."
   },
   {
-    question: "The terminal potential difference when the short circuit is:",
-    answers: [
-      { text: "E", correct: false },
-      { text: "E/3", correct: false },
-      { text: "E/2", correct: false },
-      { text: "0", correct: true }
+    "question": "The energy gap is much more in silicon than in germanium because ………..",
+    "answers": [
+      {"text": "It has less number of electrons", "correct": false},
+      {"text": "It has high atomic mass number", "correct": false},
+      {"text": "Its crystal has much stronger bonds called ionic bonds", "correct": false},
+      {"text": "Its valence electrons are more tightly bound to their parent nuclei", "correct": true}
     ],
-    explanation: "In a short circuit, the terminal potential difference drops to zero."
+    "explanation": "Silicon has a larger energy band gap compared to germanium due to stronger covalent bonds between its atoms, resulting in valence electrons being more tightly bound."
   },
   {
-    question: "How many seconds will it take for 10.0 C of charge to pass through a 12.0 m circuit?",
-    answers: [
-      { text: "120s", correct: false },
-      { text: "100s", correct: false },
-      { text: "0.120s", correct: false },
-      { text: "0.833s", correct: true }
+    "question": "The decay constant of radium is 4.28 × 10-4 per year. Its half life in years will be………..",
+    "answers": [
+      {"text": "1240", "correct": false},
+      {"text": "1620", "correct": false},
+      {"text": "2000", "correct": true},
+      {"text": "63", "correct": false}
     ],
-    explanation: "Using I = Q/t, where I = V/R and Q = 10.0 C, we find t = 10 / (12.0/0.833) = 0.833s."
+    "explanation": "The half-life (T₁/₂) can be calculated using the formula T₁/₂ = ln(2) / λ, where λ is the decay constant. For radium with a decay constant of 4.28 × 10-4 per year, the half-life is approximately 2000 years."
   },
   {
-    question: "Which voltage source converts chemical energy to electrical energy?",
-    answers: [
-      { text: "Electrical generator", correct: false },
-      { text: "Battery", correct: true },
-      { text: "solar cell", correct: false },
-      { text: "Electronic power supply", correct: false }
+    "question": "Which pair can show the functional isomerism?",
+    "answers": [
+      {"text": "Alcohol and ether", "correct": false},
+      {"text": "Ether and aldehyde", "correct": false},
+      {"text": "Alcohol and aldehyde", "correct": true},
+      {"text": "Aldehyde and ester", "correct": false}
     ],
-    explanation: "A battery converts chemical energy to electrical energy."
+    "explanation": "Functional isomers have the same molecular formula but differ in the functional group arrangement. Alcohols (R-OH) and aldehydes (R-CHO) are examples of functional isomers."
   },
   {
-    question: "A particle of mass 5m at rest decays into two particles of masses 2m and 3m having non-zero velocities. The De Broglie wavelength of particle is:",
-    answers: [
-      { text: "3/2", correct: true },
-      { text: "2/3", correct: false },
-      { text: "1/3", correct: false },
-      { text: "none of the above", correct: false }
+    "question": "What is the major product obtained by heating sodium benzoate in presence of sodalime?",
+    "answers": [
+      {"text": "Benzene", "correct": true},
+      {"text": "Toluene", "correct": false},
+      {"text": "Benzoic acid", "correct": false},
+      {"text": "Azobenzene", "correct": false}
     ],
-    explanation: "Using conservation of momentum and De Broglie wavelength formula, we can find the wavelength ratio."
+    "explanation": "Heating sodium benzoate (C₆H₅COONa) with sodalime (NaOH + CaO) results in the decarboxylation reaction, producing benzene (C₆H₆)."
   },
   {
-    question: "Which of the following digital logic gates are used to build a single transistor?",
-    answers: [
-      { text: "AND", correct: false },
-      { text: "OR", correct: false },
-      { text: "NOT", correct: true },
-      { text: "NAND", correct: false }
+    "question": "Which one is ester?",
+    "answers": [
+      {"text": "HCOOR", "correct": false},
+      {"text": "-C=O", "correct": false},
+      {"text": "R-O- C", "correct": true},
+      {"text": "-CO2 –", "correct": false}
     ],
-    explanation: "A single transistor can be used to build a NOT gate."
+    "explanation": "Esters are organic compounds formed by the reaction of carboxylic acids and alcohols, resulting in the functional group R-O-C."
   },
   {
-    question: "Charge carrier in semiconductor is due to:",
-    answers: [
-      { text: "electrons and holes", correct: true },
-      { text: "electrons only", correct: false },
-      { text: "holes only", correct: false },
-      { text: "none", correct: false }
+    "question": "Ozonolysis of acetylene gives …….",
+    "answers": [
+      {"text": "Methanol", "correct": false},
+      {"text": "Ethanol", "correct": false},
+      {"text": "Ethanedial", "correct": true},
+      {"text": "Oxalic acid", "correct": false}
     ],
-    explanation: "In semiconductors, charge carriers are both electrons and holes."
+    "explanation": "Ozonolysis of acetylene (C₂H₂) results in the formation of ethanedial (C₂H₂O₂), also known as glyoxal."
   },
   {
-    question: "Which of the photon of radius has the highest energy?",
-    answers: [
-      { text: "photon of blue light", correct: false },
-      { text: "photon of red light", correct: false },
-      { text: "photon of green light", correct: false },
-      { text: "photon of violet light", correct: true }
+    "question": "The reagent that reacts with both aldehyde and ketone is …………",
+    "answers": [
+      {"text": "Fehling’s reagent", "correct": true},
+      {"text": "Tollen’s reagent", "correct": false},
+      {"text": "Schiff’s reagent", "correct": false},
+      {"text": "Grignard’s reagent", "correct": false}
     ],
-    explanation: "Among the visible spectrum, violet light photons have the highest energy due to their shortest wavelength."
+    "explanation": "Fehling's reagent (a mixture of aqueous solutions of copper(II) sulfate and potassium sodium tartrate) reacts with both aldehydes and ketones to form colored precipitates."
   },
   {
-    question: "What is the formula of copper sulphate crystal?",
-    answers: [
-      { text: "CuSO4", correct: false },
-      { text: "CuSO4.5H2O", correct: true },
-      { text: "CuSO4.3H2O", correct: false },
-      { text: "CuCO", correct: false }
+    "question": "The synonym of the underlined word in the sentence 'He hardly works' is …….",
+    "answers": [
+      {"text": "Strenuously", "correct": false},
+      {"text": "Scarcely", "correct": true},
+      {"text": "Mostly", "correct": false},
+      {"text": "Arduously", "correct": false}
     ],
-    explanation: "The formula of copper sulphate crystal, commonly known as blue vitriol, is CuSO4.5H2O."
+    "explanation": "The word 'hardly' in this context means scarcely or rarely."
   },
   {
-    question: "Which of these is both a Bronsted and Lewis acid?",
-    answers: [
-      { text: "BF3", correct: false },
-      { text: "HCL", correct: false },
-      { text: "HSO4-", correct: false },
-      { text: "NH4+", correct: true }
+    "question": "The expression 'to smell a rat' means………",
+    "answers": [
+      {"text": "A bad smell", "correct": false},
+      {"text": "To misunderstand", "correct": false},
+      {"text": "To hide", "correct": false},
+      {"text": "To suspect", "correct": true}
     ],
-    explanation: "NH4+ is both a Bronsted acid (proton donor) and a Lewis acid (electron pair acceptor)."
+    "explanation": "The idiom 'to smell a rat' means to suspect that something is wrong or suspicious."
   },
   {
-    question: "The reactive species present in Aqua-regia is:",
-    answers: [
-      { text: "nascent oxygen", correct: false },
-      { text: "nascent hydrogen", correct: false },
-      { text: "NO2", correct: false },
-      { text: "nascent Cl", correct: true }
+    "question": "Hari said, 'I went to Delhi long ago.'",
+    "answers": [
+      {"text": "Hari said that I went to Delhi long ago.", "correct": false},
+      {"text": "Hari said that he had gone to Delhi long before.", "correct": true},
+      {"text": "Hari said that he went to Delhi long ago.", "correct": false},
+      {"text": "Hari said that I had gone to Delhi long ago.", "correct": false}
     ],
-    explanation: "Aqua-regia contains nascent chlorine, which makes it a highly reactive mixture."
+    "explanation": "When reporting a past statement, the tense in the reported speech usually shifts one step back (past simple to past perfect) unless the reported action is still true."
   },
   {
-    question: "Which of these is the strongest reducing agent?",
-    answers: [
-      { text: "HF", correct: false },
-      { text: "HCL", correct: false },
-      { text: "HBr", correct: false },
-      { text: "HI", correct: true }
+    "question": "Do you imitate others?",
+    "answers": [
+      {"text": "Are others imitated by you?", "correct": true},
+      {"text": "Are others being imitated by you?", "correct": false},
+      {"text": "Were others imitated by you?", "correct": false},
+      {"text": "Have others been imitated by you?", "correct": false}
     ],
-    explanation: "HI is the strongest reducing agent among the given hydrogen halides due to the weakest bond strength."
+    "explanation": "This question seeks confirmation whether the person imitates others, hence the correct answer is 'Are others imitated by you?'"
   },
   {
-    question: "Which of these is an ore of zinc?",
-    answers: [
-      { text: "siderite", correct: false },
-      { text: "malachite", correct: false },
-      { text: "franklinite", correct: true },
-      { text: "tincal", correct: false }
+    "question": "The phonemic transcription of 'home' is………",
+    "answers": [
+      {"text": "/ hɔ:m/", "correct": true},
+      {"text": "/ hʌʊm/", "correct": false},
+      {"text": "/ hoʊm/", "correct": false},
+      {"text": "/ həʊm/", "correct": false}
     ],
-    explanation: "Franklinite is a zinc ore, whereas siderite is an iron ore, malachite is a copper ore, and tincal is a boron ore."
+    "explanation": "The phonetic transcription / hɔ:m/ represents the pronunciation of 'home' using the International Phonetic Alphabet (IPA)."
   },
   {
-    question: "The raw material used in the manufacture of sodium carbonate by Solvay’s process is:",
-    answers: [
-      { text: "NH3 and CO2", correct: false },
-      { text: "NaCl and CO2", correct: false },
-      { text: "NaCl, CaCO3 and CO2", correct: true },
-      { text: "NaCl, CaCO2 and CO2", correct: false }
+    "question": "Which one of the following is correctly punctuated?",
+    "answers": [
+      {"text": "These books are theirs’.", "correct": false},
+      {"text": "These books are their’s.", "correct": false},
+      {"text": "These books are theirs.", "correct": true},
+      {"text": "These books are their.", "correct": false}
     ],
-    explanation: "The Solvay process uses NaCl, CaCO3, and CO2 as raw materials to produce sodium carbonate."
+    "explanation": "The possessive pronoun 'theirs' does not require an apostrophe when indicating possession."
   },
   {
-    question: "The number(s) orbital in ‘d’ sub-shell is/are:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "2", correct: false },
-      { text: "5", correct: true },
-      { text: "4", correct: false }
+    "question": " The greatest enemy of mankind, as people have discovered is not science, but war. Science merely reflects the social forces by which it is surrounded. It is found that when there is peace, science is constructive, and when there is war, science is perverted to destructive ends. The weapons which science gives us do not necessarily create war; these make war increasingly more terrible. Until now, it has brought us to the doorstep of doom. Our main problem, therefore, is not to curb science, but to stop war, to substitute law for force, and international government for anarchy in the relations of one nation with another. That is a job in which everybody must participate, including the scientists. But the bomb of Hiroshima suddenly woke us up to the fact that we have very little time. The hour is late and our work has scarcely begun. Now we are face to face with this urgent question: Can education and tolerance, understanding and creative intelligence run fast enough to keep us abreast with our own mounting capacity to destroy? That is the question which we shall have to answer one way or the other in this generation. Science must help us in the answer, but the main decision lies within ourselves.An appropriate title for the passage would be",
+    "answers": [
+      {"text": "Science and the new generation", "correct": false},
+      {"text": "Science and social forces", "correct": false},
+      {"text": "Science and the horrors of war", "correct": true},
+      {"text": "Science and world peace", "correct": false}
     ],
-    explanation: "The 'd' sub-shell contains 5 orbitals."
+    "explanation": "The passage discusses how science, in the context of war, becomes destructive, reflecting on the horrors of war."
   },
   {
-    question: "The types of bonds present in hydrogen peroxide are:",
-    answers: [
-      { text: "only covalent", correct: true },
-      { text: "covalent & ionic", correct: false },
-      { text: "covalent & co-ordinate", correct: false },
-      { text: "none of the above", correct: false }
+    "question": "The expression 'keep us abreast' in the passage means ……",
+    "answers": [
+      {"text": "prevent from escaping", "correct": false},
+      {"text": "hold out a challenge", "correct": false},
+      {"text": "keep at a side", "correct": false},
+      {"text": "keep side by side", "correct": true}
     ],
-    explanation: "Hydrogen peroxide (H2O2) contains only covalent bonds between hydrogen and oxygen atoms."
+    "explanation": "'Keep us abreast' means to stay side by side or keep pace with."
   },
   {
-    question: "Nitrous acid is:",
-    answers: [
-      { text: "reducing agent", correct: false },
-      { text: "bleaching agent", correct: false },
-      { text: "both a & b", correct: true },
-      { text: "none of the above", correct: false }
+    "question": "According to the writer, the main problem we are faced with is to ……",
+    "answers": [
+      {"text": "prevent scientists from participating in destructive activities", "correct": false},
+      {"text": "abolish war", "correct": true},
+      {"text": "stop scientific activities everywhere", "correct": false},
+      {"text": "stop science from reflecting social forces", "correct": false}
     ],
-    explanation: "Nitrous acid acts as both a reducing and bleaching agent."
+    "explanation": "The passage emphasizes the need to stop war and replace it with peaceful international relations."
   },
   {
-    question: "Alkaline KMnO4 is called:",
-    answers: [
-      { text: "Hoffmann’s reagent", correct: false },
-      { text: "Tollen’s reagent", correct: false },
-      { text: "Bayer’s reagent", correct: true },
-      { text: "group reagent", correct: false }
+    "question": "Which of the following statements is not implied in the passage?",
+    "answers": [
+      {"text": "Science is misused for destructive purposes.", "correct": false},
+      {"text": "Neither science nor the weapons it invents add to the horrors of war.", "correct": false},
+      {"text": "People needlessly blame science for war.", "correct": true},
+      {"text": "The role of science in ensuring world peace is subsidiary to that of man.", "correct": false}
     ],
-    explanation: "Alkaline KMnO4 is known as Bayer’s reagent."
+    "explanation": "The passage does not suggest that people blame science needlessly for war."
   },
   {
-    question: "Unsaturated hydrocarbons contain:",
-    answers: [
-      { text: "C-C multiple bond", correct: true },
-      { text: "C-C single bond", correct: false },
-      { text: "covalent bond", correct: false },
-      { text: "homogeneous solution", correct: false }
+    "question": "In Hooke’s law, F = -kx, the constant k is called the……",
+    "answers": [
+      {"text": "Velocity", "correct": false},
+      {"text": "Speed constant", "correct": false},
+      {"text": "Spring constant", "correct": true},
+      {"text": "Time", "correct": false}
     ],
-    explanation: "Unsaturated hydrocarbons have one or more C-C multiple bonds (double or triple bonds)."
+    "explanation": "In Hooke's law, k is the spring constant which represents the stiffness of the spring."
   },
   {
-    question: "The correct IUPAC name of the compound with molecular formula (CH3)3C-CH3 is:",
-    answers: [
-      { text: "2, 3-dimethyl butane", correct: false },
-      { text: "2, 2-dimethyl propane", correct: true },
-      { text: "iso-propane", correct: false },
-      { text: "trimethylpropane", correct: false }
+    "question": "If the moment of inertia of a rotating body is increased then what will be the effect on the angular velocity?",
+    "answers": [
+      {"text": "It will increase", "correct": false},
+      {"text": "It will decrease", "correct": false},
+      {"text": "There will be no effect", "correct": false},
+      {"text": "First increase and then decrease", "correct": true}
     ],
-    explanation: "The correct IUPAC name for (CH3)3C-CH3 is 2, 2-dimethyl propane."
+    "explanation": "When moment of inertia increases, if external torque is constant, angular velocity initially decreases and then stabilizes."
   },
   {
-    question: "An example of disaccharide is:",
-    answers: [
-      { text: "sucrose", correct: true },
-      { text: "glucose", correct: false },
-      { text: "fructose", correct: false },
-      { text: "starch", correct: false }
+    "question": "Which of the following represents viscosity?",
+    "answers": [
+      {"text": "Potential energy stored in fluid", "correct": false},
+      {"text": "Resistance of fluid motion", "correct": true},
+      {"text": "Roughness of the surface", "correct": false},
+      {"text": "The pressure difference between the two fluids", "correct": false}
     ],
-    explanation: "Sucrose is a disaccharide, while glucose and fructose are monosaccharides, and starch is a polysaccharide."
+    "explanation": "Viscosity is the resistance of a fluid to flow."
   },
   {
-    question: "Among the amines:",
-    answers: [
-      { text: "1°amine is most basic", correct: false },
-      { text: "2°amine is most basic", correct: true },
-      { text: "3°amine is most basic", correct: false },
-      { text: "amines are not basic", correct: false }
+    "question": "Every temperature measuring instrument makes use of a physical property of a substance in order to measure temperature objectively, which physical property is used by mercury in glass thermometer?",
+    "answers": [
+      {"text": "Electromotive force", "correct": false},
+      {"text": "Resistance of a piece of metal", "correct": false},
+      {"text": "Pressure of a fixed mass of gas at constant volume", "correct": false},
+      {"text": "Volume of a fixed mass of liquid", "correct": true}
     ],
-    explanation: "2° amines are generally more basic than 1° and 3° amines due to their structure and electronic effects."
+    "explanation": "Mercury thermometers use the expansion of mercury with temperature to measure temperature."
   },
   {
-    question: "The mean speed of oxygen molecules in air at 25°C is:",
-    answers: [
-      { text: "482 ms-1", correct: true },
-      { text: "444 ms-1", correct: false },
-      { text: "14.0 ms-1", correct: false },
-      { text: "129 ms-1", correct: false }
+    "question": "A metal ball of mass 0.5 kg falls freely from a height of 10 m and bounces to a height of 5.5 m from the ground. If the dissipated energy in this process is absorbed by the ball (specific heat capacity of material = 450 J/ kgC), the rise in its temperature is…………………..",
+    "answers": [
+      {"text": "0.002C", "correct": false},
+      {"text": "0.2C", "correct": false},
+      {"text": "20C", "correct": false},
+      {"text": "2C", "correct": true}
     ],
-    explanation: "The mean speed of oxygen molecules in air at 25°C is approximately 482 ms-1."
+    "explanation": "The rise in temperature can be calculated using the energy dissipated and the specific heat capacity of the material."
   },
   {
-    question: "0.2 gm of a metal gives 68.4 ml of hydrogen measured at NTP on treatment with dilute HCl. The equivalent weight of the metal is:",
-    answers: [
-      { text: "12", correct: false },
-      { text: "32.78", correct: true },
-      { text: "36", correct: false },
-      { text: "53", correct: false }
+    "question": "A piece of steel has a length of 30 cm at 15°C. At 90°C its length increases by 0.027 cm. Coefficient of linear expansion of steel piece is:",
+    "answers": [
+      {"text": "6 × 10-6 C-1", "correct": false},
+      {"text": "12 × 10-6 C-1", "correct": false},
+      {"text": "24 × 10-6 C-1", "correct": true},
+      {"text": "36 × 10-6 C-1", "correct": false}
     ],
-    explanation: "Using the volume of hydrogen gas produced and stoichiometry, the equivalent weight of the metal is calculated to be 32.78."
+    "explanation": "The coefficient of linear expansion is calculated based on the change in length and the original length."
   },
   {
-    question: "The molality of 4% by weight of NaOH solution is:",
-    answers: [
-      { text: "0.104M", correct: false },
-      { text: "0.402M", correct: true },
-      { text: "1.04M", correct: false },
-      { text: "4.01M", correct: false }
+    "question": "Heat transmission is directly linked with the transport of medium itself, i.e., there is actual motion of heated particles during ……",
+    "answers": [
+      {"text": "Conduction only", "correct": false},
+      {"text": "Convection only", "correct": true},
+      {"text": "Radiation only", "correct": false},
+      {"text": "Conduction as well as radiation", "correct": false}
     ],
-    explanation: "The molality of a 4% NaOH solution is 0.402M."
+    "explanation": "Heat is transferred by actual motion of particles in convection."
   },
   {
-    question: "The amount of NaOH required to prepare N/10 solution of sodium hydroxide in 500ml volumetric flask is:",
-    answers: [
-      { text: "2 gm", correct: true },
-      { text: "1 gm", correct: false },
-      { text: "20 gm", correct: false },
-      { text: "40 gm", correct: false }
+    "question": "What is the power of the lens, if the far point of a short-sighted eye is 200 cm?",
+    "answers": [
+      {"text": "-0.5 D", "correct": false},
+      {"text": "2 D", "correct": false},
+      {"text": "1 D", "correct": true},
+      {"text": "-1.5 D", "correct": false}
     ],
-    explanation: "To prepare an N/10 solution of NaOH in 500 ml, 2 gm of NaOH is required."
+    "explanation": "The power of a lens is the reciprocal of the focal length in meters."
   },
   {
-    question: "The correct order of acidic strength is:",
-    answers: [
-      { text: "HI>HBr>HCl>HF", correct: true },
-      { text: "HI<HBr<HCl<HF", correct: false },
-      { text: "HI>HBr=HCl>HF", correct: false },
-      { text: "HI>HBr>HCl=HF", correct: false }
+    "question": "The angle of the prism is equal to the angle of minimum deviation for a prism of refractive index 1.5. What is the value of the angle of the prism?",
+    "answers": [
+      {"text": "41", "correct": false},
+      {"text": "82", "correct": false},
+      {"text": "62", "correct": true},
+      {"text": "31", "correct": false}
     ],
-    explanation: "The correct order of acidic strength is HI > HBr > HCl > HF."
+    "explanation": "The angle of minimum deviation for a prism is equal to the angle of the prism."
   },
   {
-    question: "By the action of Cl2 on dry slaked lime:",
-    answers: [
-      { text: "Ca(ClO)2 and CaCl2", correct: true },
-      { text: "Ca(ClO2)2 and CaCl2", correct: false },
-      { text: "Ca(ClO2) and CaCl2", correct: false },
-      { text: "Ca(ClO) and CaCl2", correct: false }
+    "question": "Which ray is the least deviated by a prism?",
+    "answers": [
+      {"text": "Violet ray", "correct": false},
+      {"text": "Green ray", "correct": false},
+      {"text": "Red ray", "correct": true},
+      {"text": "Yellow ray", "correct": false}
     ],
-    explanation: "The action of Cl2 on dry slaked lime produces Ca(ClO)2 and CaCl2."
+    "explanation": "Red light is least deviated by a prism due to its longer wavelength."
   },
   {
-    question: "Read the following passage and tick the correct answer:The brain of the average human weighs approx. 14 kg and consists of three main parts cerebrum, thecerebellum and the brain stem. The cerebrum is by far the largest of the three parts, taking up 85% of thebrain by weight. The outside layer of the cerebrum, the cerebral cortex, is a grooved and bumpy surfacecovering the nerve cells beneath. The various sections of the cerebrum are the sensory cortex, which isresponsible for receiving and decoding sensory messages from throughout the body; the motor cortex,which sends action instructions to the skeletal muscles; and the association cortex, which receives,monitors, and processes information. It is in the association cortex that the processes that allow humans tothink take place. The cerebellum, located below the cerebrum in the back part of the skull, is the section ofthe brain that controls balance and posture. The brain steam connects the cerebrum and the spinal cord. It controls various body processes such as breathing and heartbeat.",
-    answers: [
-      { text: "cerebrum", correct: true },
-      { text: "cerebellum", correct: false },
-      { text: "cerebral cortex", correct: false },
-      { text: "brain stem", correct: false }
+    "question": "Fringe width in Young’s double slit experiment increases when ……",
+    "answers": [
+      {"text": "Separation between sources increases", "correct": true},
+      {"text": "Distance between source and screen increases", "correct": false},
+      {"text": "Wavelength of light decreases", "correct": false},
+      {"text": "Do not change", "correct": false}
     ],
-    explanation: "The passage mentions that the cerebrum is the largest part of the brain, taking up 85% of its weight."
+    "explanation": "Fringe width in double slit interference increases with the increase in separation between sources."
   },
   {
-    question: "According to the passage, which part of the brain analyzes information?",
-    answers: [
-      { text: "The sensory cortex", correct: false },
-      { text: "The association cortex", correct: true },
-      { text: "the cerebellum", correct: false },
-      { text: "the brain stem", correct: false }
+    "question": "Electric lines of force about a negative point charge are …….",
+    "answers": [
+      {"text": "Radial, inward", "correct": false},
+      {"text": "Radial, outward", "correct": true},
+      {"text": "Circular, clockwise", "correct": false},
+      {"text": "Circular, anticlockwise", "correct": false}
     ],
-    explanation: "The passage indicates that it is in the association cortex where processes allowing humans to think take place, which involves analyzing information."
+    "explanation": "Electric field lines around a negative charge extend outward, radially."
   },
   {
-    question: "What is the author’s main purpose of writing this paragraph?",
-    answers: [
-      { text: "to describe the function of the parts of the brain.", correct: false },
-      { text: "to explain how the brain processes information.", correct: false },
-      { text: "to demonstrate the physical composition of the brain.", correct: true },
-      { text: "to give examples of human body functions.", correct: false }
+    "question": "A capacitor consists of ………..",
+    "answers": [
+      {"text": "Two insulators separated by a conductor", "correct": false},
+      {"text": "Two conductors separated by an insulator", "correct": true},
+      {"text": "Two insulators only", "correct": false},
+      {"text": "Two conductors only", "correct": false}
     ],
-    explanation: "The main purpose of the paragraph is to describe the physical composition of the brain, including its parts and their functions."
+    "explanation": "A capacitor has two conductors (plates) separated by an insulating material (dielectric)."
   },
   {
-    question: "That’s very sad news. If ............ sooner, I would have tried to help.",
-    answers: [
-      { text: "I know", correct: false },
-      { text: "I’ll know", correct: false },
-      { text: "I knew", correct: true },
-      { text: "I’d known", correct: false }
+    "question": "Ohm's law in point form in field theory can be expressed as …..",
+    "answers": [
+      {"text": "V = RI", "correct": false},
+      {"text": "J = E/σ", "correct": false},
+      {"text": "J = σE", "correct": true},
+      {"text": "R = ρl/A", "correct": false}
     ],
-    explanation: "The correct answer is 'I knew,' which is the correct past perfect tense for the hypothetical situation presented."
+    "explanation": "In field theory, Ohm's law is often expressed as J = σE, where J is the current density, σ is the conductivity, and E is the electric field strength."
   },
   {
-    question: "I was in Nepal and ......",
-    answers: [
-      { text: "so were my parents", correct: true },
-      { text: "were so my parents", correct: false },
-      { text: "parents were also", correct: false },
-      { text: "so my parents were", correct: false }
+    "question": "You are given three bulbs of 25, 40 and 60 watt. Which of them has lowest resistance?",
+    "answers": [
+      {"text": "25 watt bulb", "correct": false},
+      {"text": "40 watt bulb", "correct": false},
+      {"text": "60 watt bulb", "correct": true},
+      {"text": "Information is insufficient", "correct": false}
     ],
-    explanation: "The correct answer is 'so were my parents,' which is the correct structure for indicating agreement."
+    "explanation": "Power is inversely proportional to resistance (P = V^2 / R), so the 60 watt bulb has the lowest resistance."
   },
   {
-    question: "We haven’t got ........ on holiday at the moment.",
-    answers: [
-      { text: "money enough to go", correct: false },
-      { text: "enough money to go", correct: true },
-      { text: "money enough for going", correct: false },
-      { text: "enough money for going", correct: false }
+    "question": "Which of the following apparatus construction uses electromagnetic induction?",
+    "answers": [
+      {"text": "Generator", "correct": true},
+      {"text": "Voltmeter", "correct": false},
+      {"text": "Galvanometer", "correct": false},
+      {"text": "Electric Motor", "correct": false}
     ],
-    explanation: "The correct answer is 'enough money to go,' which is the correct structure for indicating sufficiency."
+    "explanation": "Generators use electromagnetic induction to convert mechanical energy into electrical energy."
   },
   {
-    question: "No sooner ...... one of the engines caught fire.",
-    answers: [
-      { text: "had we taken off when", correct: true },
-      { text: "had we taken off than", correct: false },
-      { text: "we had taken off when", correct: false },
-      { text: "we had taken off", correct: false }
+    "question": "Why DC ammeter is not suitable to measure the alternating current (AC)?",
+    "answers": [
+      {"text": "It may show the reading in positive and negative alternation", "correct": false},
+      {"text": "It cannot measure the current which changes direction", "correct": true},
+      {"text": "It can measure the average value", "correct": false},
+      {"text": "None of the above", "correct": false}
     ],
-    explanation: "The correct answer is 'had we taken off when,' which follows the correct structure for expressing 'no sooner... than.'"
-  },
-  {
-    question: "It was inevitable that women would be sent into space along with them.",
-    answers: [
-      { text: "unlikely", correct: false },
-      { text: "influential", correct: false },
-      { text: "fantastic", correct: false },
-      { text: "unavoidable", correct: true }
-    ],
-    explanation: "The correct answer is 'unavoidable,' which means something that cannot be avoided or prevented."
-  },
-  
-  {
-    question: "Our flat is ........ the second floor of the building.",
-    answers: [
-      { text: "in", correct: false },
-      { text: "at", correct: false },
-      { text: "on", correct: true },
-      { text: "to", correct: false }
-    ],
-    explanation: "The correct answer is 'on,' which indicates the location of the flat within the building."
+    "explanation": "DC ammeters are designed to measure current in one direction only and do not account for the alternating direction of AC."
   }
 ];
 

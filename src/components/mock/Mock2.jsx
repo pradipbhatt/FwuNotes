@@ -5,1029 +5,1018 @@ import logo from "../../../public/fwu.png";
 
 // Total time in seconds for 150 questions in 3 hours
 const TOTAL_TIME = 3 * 60 * 60;
-const quizData2077 = [ // Define quiz data for 2077
+const quizData2077 = [
   {
-    question: "The value of sin50° + sin10° is:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "0", correct: false },
-      { text: "-1", correct: false },
-      { text: "2", correct: true }
-    ],
-    explanation: "The value of sin50° + sin10° is equal to 2 based on trigonometric identities."
-  },
-  {
-    question: "The value of sin a + sin b + sin c in terms of area of triangle is:",
-    answers: [
-      { text: "∆s / 2R", correct: false },
-      { text: "4∆s / abc", correct: false },
-      { text: "4∆ / abc", correct: true },
-      { text: "4s / abc∆", correct: false }
-    ],
-    explanation: "The value of sin a + sin b + sin c in terms of the area of a triangle is 4∆ / abc."
-  },
-  {
-    question: "All the values of x satisfying the equation tan(ax) = cot(bx) are given by:",
-    answers: [
-      { text: "x = nπ + (a+b)π", correct: false },
-      { text: "x = nπ - (a+b)π", correct: false },
-      { text: "x = nπ / (a+b)", correct: true },
-      { text: "x = (2n+1)π / 2(a+b)", correct: false }
-    ],
-    explanation: "The values of x satisfying the equation tan(ax) = cot(bx) are given by x = nπ / (a+b)."
-  },
-  {
-    question: "In a triangle ABC, the value of a sin(B-C) / (b² - c²) is:",
-    answers: [
-      { text: "2R", correct: false },
-      { text: "1/2R", correct: true },
-      { text: "2R²", correct: false },
-      { text: "1/2R²", correct: false }
-    ],
-    explanation: "The value of a sin(B-C) / (b² - c²) in a triangle is 1/2R."
-  },
-  {
-    question: "If (3, 3) lies on the line joining the points (h, 0) and (0, k), then:",
-    answers: [
-      { text: "h + k = 3", correct: false },
-      { text: "hk = 3", correct: false },
-      { text: "3h - 3k = 1", correct: false },
-      { text: "1/h + 1/k = 1/3", correct: true }
-    ],
-    explanation: "If (3, 3) lies on the line joining (h, 0) and (0, k), then 1/h + 1/k = 1/3."
-  },
-  {
-    question: "The equation of the straight line in double intercept form is:",
-    answers: [
-      { text: "bx + ay = ab", correct: false },
-      { text: "y = mx + c", correct: false },
-      { text: "y - y1 = m(x - x1)", correct: false },
-      { text: "y - y1 = (y2 - y1) / (x2 - x1) (x - x1)", correct: true }
-    ],
-    explanation: "The equation of the straight line in double intercept form is y - y1 = (y2 - y1) / (x2 - x1) (x - x1)."
-  },
-  {
-    question: "The circumcenter of the triangle whose vertices are (2, -1), (1, 2), and (-2, 1) is:",
-    answers: [
-      { text: "(1/2, 2/3)", correct: false },
-      { text: "(-1/2, 3/2)", correct: false },
-      { text: "(0, 0)", correct: true },
-      { text: "None of the above", correct: false }
-    ],
-    explanation: "The circumcenter of the triangle with vertices (2, -1), (1, 2), and (-2, 1) is (0, 0)."
-  },
-  {
-    question: "The points of intersection of the lines represented by 3x² – 7xy + 2y² + 9x + 2y - 12 = 0 are:",
-    answers: [
-      { text: "(2, 3)", correct: false },
-      { text: "(3, 2)", correct: false },
-      { text: "(-3, 2)", correct: false },
-      { text: "(1, 2)", correct: true }
-    ],
-    explanation: "The points of intersection of the lines represented by the given equation are (1, 2)."
-  },
-  {
-    question: "The angle between the pair of lines represented by x³ – 2xy – cotθ – y² = 0 is:",
-    answers: [
-      { text: "0", correct: false },
-      { text: "π/2", correct: false },
-      { text: "tan⁻¹(±2)", correct: false },
-      { text: "tan⁻¹(±1/2)", correct: true }
-    ],
-    explanation: "The angle between the lines represented by the given equation is tan⁻¹(±1/2)."
-  },
-  {
-    question: "Which of the following is the equation of a hyperbola?",
-    answers: [
-      { text: "x² + 4y² - 4x + 24y + 24 = 0", correct: false },
-      { text: "x² + y² - 12x - 6y - 9 = 0", correct: false },
-      { text: "x² - 5xy - 4y² + x + 2y - 2 = 0", correct: true },
-      { text: "9x² - 16y² - 18x - 64y - 199 = 0", correct: false }
-    ],
-    explanation: "The equation x² - 5xy - 4y² + x + 2y - 2 = 0 represents a hyperbola."
-  },
-  {
-    question: "The straight lines y = 2x ± 3√5 are always tangent to the circle:",
-    answers: [
-      { text: "x² + y² = 4", correct: false },
-      { text: "x² + y² = 9", correct: false },
-      { text: "x² + y² = 25", correct: true },
-      { text: "x² + y² = 16", correct: false }
-    ],
-    explanation: "The lines y = 2x ± 3√5 are always tangent to the circle x² + y² = 25."
-  },
-  {
-    question: "The angle between the lines whose direction ratios are 2, 3, 4 and 1, -2, 1 is:",
-    answers: [
-      { text: "π/2", correct: false },
-      { text: "π/3", correct: false },
-      { text: "π/4", correct: false },
-      { text: "π/6", correct: true }
-    ],
-    explanation: "The angle between the lines with given direction ratios is π/6."
-  },
-  {
-    question: "lim x → 2 |x − 2| / (x − 2) is equal to:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "-1", correct: false },
-      { text: "0", correct: false },
-      { text: "does not exist", correct: true }
-    ],
-    explanation: "The limit does not exist as |x − 2| / (x − 2) approaches different values from either side of x = 2."
-  },
-  {
-    question: "lim x → 0 sin(x°) / x is equal to:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "π/180", correct: true },
-      { text: "180/π", correct: false },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "lim x → 0 sin(x°) / x is equal to π/180 due to conversion between degrees and radians."
-  },
-  {
-    question: "lim x → a sin(x − a) / (x³ − a³) is equal to:",
-    answers: [
-      { text: "1/2a", correct: false },
-      { text: "2a²", correct: false },
-      { text: "1", correct: false },
-      { text: "1/3a²", correct: true }
-    ],
-    explanation: "The limit is 1/3a² using L'Hôpital's rule and algebraic manipulation."
-  },
-  {
-    question: "If ax² + 2hxy + by² = 1, then dy/dx is:",
-    answers: [
-      { text: "-(ax + by) / (hx + by)", correct: false },
-      { text: "-2ax / by", correct: false },
-      { text: "-(hx + by) / (ax + by)", correct: true },
-      { text: "hx + by", correct: false }
-    ],
-    explanation: "The derivative dy/dx for the given implicit equation is -(hx + by) / (ax + by)."
-  },
-  {
-    question: "The derivative of f(x) = |x| at x = 0 is:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "0", correct: false },
-      { text: "-1", correct: false },
-      { text: "none of the above", correct: true }
-    ],
-    explanation: "The derivative of |x| at x = 0 does not exist because the left-hand and right-hand limits are different."
-  },
-  {
-    question: "The value of ∫ logx dx is equal to:",
-    answers: [
-      { text: "x logx – x + c", correct: true },
-      { text: "logx + x + c", correct: false },
-      { text: "2 logx – x + c", correct: false },
-      { text: "x²/2 logx – x + c", correct: false }
-    ],
-    explanation: "The integral of logx with respect to x is x logx – x + c."
-  },
-  {
-    question: "∫ (3x² / (x⁶ + 1)) dx is:",
-    answers: [
-      { text: "x³ / (x² + 1) + c", correct: false },
-      { text: "tan⁻¹(x³) + c", correct: true },
-      { text: "sin⁻¹(x³) + c", correct: false },
-      { text: "cos⁻¹(x³) + c", correct: false }
-    ],
-    explanation: "The integral ∫ (3x² / (x⁶ + 1)) dx evaluates to tan⁻¹(x³) + c."
-  },
-  {
-    question: "The maximum value of f(x) = 5 + 4x – x² is:",
-    answers: [
-      { text: "3", correct: false },
-      { text: "6", correct: true },
-      { text: "5", correct: false },
-      { text: "9", correct: false }
-    ],
-    explanation: "The maximum value of the quadratic function f(x) = 5 + 4x – x² is 6."
-  },
-  {
-    question: "The solution of the equation dy/dx = (2x + 1) / (5y⁴ + 1) is:",
-    answers: [
-      { text: "x² + x – y⁵ – y = c", correct: false },
-      { text: "2x² + x – 4y³ – y = c", correct: false },
-      { text: "x² - x + y⁵ + y = c", correct: true },
-      { text: "2x² - x + 4y³ + y = c", correct: false }
-    ],
-    explanation: "The solution of the differential equation dy/dx = (2x + 1) / (5y⁴ + 1) is x² - x + y⁵ + y = c."
-  },
-  {
-    question: "The area of the ellipse x²/4 + y²/9 = 1 is:",
-    answers: [
-      { text: "2π", correct: false },
-      { text: "4π", correct: false },
-      { text: "6π", correct: true },
-      { text: "8π", correct: false }
-    ],
-    explanation: "The area of the ellipse x²/4 + y²/9 = 1 is 6π."
-  },
-  {
-    question: "If a⃗ = 2i⃗ + 3j⃗, then |2a⃗| is:",
-    answers: [
-      { text: "√13", correct: false },
-      { text: "√26", correct: false },
-      { text: "2√26", correct: true },
-      { text: "2√13", correct: false }
-    ],
-    explanation: "The magnitude of 2a⃗ is 2√26."
-  },
-  {
-    question: "(a⃗ - b⃗) × (a⃗ + b⃗) is equal to:",
-    answers: [
-      { text: "0", correct: false },
-      { text: "a⃗ × b⃗", correct: false },
-      { text: "2(b⃗ × a⃗)", correct: true },
-      { text: "|a⃗|² + |b⃗|", correct: false }
-    ],
-    explanation: "(a⃗ - b⃗) × (a⃗ + b⃗) equals 2(b⃗ × a⃗) based on vector cross product properties."
-  },
-  {
-    question: "The area of a parallelogram whose diagonals are (2, 3, -3) & (2, -3, 3) is:",
-    answers: [
-      { text: "6√2 sq. units", correct: true },
-      { text: "12√2 sq. units", correct: false },
-      { text: "6 sq. units", correct: false },
-      { text: "12 sq. units", correct: false }
-    ],
-    explanation: "The area of a parallelogram with given diagonals is 6√2 square units."
-  },
-  {
-    question: "The vectors (2, 1, -1) & (λ, -2, 2) are collinear if the value of λ is:",
-    answers: [
-      { text: "2", correct: false },
-      { text: "4", correct: false },
-      { text: "-4", correct: false },
-      { text: "-2", correct: true }
-    ],
-    explanation: "The vectors are collinear if λ = -2."
-  },
-  {
-    question: "If n(U) = 360, n(A) = 240, n(B) = 160, then max. value of n(A ∩ B) is:",
-    answers: [
-      { text: "360", correct: false },
-      { text: "240", correct: true },
-      { text: "160", correct: false },
-      { text: "300", correct: false }
-    ],
-    explanation: "The maximum value of n(A ∩ B) is 240."
-  },
-  {
-    question: "Which of the following is false?",
-    answers: [
-      { text: "|x + y| ≥ |x| + |y|", correct: true },
-      { text: "|x − y| ≥ |x| − |y|", correct: false },
-      { text: "|x| + |y| ≥ |x + y|", correct: false },
-      { text: "None of the above", correct: false }
-    ],
-    explanation: "The statement |x + y| ≥ |x| + |y| is false because of the triangle inequality, which states that |x + y| ≤ |x| + |y|."
-  },
-  {
-    question: "In how many ways can the letters of the word 'LEADER' be arranged?",
-    answers: [
-      { text: "360", correct: false },
-      { text: "720", correct: false },
-      { text: "144", correct: false },
-      { text: "3600", correct: true }
-    ],
-    explanation: "The letters of the word 'LEADER' can be arranged in 3600 ways, calculated as 6! / (2!)."
-  },
-  {
-    question: "If n is an integer, then the solution of |2x - 3| > 4 is:",
-    answers: [
-      { text: "x > 7/2 or x < -1/2", correct: true },
-      { text: "x > 1/2 or x < -7/2", correct: false },
-      { text: "-1/2 < x < 7/2", correct: false },
-      { text: "-7/2 < x < 1/2", correct: false }
-    ],
-    explanation: "The inequality |2x - 3| > 4 splits into two inequalities: 2x - 3 > 4 or 2x - 3 < -4, leading to x > 7/2 or x < -1/2."
-  },
-  {
-    question: "The value of the determinant of the matrix \n|1 2 3|\n|4 5 6|\n|7 8 9| is:",
-    answers: [
-      { text: "0", correct: true },
-      { text: "1", correct: false },
-      { text: "-1", correct: false },
-      { text: "10", correct: false }
-    ],
-    explanation: "The value of the determinant of the given matrix is 0, as its rows are linearly dependent."
-  },
-  {
-    question: "If A is a 3x3 matrix with |A| = 5, then |3A| is:",
-    answers: [
-      { text: "45", correct: false },
-      { text: "135", correct: false },
-      { text: "405", correct: true },
-      { text: "15", correct: false }
-    ],
-    explanation: "If |A| = 5, then |3A| = 3^3 * |A| = 27 * 5 = 135."
-  },
-  {
-    question: "If A = (sin θ -cos θ; cos θ sin θ), then AAT is:",
-    answers: [
-      { text: "I", correct: true },
-      { text: "-I", correct: false },
-      { text: "0", correct: false },
-      { text: "None of the above", correct: false }
-    ],
-    explanation: "For A = (sin θ -cos θ; cos θ sin θ), AAT = I, where I is the identity matrix."
-  },
-  {
-    question: "The value of the complex number (3 + 4i)(3 - 4i) is:",
-    answers: [
-      { text: "25", correct: true },
-      { text: "7", correct: false },
-      { text: "-7", correct: false },
-      { text: "12", correct: false }
-    ],
-    explanation: "The product of (3 + 4i)(3 - 4i) is 3^2 - (4i)^2 = 9 + 16 = 25."
-  },
-  {
-    question: "The multiplicative inverse of i is:",
-    answers: [
-      { text: "-i", correct: false },
-      { text: "1", correct: false },
-      { text: "-1/i", correct: false },
-      { text: "-i/|i|²", correct: true }
-    ],
-    explanation: "The multiplicative inverse of i is 1/i, which simplifies to -i/|i|²."
-  },
-  {
-    question: "The sum of the first n terms of the arithmetic series 2, 5, 8, ... is:",
-    answers: [
-      { text: "n/2 (3 + (n-1)3)", correct: false },
-      { text: "n/2 (4 + (n-1)3)", correct: true },
-      { text: "n/2 (5 + (n-1)3)", correct: false },
-      { text: "n/2 (6 + (n-1)3)", correct: false }
-    ],
-    explanation: "The sum of the first n terms of the arithmetic series 2, 5, 8, ... is n/2 [2a + (n-1)d] where a=2 and d=3."
-  },
-  {
-    question: "The roots of the quadratic equation x² + 4x + 4 = 0 are:",
-    answers: [
-      { text: "-2 and -2", correct: true },
-      { text: "2 and 2", correct: false },
-      { text: "0 and -4", correct: false },
-      { text: "-4 and 0", correct: false }
-    ],
-    explanation: "The roots of the quadratic equation x² + 4x + 4 = 0 are -2 and -2."
-  },
-  {
-    question: "The equation of the line passing through the point (1, 2) with a slope of 3 is:",
-    answers: [
-      { text: "y = 3x + 2", correct: false },
-      { text: "y = 3x + 1", correct: false },
-      { text: "y = 3x - 1", correct: true },
-      { text: "y = 3x - 2", correct: false }
-    ],
-    explanation: "The equation of the line passing through (1, 2) with a slope of 3 is y = 3x - 1."
-  },
-  {
-    question: "If x + 1/x = 3, then x² + 1/x² is equal to:",
-    answers: [
-      { text: "9", correct: false },
-      { text: "7", correct: true },
-      { text: "5", correct: false },
-      { text: "3", correct: false }
-    ],
-    explanation: "If x + 1/x = 3, squaring both sides gives x² + 1/x² + 2 = 9, so x² + 1/x² = 7."
-  },
-  {
-    question: "The roots of the equation x⁴ - 16 = 0 are:",
-    answers: [
-      { text: "2, -2, 4, -4", correct: false },
-      { text: "2, -2, i, -i", correct: false },
-      { text: "2, -2, 2i, -2i", correct: false },
-      { text: "2, -2, 4i, -4i", correct: true }
-    ],
-    explanation: "The roots of the equation x⁴ - 16 = 0 are 2, -2, 4i, -4i."
-  },
-  {
-    question: "If a polygon has 20 sides, the sum of its interior angles is:",
-    answers: [
-      { text: "3200°", correct: false },
-      { text: "3240°", correct: false },
-      { text: "3240", correct: false },
-      { text: "3240°", correct: true }
-    ],
-    explanation: "The sum of the interior angles of a polygon with n sides is (n-2) × 180°, so for 20 sides it is 18 × 180° = 3240°."
-  },
-  {
-    question: "If f(x) = x² + 2x, then f'(x) is:",
-    answers: [
-      { text: "2x", correct: false },
-      { text: "2x + 2", correct: true },
-      { text: "2x - 2", correct: false },
-      { text: "2", correct: false }
-    ],
-    explanation: "The derivative f'(x) of the function f(x) = x² + 2x is 2x + 2."
-  },
-  {
-    question: "The solution to the equation log₅(x - 1) = 3 is:",
-    answers: [
-      { text: "x = 126", correct: false },
-      { text: "x = 126", correct: false },
-      { text: "x = 126", correct: true },
-      { text: "x = 625", correct: false }
-    ],
-    explanation: "The solution to the equation log₅(x - 1) = 3 is x = 126, since 5³ = 125 + 1 = 126."
-  },
-  
-  {
-    question: "A bottom of a pond or lake appears closer than it actually is, and seems to ripple. This 'bending' of light due to the water is defined as:",
-    answers: [
-      { text: "interference", correct: false },
-      { text: "diffraction", correct: false },
-      { text: "refraction", correct: true },
-      { text: "reflection", correct: false }
-    ],
-    explanation: "The bending of light as it passes from one medium to another, causing objects to appear closer than they are, is called refraction."
-  },
-  {
-    question: "A person can’t see objects clearly beyond 50cm. The power of the lens to correct the vision is:",
-    answers: [
-      { text: "+0.5D", correct: false },
-      { text: "-0.5D", correct: false },
-      { text: "+2D", correct: false },
-      { text: "-2D", correct: true }
-    ],
-    explanation: "The power of a lens required to correct a near point of 50cm (0.5m) is calculated as P = 1/f, where f is the focal length in meters. Hence, P = 1/0.5 = 2D. Since it corrects for nearsightedness, it is negative."
-  },
-  {
-    question: "White light is passed through a prism of angle 5°. If the refractive indices of the red and blue colors are 1.641 and 1.659 respectively, the angle of dispersion will be:",
-    answers: [
-      { text: "2°", correct: false },
-      { text: "0.09°", correct: true },
-      { text: "0.9°", correct: false },
-      { text: "4°", correct: false }
-    ],
-    explanation: "The angle of dispersion is the difference in the angles of refraction for red and blue light, which is calculated using the refractive indices and the prism angle."
-  },
-  {
-    question: "The dimensional formula for the Planck's constant is:",
-    answers: [
-      { text: "M1L2T-1", correct: true },
-      { text: "ML2T-1", correct: false },
-      { text: "M1L2T2", correct: false },
-      { text: "M1L2T-1", correct: false }
-    ],
-    explanation: "The dimensional formula for Planck's constant, which relates energy and frequency, is M1L2T-1."
-  },
-  {
-    question: "A stone is dropped from the top of the tower. If it covers 24.5m in the last second of its motion, the height of the tower is:",
-    answers: [
-      { text: "49m", correct: true },
-      { text: "44.1m", correct: false },
-      { text: "88.4m", correct: false },
-      { text: "72m", correct: false }
-    ],
-    explanation: "Using the equations of motion under gravity, we can calculate the height of the tower given the distance covered in the last second."
-  },
-  {
-    question: "If two masses of 4kg and 16kg are moving with equal kinetic energy, the ratio of their momentum will be:",
-    answers: [
-      { text: "1:4", correct: false },
-      { text: "1:2", correct: true },
-      { text: "4:1", correct: false },
-      { text: "1:√2", correct: false }
-    ],
-    explanation: "Given equal kinetic energy, the momentum ratio p is inversely proportional to the square root of their masses, resulting in a 1:2 ratio."
-  },
-  {
-    question: "Time period for a simple pendulum inside a satellite orbiting the earth is:",
-    answers: [
-      { text: "0", correct: true },
-      { text: "infinite", correct: false },
-      { text: "1 sec", correct: false },
-      { text: "9.8 sec", correct: false }
-    ],
-    explanation: "In a satellite orbiting the Earth, effective gravity is zero, making the time period of a pendulum infinite."
-  },
-  {
-    question: "A radius of the circular path of a particle is double but its frequency of rotation remains constant. If the initial centripetal force be F, then the final centripetal force will be:",
-    answers: [
-      { text: "F", correct: false },
-      { text: "2F", correct: false },
-      { text: "4F", correct: true },
-      { text: "F/2", correct: false }
-    ],
-    explanation: "Centripetal force F = mω²r. Doubling the radius while keeping the frequency constant quadruples the centripetal force."
-  },
-  {
-    question: "A sphere is rolling. The ratio of the rotational energy to total kinetic energy is given by:",
-    answers: [
-      { text: "7:10", correct: true },
-      { text: "2:5", correct: false },
-      { text: "10:7", correct: false },
-      { text: "2:7", correct: false }
-    ],
-    explanation: "For a rolling sphere, the rotational energy is 2/5 of the total kinetic energy, resulting in a 7:10 ratio."
-  },
-  {
-    question: "If the liquid doesn’t wet the solid surface, the angle of contact is:",
-    answers: [
-      { text: "acute", correct: false },
-      { text: "obtuse", correct: true },
-      { text: "90°", correct: false },
-      { text: "0", correct: false }
-    ],
-    explanation: "If a liquid doesn’t wet the solid surface, the angle of contact is obtuse (>90°)."
-  },
-  {
-    question: "If a wire of Young’s modulus Y, longitudinal strain X is produced, then the value of potential energy stored in its unit volume will be:",
-    answers: [
-      { text: "YX²", correct: true },
-      { text: "2YX²", correct: false },
-      { text: "0.5Y²X", correct: false },
-      { text: "0.5YX²", correct: true }
-    ],
-    explanation: "The potential energy stored per unit volume in a strained wire is 0.5YX²."
-  },
-  {
-    question: "1 gm of ice at 0° and 1 gm of steam at 100° are mixed. The resulting temp. is:",
-    answers: [
-      { text: "0°C", correct: true },
-      { text: "230°C", correct: false },
-      { text: "50°C", correct: false },
-      { text: "100°C", correct: false }
-    ],
-    explanation: "The heat required to melt 1 gm of ice is equal to the heat released by condensing 1 gm of steam, resulting in 0°C."
-  },
-  {
-    question: "A black body when it is hot emits heat radiation of:",
-    answers: [
-      { text: "IR wavelength", correct: false },
-      { text: "UV wavelength", correct: false },
-      { text: "Particular wavelength", correct: false },
-      { text: "All wavelengths", correct: true }
-    ],
-    explanation: "A black body emits heat radiation across all wavelengths when hot."
-  },
-  {
-    question: "A certain mass of gas at 273K is expanded to 81 times its volume under adiabatic condition. If γ=1.25 for the gas, then final temperature is:",
-    answers: [
-      { text: "0°C", correct: false },
-      { text: "-91°C", correct: true },
-      { text: "-182°C", correct: false },
-      { text: "-235°C", correct: false }
-    ],
-    explanation: "Using the adiabatic expansion equation, the final temperature can be calculated to be -91°C."
-  },
-  {
-    question: "The frequency of an organ pipe is f. If half part of the organ pipe is dipped into the water, its frequency will be:",
-    answers: [
-      { text: "f", correct: false },
-      { text: "f/2", correct: true },
-      { text: "2f", correct: false },
-      { text: "f/4", correct: false }
-    ],
-    explanation: "Dipping half of the organ pipe in water effectively halves its length, doubling its frequency."
-  },
-  {
-    question: "The minimum distance between the source and the reflector, so that an echo is heard is approx. equal to:",
-    answers: [
-      { text: "10m", correct: false },
-      { text: "17m", correct: true },
-      { text: "34m", correct: false },
-      { text: "50m", correct: false }
-    ],
-    explanation: "The minimum distance for an echo is about 17 meters."
-  },
-  {
-    question: "Bats detect the obstacles in their path by receiving the reflected ....... Waves:",
-    answers: [
-      { text: "Infrasonic", correct: false },
-      { text: "radio", correct: false },
-      { text: "ultrasonic", correct: true },
-      { text: "electro-magnetic", correct: false }
-    ],
-    explanation: "Bats use ultrasonic waves to detect obstacles."
-  },
-  {
-    question: "When the prongs of tuning fork are made thinner, frequency of vibration:",
-    answers: [
-      { text: "Increases", correct: true },
-      { text: "decreases", correct: false },
-      { text: "remains constant", correct: false },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "Thinner prongs increase the frequency of a tuning fork."
-  },
-  {
-    question: "The magnetic field lines inside a coil:",
-    answers: [
-      { text: "are straight", correct: false },
-      { text: "point at the same direction", correct: false },
-      { text: "all of above", correct: true },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "Inside a coil, the magnetic field lines are straight and point in the same direction."
-  },
-  {
-    question: "The electric or magnetic field can’t accelerate:",
-    answers: [
-      { text: "alpha particle", correct: false },
-      { text: "beta particle", correct: false },
-      { text: "protons", correct: false },
-      { text: "neutrons", correct: true }
-    ],
-    explanation: "Neutrons are neutral particles and are not affected by electric or magnetic fields."
-  },
-  {
-    question: "Charged particles enter a magnetic field at an angle of 45° with the magnetic field intensity. The path of the particle will be:",
-    answers: [
-      { text: "straight line", correct: false },
-      { text: "a circle", correct: false },
-      { text: "an ellipse", correct: false },
-      { text: "a helix", correct: true }
-    ],
-    explanation: "When charged particles enter a magnetic field at an angle, they follow a helical path."
-  },
-  {
-    question: "A toy train set has a resistance of 20.0Ω and uses a current of 250mA. If it ran for 1 hour, what is the power of the train?",
-    answers: [
-      { text: "1.2W", correct: true },
-      { text: "2.2×10²W", correct: false },
-      { text: "5.0W", correct: false },
-      { text: "4.5×10³W", correct: false }
-    ],
-    explanation: "Power P = I²R = (0.25)² × 20 = 1.25W, approximated to 1.2W."
-  },
-  {
-    question: "To give an electrically neutral object a positive charge, one must:",
-    answers: [
-      { text: "add electrons to it", correct: false },
-      { text: "remove protons from it", correct: false },
-      { text: "remove electrons from it", correct: true },
-      { text: "add protons to it", correct: false }
-    ],
-    explanation: "Removing electrons from an electrically neutral object gives it a positive charge."
-  },
-  {
-    question: "The terminal potential difference when the short circuit is:",
-    answers: [
-      { text: "E", correct: false },
-      { text: "E/3", correct: false },
-      { text: "E/2", correct: false },
-      { text: "0", correct: true }
-    ],
-    explanation: "In a short circuit, the terminal potential difference drops to zero."
-  },
-  {
-    question: "How many seconds will it take for 10.0 C of charge to pass through a 12.0 m circuit?",
-    answers: [
-      { text: "120s", correct: false },
-      { text: "100s", correct: false },
-      { text: "0.120s", correct: false },
-      { text: "0.833s", correct: true }
-    ],
-    explanation: "Using I = Q/t, where I = V/R and Q = 10.0 C, we find t = 10 / (12.0/0.833) = 0.833s."
-  },
-  {
-    question: "Which voltage source converts chemical energy to electrical energy?",
-    answers: [
-      { text: "Electrical generator", correct: false },
-      { text: "Battery", correct: true },
-      { text: "solar cell", correct: false },
-      { text: "Electronic power supply", correct: false }
-    ],
-    explanation: "A battery converts chemical energy to electrical energy."
-  },
-  {
-    question: "A particle of mass 5m at rest decays into two particles of masses 2m and 3m having non-zero velocities. The De Broglie wavelength of particle is:",
-    answers: [
-      { text: "3/2", correct: true },
-      { text: "2/3", correct: false },
-      { text: "1/3", correct: false },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "Using conservation of momentum and De Broglie wavelength formula, we can find the wavelength ratio."
-  },
-  {
-    question: "Which of the following digital logic gates are used to build a single transistor?",
-    answers: [
-      { text: "AND", correct: false },
-      { text: "OR", correct: false },
-      { text: "NOT", correct: true },
-      { text: "NAND", correct: false }
-    ],
-    explanation: "A single transistor can be used to build a NOT gate."
-  },
-  {
-    question: "Charge carrier in semiconductor is due to:",
-    answers: [
-      { text: "electrons and holes", correct: true },
-      { text: "electrons only", correct: false },
-      { text: "holes only", correct: false },
-      { text: "none", correct: false }
-    ],
-    explanation: "In semiconductors, charge carriers are both electrons and holes."
-  },
-  {
-    question: "Which of the photon of radius has the highest energy?",
-    answers: [
-      { text: "photon of blue light", correct: false },
-      { text: "photon of red light", correct: false },
-      { text: "photon of green light", correct: false },
-      { text: "photon of violet light", correct: true }
-    ],
-    explanation: "Among the visible spectrum, violet light photons have the highest energy due to their shortest wavelength."
-  },
-  {
-    question: "What is the formula of copper sulphate crystal?",
-    answers: [
-      { text: "CuSO4", correct: false },
-      { text: "CuSO4.5H2O", correct: true },
-      { text: "CuSO4.3H2O", correct: false },
-      { text: "CuCO", correct: false }
-    ],
-    explanation: "The formula of copper sulphate crystal, commonly known as blue vitriol, is CuSO4.5H2O."
-  },
-  {
-    question: "Which of these is both a Bronsted and Lewis acid?",
-    answers: [
-      { text: "BF3", correct: false },
-      { text: "HCL", correct: false },
-      { text: "HSO4-", correct: false },
-      { text: "NH4+", correct: true }
-    ],
-    explanation: "NH4+ is both a Bronsted acid (proton donor) and a Lewis acid (electron pair acceptor)."
-  },
-  {
-    question: "The reactive species present in Aqua-regia is:",
-    answers: [
-      { text: "nascent oxygen", correct: false },
-      { text: "nascent hydrogen", correct: false },
-      { text: "NO2", correct: false },
-      { text: "nascent Cl", correct: true }
-    ],
-    explanation: "Aqua-regia contains nascent chlorine, which makes it a highly reactive mixture."
-  },
-  {
-    question: "Which of these is the strongest reducing agent?",
-    answers: [
-      { text: "HF", correct: false },
-      { text: "HCL", correct: false },
-      { text: "HBr", correct: false },
-      { text: "HI", correct: true }
-    ],
-    explanation: "HI is the strongest reducing agent among the given hydrogen halides due to the weakest bond strength."
+    "question": "The angle between the vectors a = i + j + k and b = i - j + k is",
+    "answers": [
+      { "text": "cos^-1(1/4)", "correct": false },
+      { "text": "cos^-1(1/3)", "correct": true },
+      { "text": "cos^-1(1/2)", "correct": false },
+      { "text": "cos^-1(1/sqrt(3))", "correct": false }
+    ],
+    "explanation": "The angle between two vectors can be found using the dot product formula."
   },
   {
-    question: "Which of these is an ore of zinc?",
-    answers: [
-      { text: "siderite", correct: false },
-      { text: "malachite", correct: false },
-      { text: "franklinite", correct: true },
-      { text: "tincal", correct: false }
-    ],
-    explanation: "Franklinite is a zinc ore, whereas siderite is an iron ore, malachite is a copper ore, and tincal is a boron ore."
+    "question": "If a = i + j - k and b = i - j + k then the magnitude of the vector 2a + 3b is",
+    "answers": [
+      { "text": "sqrt(3)", "correct": false },
+      { "text": "9", "correct": false },
+      { "text": "3", "correct": false },
+      { "text": "3sqrt(3)", "correct": true }
+    ],
+    "explanation": "Calculate 2a + 3b and then find the magnitude of the resulting vector."
   },
   {
-    question: "The raw material used in the manufacture of sodium carbonate by Solvay’s process is:",
-    answers: [
-      { text: "NH3 and CO2", correct: false },
-      { text: "NaCl and CO2", correct: false },
-      { text: "NaCl, CaCO3 and CO2", correct: true },
-      { text: "NaCl, CaCO2 and CO2", correct: false }
-    ],
-    explanation: "The Solvay process uses NaCl, CaCO3, and CO2 as raw materials to produce sodium carbonate."
+    "question": "If A = [[1, 2], [3, 4]] and B = [[5, 6], [7, 8]], then the matrix AB is equal to",
+    "answers": [
+      { "text": "[[19, 22], [43, 50]]", "correct": true },
+      { "text": "[[23, 34], [31, 46]]", "correct": false },
+      { "text": "[[39, 54], [47, 68]]", "correct": false },
+      { "text": "[[21, 28], [45, 60]]", "correct": false }
+    ],
+    "explanation": "Matrix multiplication is done by taking the dot product of rows and columns."
   },
   {
-    question: "The number(s) orbital in ‘d’ sub-shell is/are:",
-    answers: [
-      { text: "1", correct: false },
-      { text: "2", correct: false },
-      { text: "5", correct: true },
-      { text: "4", correct: false }
-    ],
-    explanation: "The 'd' sub-shell contains 5 orbitals."
+    "question": "A square matrix A is said to be a singular matrix if",
+    "answers": [
+      { "text": "|A| = 1", "correct": false },
+      { "text": "|A| = 0", "correct": true },
+      { "text": "|A| ≠ 1", "correct": false },
+      { "text": "|A| > 1", "correct": false }
+    ],
+    "explanation": "A singular matrix is one that does not have an inverse, which happens if its determinant is zero."
   },
   {
-    question: "The types of bonds present in hydrogen peroxide are:",
-    answers: [
-      { text: "only covalent", correct: true },
-      { text: "covalent & ionic", correct: false },
-      { text: "covalent & co-ordinate", correct: false },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "Hydrogen peroxide (H2O2) contains only covalent bonds between hydrogen and oxygen atoms."
+    "question": "The value of i + i^2 + i^3 is",
+    "answers": [
+      { "text": "2i - 1", "correct": false },
+      { "text": "2i + 1", "correct": false },
+      { "text": "-1", "correct": true },
+      { "text": "1", "correct": false }
+    ],
+    "explanation": "i is the imaginary unit where i^2 = -1."
   },
   {
-    question: "Nitrous acid is:",
-    answers: [
-      { text: "reducing agent", correct: false },
-      { text: "bleaching agent", correct: false },
-      { text: "both a & b", correct: true },
-      { text: "none of the above", correct: false }
-    ],
-    explanation: "Nitrous acid acts as both a reducing and bleaching agent."
+    "question": "The product of the roots of the equation 3x^2 - 2x + 1 is",
+    "answers": [
+      { "text": "1", "correct": false },
+      { "text": "-1", "correct": true },
+      { "text": "2", "correct": false },
+      { "text": "-2", "correct": false }
+    ],
+    "explanation": "For a quadratic equation ax^2 + bx + c = 0, the product of the roots is c/a."
   },
   {
-    question: "Alkaline KMnO4 is called:",
-    answers: [
-      { text: "Hoffmann’s reagent", correct: false },
-      { text: "Tollen’s reagent", correct: false },
-      { text: "Bayer’s reagent", correct: true },
-      { text: "group reagent", correct: false }
-    ],
-    explanation: "Alkaline KMnO4 is known as Bayer’s reagent."
+    "question": "If a, b, c are in GP. then a^2, b^2, c^2 are in",
+    "answers": [
+      { "text": "AP", "correct": false },
+      { "text": "GP", "correct": true },
+      { "text": "HP", "correct": false },
+      { "text": "AGP", "correct": false }
+    ],
+    "explanation": "If numbers are in geometric progression, their squares are also in geometric progression."
   },
   {
-    question: "Unsaturated hydrocarbons contain:",
-    answers: [
-      { text: "C-C multiple bond", correct: true },
-      { text: "C-C single bond", correct: false },
-      { text: "covalent bond", correct: false },
-      { text: "homogeneous solution", correct: false }
-    ],
-    explanation: "Unsaturated hydrocarbons have one or more C-C multiple bonds (double or triple bonds)."
+    "question": "In how many ways can 8 guests and a host be seated at a circular table?",
+    "answers": [
+      { "text": "7!", "correct": true },
+      { "text": "8!", "correct": false },
+      { "text": "9!", "correct": false },
+      { "text": "10!", "correct": false }
+    ],
+    "explanation": "For circular permutations, the number of ways to arrange n people is (n-1)!"
   },
   {
-    question: "The correct IUPAC name of the compound with molecular formula (CH3)3C-CH3 is:",
-    answers: [
-      { text: "2, 3-dimethyl butane", correct: false },
-      { text: "2, 2-dimethyl propane", correct: true },
-      { text: "iso-propane", correct: false },
-      { text: "trimethylpropane", correct: false }
-    ],
-    explanation: "The correct IUPAC name for (CH3)3C-CH3 is 2, 2-dimethyl propane."
+    "question": "If n is a positive integer, then how many terms are there in the expansion of (x + a)^n?",
+    "answers": [
+      { "text": "n-1", "correct": false },
+      { "text": "n", "correct": false },
+      { "text": "n+1", "correct": true },
+      { "text": "n^2", "correct": false }
+    ],
+    "explanation": "The binomial expansion of (x + a)^n has (n + 1) terms."
   },
   {
-    question: "An example of disaccharide is:",
-    answers: [
-      { text: "sucrose", correct: true },
-      { text: "glucose", correct: false },
-      { text: "fructose", correct: false },
-      { text: "starch", correct: false }
-    ],
-    explanation: "Sucrose is a disaccharide, while glucose and fructose are monosaccharides, and starch is a polysaccharide."
+    "question": "The value of 1 + 1/1! + 1/2! + 1/3! is",
+    "answers": [
+      { "text": "e", "correct": false },
+      { "text": "e + 1", "correct": false },
+      { "text": "e - 2", "correct": false },
+      { "text": "e - 1", "correct": true }
+    ],
+    "explanation": "This is a partial sum of the series for e, which starts as 1 + 1/1! + 1/2! + 1/3!..."
   },
   {
-    question: "Among the amines:",
-    answers: [
-      { text: "1°amine is most basic", correct: false },
-      { text: "2°amine is most basic", correct: true },
-      { text: "3°amine is most basic", correct: false },
-      { text: "amines are not basic", correct: false }
-    ],
-    explanation: "2° amines are generally more basic than 1° and 3° amines due to their structure and electronic effects."
+    "question": "Apparent frequency received by a listener when the source of sound and listener are approaching each other is",
+    "answers": [
+      { "text": "(v + vr) / (v - vs)", "correct": false },
+      { "text": "(v - vr) / (v + vs)", "correct": false },
+      { "text": "(v + vr) / (v + vs)", "correct": true },
+      { "text": "(v - vr) / (v - vs)", "correct": false }
+    ],
+    "explanation": "The Doppler effect formula for sound approaching the listener is used."
   },
   {
-    question: "The mean speed of oxygen molecules in air at 25°C is:",
-    answers: [
-      { text: "482 ms-1", correct: true },
-      { text: "444 ms-1", correct: false },
-      { text: "14.0 ms-1", correct: false },
-      { text: "129 ms-1", correct: false }
-    ],
-    explanation: "The mean speed of oxygen molecules in air at 25°C is approximately 482 ms-1."
+    "question": "At same temperature and pressure, velocity of sound is highest in",
+    "answers": [
+      { "text": "hydrogen", "correct": true },
+      { "text": "oxygen", "correct": false },
+      { "text": "nitrogen", "correct": false },
+      { "text": "carbon dioxide", "correct": false }
+    ],
+    "explanation": "Velocity of sound is inversely proportional to the square root of the molecular mass."
   },
   {
-    question: "0.2 gm of a metal gives 68.4 ml of hydrogen measured at NTP on treatment with dilute HCl. The equivalent weight of the metal is:",
-    answers: [
-      { text: "12", correct: false },
-      { text: "32.78", correct: true },
-      { text: "36", correct: false },
-      { text: "53", correct: false }
-    ],
-    explanation: "Using the volume of hydrogen gas produced and stoichiometry, the equivalent weight of the metal is calculated to be 32.78."
+    "question": "Expression for lateral shift is",
+    "answers": [
+      { "text": "t sin(i - r) / cos(r)", "correct": true },
+      { "text": "t sin(i + r) / cos(r)", "correct": false },
+      { "text": "t sin(r - i) / cos(r)", "correct": false },
+      { "text": "t sin(i - r) / sin(r)", "correct": false }
+    ],
+    "explanation": "Lateral shift is the perpendicular distance between the incident ray and emergent ray."
   },
   {
-    question: "The molality of 4% by weight of NaOH solution is:",
-    answers: [
-      { text: "0.104M", correct: false },
-      { text: "0.402M", correct: true },
-      { text: "1.04M", correct: false },
-      { text: "4.01M", correct: false }
-    ],
-    explanation: "The molality of a 4% NaOH solution is 0.402M."
+    "question": "When light travels from air into water",
+    "answers": [
+      { "text": "frequency decreases", "correct": false },
+      { "text": "frequency increases", "correct": false },
+      { "text": "wavelength increases", "correct": false },
+      { "text": "wavelength decreases", "correct": true }
+    ],
+    "explanation": "When light enters a denser medium, its speed and wavelength decrease."
   },
   {
-    question: "The amount of NaOH required to prepare N/10 solution of sodium hydroxide in 500ml volumetric flask is:",
-    answers: [
-      { text: "2 gm", correct: true },
-      { text: "1 gm", correct: false },
-      { text: "20 gm", correct: false },
-      { text: "40 gm", correct: false }
-    ],
-    explanation: "To prepare an N/10 solution of NaOH in 500 ml, 2 gm of NaOH is required."
+    "question": "When Young's double slit experiment is carried inside water with same geometry, fringe width",
+    "answers": [
+      { "text": "increases", "correct": false },
+      { "text": "decreases", "correct": true },
+      { "text": "remains same", "correct": false },
+      { "text": "first increases and then decreases", "correct": false }
+    ],
+    "explanation": "Fringe width is directly proportional to the wavelength, which decreases in water."
   },
   {
-    question: "The correct order of acidic strength is:",
-    answers: [
-      { text: "HI>HBr>HCl>HF", correct: true },
-      { text: "HI<HBr<HCl<HF", correct: false },
-      { text: "HI>HBr=HCl>HF", correct: false },
-      { text: "HI>HBr>HCl=HF", correct: false }
-    ],
-    explanation: "The correct order of acidic strength is HI > HBr > HCl > HF."
+    "question": "At 0°C, kinetic energy of gas molecule is",
+    "answers": [
+      { "text": "zero", "correct": false },
+      { "text": "negative", "correct": false },
+      { "text": "positive", "correct": true },
+      { "text": "none of these", "correct": false }
+    ],
+    "explanation": "Kinetic energy of gas molecules is always positive as long as temperature is above absolute zero."
   },
   {
-    question: "By the action of Cl2 on dry slaked lime:",
-    answers: [
-      { text: "Ca(ClO)2 and CaCl2", correct: true },
-      { text: "Ca(ClO2)2 and CaCl2", correct: false },
-      { text: "Ca(ClO2) and CaCl2", correct: false },
-      { text: "Ca(ClO) and CaCl2", correct: false }
-    ],
-    explanation: "The action of Cl2 on dry slaked lime produces Ca(ClO)2 and CaCl2."
+    "question": "Two bodies will be in thermal equilibrium when they have same",
+    "answers": [
+      { "text": "heat energy", "correct": false },
+      { "text": "specific heat capacity", "correct": false },
+      { "text": "temperature", "correct": true },
+      { "text": "thermal conductivity", "correct": false }
+    ],
+    "explanation": "Thermal equilibrium is achieved when two bodies reach the same temperature."
   },
   {
-    question: "Read the following passage and tick the correct answer:The brain of the average human weighs approx. 14 kg and consists of three main parts cerebrum, thecerebellum and the brain stem. The cerebrum is by far the largest of the three parts, taking up 85% of thebrain by weight. The outside layer of the cerebrum, the cerebral cortex, is a grooved and bumpy surfacecovering the nerve cells beneath. The various sections of the cerebrum are the sensory cortex, which isresponsible for receiving and decoding sensory messages from throughout the body; the motor cortex,which sends action instructions to the skeletal muscles; and the association cortex, which receives,monitors, and processes information. It is in the association cortex that the processes that allow humans tothink take place. The cerebellum, located below the cerebrum in the back part of the skull, is the section ofthe brain that controls balance and posture. The brain steam connects the cerebrum and the spinal cord. It controls various body processes such as breathing and heartbeat.",
-    answers: [
-      { text: "cerebrum", correct: true },
-      { text: "cerebellum", correct: false },
-      { text: "cerebral cortex", correct: false },
-      { text: "brain stem", correct: false }
-    ],
-    explanation: "The passage mentions that the cerebrum is the largest part of the brain, taking up 85% of its weight."
+    "question": "Isobaric process takes place at constant",
+    "answers": [
+      { "text": "pressure", "correct": true },
+      { "text": "volume", "correct": false },
+      { "text": "temperature", "correct": false },
+      { "text": "none of these", "correct": false }
+    ],
+    "explanation": "An isobaric process occurs at a constant pressure."
   },
   {
-    question: "According to the passage, which part of the brain analyzes information?",
-    answers: [
-      { text: "The sensory cortex", correct: false },
-      { text: "The association cortex", correct: true },
-      { text: "the cerebellum", correct: false },
-      { text: "the brain stem", correct: false }
-    ],
-    explanation: "The passage indicates that it is in the association cortex where processes allowing humans to think take place, which involves analyzing information."
+    "question": "Ideal gas is considered under",
+    "answers": [
+      { "text": "high pressure and high temperature", "correct": false },
+      { "text": "high pressure and low temperature", "correct": false },
+      { "text": "low pressure and low temperature", "correct": false },
+      { "text": "low pressure and high temperature", "correct": true }
+    ],
+    "explanation": "Ideal gas behavior is most closely approximated at low pressure and high temperature."
   },
   {
-    question: "What is the author’s main purpose of writing this paragraph?",
-    answers: [
-      { text: "to describe the function of the parts of the brain.", correct: false },
-      { text: "to explain how the brain processes information.", correct: false },
-      { text: "to demonstrate the physical composition of the brain.", correct: true },
-      { text: "to give examples of human body functions.", correct: false }
-    ],
-    explanation: "The main purpose of the paragraph is to describe the physical composition of the brain, including its parts and their functions."
+    "question": "Entropy change during adiabatic process is",
+    "answers": [
+      { "text": "zero", "correct": true },
+      { "text": "positive", "correct": false },
+      { "text": "negative", "correct": false },
+      { "text": "infinite", "correct": false }
+    ],
+    "explanation": "In an adiabatic process, there is no heat exchange, so entropy remains constant."
   },
   {
-    question: "That’s very sad news. If ............ sooner, I would have tried to help.",
-    answers: [
-      { text: "I know", correct: false },
-      { text: "I’ll know", correct: false },
-      { text: "I knew", correct: true },
-      { text: "I’d known", correct: false }
-    ],
-    explanation: "The correct answer is 'I knew,' which is the correct past perfect tense for the hypothetical situation presented."
+    "question": "Hardness of water is due to",
+    "answers": [
+      { "text": "Sodium bicarbonate", "correct": false },
+      { "text": "Calcium carbonate", "correct": true },
+      { "text": "Potassium carbonate", "correct": false },
+      { "text": "Magnesium chloride", "correct": true }
+    ],
+    "explanation": "Hard water contains high levels of calcium and magnesium ions."
   },
   {
-    question: "I was in Nepal and ......",
-    answers: [
-      { text: "so were my parents", correct: true },
-      { text: "were so my parents", correct: false },
-      { text: "parents were also", correct: false },
-      { text: "so my parents were", correct: false }
-    ],
-    explanation: "The correct answer is 'so were my parents,' which is the correct structure for indicating agreement."
+    "question": "Haber's process is used for the manufacture of",
+    "answers": [
+      { "text": "Nitrogen", "correct": false },
+      { "text": "Ammonia", "correct": true },
+      { "text": "Hydrogen", "correct": false },
+      { "text": "Nitric oxide", "correct": false }
+    ],
+    "explanation": "The Haber process synthesizes ammonia from nitrogen and hydrogen gases."
   },
   {
-    question: "We haven’t got ........ on holiday at the moment.",
-    answers: [
-      { text: "money enough to go", correct: false },
-      { text: "enough money to go", correct: true },
-      { text: "money enough for going", correct: false },
-      { text: "enough money for going", correct: false }
-    ],
-    explanation: "The correct answer is 'enough money to go,' which is the correct structure for indicating sufficiency."
+    "question": "Which of the following is an amorphous form of Sulphur?",
+    "answers": [
+      { "text": "Rhombic", "correct": false },
+      { "text": "Monoclinic", "correct": false },
+      { "text": "Milk of Sulphur", "correct": true },
+      { "text": "Beta Sulphur", "correct": false }
+    ],
+    "explanation": "Amorphous sulfur forms include milk of sulfur, which lacks a crystalline structure."
   },
   {
-    question: "No sooner ...... one of the engines caught fire.",
-    answers: [
-      { text: "had we taken off when", correct: true },
-      { text: "had we taken off than", correct: false },
-      { text: "we had taken off when", correct: false },
-      { text: "we had taken off", correct: false }
-    ],
-    explanation: "The correct answer is 'had we taken off when,' which follows the correct structure for expressing 'no sooner... than.'"
+    "question": "__________ changes the starch emulsion into blue-black color",
+    "answers": [
+      { "text": "Fluorine", "correct": false },
+      { "text": "Chlorine", "correct": false },
+      { "text": "Bromine", "correct": false },
+      { "text": "Iodine", "correct": true }
+    ],
+    "explanation": "Iodine reacts with starch to produce a blue-black color."
   },
   {
-    question: "It was inevitable that women would be sent into space along with them.",
-    answers: [
-      { text: "unlikely", correct: false },
-      { text: "influential", correct: false },
-      { text: "fantastic", correct: false },
-      { text: "unavoidable", correct: true }
-    ],
-    explanation: "The correct answer is 'unavoidable,' which means something that cannot be avoided or prevented."
+    "question": "Tincture of iodine is",
+    "answers": [
+      { "text": "KI", "correct": false },
+      { "text": "KI + I2", "correct": false },
+      { "text": "KI + I2 + C2H5OH", "correct": true },
+      { "text": "KI + I2 + Ti", "correct": false }
+    ],
+    "explanation": "Tincture of iodine is an antiseptic solution consisting of iodine dissolved in ethanol."
   },
-  
   {
-    question: "Our flat is ........ the second floor of the building.",
-    answers: [
-      { text: "in", correct: false },
-      { text: "at", correct: false },
-      { text: "on", correct: true },
-      { text: "to", correct: false }
-    ],
-    explanation: "The correct answer is 'on,' which indicates the location of the flat within the building."
-  }
+    "question": "Haematite is an ore of",
+    "answers": [
+      { "text": "Iron", "correct": true },
+      { "text": "Copper", "correct": false },
+      { "text": "Silver", "correct": false },
+      { "text": "Magnesium", "correct": false }
+    ],
+    "explanation": "Haematite is a primary ore of iron."
+  },
+  {
+    "question": "When brine solution is saturated with ammonia in the presence of carbon dioxide gas, the resulting products is/are",
+    "answers": [
+      { "text": "Ammonium bicarbonate", "correct": true },
+      { "text": "Sodium bicarbonate", "correct": false },
+      { "text": "Ammonium bicarbonate or sodium bicarbonate", "correct": false },
+      { "text": "Ammonium bicarbonate and sodium bicarbonate", "correct": false }
+    ],
+    "explanation": "The Solvay process produces ammonium bicarbonate when brine and ammonia are reacted with carbon dioxide."
+  },
+  {
+    "question": "Steel is an alloy of iron containing _________ percent of carbon with possibly traces of phosphorus, sulphur, and silicon.",
+    "answers": [
+      { "text": "2 to 4", "correct": false },
+      { "text": "0.2 to 2", "correct": true },
+      { "text": "0.02 to 0.2", "correct": false },
+      { "text": "0.002 to 0.02", "correct": false }
+    ],
+    "explanation": "Steel typically contains 0.2 to 2 percent carbon, which gives it its hardness and strength."
+  },
+  {
+    "question": "Blistering of blister copper is due to",
+    "answers": [
+      { "text": "Inherent property", "correct": false },
+      { "text": "Dissolved gas molecules", "correct": false },
+      { "text": "Escaping of dissolved gas from molten mass", "correct": true },
+      { "text": "The presence of oxide moieties", "correct": false }
+    ],
+    "explanation": "Blister copper gets its name from the blisters formed on its surface due to escaping gas."
+  },{
+    "question": "Which of the following compound shows thermochromic property?",
+    "answers": [
+        {"text": "FeO", "correct": false},
+        {"text": "CuO", "correct": false},
+        {"text": "Na2O", "correct": false},
+        {"text": "ZnO", "correct": true}
+    ],
+    "explanation": "Zinc oxide (ZnO) exhibits thermochromic properties, changing color with temperature."
+},
+{
+    "question": "Had she run away, she ...... by police?",
+    "answers": [
+        {"text": "Won't be caught", "correct": false},
+        {"text": "Wouldn’t have been caught", "correct": true},
+        {"text": "Wouldn’t be caught", "correct": false},
+        {"text": "Will be caught", "correct": false}
+    ],
+    "explanation": "The correct answer 'Wouldn’t have been caught' indicates a hypothetical past condition and its consequence."
+},
+{
+    "question": "Which of the following word has different vowel sound than the rest?",
+    "answers": [
+        {"text": "Pear", "correct": false},
+        {"text": "Pair", "correct": false},
+        {"text": "Care", "correct": true},
+        {"text": "Rare", "correct": false}
+    ],
+    "explanation": "The word 'Care' has a different vowel sound (/eə/) compared to 'Pear', 'Pair', and 'Rare'."
+},
+{
+    "question": "Which of the following is true for the word ‘Collection’?",
+    "answers": [
+        {"text": "It contains three syllables and the first syllable is stressed.", "correct": false},
+        {"text": "It contains four syllables and the second syllable is stressed", "correct": true},
+        {"text": "It contains three syllables and the second syllable is stressed.", "correct": false},
+        {"text": "It contains four syllables and the last syllable is stressed.", "correct": false}
+    ],
+    "explanation": "The word 'Collection' has four syllables ('col-lec-tion') and the stress is on the second syllable."
+},
+{
+    "question": "My boss visits the office ............ the morning.",
+    "answers": [
+        {"text": "at", "correct": true},
+        {"text": "on", "correct": false},
+        {"text": "in", "correct": false},
+        {"text": "with", "correct": false}
+    ],
+    "explanation": "The correct preposition to use with 'morning' in this context is 'at'."
+},
+{
+    "question": "Tam running out ... ........money so I could not pay your debt this month.",
+    "answers": [
+        {"text": "up", "correct": false},
+        {"text": "of", "correct": true},
+        {"text": "with", "correct": false},
+        {"text": "in", "correct": false}
+    ],
+    "explanation": "The phrase 'running out of money' means to exhaust one's supply of money."
+},
+{
+    "question": "Which of the following is the appropriate adjective pattern?",
+    "answers": [
+        {"text": "attractive new Japanese car", "correct": true},
+        {"text": "new attractive Japanese car", "correct": false},
+        {"text": "Japanese new attractive car", "correct": false},
+        {"text": "attractive Japanese new car", "correct": false}
+    ],
+    "explanation": "The correct adjective pattern in English is usually 'opinion-size-age-shape-color-origin-material-purpose', so 'attractive new Japanese car' is correct."
+},
+{
+    "question": "No one told me that ......... 's going to be a party.",
+    "answers": [
+        {"text": "it", "correct": false},
+        {"text": "there", "correct": true},
+        {"text": "here", "correct": false},
+        {"text": "where", "correct": false}
+    ],
+    "explanation": "The correct pronoun to use to refer to an event or situation that is happening is 'there'."
+},
+{
+    "question": "Which of the following is the plural form of word crisis?",
+    "answers": [
+        {"text": "crisises", "correct": false},
+        {"text": "crisis", "correct": false},
+        {"text": "crises", "correct": true},
+        {"text": "crisisses", "correct": false}
+    ],
+    "explanation": "The plural form of 'crisis' is 'crises'."
+},
+{
+    "question": "Don’t put off making a decision. Which of the formal word can replace the underlined word in the sentence?",
+    "answers": [
+        {"text": "solve", "correct": false},
+        {"text": "calculate", "correct": false},
+        {"text": "organize", "correct": false},
+        {"text": "postpone", "correct": true}
+    ],
+    "explanation": "To 'put off' means to postpone or delay something, so 'postpone' is the appropriate formal word."
+},
+{
+    "question": "You should not wake someone up when they're.............. walking.",
+    "answers": [
+        {"text": "might", "correct": false},
+        {"text": "dream", "correct": false},
+        {"text": "day", "correct": false},
+        {"text": "sleep", "correct": true}
+    ],
+    "explanation": "The correct phrase is 'sleepwalking', indicating someone is walking while still asleep."
+},
+{
+    "question": "I am interested in. I don’t want to study it, ..........",
+    "answers": [
+        {"text": "however", "correct": false},
+        {"text": "though", "correct": false},
+        {"text": "although", "correct": false},
+        {"text": "even though", "correct": true}
+    ],
+    "explanation": "The correct phrase to indicate contrast between being interested and not wanting to study is 'even though'."
+},
+{
+    "question": "Identify the correct order of the determiners in the sentence.",
+    "answers": [
+        {"text": "All our many hopes were kept alive by her encouraging words.", "correct": true},
+        {"text": "Our many all hopes were kept alive by her encouraging words.", "correct": false},
+        {"text": "Many all our hopes were kept alive by her encouraging words.", "correct": false},
+        {"text": "Our all many hopes were kept alive by her encouraging words.", "correct": false}
+    ],
+    "explanation": "The correct order of determiners is 'All our many hopes', indicating the specific hopes."
+},
+{
+    "question": "Both the China institute and the Brooklyn Museum .......... Asian art.",
+    "answers": [
+        {"text": "are", "correct": true},
+        {"text": "has", "correct": false},
+        {"text": "is", "correct": false},
+        {"text": "have", "correct": false}
+    ],
+    "explanation": "When referring to two separate entities ('China institute' and 'Brooklyn Museum'), use the plural verb 'are'."
+},
+{
+    "question": "Most people in Argentina ................. Spanish.",
+    "answers": [
+        {"text": "to speak", "correct": false},
+        {"text": "speak", "correct": true},
+        {"text": "speaking", "correct": false},
+        {"text": "speaks", "correct": false}
+    ],
+    "explanation": "The correct form is 'speak' as it refers to a plural subject ('most people')."
+},
+{
+    "question": "Dr. Murray Salby, a well-known climatologist, .......... a paper about the causes of global warming.",
+    "answers": [
+        {"text": "are writing", "correct": false},
+        {"text": "write", "correct": false},
+        {"text": "writes", "correct": false},
+        {"text": "is writing", "correct": true}
+    ],
+    "explanation": "The singular subject 'Dr. Murray Salby' requires the singular verb 'is writing'."
+},
+{
+    "question": "The search engine BackRub............... Google in 1998.",
+    "answers": [
+        {"text": "became", "correct": true},
+        {"text": "becomes", "correct": false},
+        {"text": "become", "correct": false},
+        {"text": "was becoming", "correct": false}
+    ],
+    "explanation": "The correct verb form for the past tense of 'become' in this context is 'became'."
+},
+{
+    "question": "In his youth he was practically rolling in money. The underlined idiom is closest to the meaning:",
+    "answers": [
+        {"text": "spending more than his income", "correct": false},
+        {"text": "wasting a lot of money", "correct": false},
+        {"text": "Very rich", "correct": true},
+        {"text": "borrowing money liberally", "correct": false}
+    ],
+    "explanation": "The idiom 'rolling in money' means to be very rich or have a lot of money."
+},
+{
+    "question": "I don’t want to stifle your creativity, but your ideas for the brochure are too complicated. Let's try to make it very simple. The underlined word is closest to the meaning:",
+    "answers": [
+        {"text": "to let go of something", "correct": false},
+        {"text": "to prevent something form happening", "correct": true},
+        {"text": "to support something strongly", "correct": false},
+        {"text": "to make something clear", "correct": false}
+    ],
+    "explanation": "To 'stifle' someone's creativity means to prevent it from developing or expressing freely."
+},
+{
+    "question": "Which of the following is the correct sentence?",
+    "answers": [
+        {"text": "Rohan I was wondering where, the cookies were.", "correct": false},
+        {"text": "Rohan I was wondering where the cookies, were.", "correct": false},
+        {"text": "Rohan, I was wondering where the cookies were.", "correct": true},
+        {"text": "Rohan I was wondering, where the cookies were.", "correct": false}
+    ],
+    "explanation": "The correct sentence structure includes a comma after 'Rohan' to separate the introductory clause."
+},
+{
+    "question": "The passive of 'do not waste the time.' Is..........",
+    "answers": [
+        {"text": "Let the time be not wasted.", "correct": false},
+        {"text": "Let not the time be wasted.", "correct": true},
+        {"text": "Let the time not wasted.", "correct": false},
+        {"text": "Let the time not be wasted.", "correct": false}
+    ],
+    "explanation": "The correct passive construction is 'Let not the time be wasted.' to retain the negative sense."
+},{
+  "question": "If A and B are two sets having 5 and 17 elements respectively and 2 elements are common. How many elements are there in the set A U B?",
+  "answers": [
+      {"text": "3", "correct": false},
+      {"text": "15", "correct": false},
+      {"text": "20", "correct": true},
+      {"text": "12", "correct": false}
+  ],
+  "explanation": "The union of sets A and B includes all unique elements from both sets, considering the common elements only once."
+},
+{
+  "question": "If a function f(x) is defined by f(x) = — then the value of f(—1) is",
+  "answers": [
+      {"text": "1", "correct": true},
+      {"text": "0", "correct": false},
+      {"text": "-1", "correct": false},
+      {"text": "a", "correct": false}
+  ],
+  "explanation": "Substitute x = -1 into the function f(x) = -x to find f(-1) = -(-1) = 1."
+},
+{
+  "question": "If sin @ = 1. Then the general value of @ are given by",
+  "answers": [
+      {"text": "nπ + (-1)", "correct": false},
+      {"text": "nπ", "correct": true},
+      {"text": "nw + >", "correct": false},
+      {"text": "nz — .", "correct": false}
+  ],
+  "explanation": "For sin θ = 1, θ can take values of the form θ = nπ where n is an integer."
+},
+{
+  "question": "The value of sin^7 x + cos^-7 x is",
+  "answers": [
+      {"text": "1", "correct": true},
+      {"text": "x", "correct": false},
+      {"text": "()5", "correct": false},
+      {"text": "2", "correct": false}
+  ],
+  "explanation": "The sum of sin^7 x and cos^-7 x equals 1 for all values of x."
+},
+{
+  "question": "In any triangle if tan A + tan B + tan C = 6 and tan A tan B = 3. Then the value of tan A + tan B is...",
+  "answers": [
+      {"text": "4", "correct": true},
+      {"text": "2", "correct": false},
+      {"text": "3", "correct": false},
+      {"text": "9", "correct": false}
+  ],
+  "explanation": "Given tan A + tan B + tan C = 6 and tan A tan B = 3, tan A + tan B = 4."
+},
+{
+  "question": "If the lines 3x + 4y = 9 and 4x + ky = 5 are perpendicular then what will be the value of k?",
+  "answers": [
+      {"text": "3", "correct": false},
+      {"text": "−3", "correct": true},
+      {"text": "4", "correct": false},
+      {"text": "−4", "correct": false}
+  ],
+  "explanation": "For two lines to be perpendicular, the product of their slopes must equal -1. Here, k = -3 satisfies this condition."
+},
+{
+  "question": "The condition for a homogenous equation ax^2 + 2hxy + by^2 = 0 to represent a real and coincident lines is ......",
+  "answers": [
+      {"text": "h^2 − ab = 0", "correct": true},
+      {"text": "h^2 − ab > 0", "correct": false},
+      {"text": "h^2 − ab < 0", "correct": false},
+      {"text": "h^2 = ab", "correct": false}
+  ],
+  "explanation": "For a homogeneous equation representing real and coincident lines, the condition h^2 − ab = 0 must be satisfied."
+},
+{
+  "question": "The centre of the circle x^2 + y^2 − 2x + 6y + 18 = 0 is......",
+  "answers": [
+      {"text": "(1, -3)", "correct": false},
+      {"text": "(−1, 3)", "correct": false},
+      {"text": "(1, 3)", "correct": true},
+      {"text": "(−1, −3)", "correct": false}
+  ],
+  "explanation": "To find the center of a circle given by the equation (x − h)^2 + (y − k)^2 = r^2, the center is (h, k)."
+},
+{
+  "question": "If e denotes the eccentricity of the parabola x^2 − 4x − 8y + 12 = 0. Then the value of e is.....",
+  "answers": [
+      {"text": "<1", "correct": true},
+      {"text": "≈0", "correct": false},
+      {"text": "1", "correct": false},
+      {"text": ">1", "correct": false}
+  ],
+  "explanation": "The eccentricity e of a parabola is less than 1 when it opens upwards or downwards."
+},
+{
+  "question": "If the direction ratios of a line are 4, 5, 6. Then its direction cosines are ..........",
+  "answers": [
+      {"text": "± 8", "correct": false},
+      {"text": "± 2", "correct": false},
+      {"text": "± 4", "correct": true},
+      {"text": "± 6", "correct": false}
+  ],
+  "explanation": "Direction cosines (l, m, n) of a line with direction ratios (a, b, c) are given by l = a/sqrt(a^2 + b^2 + c^2), m = b/sqrt(a^2 + b^2 + c^2), n = c/sqrt(a^2 + b^2 + c^2)."
+},
+{
+  "question": "The value of lim x tan(x) as x approaches 0 is......",
+  "answers": [
+      {"text": "-1", "correct": false},
+      {"text": "0", "correct": true},
+      {"text": "1", "correct": false},
+      {"text": "does not exist", "correct": false}
+  ],
+  "explanation": "The limit of x tan(x) as x approaches 0 is 0."
+},
+{
+  "question": "The derivative of cos^-1 x is......",
+  "answers": [
+      {"text": "1", "correct": false},
+      {"text": "0", "correct": false},
+      {"text": "1/x", "correct": false},
+      {"text": "-1/sqrt(1-x^2)", "correct": true}
+  ],
+  "explanation": "The derivative of cos^-1 x (arccos x) with respect to x is -1/sqrt(1-x^2)."
+},
+{
+  "question": "The value of ∫y dx is ....",
+  "answers": [
+      {"text": "1", "correct": false},
+      {"text": "0", "correct": true},
+      {"text": "-1", "correct": false},
+      {"text": "2", "correct": false}
+  ],
+  "explanation": "The integral of a function y with respect to x, without specific limits, results in 0 for any function y."
+},
+{
+  "question": "If the function f(x) = 4x^2 + 2x + 3 has a local minima at x = x0, then the value of x0 is",
+  "answers": [
+      {"text": "1", "correct": false},
+      {"text": "-1", "correct": false},
+      {"text": "0", "correct": false},
+      {"text": "-1/4", "correct": true}
+  ],
+  "explanation": "For a local minima of a function f(x), the derivative f'(x) must be 0 and the second derivative f''(x) must be positive."
+},
+{
+  "question": "The area bounded by the lines y = x, x = 1 and the x axis is",
+  "answers": [
+      {"text": "1", "correct": false},
+      {"text": "2", "correct": true},
+      {"text": "0", "correct": false},
+      {"text": "∞", "correct": false}
+  ],
+  "explanation": "The area bounded by y = x, x = 1, and the x-axis is a right triangle with base 1 and height 1, giving an area of 1/2 * 1 * 1 = 1/2."
+},
+{
+  "question": "If velocity, force and time are taken as fundamental units then dimensional formula of mass is...",
+  "answers": [
+      {"text": "[FT] [err]", "correct": false},
+      {"text": "[FT2]", "correct": true},
+      {"text": "[FT2]", "correct": false},
+      {"text": "[FT77]", "correct": false}
+  ],
+  "explanation": "Using dimensional analysis, the dimensional formula of mass [M] can be derived from velocity [LT^-1], force [MLT^-2], and time [T]."
+},
+{
+  "question": "Angle between A=(i + 4j − 5k) and B=(i − 4j − 5k) is",
+  "answers": [
+      {"text": "0°", "correct": false},
+      {"text": "30°", "correct": false},
+      {"text": "60°", "correct": true},
+      {"text": "90°", "correct": false}
+  ],
+  "explanation": "The angle between two vectors A and B is given by cos θ = (A ⋅ B) / (|A| |B|)."
+},
+{
+  "question": "A lift with mass 1500kg supported by string is moving upward with acceleration 1.8m/s². The tension in the string is...",
+  "answers": [
+      {"text": "1770N", "correct": false},
+      {"text": "17700N", "correct": true},
+      {"text": "15000N", "correct": false},
+      {"text": "16000N", "correct": false}
+  ],
+  "explanation": "The tension in the string supporting the lift is equal to the sum of the gravitational force mg and the force due to acceleration ma, where m is the mass and a is the acceleration."
+},
+{
+  "question": "If angular velocity of earth increases then value of g at poles.....",
+  "answers": [
+      {"text": "increases", "correct": false},
+      {"text": "decreases", "correct": false},
+      {"text": "remains same", "correct": true},
+      {"text": "none of these", "correct": false}
+  ],
+  "explanation": "The value of acceleration due to gravity g at the poles remains approximately the same if the angular velocity of the Earth changes."
+},
+{
+  "question": "Time period T of simple pendulum inside lift moving upward with acceleration g/2 becomes...",
+  "answers": [
+      {"text": "(√3/2)T", "correct": false},
+      {"text": "(1/2)T", "correct": false},
+      {"text": "(√3)T", "correct": true},
+      {"text": "T", "correct": false}
+  ],
+  "explanation": "The time period T of a simple pendulum depends on the effective acceleration due to gravity g. Inside a lift accelerating upward with acceleration g/2, the effective g is reduced to g - g/2 = g/2."
+},{
+  "question": "Young’s modulus for perfectly plastic body is...",
+  "answers": [
+      {"text": "0", "correct": false},
+      {"text": "1", "correct": false},
+      {"text": "∞", "correct": false},
+      {"text": "some finite value", "correct": true}
+  ],
+  "explanation": "Young's modulus measures the stiffness of a material. For a perfectly plastic body, it deforms indefinitely under stress, indicating it has no elastic modulus (Young's modulus) but can sustain a yield stress indefinitely, hence a finite value."
+},
+{
+  "question": "An ice berg of density 0.929 g/cc is floating in water of density 1.03 g/cc. The percentage volume of iceberg outside water is...",
+  "answers": [
+      {"text": "11%", "correct": true},
+      {"text": "72%", "correct": false},
+      {"text": "79%", "correct": false},
+      {"text": "89%", "correct": false}
+  ],
+  "explanation": "The volume of iceberg outside water is determined by the ratio of their densities. Given densities, the iceberg displaces 10.64% of its volume above water, leaving 89.36% submerged, so 11% is above water."
+},
+{
+  "question": "Ratio of specific charge of electron to that of beta-particle is...",
+  "answers": [
+      {"text": "1:3", "correct": false},
+      {"text": "1:1", "correct": false},
+      {"text": "2:1", "correct": false},
+      {"text": "4:1", "correct": true}
+  ],
+  "explanation": "The specific charge (charge-to-mass ratio) of an electron is much greater than that of a beta-particle (electron emitted from a nucleus). Therefore, the ratio of their specific charges is 4:1."
+},
+{
+  "question": "The ratio of frequency of electron in third orbit to second orbit is...",
+  "answers": [
+      {"text": "2:3", "correct": false},
+      {"text": "4:5", "correct": false},
+      {"text": "4:9", "correct": true},
+      {"text": "6:5", "correct": false}
+  ],
+  "explanation": "The frequency of an electron in a Bohr orbit is inversely proportional to the square of the principal quantum number (n). Therefore, the ratio of frequencies in the third orbit (n=3) to the second orbit (n=2) is 9:4."
+},
+{
+  "question": "Nuclear density increases with...",
+  "answers": [
+      {"text": "increase in mass number", "correct": false},
+      {"text": "increase in atomic number", "correct": true},
+      {"text": "increase in number of protons", "correct": false},
+      {"text": "none of these", "correct": false}
+  ],
+  "explanation": "Nuclear density increases with an increase in atomic number due to more protons packed in the nucleus, increasing the attractive nuclear force relative to the repulsive electromagnetic force."
+},
+{
+  "question": "A radioactive element has half-life 15 years. The fraction will decayed in 30 years is...",
+  "answers": [
+      {"text": "1:2", "correct": false},
+      {"text": "2:3", "correct": false},
+      {"text": "3:4", "correct": true},
+      {"text": "4:5", "correct": false}
+  ],
+  "explanation": "Radioactive decay follows an exponential decay law. In 30 years (double the half-life), 3/4 of the original substance will have decayed, leaving 1/4 remaining."
+},
+{
+  "question": "Discharging equation of capacitor is...",
+  "answers": [
+      {"text": "I = I₀e^(-t/RC)", "correct": false},
+      {"text": "I = I₀e^(-t/RC)", "correct": false},
+      {"text": "q = q₀e^(-t/RC)", "correct": true},
+      {"text": "I = I₀e^(-t/RC)", "correct": false}
+  ],
+  "explanation": "During discharging, the charge q on the capacitor decreases exponentially over time t with resistance R and capacitance C, governed by q = q₀e^(-t/RC), where q₀ is the initial charge."
+},
+{
+  "question": "Vector form of Biot-Savart law is...",
+  "answers": [
+      {"text": "dB = µ₀I (dl x r) / (4πr²)", "correct": false},
+      {"text": "dB = µ₀I (dl x r) / (4πr²)", "correct": false},
+      {"text": "dB = µ₀I (dl x r) / (4πr²)", "correct": false},
+      {"text": "dB = µ₀I (dl x r) / (4πr²)", "correct": true}
+  ],
+  "explanation": "The Biot-Savart law describes the magnetic field dB created by a current I flowing through a differential element dl at distance r from the point of observation. The correct vector form is dB = µ₀I (dl x r) / (4πr²)."
+},
+{
+  "question": "When two bulbs rated 40W, 220V and 60W, 220V are connected in parallel with 220V supply,...",
+  "answers": [
+      {"text": "40W will glow brighter than 60W bulb", "correct": false},
+      {"text": "60W will glow brighter than 40W bulb", "correct": false},
+      {"text": "both bulbs glow equally brighter", "correct": true},
+      {"text": "both bulbs burn out", "correct": false}
+  ],
+  "explanation": "In parallel connection, bulbs of different wattages but same voltage ratings glow equally bright as each receives the full voltage supply independently."
+},
+{
+  "question": "Peak and r.m.s. value of A.C. are related as...",
+  "answers": [
+      {"text": "Lp = 70.7% Lrms", "correct": false},
+      {"text": "Lp = 63.7% Lrms", "correct": true},
+      {"text": "Lp = 67.7% Lrms", "correct": false},
+      {"text": "Lp = 67.3% Lrms", "correct": false}
+  ],
+  "explanation": "The peak value (Lp) of an AC waveform is 1.414 times the RMS (root mean square) value (Lrms). Mathematically, Lp = √2 Lrms ≈ 63.7% Lrms."
+},
+{
+  "question": "Chloride of a metal ‘M’ is MCl₃. The salt of the metal when treated with concentrated nitric acid is...",
+  "answers": [
+      {"text": "M₃N", "correct": false},
+      {"text": "M₃NO₃", "correct": true},
+      {"text": "M₄NO₃", "correct": false},
+      {"text": "M(NO₃)₄", "correct": false}
+  ],
+  "explanation": "Concentrated nitric acid oxidizes metal chlorides to form nitrate salts. Hence, MCl₃ reacts with concentrated nitric acid to form M₃NO₃."
+},
+{
+  "question": "Which of the following set of quantum number designation (in the order of n, l, m, s) is incorrectly expressed?",
+  "answers": [
+      {"text": "4, 2, 1, +1/2", "correct": false},
+      {"text": "4, 2, 1, -1/2", "correct": false},
+      {"text": "4, 2, 1, 0", "correct": false},
+      {"text": "4, 3, 1, +1/2", "correct": true}
+  ],
+  "explanation": "Quantum numbers n (principal), l (azimuthal), m (magnetic), and s (spin) must adhere to specific rules: 0 ≤ l < n, -l ≤ m ≤ l, and s = ±1/2. Hence, the set 4, 3, 1, +1/2 violates the azimuthal quantum number rule."
+},
+{
+  "question": "Which of the following compound has exact numbers of valence electrons as much as demanded by octet rules?",
+  "answers": [
+      {"text": "AlCl₃", "correct": true},
+      {"text": "SiCl₄", "correct": false},
+      {"text": "PCl₅", "correct": false},
+      {"text": "SF₆", "correct": false}
+  ],
+  "explanation": "AlCl₃ has 6 valence electrons in Al (group 13) and 7 electrons in each Cl, adhering to the octet rule for stable electronic configurations."
+},
+{
+  "question": "Complete reduction of one mole permanganate ions in acidic medium is possible by... mole of electrons.",
+  "answers": [
+      {"text": "5", "correct": true},
+      {"text": "3", "correct": false},
+      {"text": "2", "correct": false},
+      {"text": "1", "correct": false}
+  ],
+  "explanation": "Permanganate ions (MnO₄⁻) in acidic medium undergo reduction to Mn²⁺. Each MnO₄⁻ requires 5 moles of electrons to complete reduction to Mn²⁺."
+},
+{
+  "question": "The number of atoms present in 0.1 mol of water is...",
+  "answers": [
+      {"text": "3", "correct": false},
+      {"text": "0.3", "correct": false},
+      {"text": "0.3Nₐ", "correct": false},
+      {"text": "0.1Nₐ", "correct": true}
+  ],
+  "explanation": "One mole of water (H₂O) contains 6.022 × 10²³ molecules. Therefore, 0.1 mole of water contains 6.022 × 10²² molecules, corresponding to 3.011 × 10²³ atoms."
+},
+{
+  "question": "4 gram of a metal displaces 10.8 g of silver from silver nitrate solution. The equivalent weight of the metal is...",
+  "answers": [
+      {"text": "108", "correct": true},
+      {"text": "40", "correct": false},
+      {"text": "4", "correct": false},
+      {"text": "10.8", "correct": false}
+  ],
+  "explanation": "Equivalent weight is the mass of a substance that reacts with 1 mole of hydrogen ions (H⁺) or 1 mole of electrons. For the given reaction, 4g metal displaces 10.8g silver, so equivalent weight = (4g / 0.037 moles) = 108g/mol."
+},
+{
+  "question": "5A current was passed into a voltameter containing copper sulphate solution for 15 minutes. Assuming 50% efficacy of the process, the amount of copper deposited during the process is...",
+  "answers": [
+      {"text": "1.480 g", "correct": false},
+      {"text": "0.740 g", "correct": true},
+      {"text": "0.370 g", "correct": false},
+      {"text": "2.960 g", "correct": false}
+  ],
+  "explanation": "The amount of substance deposited during electrolysis is directly proportional to the quantity of electricity passed through the solution. Given conditions and 50% efficiency, 0.740g of copper is deposited."
+},
+{
+  "question": "Solubility of calcium carbonate is 3.049 × 10⁻⁴. What is the solubility product of that salt?",
+  "answers": [
+      {"text": "9.3 × 10⁰", "correct": false},
+      {"text": "3.049 × 10⁻⁴", "correct": false},
+      {"text": "3.049 × 10⁷", "correct": true},
+      {"text": "3.049 × 10¹⁶", "correct": false}
+  ],
+  "explanation": "Solubility product (Ksp) is the product of the dissolved ion concentrations of a sparingly soluble salt at equilibrium. Given solubility, Ksp for CaCO₃ is 3.049 × 10⁻⁴."
+},
+{
+  "question": "What is the mass of calcium carbonate required to neutralize 40 mL of seminormal HCl solution?",
+  "answers": [
+      {"text": "8g", "correct": true},
+      {"text": "4g", "correct": false},
+      {"text": "2g", "correct": false},
+      {"text": "1g", "correct": false}
+  ],
+  "explanation": "Calcium carbonate (CaCO₃) reacts with hydrochloric acid (HCl) based on their stoichiometry. For seminormal HCl (0.5N), 40mL requires 8g CaCO₃ to neutralize."
+},
+{
+  "question": "10 mL of decinormal ammonium hydroxide was mixed with 20 mL of 0.05M hydrochloric acid. The pH of the resulting solution after mixing is...",
+  "answers": [
+      {"text": "7", "correct": false},
+      {"text": "Less than 7", "correct": true},
+      {"text": "More than 7", "correct": false},
+      {"text": "Amphoteric", "correct": false}
+  ],
+  "explanation": "Ammonium hydroxide (NH₄OH) is a weak base, and HCl is a strong acid. Mixing leads to an acidic solution due to excess H⁺ ions from HCl, resulting in a pH less than 7."
+},
+{
+  "question": "Pyrrole consists of .......... as a heteroatom",
+  "answers": [
+      {"text": "N", "correct": true},
+      {"text": "S", "correct": false},
+      {"text": "O", "correct": false},
+      {"text": "P", "correct": false}
+  ],
+  "explanation": "Pyrrole is a five-membered aromatic heterocycle with one nitrogen (N) atom in its ring structure, which contributes to its aromaticity and reactivity."
+},
+{
+  "question": "Functional group of ester and acid chloride are..........respectively.",
+  "answers": [
+      {"text": "HCOOR and RCOCI", "correct": false},
+      {"text": "-C=O and -COCI", "correct": false},
+      {"text": "-CO₂ and -CO", "correct": false},
+      {"text": "-CO₂R and -COCl", "correct": true}
+  ],
+  "explanation": "Esters have the functional group -COO-R, where R is an alkyl or aryl group, while acid chlorides have the functional group -COCl. These groups define their chemical and physical properties."
+},
+{
+  "question": "Which of the following pair of organic compounds show functional isomerism?",
+  "answers": [
+      {"text": "Alcohol and aldehyde", "correct": false},
+      {"text": "Alcohol and ether", "correct": false},
+      {"text": "Ether and aldehyde", "correct": false},
+      {"text": "Aldehyde and ester", "correct": true}
+  ],
+  "explanation": "Functional isomerism occurs when organic compounds have the same molecular formula but differ in the functional groups they contain. Aldehydes (-CHO) and esters (-COOR) exhibit functional isomerism."
+},
+{
+  "question": "............... are more likely to be obtained on heating a product formed upon introducing streams of ozone into an alkene solution in organic medium.",
+  "answers": [
+      {"text": "Aldehyde", "correct": false},
+      {"text": "Ketone", "correct": true},
+      {"text": "Aldehyde and ketone", "correct": false},
+      {"text": "Aldehyde or ketone or mixture of both", "correct": false}
+  ],
+  "explanation": "Ozonolysis of alkenes in organic solvents typically yields a mixture of aldehydes and ketones, depending on the structure of the alkene and reaction conditions."
+},
+{
+  "question": "Sodium benzoate upon heating in presence of sodalime gives.... as a major product.",
+  "answers": [
+      {"text": "Benzene", "correct": true},
+      {"text": "Toluene", "correct": false},
+      {"text": "Benzoic acid", "correct": false},
+      {"text": "Azobenzene", "correct": false}
+  ],
+  "explanation": "Heating sodium benzoate (NaC₇H₅O₂) with sodalime (a mixture of sodium hydroxide and calcium oxide) induces decarboxylation, converting it to benzene."
+},
+{
+  "questions": [
+    {
+      "question": "It is estimated that over one million people volunteer overseas each year. Many of these volunteers travel thousands of miles to other countries all across Africa, Asia, and Latin America. They experience foreign cultures and visit beautiful places. However, volunteering in a foreign country is not just for the fun of international travel. In fact, people volunteer overseas for several important reasons.\n\nOne of the main reasons people volunteer overseas is to give back to those in need. For example, many volunteers travel to poorer countries where people don’t have basic conveniences that are found in other countries. Some build wells to give small villages access to clean water. Others set up medical clinics so people can get treatment for common illnesses like the flu. Many of these volunteers come from countries with good schools and they want to give others the same educational opportunities. Overall, these volunteers feel they have a responsibility to people who deserve the same opportunities they have back home.\n\nSecond of all, many volunteers feel that travelling overseas can improve their job skills. These volunteers can add their international experiences to their resumes. This is important because many companies today are looking for employees who have a global perspective. Volunteering overseas also teaches people how to work effectively on a team, which helps when applying for future jobs. Learning about teamwork in a foreign setting will make these volunteers stand out from the crowd when they apply for jobs.\n\nA third reason people volunteer in foreign countries is because they want to immerse themselves in a foreign culture. Living in another country is one of the most rewarding experiences a person can have. Being a part of a new culture for even a short period of time will bring these volunteers a sense of belonging and a deeper level of understanding of how people live on other parts of the world.\n\nIn addition to experiencing the new country, volunteers also get time away from their modern, fast-paced lifestyles back home. The majority of volunteers come from Canada, the United States, and the United Kingdom, where people are often rushing around and feeling stressed. When these volunteers spend time in a country with a slower pace of life, they feel less stress and can enjoy a different lifestyle. This shows that volunteering abroad can be good for both the mind and the body.\n\nOverseas volunteers don’t just travel for fun. They travel with a purpose. All these volunteers travel because they want to help others in some way. At the same time, they are gaining valuable work and life experiences. It's hard to ask for anything more than that.",
+      "answers": [
+        {"text": "they could know how people work.", "correct": false},
+        {"text": "they can work with minimum facilities like them.", "correct": false},
+        {"text": "they can provide some assistance to them.", "correct": true},
+        {"text": "they can learn survival skills.", "correct": false}
+      ],
+      "explanation": "Volunteers often travel to poorer countries to offer assistance and support, providing basic necessities and helping to improve living conditions."
+    },
+    {
+      "question": "Which of the following is not associated with contributing to improving the job skills of the volunteers?",
+      "answers": [
+        {"text": "It adds skills to their CV.", "correct": false},
+        {"text": "It increases their teamwork spirit.", "correct": false},
+        {"text": "It makes them aware of the global perspective.", "correct": false},
+        {"text": "It helps them learn the foreign culture.", "correct": true}
+      ],
+      "explanation": "While learning about foreign cultures is an enriching experience, it is not directly associated with improving job skills in terms of CV enhancement, teamwork, or global awareness."
+    },
+    {
+      "question": "The word ‘conveniences’ in the second paragraph is closest in meaning to:",
+      "answers": [
+        {"text": "amenities", "correct": true},
+        {"text": "ease", "correct": false},
+        {"text": "communicable", "correct": false},
+        {"text": "transportable", "correct": false}
+      ],
+      "explanation": "In the context provided, 'conveniences' refers to basic amenities or comforts that people in wealthier countries often take for granted but are lacking in poorer regions."
+    },
+    {
+      "question": "The phrasal verb 'stand out' in the third paragraph can be replaced by:",
+      "answers": [
+        {"text": "to be effective", "correct": false},
+        {"text": "to be much better than others", "correct": true},
+        {"text": "to show", "correct": false},
+        {"text": "to prove", "correct": false}
+      ],
+      "explanation": "'Stand out' means to be noticeably better or more successful than others, which aligns with the phrase 'to be much better than others'."
+    },
+    {
+      "question": "Why do volunteers often feel they have a responsibility to people in poorer countries?",
+      "answers": [
+        {"text": "Because they want to learn survival skills.", "correct": false},
+        {"text": "Because they want to immerse themselves in a foreign culture.", "correct": false},
+        {"text": "Because they want to give back and provide opportunities.", "correct": true},
+        {"text": "Because they want to enjoy beautiful places in Africa, Asia, and Latin America.", "correct": false}
+      ],
+      "explanation": "Volunteers often feel a responsibility to help improve living conditions and provide opportunities to those in need in poorer countries."
+    },
+    {
+      "question": "What does volunteering overseas teach volunteers in terms of job skills?",
+      "answers": [
+        {"text": "How to enjoy a slower pace of life.", "correct": false},
+        {"text": "How to build medical clinics.", "correct": false},
+        {"text": "How to add international experiences to their resumes.", "correct": true},
+        {"text": "How to travel across Africa, Asia, and Latin America.", "correct": false}
+      ],
+      "explanation": "Volunteering overseas helps volunteers enhance their resumes with international experiences, which is valuable in today's job market."
+    }
+  ]
+}
 ];
 
 const Mock2 = () => {
