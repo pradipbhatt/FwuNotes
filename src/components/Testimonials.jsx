@@ -77,9 +77,9 @@ const Testimonials = () => {
   return (
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20">
       <h1 className="text-3xl font-serif text-center mb-12">Testimonials</h1>
-      <Slider {...sliderSettings} className="mx-auto max-w-5xl">
+      <Slider {...sliderSettings} className="mx-auto max-w-9xl">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="bg-white rounded-lg p-6 shadow-md mx-4">
+          <div key={index} className="bg-white rounded-lg p-6 shadow-md mx-4 md:mx-2 my-4 lg:my-0 lg:w-full lg:mx-0">
             <img
               src={testimonial.img}
               alt={testimonial.name}
