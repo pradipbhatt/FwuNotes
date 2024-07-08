@@ -1,6 +1,6 @@
 # React + Vite
 
-This is my project for soeNotes
+This is my project for soeNotes for engineering students wt far Western University!
 
 Currently, two official plugins are available:
 
