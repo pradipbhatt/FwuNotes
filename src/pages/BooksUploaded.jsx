@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import arrowUp from '../../public/up-arrow.png'; // Make sure to import your arrow image
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function BooksUploaded() {
   const [books, setBooks] = useState([]);
@@ -26,6 +28,12 @@ function BooksUploaded() {
 
   useEffect(() => {
     getBooks();
+
+    // Initialize AOS library with desired options
+    AOS.init({
+      duration: 1000, // Animation duration
+      once: true, // Only animate once
+    });
 
     // Show or hide the scroll button based on the scroll position
     const handleScroll = () => {
@@ -91,14 +99,14 @@ function BooksUploaded() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8 mt-20">
+      <div className="container mx-auto px-4 py-8 mt-20 ">
         <h1 className="text-3xl font-bold mb-4">Books Uploaded</h1>
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="flex items-center justify-center space-x-2">
-              <div className="w-4 h-4 rounded-full animate-bounce bg-blue-500"></div>
-              <div className="w-4 h-4 rounded-full animate-bounce bg-blue-500 animation-delay-200"></div>
-              <div className="w-4 h-4 rounded-full animate-bounce bg-blue-500 animation-delay-400"></div>
+              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500"></div>
+              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500 animation-delay-200"></div>
+              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500 animation-delay-400"></div>
             </div>
             <p className="text-gray-700 mt-4">Please wait, notes are loading...</p>
           </div>
@@ -106,11 +114,11 @@ function BooksUploaded() {
           <>
             {Object.keys(groupedBooks).map((semester, index) => (
               index === currentPage && (
-                <div key={index} className="mb-8">
+                <div key={index} className="mb-8" data-aos="zoom-in-left">
                   <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
                     {groupedBooks[semester].map((book, index) => (
-                      <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300">
+                      <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300" data-aos="fade-up">
                         <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
                         <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
                         <p className="text-gray-700 mb-1">By: {book.createdBy}</p>

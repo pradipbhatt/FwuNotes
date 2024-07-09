@@ -188,10 +188,10 @@ function Navbar() {
                   {showMenuRight && (
                     <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/profile">Profile</Link>
+                        <Link to="/">Profile</Link>
                       </li>
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/settings">Settings</Link>
+                        <Link to="/">Settings</Link>
                       </li>
                       <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Logout />
@@ -273,7 +273,7 @@ function Navbar() {
             <span className="text-xs">Entrance Test</span>
           </Link>
           <Link
-            to="/profile"
+            to="/"
             className={`flex flex-col items-center space-y-1 ${
               activeTab === "profile" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
             }`}

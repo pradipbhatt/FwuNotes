@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
-import Footer from "../Footer";
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // Import AOS CSS
 import logo from "../../../public/fwu.png";
 
-// Total time in seconds for 150 questions in 3 hours
-const TOTAL_TIME = 3 * 60 * 60;
+// Time per question in seconds
+const TIME_PER_QUESTION = 2 * 60;
+
+// Sample quiz data
 const quizData2077 = [
   {
     "question": "The unit vector along the direction of the vector a is ...",
@@ -1012,7 +1015,16 @@ const Mock1 = () => {
   const [showScore, setShowScore] = useState(false);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
   const [correctAnswer, setCorrectAnswer] = useState(null);
-  const [timer, setTimer] = useState(TOTAL_TIME);
+  const [timer, setTimer] = useState(TIME_PER_QUESTION);
+
+  useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 600,
+      easing: 'ease-in-sine',
+      once: true,
+    });
+  }, []);
 
   useEffect(() => {
     let countdown;
@@ -1038,12 +1050,13 @@ const Mock1 = () => {
     setCorrectAnswer(correctAnswer);
     setTimeout(() => {
       handleNextQuestion();
-    }, 5000); // wait for 1 second before moving to the next question
+    }, 5000); // wait for 5 seconds before moving to the next question
   };
 
   const handleNextQuestion = () => {
     setSelectedAnswer(null);
     setCorrectAnswer(null);
+    setTimer(TIME_PER_QUESTION); // Reset the timer for the next question
     const nextQuestion = currentQuestion + 1;
     if (nextQuestion < quizData2077.length) {
       setCurrentQuestion(nextQuestion);
@@ -1058,24 +1071,24 @@ const Mock1 = () => {
     setShowScore(false);
     setSelectedAnswer(null);
     setCorrectAnswer(null);
-    setTimer(TOTAL_TIME);
+    setTimer(TIME_PER_QUESTION); // Reset the timer for the first question
   };
 
   return (
     <>
       <div className="container mx-auto text-center mt-20 p-4">
-        <div className="header mb-4">
+        <div className="header mb-4" data-aos="fade-down">
           <img src={logo} alt="University Logo" className="mx-auto w-32 h-auto mb-4" />
           <h1 className="text-2xl font-bold">FAR WESTERN UNIVERSITY</h1>
           <h2 className="text-xl">Faculty of Engineering</h2>
           <h3 className="text-lg">Mahendranagar, Kanchanpur, Nepal</h3>
           <h3 className="text-lg">BE Entrance Examination</h3>
         </div>
-        <div className="exam-info mb-4">
+        <div className="exam-info mb-4" data-aos="fade-up">
           <p className="text-lg"><strong>Full Marks: 150</strong></p>
           <p className="text-lg"><strong>Time: 3 hours</strong></p>
         </div>
-        <div className="instructions text-left mx-auto w-full">
+        <div className="instructions text-left mx-auto w-full" data-aos="fade-up">
           <p className="font-bold">Attempt all questions:</p>
           <p className="mb-2">Read the following questions and Click down the correct option <strong>a, b, c,</strong> or <strong>d</strong> in the answer sheet provided. In section I each question carries <strong>1 (one) mark</strong> and in section II each question carries <strong>2 (two) marks</strong>.</p>
         </div>
@@ -1085,14 +1098,14 @@ const Mock1 = () => {
         <div className="flex-grow flex justify-center items-center bg-gray-100 p-4 text-gray-800">
           <div className="w-full max-w-4xl">
             {showScore ? (
-              <div className="text-center">
+              <div className="text-center" data-aos="zoom-in">
                 <h4 className="text-2xl font-bold mt-12 w-full">Quiz Completed</h4>
                 <h5 className="text-xl mb-4">
                   You scored {score} out of {quizData2077.length}
                 </h5>
                 <div className="mt-4 text-left">
                   {quizData2077.map((question, index) => (
-                    <div key={index} className="mb-4">
+                    <div key={index} className="mb-4" data-aos="fade-up">
                       <h6 className="text-lg">{question.question}</h6>
                       <p className="text-sm text-gray-800">
                         {question.explanation}
@@ -1109,7 +1122,7 @@ const Mock1 = () => {
               </div>
             ) : (
               <>
-                <div className="mb-4">
+                <div className="mb-4" data-aos="fade-up">
                   <h5 className="text-xl mb-2">
                     Question {currentQuestion + 1}/{quizData2077.length}
                   </h5>
@@ -1120,7 +1133,7 @@ const Mock1 = () => {
                     Time remaining: {Math.floor(timer / 60)} minutes {timer % 60} seconds
                   </p>
                 </div>
-                <div className="grid grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4" data-aos="fade-up">
                   {quizData2077[currentQuestion].answers.map(
                     (answerOption, index) => (
                       <button
@@ -1147,7 +1160,7 @@ const Mock1 = () => {
                     )
                   )}
                 </div>
-                <div className="mt-20 flex justify-between">
+                <div className="mt-20 flex justify-between" data-aos="fade-up">
                   <button
                     className="px-4 py-2 bg-purple-500 hover:bg-purple-600 text-white rounded disabled:bg-gray-400"
                     onClick={handleRestartQuiz}

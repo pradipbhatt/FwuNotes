@@ -19,7 +19,7 @@ import PdfUploadPage from "./components/soenotes/PdfUploadPage";
 import NotesUploaded from "./components/soenotes/NotesUploaded";
 import Courses from "../src/courses/Courses";
 import Profile from "./components/Profile";
-import Settings from "./components/Settings";
+// import Settings from "./components/Settings";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 import Addbook from "./pages/Addbook.jsx";
@@ -57,8 +57,7 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/courses" element={<Courses/>} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/settings" element={<Settings />} />
+          <Route path="/" element={<Profile />} />
           <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
           <Route

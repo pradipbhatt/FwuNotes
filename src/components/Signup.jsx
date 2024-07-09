@@ -94,7 +94,7 @@ function Signup() {
               <label className="block text-sm font-medium text-gray-700">Registration Number</label>
               <input
                 type="text"
-                placeholder="Enter your registration number"
+                placeholder="Enter registration number eg.BCT07733"
                 className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
                 {...register("registrationNumber", { required: "Registration number is required" })}
               />

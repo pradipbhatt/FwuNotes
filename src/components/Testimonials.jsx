@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Testimonials = () => {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    });
+  }, []);
+
   const testimonials = [
     {
       name: 'Pradip Bhatt',
@@ -27,7 +35,7 @@ const Testimonials = () => {
       name: 'Bijay Saud',
       title: 'CSE Student',
       company: 'Far Western University',
-      img: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-6/341151557_101011719647949_7538820499509787011_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tIWHbf3-jPcQ7kNvgHg6z3Z&_nc_ht=scontent.fktm1-1.fna&oh=00_AYBiSGMcJ8MK8Uqzdaxk2yXl10ES95S68s66IBjgQA1qxg&oe=668B7696',
+      img: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-6/341151557_101011719647949_7538820499509787011_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=tIWHbf3-jPcQ7kNvgHg6z3Z&_nc_ht=scontent.fktm1-1.fna&oh=00_AYBiSGMcJ8MK8Uqzdaxk2YXl10ES95S68s66IBjgQA1qxg&oe=668B7696',
       quoteTitle: 'Handwritten Notes Provider',
       quote: 'The handwritten notes provided by Bijay have been crucial in supporting our education.',
       rating: 5
@@ -47,7 +55,7 @@ const Testimonials = () => {
     dots: true,
     infinite: true,
     speed: 1000, // Slide every 1 second
-    slidesToShow: 3, // Show 3 cards at a time
+    slidesToShow: 1, // Show 3 cards at a time
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000, // Auto slide every 2 seconds
@@ -75,16 +83,25 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent">
       <h1 className="text-3xl font-serif text-center mb-12">Testimonials</h1>
       <Slider {...sliderSettings} className="mx-auto max-w-9xl">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="bg-white rounded-lg p-6 shadow-md mx-4 md:mx-2 my-4 lg:my-0 lg:w-full lg:mx-0">
-            <img
-              src={testimonial.img}
-              alt={testimonial.name}
-              className="w-24 h-24 rounded-full mx-auto mb-6 object-cover"
-            />
+          <div
+            key={index}
+            className="bg-white rounded-lg p-6 shadow-md mx-4 md:mx-2 my-4 lg:my-0 lg:w-full lg:mx-0"
+            data-aos={index % 2 === 0 ? 'flip-left' : 'flip-right'}
+            data-aos-easing="ease-out-cubic"
+            data-aos-duration="2000"
+            style={{ margin: '0 15px', width: '250px' }} // Decreased width of the cards and added margin
+          >
+            <div className="overflow-hidden rounded-full w-24 h-24 mx-auto mb-6">
+              <img
+                src={testimonial.img}
+                alt={testimonial.name}
+                className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" // Added hover zoom effect
+              />
+            </div>
             <div className="text-center">
               <h4 className="text-lg font-bold text-gray-800">{testimonial.name}</h4>
               <p className="text-sm text-gray-500 mb-2">{testimonial.title} | {testimonial.company}</p>
