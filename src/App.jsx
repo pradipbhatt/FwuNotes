@@ -28,7 +28,7 @@ import { Analytics } from '@vercel/analytics/react';
 import Mock8 from "./components/mock/Mock8.jsx";
 import Mock9 from "./components/mock/Mock9.jsx";
 import Mock10 from "./components/mock/Mock10.jsx";
-
+import Quiz from "./components/mock/Quiz.jsx";
 function App() {
   const [authUser] = useAuth();
   return (
@@ -44,6 +44,7 @@ function App() {
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
           <Route path="/Mock1" element={<Mock1 />} />
+          <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
           <Route path="/Mock2" element={<Mock2 />} />
           <Route path="/Mock3" element={<Mock3 />} />
           <Route path="/Mock4" element={<Mock4 />} />
