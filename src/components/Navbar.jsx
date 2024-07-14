@@ -273,14 +273,14 @@ function Navbar() {
             <span className="text-xs">Entrance Test</span>
           </Link>
           <Link
-            to="/"
+            to="/about"
             className={`flex flex-col items-center space-y-1 ${
               activeTab === "profile" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
             }`}
             onClick={() => setActiveTab("profile")}
           >
             <HiUserCircle className="w-6 h-6" />
-            <span className="text-xs">Profile</span>
+            <span className="text-xs">About us</span>
           </Link>
         </div>
       </div>
