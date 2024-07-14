@@ -196,7 +196,7 @@ function About() {
       <section className="bg-gray-50 py-20 mt-16 m-20">
         <div className="w-full flex flex-col items-center">
           <h2 className="text-3xl font-bold mb-8">Executive Committee -2080/81</h2>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-8 sm:w-full lg:grid-cols-4 lg:m-20">
             {teamMembers.map((member, index) => (
               <div key={index} className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white "  data-aos="fade-up"
               data-aos-delay={index * 300} >
