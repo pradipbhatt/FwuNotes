@@ -184,7 +184,7 @@ function BooksUploaded() {
       {showScroll && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-10 right-10 bg-blue-500 text-white p-2 rounded-full shadow-lg focus:outline-none"
+          className="fixed bottom-20 right-10 bg-blue-500 text-white p-2 rounded-full shadow-lg focus:outline-none"
         >
           <img src={arrowUp} alt="Scroll to top" className="w-6 h-6" />
         </button>

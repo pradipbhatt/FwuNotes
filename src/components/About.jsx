@@ -193,30 +193,52 @@ function About() {
         </ul>
       </div>
 
-      <section className="bg-gray-50 py-20 mt-16 m-20">
-        <div className="w-full flex flex-col items-center">
-          <h2 className="text-3xl font-bold mb-8">Executive Committee -2080/81</h2>
-          <div className="grid grid-cols-1 gap-8 sm:w-full lg:grid-cols-4 lg:m-20">
-            {teamMembers.map((member, index) => (
-              <div key={index} className="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white "  data-aos="fade-up"
-              data-aos-delay={index * 300} >
-                <img className="w-full h-64 object-cover" src={member.image} alt={member.name} />
-                <div className="p-4">
-                  <div className="font-bold text-xl mb-2">{member.name}</div>
-                  <p className="text-gray-700 text-base">{member.role}</p>
-                  <p className="text-gray-600 text-sm mt-2">{member.contribution}</p>
-                  <button
-                    onClick={() => handleContactClick(member.contactUrl)}
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"
-                  >
-                    Contact
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+      <section className="bg-gray-900 py-20 mt-16 dark:bg-gray-100">
+  <div className="w-full flex flex-col items-center">
+    <h2 className="text-3xl font-bold mb-8 text-gray-100 dark:text-gray-900">
+      Executive Committee - 2080/81
+    </h2>
+    <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
+      {teamMembers.map((member, index) => (
+        <div
+          key={index}
+          className="bg-gray-700 dark:bg-gray-100 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
+          data-aos="fade-up"
+          data-aos-delay={index * 100}
+        >
+          <img
+            className="w-32 h-32 rounded-full mx-auto mb-4"
+            src={member.image}
+            alt={member.name}
+          />
+          <h3 className="text-lg font-semibold text-center text-gray-100 dark:text-gray-900 mb-2">
+            {member.name}
+          </h3>
+          <p className="text-center text-gray-100 dark:text-gray-900  mb-4">
+            {member.role}
+          </p>
+          <p className="text-center text-gray-100 dark:text-gray-900  text-sm">
+            {member.contribution}
+          </p>
+          <button
+            className="bg-blue-500 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-200 text-xs md:text-sm hover:bg-blue-600 transform hover:scale-110"
+            style={{
+              height: '32px',
+              padding: '0 10px',
+              backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
+              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
+              transition: 'background-image 1s ease, transform 1s ease',
+            }}
+            onClick={() => handleContactClick(member.contactUrl)}
+          >
+            Contact
+          </button>
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       <Footer />
     </>

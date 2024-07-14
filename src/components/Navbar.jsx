@@ -188,7 +188,7 @@ function Navbar() {
                   {showMenuRight && (
                     <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/">Profile</Link>
+                        <Link to="/">About Us</Link>
                       </li>
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Link to="/">Settings</Link>
