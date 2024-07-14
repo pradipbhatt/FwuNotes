@@ -1,41 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import arrowUp from '../../public/up-arrow.png'; // Make sure to import your arrow image
+import arrowUp from '../../public/up-arrow.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import bannerImage from '../assets/pokhara.jpg'; // Import the banner image
+import coverImage from '../assets/pkr.jpg'; // Import the cover image
 
 function BooksUploaded() {
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [currentPage, setCurrentPage] = useState(0); // Pagination state
-  const [showScroll, setShowScroll] = useState(false); // State to show/hide scroll-to-top button
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [showScroll, setShowScroll] = useState(false);
 
-  // Function to fetch books from the backend
   const getBooks = () => {
     fetch('https://fwu-soe.onrender.com/book/getBook')
       .then(response => response.json())
       .then(data => {
         const sortedBooks = data.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
         setBooks(sortedBooks);
-        setLoading(false); // Set loading to false after data is fetched
+        setLoading(false);
       })
       .catch(error => {
         console.error('Error:', error);
-        setLoading(false); // Set loading to false even if there is an error
+        setLoading(false);
       });
   };
 
   useEffect(() => {
     getBooks();
-
-    // Initialize AOS library with desired options
     AOS.init({
-      duration: 1000, // Animation duration
-      once: true, // Only animate once
+      duration: 1000,
+      once: true,
     });
 
-    // Show or hide the scroll button based on the scroll position
     const handleScroll = () => {
       if (window.scrollY > 300) {
         setShowScroll(true);
@@ -48,19 +46,16 @@ function BooksUploaded() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Function to open PDF link in a new tab
   const handleShowPDF = (pdfLink) => {
     window.open(pdfLink, '_blank');
   };
 
-  // Function to delete a book by ID
   const handleDeleteBook = (id) => {
     fetch(`https://fwu-soe.onrender.com/book/deleteBook/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
     })
     .then(response => {
       if (response.ok) {
-        // Remove deleted book from state
         setBooks(prevBooks => prevBooks.filter(book => book._id !== id));
       } else {
         console.error('Failed to delete book');
@@ -69,7 +64,6 @@ function BooksUploaded() {
     .catch(error => console.error('Error:', error));
   };
 
-  // Function to group books by semester
   const groupBooksBySemester = () => {
     const groupedBooks = {};
     books.forEach(book => {
@@ -82,16 +76,13 @@ function BooksUploaded() {
   };
 
   const groupedBooks = groupBooksBySemester();
+  const semesters = Object.keys(groupedBooks);
+  const totalSemesters = semesters.length;
 
-  // Get the total number of semesters
-  const totalSemesters = Object.keys(groupedBooks).length;
-
-  // Function to handle page change
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
   };
 
-  // Function to scroll to the top of the page
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -99,8 +90,29 @@ function BooksUploaded() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8 mt-20 ">
-        <h1 className="text-3xl font-bold mb-4">Books Uploaded</h1>
+      {/* Banner Section */}
+      <div
+        className="relative bg-cover bg-center h-64 md:h-96"
+        style={{ backgroundImage: `url(${bannerImage})` }}
+      >
+        <div className="absolute inset-0 bg-gray-900 opacity-60"></div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <h1 className="text-white text-3xl md:text-5xl font-bold text-center px-4 md:px-10">
+            Books Uploaded
+          </h1>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 mt-20 overflow-hidden relative">
+        {/* Cover Section Behind Cards */}
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url(${coverImage})`,
+            filter: 'blur(8px)', // Apply the blur effect
+          }}
+        ></div>
+
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="flex items-center justify-center space-x-2">
@@ -112,13 +124,13 @@ function BooksUploaded() {
           </div>
         ) : (
           <>
-            {Object.keys(groupedBooks).map((semester, index) => (
+            {semesters.map((semester, index) => (
               index === currentPage && (
                 <div key={index} className="mb-8" data-aos="zoom-in-left">
                   <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
-                    {groupedBooks[semester].map((book, index) => (
-                      <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300" data-aos="fade-up">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    {groupedBooks[semester].map((book, idx) => (
+                      <div key={idx} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300" data-aos="fade-up">
                         <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
                         <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
                         <p className="text-gray-700 mb-1">By: {book.createdBy}</p>
@@ -153,7 +165,10 @@ function BooksUploaded() {
               )
             ))}
 
-            <div className="flex justify-center mt-8">
+          </>
+        )}
+      </div>
+            <div className="flex justify-center mt-8 mb-10">
               {Array.from({ length: totalSemesters + 1 }, (_, index) => (
                 <button
                   key={index}
@@ -164,9 +179,7 @@ function BooksUploaded() {
                 </button>
               ))}
             </div>
-          </>
-        )}
-      </div>
+
       <Footer />
       {showScroll && (
         <button
