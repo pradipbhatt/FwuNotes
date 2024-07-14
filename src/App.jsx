@@ -43,6 +43,7 @@ function App() {
           />
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
+          <Route path="/Mock0" element={<Mock0 />} />
           <Route path="/Mock1" element={<Mock1 />} />
           <Route path="/quiz" element={<ProtectedRoute><Quiz /></ProtectedRoute>} />
           <Route path="/Mock2" element={<Mock2 />} />
