@@ -4,6 +4,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import mukul from "../../public/mukul.jpeg";
 
 const Testimonials = () => {
   useEffect(() => {
@@ -44,7 +45,7 @@ const Testimonials = () => {
       name: 'Mukul Bhatt',
       title: 'CSE Student',
       company: 'Far Western University',
-      img: '../../public/mukul.jpeg', // Replace with actual image URL
+      img: {mukul}, // Replace with actual image URL
       quoteTitle: 'Handwritten Notes Provider Second Batch',
       quote: 'The handwritten notes provided by Mukul have been crucial in supporting our education.',
       rating: 5
@@ -55,7 +56,7 @@ const Testimonials = () => {
     dots: true,
     infinite: true,
     speed: 1000, // Slide every 1 second
-    slidesToShow: 1, // Show 3 cards at a time
+    slidesToShow: 1, // Show 1 card at a time
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 2000, // Auto slide every 2 seconds
@@ -76,14 +77,15 @@ const Testimonials = () => {
           slidesToScroll: 1,
           initialSlide: 0,
           infinite: true,
-          dots: true
+          dots: true,
+          arrows: false // Hide arrows on mobile
         }
       }
     ]
   };
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent">
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent overflow-hidden">
       <h1 className="text-3xl font-serif text-center mb-12">Testimonials</h1>
       <Slider {...sliderSettings} className="mx-auto max-w-9xl">
         {testimonials.map((testimonial, index) => (
@@ -93,7 +95,7 @@ const Testimonials = () => {
             data-aos={index % 2 === 0 ? 'flip-left' : 'flip-right'}
             data-aos-easing="ease-out-cubic"
             data-aos-duration="2000"
-            style={{ margin: '0 15px', width: '250px' }} // Decreased width of the cards and added margin
+            style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }} // Set max width for mobile and center align
           >
             <div className="overflow-hidden rounded-full w-24 h-24 mx-auto mb-6">
               <img

@@ -120,7 +120,7 @@ const Mock = () => {
                         className="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 px-4 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-all duration-400 ease-in-out shadow-inner"
                         onClick={() => handleTestNowClick(year)}
                       >
-                        View Paper
+                       Take a test Now 
                       </button>
                     </Link>
                   </div>
