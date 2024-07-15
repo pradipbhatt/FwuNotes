@@ -11,7 +11,7 @@ const teamMembers = [
     image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.inXgh5O_Chd56OM6PROU1gAAAA%26pid%3DApi&f=1&ipt=123cec7b67b4e941bf4944dfdae504127a7df4fdb76ed75f92fb9f8a9c9e36ff&ipo=images', // Replace with actual image URL
     contribution: 'Lead the development and management of i-CEC club activities.',
     position: 1, // President
-    contactUrl: 'https://instagram.com/pradip_bhatt', // Replace with actual social media URL
+    contactUrl: 'https://pradipbhatt.com.np', // Replace with actual social media URL
   },
   {
     name: 'Dipak Raj Giri',
