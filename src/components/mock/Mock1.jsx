@@ -19,6 +19,15 @@ const Mock1 = () => {
   const [quizData, setQuizData] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
   const [showTitles, setShowTitles] = useState(false);
+  const [formData, setFormData] = useState({
+    userName: "",
+    engineeringField: "",
+    review: "",
+    rating: "",
+    totalQuestions: NUM_QUESTIONS,
+    solvedQuestions: 0,
+  });
+  const [formMode, setFormMode] = useState("add");
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -136,6 +145,44 @@ const Mock1 = () => {
     return `${minutes} minutes ${seconds} seconds`;
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("https://fwu-soe.onrender.com/api/quiz-results/", {
+        method: formMode === "add" ? "POST" : "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      alert(
+        formMode === "add"
+          ? "Quiz result submitted successfully!"
+          : "Quiz result updated successfully!"
+      );
+      // Reset form after successful submission
+      setFormData({
+        userName: "",
+        engineeringField: "",
+        review: "",
+        rating: "",
+        totalQuestions: NUM_QUESTIONS,
+        solvedQuestions: 0,
+      });
+    } catch (error) {
+      console.error("Error submitting quiz result:", error);
+      alert("Failed to submit quiz result. Please try again later.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -149,7 +196,9 @@ const Mock1 = () => {
           <div className="container mx-auto text-center">
             {showLoader && (
               <div className="text-center">
-                <h4 className="text-2xl font-bold text-white mt-12">Loading questions...</h4>
+                <h4 className="text-2xl font-bold text-white mt-12">
+                  Loading questions...
+                </h4>
               </div>
             )}
             {!showLoader && (
@@ -157,25 +206,38 @@ const Mock1 = () => {
                 {showTitles && (
                   <>
                     <div className="header mb-4">
-                      <h1 className="text-3xl font-bold text-white">Quiz Title</h1>
-                      <p className="text-lg text-gray-200">Quiz Description</p>
+                      <h1 className="text-3xl font-bold text-white">
+                        Quiz Title
+                      </h1>
+                      <p className="text-lg text-gray-200">
+                        Quiz Description
+                      </p>
                     </div>
                     <div className="exam-info mb-4">
-                      <p className="text-md text-white">Time Remaining: {formatTime(timer)}</p>
+                      <p className="text-md text-white">
+                        Time Remaining: {formatTime(timer)}
+                      </p>
                     </div>
                   </>
                 )}
                 {!showTitles && (
                   <div className="exam-info mb-4">
-                    <p className="text-md text-white">Time Remaining: {formatTime(timer)}</p>
-                    <p className="text-md text-white">Time Remaining for Question: {formatTime(questionTimer)}</p>
+                    <p className="text-md text-white">
+                      Time Remaining: {formatTime(timer)}
+                    </p>
+                    <p className="text-md text-white">
+                      Time Remaining for Question:{" "}
+                      {formatTime(questionTimer)}
+                    </p>
                   </div>
                 )}
                 <div className="flex flex-col items-center">
                   <div className="max-w-4xl w-full bg-gray-100 p-4 text-gray-800 rounded-lg shadow-lg">
                     {showScore ? (
                       <div className="text-center">
-                        <h4 className="text-2xl font-bold mt-12 w-full text-gray-800">Quiz Completed</h4>
+                        <h4 className="text-2xl font-bold mt-12 w-full text-gray-800">
+                          Quiz Completed
+                        </h4>
                         <h5 className="text-xl mb-4 text-gray-800">
                           You scored {score} out of {quizData.length}
                         </h5>
@@ -200,44 +262,41 @@ const Mock1 = () => {
                       <>
                         <div className="mb-4">
                           <h5 className="text-xl mb-2">
-                            Question {currentQuestion + 1}/{quizData.length}
+                            Question {currentQuestion + 1}/
+                            {quizData.length}
                           </h5>
                           <p className="text-base mb-10">
                             {quizData[currentQuestion]?.question}
                           </p>
                         </div>
                         <div className="grid grid-cols-1 gap-4">
-                          {quizData[currentQuestion]?.answers.map((answerOption, index) => (
-                            <button
-                              key={index}
-                              className={`w-full px-4 py-2 flex items-center justify-between rounded ${
-                                selectedAnswer &&
-                                selectedAnswer.text === answerOption.text
-                                  ? answerOption.correct
-                                    ? 'bg-green-500 hover:bg-green-600 text-white'
-                                    : 'bg-red-500 hover:bg-red-600 text-white'
-                                  : selectedAnswer && answerOption.correct
-                                    ? 'bg-green-500 hover:bg-green-600 text-white'
-                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
-                              }`}
-                              onClick={() => handleAnswerOptionClick(answerOption)}
-                              disabled={!!selectedAnswer}
-                            >
-                              <span>{`${String.fromCharCode(65 + index)}. ${answerOption.text}`}</span>
-                              {selectedAnswer && selectedAnswer.text === answerOption.text && (
-                                <FaCheck className="text-xl text-green-500" />
-                              )}
-                            </button>
-                          ))}
-                        </div>
-                        <div className="mt-8 flex justify-end">
-                          <button
-                            className="w-1/3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded disabled:bg-gray-400"
-                            onClick={handleNextQuestion}
-                            disabled={!selectedAnswer}
-                          >
-                            Next
-                          </button>
+                          {quizData[currentQuestion]?.answers.map(
+                            (answerOption, index) => (
+                              <button
+                                key={index}
+                                className={`w-full px-4 py-2 flex items-center justify-between rounded ${
+                                  selectedAnswer &&
+                                  selectedAnswer.text ===
+                                    answerOption.text
+                                    ? answerOption.correct
+                                      ? "bg-green-500"
+                                      : "bg-red-500"
+                                    : "bg-gray-200 hover:bg-gray-300"
+                                }`}
+                                disabled={!!selectedAnswer}
+                                onClick={() =>
+                                  handleAnswerOptionClick(answerOption)
+                                }
+                              >
+                                <span>{answerOption.text}</span>
+                                {selectedAnswer &&
+                                  selectedAnswer.text ===
+                                    answerOption.text && (
+                                    <FaCheck className="text-white" />
+                                  )}
+                              </button>
+                            )
+                          )}
                         </div>
                       </>
                     )}
@@ -247,6 +306,93 @@ const Mock1 = () => {
             )}
           </div>
         </div>
+      </div>
+      {/* Form Section */}
+      <div className="container mx-auto mt-8">
+        <form
+          onSubmit={handleSubmit}
+          className="max-w-xl mx-auto bg-white p-6 rounded-lg shadow-md"
+        >
+          <h2 className="text-2xl font-bold text-center mb-4">
+            Submit Quiz Result
+          </h2>
+          <label className="block mb-4">
+            User Name:
+            <input
+              type="text"
+              name="userName"
+              value={formData.userName}
+              onChange={handleInputChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            />
+          </label>
+          <label className="block mb-4">
+            Engineering Field:
+            <div className="mt-1">
+              <label className="inline-flex items-center">
+                <input
+                  type="radio"
+                  name="engineeringField"
+                  value="Computer"
+                  checked={formData.engineeringField === "Computer"}
+                  onChange={handleInputChange}
+                  className="form-radio h-4 w-4 text-blue-600"
+                />
+                <span className="ml-2">Computer</span>
+              </label>
+              <label className="inline-flex items-center ml-6">
+                <input
+                  type="radio"
+                  name="engineeringField"
+                  value="Civil"
+                  checked={formData.engineeringField === "Civil"}
+                  onChange={handleInputChange}
+                  className="form-radio h-4 w-4 text-blue-600"
+                />
+                <span className="ml-2">Civil</span>
+              </label>
+            </div>
+          </label>
+          <label className="block mb-4">
+            Review:
+            <textarea
+              name="review"
+              value={formData.review}
+              onChange={handleInputChange}
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            />
+          </label>
+          <label className="block mb-4">
+            Rating (out of 5):
+            <input
+              type="number"
+              name="rating"
+              value={formData.rating}
+              onChange={handleInputChange}
+              min="1"
+              max="5"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+            />
+          </label>
+          <input
+            type="hidden"
+            name="totalQuestions"
+            value={formData.totalQuestions}
+          />
+          <input
+            type="hidden"
+            name="solvedQuestions"
+            value={formData.solvedQuestions}
+          />
+          <div className="flex justify-center">
+            <button
+              type="submit"
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+            >
+              Submit Quiz Result
+            </button>
+          </div>
+        </form>
       </div>
     </>
   );
