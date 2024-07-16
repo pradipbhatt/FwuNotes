@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
-import { FaCheck } from "react-icons/fa";
+import { FaCheck, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import backgroundImage from "../../../src/assets/bg-image.jpeg"; // Replace with your Unsplash image URL
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -19,6 +19,15 @@ const Mock7 = () => {
   const [quizData, setQuizData] = useState([]);
   const [showLoader, setShowLoader] = useState(true);
   const [showTitles, setShowTitles] = useState(false);
+  const [formData, setFormData] = useState({
+    userName: "",
+    engineeringField: "",
+    review: "",
+    rating: "",
+    totalQuestions: NUM_QUESTIONS,
+    solvedQuestions: 0,
+  });
+  const [formMode, setFormMode] = useState("add");
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -118,6 +127,15 @@ const Mock7 = () => {
     }
   };
 
+  const handlePreviousQuestion = () => {
+    setSelectedAnswer(null);
+    setQuestionTimer(QUESTION_TIME);
+    const prevQuestion = currentQuestion - 1;
+    if (prevQuestion >= 0) {
+      setCurrentQuestion(prevQuestion);
+    }
+  };
+
   const handleRestartQuiz = () => {
     setCurrentQuestion(0);
     setScore(0);
@@ -136,6 +154,48 @@ const Mock7 = () => {
     return `${minutes} minutes ${seconds} seconds`;
   };
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await fetch("https://fwu-soe.onrender.com/api/quiz-results/", {
+        method: formMode === "add" ? "POST" : "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          totalQuestions: quizData.length,
+          solvedQuestions: score, // Using score directly from state
+        }),
+      });
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      alert(
+        formMode === "add"
+          ? "Quiz result submitted successfully!"
+          : "Quiz result updated successfully!"
+      );
+      // Reset form after successful submission
+      setFormData({
+        userName: "",
+        engineeringField: "",
+        review: "",
+        rating: "",
+        totalQuestions: NUM_QUESTIONS,
+        solvedQuestions: 0,
+      });
+    } catch (error) {
+      console.error("Error submitting quiz result:", error);
+      alert("Failed to submit quiz result. Please try again later.");
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -145,7 +205,9 @@ const Mock7 = () => {
           src={backgroundImage}
           alt="Background Image"
         />
-        <div className="relative bg-opacity-75 bg-gray-900 py-20">
+
+
+<div className="relative bg-opacity-75 bg-gray-900 py-20">
           <div className="container mx-auto text-center">
             {showLoader && (
               <div className="text-center">
@@ -247,6 +309,104 @@ const Mock7 = () => {
             )}
           </div>
         </div>
+      </div>
+
+
+      <div className="container mx-auto mt-8">
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label
+              htmlFor="userName"
+              className="block text-sm font-medium text-gray-500 dark:text-gray-500"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={formData.userName}
+              onChange={handleInputChange}
+              required
+              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-200 text-white" 
+              disabled={formMode === "edit"}
+            />
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="engineeringField"
+              className="block text-sm font-medium text-gray-500"
+            >
+              Engineering Field
+            </label>
+            <select
+              id="engineeringField"
+              name="engineeringField"
+              value={formData.engineeringField}
+              onChange={handleInputChange}
+              required
+              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-200"
+              disabled={formMode === "edit"}
+            >
+              <option value="">Select Engineering Field</option>
+              <option value="Computer">Computer</option>
+              <option value="Civil">Civil</option>
+            </select>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="review"
+              className="block text-sm font-medium text-gray-500"
+            >
+              Review
+            </label>
+            <textarea
+              id="review"
+              name="review"
+              value={formData.review}
+              onChange={handleInputChange}
+              rows="3"
+              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-gray-100"
+            ></textarea>
+          </div>
+          <div className="mb-4">
+            <label
+              htmlFor="rating"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Rating (1-5)
+            </label>
+            <input
+              type="number"
+              id="rating"
+              name="rating"
+              value={formData.rating}
+              onChange={handleInputChange}
+              min="1"
+              max="5"
+              required
+              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-white"
+            />
+          </div>
+          <input
+            type="hidden"
+            id="totalQuestions"
+            name="totalQuestions"
+            value={formData.totalQuestions}
+          />
+          <input
+            type="hidden"
+            id="solvedQuestions"
+            name="solvedQuestions"
+            value={score} // Set solvedQuestions directly from state
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </>
   );
