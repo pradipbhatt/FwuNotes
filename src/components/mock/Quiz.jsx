@@ -35,12 +35,12 @@ const Quiz = () => {
     clearTimeout(); // Clear any existing timeout to debounce the scroll event
     setTimeout(() => {
       setShowButtons(true); // Show buttons when scrolling stops
-    }, 200); // Adjust debounce delay as needed (e.g., 200ms)
+    }, 100); // Adjust debounce delay as needed (e.g., 200ms)
     
     // Hide buttons after 3 seconds of no scroll activity
     setTimeout(() => {
       setShowButtons(false);
-    }, 3000); // Adjust hiding delay as needed (e.g., 3000ms)
+    }, 800); // Adjust hiding delay as needed (e.g., 3000ms)
   };
 
   const fetchQuizzes = async () => {
