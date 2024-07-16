@@ -312,7 +312,7 @@ const Mock9 = () => {
       </div>
 
 
-      <div className="container mx-auto mt-8">
+      <div className="container mx-auto mt-8 mb-36">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <label
