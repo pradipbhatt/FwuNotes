@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import QuizResultForm from '../components/mock/QuizResultForm';
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
@@ -288,6 +289,7 @@ const AdminDashboard = () => {
           </form>
         </div>
       </div>
+      <QuizResultForm/>
       <Footer />
       <ToastContainer />
     </>

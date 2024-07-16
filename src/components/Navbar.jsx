@@ -103,6 +103,12 @@ function Navbar() {
         </a>
       </li>
       <li>
+        <a href="/quizresult" className="hover:text-orange-500">
+       EntranceResults
+        </a>
+      </li>
+      {/*  */}
+      <li>
         <a href="/about" className="hover:text-orange-500">
           About
         </a>
@@ -272,6 +278,35 @@ function Navbar() {
             <HiClipboardList className="w-6 h-6" />
             <span className="text-xs">Entrance Test</span>
           </Link>
+
+
+          <Link
+            to="/mock"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "mocktest" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("Entrance Test")}
+          >
+            <HiClipboardList className="w-6 h-6" />
+            <span className="text-xs">Entrance Test</span>
+          </Link>
+
+
+          {/* quizresult */}
+
+          <Link
+            to="/quizresult"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "mocktest" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("Entrance Test")}
+          >
+            <HiClipboardList className="w-6 h-6" />
+            <span className="text-xs">quizResult</span>
+          </Link>
+
+
+
           <Link
             to="/about"
             className={`flex flex-col items-center space-y-1 ${

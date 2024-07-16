@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import Navbar from "../Navbar";
+import Footer from "../Footer";
 
-const QuizResultForm = () => {
+const QuizResult = () => {
   const [quizResults, setQuizResults] = useState([]);
   const [formData, setFormData] = useState({
     userName: '',
@@ -12,10 +14,15 @@ const QuizResultForm = () => {
   });
   const [formMode, setFormMode] = useState('add'); // 'add' or 'update'
   const [selectedQuizResultId, setSelectedQuizResultId] = useState(null);
+  const [topPerformers, setTopPerformers] = useState([]);
 
   useEffect(() => {
     fetchQuizResults();
   }, []);
+
+  useEffect(() => {
+    calculateTopPerformers();
+  }, [quizResults]);
 
   const fetchQuizResults = () => {
     fetch('https://fwu-soe.onrender.com/api/quiz-results/')
@@ -97,38 +104,42 @@ const QuizResultForm = () => {
     .catch(error => console.error('Error deleting quiz result:', error));
   };
 
+  const calculateTopPerformers = () => {
+    // Sort quiz results by rating (descending order)
+    const sortedResults = [...quizResults].sort((a, b) => b.rating - a.rating);
+    // Get top 20 performers
+    const topPerformersList = sortedResults.slice(0, 20);
+    setTopPerformers(topPerformersList);
+  };
+
   return (
     <>
+    <Navbar/>
       <div className="container mx-auto px-4 py-8 mt-20">
         <h1 className="text-3xl font-bold mb-4">User Quiz Results</h1>
-
-        {/* Display quiz results */}
-        <div>
-          {quizResults.length > 0 ? (
-            quizResults.map((result, index) => (
-              <div key={index} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300 mb-4">
-                <h3 className="text-lg font-semibold mb-2">Quiz Result {index + 1}</h3>
-                <p className="text-gray-700 mb-1">User Name: {result.userName}</p>
-                <p className="text-gray-700 mb-1">Engineering Field: {result.engineeringField}</p>
-                <p className="text-gray-700 mb-1">Total Questions: {result.totalQuestions}</p>
-                <p className="text-gray-700 mb-1">Correct Answers: {result.solvedQuestions}</p>
-                <p className="text-gray-700 mb-1">Review: {result.review}</p>
-                <p className="text-gray-700 mb-1">Rating: {result.rating}</p>
-                <button
-                  className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded mt-2"
-                  onClick={() => handleDeleteQuizResult(result._id)}
-                >
-                  Delete
-                </button>
+        {/* Display top performers */}
+        <div className="mt-8">
+          <h2 className="text-2xl font-bold mb-4">Top Performers</h2>
+          {topPerformers.length > 0 ? (
+            topPerformers.map((performer, index) => (
+              <div key={index} className="bg-yellow-100 shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300 mb-4">
+                <h3 className="text-lg font-semibold mb-2">Rank {index + 1}</h3>
+                <p className="text-gray-700 mb-1">User Name: {performer.userName}</p>
+                <p className="text-gray-700 mb-1">Engineering Field: {performer.engineeringField}</p>
+                <p className="text-gray-700 mb-1">Total Questions: {performer.totalQuestions}</p>
+                <p className="text-gray-700 mb-1">Correct Answers: {performer.solvedQuestions}</p>
+                {/* <p className="text-gray-700 mb-1">Review: {performer.review}</p> */}
+                {/* <p className="text-gray-700 mb-1">Rating: {performer.rating}</p> */}
               </div>
             ))
           ) : (
-            <p>No quiz results found.</p>
+            <p>No top performers found.</p>
           )}
         </div>
       </div>
+      <Footer/>
     </>
   );
 };
 
-export default QuizResultForm;
+export default QuizResult;
