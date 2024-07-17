@@ -4,12 +4,15 @@ import { FaCheck, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import backgroundImage from "../../../src/assets/bg-image.jpeg"; // Replace with your Unsplash image URL
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { FaStar } from "react-icons/fa";
+
 
 const NUM_QUESTIONS = 75;
 const QUESTION_TIME = 2 * 60;
 const TOTAL_TIME = NUM_QUESTIONS * QUESTION_TIME;
 
-const Mock4 = () => {
+
+const Mock0 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(() => parseInt(localStorage.getItem("currentQuestion")) || 0);
   const [score, setScore] = useState(() => parseInt(localStorage.getItem("score")) || 0);
   const [showScore, setShowScore] = useState(false);
@@ -27,6 +30,7 @@ const Mock4 = () => {
     totalQuestions: NUM_QUESTIONS,
     solvedQuestions: 0,
   });
+  
   const [formMode, setFormMode] = useState("add");
 
   useEffect(() => {
@@ -92,7 +96,7 @@ const Mock4 = () => {
   useEffect(() => {
     const titlesTimer = setTimeout(() => {
       setShowTitles(false);
-    }, 5000);
+    }, 6000);
 
     return () => clearTimeout(titlesTimer);
   }, [showTitles]);
@@ -207,7 +211,7 @@ const Mock4 = () => {
         />
 
 
-<div className="relative bg-opacity-75 bg-gray-900 py-20">
+<div className="relative bg-opacity-75 bg-gray-600 py-20">
           <div className="container mx-auto text-center">
             {showLoader && (
               <div className="text-center">
@@ -252,7 +256,7 @@ const Mock4 = () => {
                           ))}
                         </div>
                         <button
-                          className="px-4 py-2 mt-4 mb-10 bg-blue-500 hover:bg-blue-600 text-white rounded"
+                          className="px-4 py-2 mt-4 mb-10 bg-blue-600 hover:bg-blue-600 text-white rounded"
                           onClick={handleRestartQuiz}
                         >
                           Restart Quiz
@@ -276,25 +280,31 @@ const Mock4 = () => {
                                 selectedAnswer &&
                                 selectedAnswer.text === answerOption.text
                                   ? answerOption.correct
-                                    ? 'bg-green-500 hover:bg-green-600 text-white'
-                                    : 'bg-red-500 hover:bg-red-600 text-white'
+                                    ? 'bg-green-600 hover:bg-green-600 text-white'
+                                    : 'bg-red-600 hover:bg-red-600 text-white'
                                   : selectedAnswer && answerOption.correct
-                                    ? 'bg-green-500 hover:bg-green-600 text-white'
-                                    : 'bg-blue-500 hover:bg-blue-600 text-white'
+                                    ? 'bg-green-600 hover:bg-green-600 text-white'
+                                    : 'bg-blue-600 hover:bg-blue-600 text-white'
                               }`}
                               onClick={() => handleAnswerOptionClick(answerOption)}
                               disabled={!!selectedAnswer}
                             >
                               <span>{`${String.fromCharCode(65 + index)}. ${answerOption.text}`}</span>
                               {selectedAnswer && selectedAnswer.text === answerOption.text && (
-                                <FaCheck className="text-xl text-green-500" />
+                                <FaCheck className="text-xl text-green-600" />
                               )}
                             </button>
                           ))}
                         </div>
                         <div className="mt-8 flex justify-end">
+                        <button
+                          className="w-1/3 px-4 py-2 bg-orange-600 hover:bg-orange-600 text-white rounded disabled:bg-gray-400 mr-36"
+                          onClick={handleRestartQuiz}
+                        >
+                          Restart Quiz
+                        </button>
                           <button
-                            className="w-1/3 px-4 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded disabled:bg-gray-400"
+                            className="w-1/3 px-4 py-2 bg-orange-600 hover:bg-orange-600 text-white rounded disabled:bg-gray-400"
                             onClick={handleNextQuestion}
                             disabled={!selectedAnswer}
                           >
@@ -312,12 +322,20 @@ const Mock4 = () => {
       </div>
 
 
-      <div className="container mx-auto mt-8 mb-36">
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
+      <div className="container mx-auto mt-8 mb-36 w-2/3">
+      <form onSubmit={handleSubmit} className="relative">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center filter blur-lg"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        ></div>
+        <div className="relative z-10 bg-gray-600 bg-opacity-15 rounded-lg shadow-lg p-8">
+
+
+
+          <div className="mb-4 relative">
             <label
               htmlFor="userName"
-              className="block text-sm font-medium text-gray-500 dark:text-gray-500"
+              className="block text-sm font-medium text-gray-600 dark:text-gray-600"
             >
               Name
             </label>
@@ -328,66 +346,110 @@ const Mock4 = () => {
               value={formData.userName}
               onChange={handleInputChange}
               required
-              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-200 text-white" 
-              disabled={formMode === "edit"}
+              className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+              style={{
+                transition: 'transform 0.3s',
+                fontSize: '1.25rem', // Larger font size
+              }}
+              onMouseEnter={() => {
+                document.getElementById('userName').style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={() => {
+                document.getElementById('userName').style.transform = 'scale(1)';
+              }}
             />
           </div>
-          <div className="mb-4">
-            <label
-              htmlFor="engineeringField"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Engineering Field
-            </label>
-            <select
-              id="engineeringField"
-              name="engineeringField"
-              value={formData.engineeringField}
-              onChange={handleInputChange}
-              required
-              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 disabled:bg-gray-200"
-              disabled={formMode === "edit"}
-            >
-              <option value="">Select Engineering Field</option>
-              <option value="Computer">Computer</option>
-              <option value="Civil">Civil</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="review"
-              className="block text-sm font-medium text-gray-500"
-            >
-              Review
-            </label>
-            <textarea
-              id="review"
-              name="review"
-              value={formData.review}
-              onChange={handleInputChange}
-              rows="3"
-              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-gray-100"
-            ></textarea>
-          </div>
-          <div className="mb-4">
-            <label
-              htmlFor="rating"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Rating (1-5)
-            </label>
-            <input
-              type="number"
-              id="rating"
-              name="rating"
-              value={formData.rating}
-              onChange={handleInputChange}
-              min="1"
-              max="5"
-              required
-              className="mt-1 p-4 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50 text-white"
-            />
-          </div>
+
+<div className="mb-4 relative">
+  <label
+    htmlFor="engineeringField"
+    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
+  >
+    Engineering Field
+  </label>
+  <select
+    id="engineeringField"
+    name="engineeringField"
+    value={formData.engineeringField}
+    onChange={handleInputChange}
+    required
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 disabled:bg-gray-200 text-gray-600 bg-transparent"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('engineeringField').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('engineeringField').style.transform = 'scale(1)';
+    }}
+  >
+    <option value="">Select Engineering Field</option>
+    <option value="Computer">Computer</option>
+    <option value="Civil">Civil</option>
+  </select>
+</div>
+
+
+<div className="mb-4 relative">
+  <label
+    htmlFor="review"
+    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
+  >
+  Ask any questions or doughts ?
+  </label>
+  <textarea
+    id="review"
+    name="review"
+    value={formData.review}
+    onChange={handleInputChange}
+    rows="3"
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('review').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('review').style.transform = 'scale(1)';
+    }}
+  ></textarea>
+</div>
+
+
+<div className="mb-4 relative">
+  <label
+    htmlFor="rating"
+    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
+  >
+    Rating (1-5)
+  </label>
+  <input
+    type="number"
+    id="rating"
+    name="rating"
+    value={formData.rating}
+    onChange={handleInputChange}
+    min="1"
+    max="5"
+    required
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('rating').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('rating').style.transform = 'scale(1)';
+    }}
+  />
+</div>
+
           <input
             type="hidden"
             id="totalQuestions"
@@ -402,14 +464,15 @@ const Mock4 = () => {
           />
           <button
             type="submit"
-            className="px-4 py-2 mt-4 bg-blue-500 hover:bg-blue-600 text-white rounded"
+            className="px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-600 text-white rounded"
           >
             Submit
           </button>
-        </form>
-      </div>
+        </div>
+      </form>
+    </div>
     </>
   );
 };
 
-export default Mock4;
+export default Mock0;
