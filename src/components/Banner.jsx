@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import fwu from "../../public/fwu.jpeg"
 
 function Banner() {
   const [typewriterVisible, setTypewriterVisible] = useState(false);
@@ -38,11 +39,11 @@ function Banner() {
       {/* Desktop and Tablet view (image covering screen) */}
       <div className="hidden md:block relative h-screen">
         <img
-          src="https://lh3.googleusercontent.com/p/AF1QipPzfh964Fkk34H5Zb0uRbCviPMnWVutO4wO1CAd=s0"
+          src={fwu}
           alt="Desktop background"
-          className="absolute inset-0 w-full h-full object-cover z-0 filter blur-md"
+          className="absolute inset-0 w-full h-full object-cover z-0 filter blur-sm"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-10">
+        <div className="absolute inset-0 bg-black bg-opacity-10 flex flex-col justify-center items-center text-center z-10">
           <div className="max-w-screen-lg mx-auto p-8 text-white" data-aos="fade-up">
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 leading-tight">
               {renderTextWithHoverEffect("Welcome to SoeNotes")}
