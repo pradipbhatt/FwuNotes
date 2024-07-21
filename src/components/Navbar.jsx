@@ -3,23 +3,33 @@ import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
-import { HiMenu, HiX, HiSun, HiMoon, HiSearch, HiHome, HiBookOpen, HiClipboardList, HiUserCircle } from "react-icons/hi";
-import axios from "axios";
+import {
+  HiMenu,
+  HiX,
+  HiSun,
+  HiMoon,
+  HiSearch,
+  HiHome,
+  HiBookOpen,
+  HiClipboardList,
+  HiUserCircle,
+} from "react-icons/hi";
 
 function Navbar() {
   const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const [showMenuLeft, setShowMenuLeft] = useState(false);
   const [showMenuRight, setShowMenuRight] = useState(false);
+  const [showDropdown, setShowDropdown] = useState(false);
 
   const profileRef = useRef(null);
   const [sticky, setSticky] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const [activeTab, setActiveTab] = useState("home");
 
   useEffect(() => {
@@ -61,9 +71,8 @@ function Navbar() {
     };
   }, []);
 
-  // Simplified function to only handle redirect
   const fetchSearchResults = () => {
-    navigate("/mock"); // Redirect to /mock
+    navigate("/mock");
   };
 
   const handleSearchSubmit = (event) => {
@@ -71,32 +80,62 @@ function Navbar() {
     fetchSearchResults();
   };
 
+  const handleDropdownMouseEnter = () => {
+    setShowDropdown(true);
+  };
+
+  const handleDropdownMouseLeave = () => {
+    setShowDropdown(false);
+  };
+
+  const handleYearClick = (year) => {
+    navigate(`/Mock${year - 2071}`);
+    setShowDropdown(false);
+  };
+
   const navItems = (
     <>
       <li>
-        <a href="/" className="hover:text-orange-500">
+        <Link to="/" className="hover:text-orange-500">
           Home
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/showbook" className="hover:text-orange-500">
+        <Link to="/showbook" className="hover:text-orange-500">
           SoeNotes
-        </a>
+        </Link>
       </li>
-      <li>
-        <a href="/mock" className="hover:text-orange-500">
+      <li
+        className="relative"
+        onMouseEnter={handleDropdownMouseEnter}
+        onMouseLeave={handleDropdownMouseLeave}
+      >
+        <a href="#" className="hover:text-orange-500">
           Entrance Test
         </a>
+        {showDropdown && (
+          <ul className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg border border-gray-200 rounded-md dark:bg-slate-700 dark:text-white">
+            {Array.from({ length: 11 }, (_, i) => 2071 + i).map((year) => (
+              <li
+                key={year}
+                className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-slate-600 cursor-pointer"
+                onClick={() => handleYearClick(year)}
+              >
+                {year}
+              </li>
+            ))}
+          </ul>
+        )}
       </li>
       <li>
-        <a href="/quizresult" className="hover:text-orange-500">
+        <Link to="/quizresult" className="hover:text-orange-500">
           Entrance Results
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/about" className="hover:text-orange-500">
+        <Link to="/about" className="hover:text-orange-500">
           About
-        </a>
+        </Link>
       </li>
     </>
   );
@@ -105,7 +144,7 @@ function Navbar() {
     <>
       <div
         className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out  
-      ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
+        ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
       >
         <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
           <div className="navbar flex justify-between items-center py-4">
@@ -117,7 +156,11 @@ function Navbar() {
                   className="btn btn-ghost lg:hidden"
                   onClick={() => setShowMenuLeft(!showMenuLeft)}
                 >
-                  {showMenuLeft ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
+                  {showMenuLeft ? (
+                    <HiX className="h-5 w-5" />
+                  ) : (
+                    <HiMenu className="h-5 w-5" />
+                  )}
                 </div>
                 {showMenuLeft && (
                   <ul
@@ -129,7 +172,10 @@ function Navbar() {
                   </ul>
                 )}
               </div>
-              <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
+              <Link
+                to="/"
+                className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black"
+              >
                 SoeNotes
               </Link>
             </div>
@@ -139,7 +185,10 @@ function Navbar() {
                   {navItems}
                 </ul>
               </div>
-              <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
+              <form
+                onSubmit={handleSearchSubmit}
+                className="hidden md:flex items-center"
+              >
                 <label className="flex items-center gap-2 px-3 py-2 border rounded-md bg-gray-100 dark:bg-slate-300">
                   <input
                     type="text"
@@ -156,7 +205,9 @@ function Navbar() {
                   type="checkbox"
                   className="theme-controller"
                   checked={theme === "dark"}
-                  onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+                  onChange={() =>
+                    setTheme(theme === "dark" ? "light" : "dark")
+                  }
                 />
                 {theme === "light" ? (
                   <HiSun className="swap-off fill-current w-7 h-7" />
@@ -193,10 +244,8 @@ function Navbar() {
               ) : (
                 <div className="">
                   <a
-                    className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
-                    onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
-                    }
+                    className="bg-orange-500 text-white px-3 py-2 rounded-md font-medium hover:bg-orange-600"
+                    href="#my-modal"
                   >
                     Login
                   </a>
@@ -205,64 +254,6 @@ function Navbar() {
               )}
             </div>
           </div>
-        </div>
-        {/* Removed the search results section since it's no longer needed */}
-      </div>
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-700 shadow-md">
-        <div className="flex justify-between items-center py-2 px-4">
-          <Link
-            to="/"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "home" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("home")}
-          >
-            <HiHome className="w-6 h-6" />
-            <span className="text-xs">Home</span>
-          </Link>
-          <Link
-            to="/showbook"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "soenotes" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("soenotes")}
-          >
-            <HiBookOpen className="w-6 h-6" />
-            <span className="text-xs">SoeNotes</span>
-          </Link>
-
-          <Link
-            to="/mock"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "mocktest" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("Entrance Test")}
-          >
-            <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Entrance Test</span>
-          </Link>
-
-          <Link
-            to="/quizresult"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "quizresult" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("quizresult")}
-          >
-            <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Quiz Result</span>
-          </Link>
-
-          <Link
-            to="/about"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "profile" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("profile")}
-          >
-            <HiUserCircle className="w-6 h-6" />
-            <span className="text-xs">About Us</span>
-          </Link>
         </div>
       </div>
     </>
