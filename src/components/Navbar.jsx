@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
@@ -10,6 +10,7 @@ function Navbar() {
   const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [showMenuLeft, setShowMenuLeft] = useState(false);
   const [showMenuRight, setShowMenuRight] = useState(false);
@@ -18,11 +19,8 @@ function Navbar() {
   const [sticky, setSticky] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [searchError, setSearchError] = useState(null);
-  const [loading, setLoading] = useState(false);
-
-  const [activeTab, setActiveTab] = useState("home"); // State for the active tab in the bottom navigation
+  
+  const [activeTab, setActiveTab] = useState("home");
 
   useEffect(() => {
     if (theme === "dark") {
@@ -63,21 +61,9 @@ function Navbar() {
     };
   }, []);
 
-  const fetchSearchResults = async () => {
-    setLoading(true);
-    try {
-      const response = await axios.get(
-        `https://soe-notes-pdf-backend.onrender.com/get-files?q=${searchQuery}`
-      );
-      setSearchResults(response.data);
-      setSearchError(null);
-    } catch (error) {
-      console.error("Error fetching search results:", error);
-      setSearchResults([]);
-      setSearchError("Failed to fetch search results. Please try again later.");
-    } finally {
-      setLoading(false);
-    }
+  // Simplified function to only handle redirect
+  const fetchSearchResults = () => {
+    navigate("/mock"); // Redirect to /mock
   };
 
   const handleSearchSubmit = (event) => {
@@ -99,15 +85,14 @@ function Navbar() {
       </li>
       <li>
         <a href="/mock" className="hover:text-orange-500">
-        Entrance Test
+          Entrance Test
         </a>
       </li>
       <li>
         <a href="/quizresult" className="hover:text-orange-500">
-       EntranceResults
+          Entrance Results
         </a>
       </li>
-      {/*  */}
       <li>
         <a href="/about" className="hover:text-orange-500">
           About
@@ -221,30 +206,7 @@ function Navbar() {
             </div>
           </div>
         </div>
-        {searchQuery && (
-          <div className="absolute top-full left-0 right-0 z-50 bg-white dark:bg-slate-700 dark:text-white shadow-lg py-2 px-4">
-            {loading ? (
-              <p>Loading...</p>
-            ) : searchError ? (
-              <p>{searchError}</p>
-            ) : searchResults.length === 0 ? (
-              <p>No results found</p>
-            ) : (
-              <ul>
-                {searchResults.map((result) => (
-                  <li key={result.id}>
-                    <Link
-                      to={`/book/${result.id}`}
-                      className="block hover:text-blue-500"
-                    >
-                      {result.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        )}
+        {/* Removed the search results section since it's no longer needed */}
       </div>
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-700 shadow-md">
         <div className="flex justify-between items-center py-2 px-4">
@@ -280,21 +242,16 @@ function Navbar() {
             <span className="text-xs">Entrance Test</span>
           </Link>
 
-
-          {/* quizresult */}
-
           <Link
             to="/quizresult"
             className={`flex flex-col items-center space-y-1 ${
-              activeTab === "mocktest" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+              activeTab === "quizresult" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
             }`}
-            onClick={() => setActiveTab("Entrance Test")}
+            onClick={() => setActiveTab("quizresult")}
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">quizResult</span>
+            <span className="text-xs">Quiz Result</span>
           </Link>
-
-
 
           <Link
             to="/about"
@@ -304,7 +261,7 @@ function Navbar() {
             onClick={() => setActiveTab("profile")}
           >
             <HiUserCircle className="w-6 h-6" />
-            <span className="text-xs">About us</span>
+            <span className="text-xs">About Us</span>
           </Link>
         </div>
       </div>
