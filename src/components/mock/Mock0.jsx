@@ -12,7 +12,7 @@ const QUESTION_TIME = 2 * 60;
 const TOTAL_TIME = NUM_QUESTIONS * QUESTION_TIME;
 
 
-const Mock0 = () => {
+const Mock1 = () => {
   const [currentQuestion, setCurrentQuestion] = useState(() => parseInt(localStorage.getItem("currentQuestion")) || 0);
   const [score, setScore] = useState(() => parseInt(localStorage.getItem("score")) || 0);
   const [showScore, setShowScore] = useState(false);
@@ -23,10 +23,10 @@ const Mock0 = () => {
   const [showLoader, setShowLoader] = useState(true);
   const [showTitles, setShowTitles] = useState(false);
   const [formData, setFormData] = useState({
-    userName: "",
-    engineeringField: "",
-    review: "",
-    rating: "",
+    userName: "User Name",
+    engineeringField: "Computer",
+    review: "Ask any doubts if you have ",
+    rating: "5",
     totalQuestions: NUM_QUESTIONS,
     solvedQuestions: 0,
   });
@@ -205,7 +205,7 @@ const Mock0 = () => {
       <Navbar />
       <div className="relative">
         <img
-          className="absolute inset-0 w-full h-full object-cover filter blur-lg"
+          className="absolute inset-0 w-full h-full object-cover filter blur-sm"
           src={backgroundImage}
           alt="Background Image"
         />
@@ -242,14 +242,18 @@ const Mock0 = () => {
                     {showScore ? (
                       <div className="text-center">
                         <h4 className="text-2xl font-bold mt-12 w-full text-gray-800">Quiz Completed</h4>
-                        <h5 className="text-xl mb-4 text-gray-800">
+                        <h5 className="text-xl text-gray-800">
                           You scored {score} out of {quizData.length}
                         </h5>
-                        <div className="mt-4 text-left">
+                        <div className="container mx-auto mt-10 mb-10 w-2/3">
+
+  </div>
+                        <div className="text-left">
                           {quizData.map((question, index) => (
                             <div key={index} className="mb-4">
                               <h6 className="text-lg">{question.question}</h6>
                               <p className="text-sm text-gray-800">
+                                
                                 {question.explanation}
                               </p>
                             </div>
@@ -259,9 +263,158 @@ const Mock0 = () => {
                           className="px-4 py-2 mt-4 mb-10 bg-blue-600 hover:bg-blue-600 text-white rounded"
                           onClick={handleRestartQuiz}
                         >
+                          
                           Restart Quiz
                         </button>
+                             <form onSubmit={handleSubmit} className="relative">
+        <div
+          className="absolute inset-0 z-0 bg-cover bg-center filter blur-sm"
+          style={{ backgroundImage: `url(${backgroundImage})` }}
+        ></div>
+        <div className="relative z-10 bg-gray-600 bg-opacity-15 rounded-lg shadow-lg p-8">
+
+
+
+          <div className="relative">
+            <label
+              htmlFor="userName"
+              className="block text-sm font-medium text-gray-100 dark:text-gray-900"
+            >
+              Name
+            </label>
+            <input
+              type="text"
+              id="userName"
+              name="userName"
+              value={formData.userName}
+              onChange={handleInputChange}
+              required
+              className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+              style={{
+                transition: 'transform 0.3s',
+                fontSize: '1.25rem', // Larger font size
+              }}
+              onMouseEnter={() => {
+                document.getElementById('userName').style.transform = 'scale(1.05)';
+              }}
+              onMouseLeave={() => {
+                document.getElementById('userName').style.transform = 'scale(1)';
+              }}
+            />
+          </div>
+
+<div className="mb-4 relative">
+  <label
+    htmlFor="engineeringField"
+    className="block text-sm font-medium text-gray-100 dark:text-gray-900"
+  >
+    Engineering Field
+  </label>
+  <select
+    id="engineeringField"
+    name="engineeringField"
+    value={formData.engineeringField}
+    onChange={handleInputChange}
+    required
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 disabled:bg-gray-200 text-gray-600 bg-transparent"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('engineeringField').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('engineeringField').style.transform = 'scale(1)';
+    }}
+  >
+    <option value="">Select Engineering Field</option>
+    <option value="Computer">Computer</option>
+    <option value="Civil">Civil</option>
+  </select>
+</div>
+
+
+<div className="mb-4 relative">
+  <label
+    htmlFor="review"
+    className="block text-sm font-medium text-gray-100 dark:text-gray-900"
+  >
+   Ask any questions or doubts ?
+  </label>
+  <textarea
+    id="review"
+    name="review"
+    value={formData.review}
+    onChange={handleInputChange}
+    rows="3"
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('review').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('review').style.transform = 'scale(1)';
+    }}
+  ></textarea>
+</div>
+
+
+{/* <div className="mb-4 relative">
+  <label
+    htmlFor="rating"
+    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
+  >
+    Rating (1-5)
+  </label>
+  <input
+    type="number"
+    id="rating"
+    name="rating"
+    value={formData.rating}
+    onChange={handleInputChange}
+    min="1"
+    max="5"
+    required
+    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
+    style={{
+      transition: 'transform 0.3s',
+      fontSize: '1.25rem', // Larger font size
+    }}
+    onMouseEnter={() => {
+      document.getElementById('rating').style.transform = 'scale(1.05)';
+    }}
+    onMouseLeave={() => {
+      document.getElementById('rating').style.transform = 'scale(1)';
+    }}
+  />
+</div> */}
+
+          <input
+            type="hidden"
+            id="totalQuestions"
+            name="totalQuestions"
+            value={formData.totalQuestions}
+          />
+          <input
+            type="hidden"
+            id="solvedQuestions"
+            name="solvedQuestions"
+            value={score} // Set solvedQuestions directly from state
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-600 text-white rounded"
+          >
+            Submit
+          </button>
+        </div>
+      </form>
                       </div>
+                      
                     ) : (
                       <>
                         <div className="mb-4">
@@ -320,159 +473,9 @@ const Mock0 = () => {
           </div>
         </div>
       </div>
-
-
-      <div className="container mx-auto mt-8 mb-36 w-2/3">
-      <form onSubmit={handleSubmit} className="relative">
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center filter blur-lg"
-          style={{ backgroundImage: `url(${backgroundImage})` }}
-        ></div>
-        <div className="relative z-10 bg-gray-600 bg-opacity-15 rounded-lg shadow-lg p-8">
-
-
-
-          <div className="mb-4 relative">
-            <label
-              htmlFor="userName"
-              className="block text-sm font-medium text-gray-600 dark:text-gray-600"
-            >
-              Name
-            </label>
-            <input
-              type="text"
-              id="userName"
-              name="userName"
-              value={formData.userName}
-              onChange={handleInputChange}
-              required
-              className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
-              style={{
-                transition: 'transform 0.3s',
-                fontSize: '1.25rem', // Larger font size
-              }}
-              onMouseEnter={() => {
-                document.getElementById('userName').style.transform = 'scale(1.05)';
-              }}
-              onMouseLeave={() => {
-                document.getElementById('userName').style.transform = 'scale(1)';
-              }}
-            />
-          </div>
-
-<div className="mb-4 relative">
-  <label
-    htmlFor="engineeringField"
-    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
-  >
-    Engineering Field
-  </label>
-  <select
-    id="engineeringField"
-    name="engineeringField"
-    value={formData.engineeringField}
-    onChange={handleInputChange}
-    required
-    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 disabled:bg-gray-200 text-gray-600 bg-transparent"
-    style={{
-      transition: 'transform 0.3s',
-      fontSize: '1.25rem', // Larger font size
-    }}
-    onMouseEnter={() => {
-      document.getElementById('engineeringField').style.transform = 'scale(1.05)';
-    }}
-    onMouseLeave={() => {
-      document.getElementById('engineeringField').style.transform = 'scale(1)';
-    }}
-  >
-    <option value="">Select Engineering Field</option>
-    <option value="Computer">Computer</option>
-    <option value="Civil">Civil</option>
-  </select>
-</div>
-
-
-<div className="mb-4 relative">
-  <label
-    htmlFor="review"
-    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
-  >
-    Ask any questions or doubts ?
-  </label>
-  <textarea
-    id="review"
-    name="review"
-    value={formData.review}
-    onChange={handleInputChange}
-    rows="3"
-    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
-    style={{
-      transition: 'transform 0.3s',
-      fontSize: '1.25rem', // Larger font size
-    }}
-    onMouseEnter={() => {
-      document.getElementById('review').style.transform = 'scale(1.05)';
-    }}
-    onMouseLeave={() => {
-      document.getElementById('review').style.transform = 'scale(1)';
-    }}
-  ></textarea>
-</div>
-
-
-<div className="mb-4 relative">
-  <label
-    htmlFor="rating"
-    className="block text-sm font-medium text-gray-600 dark:text-gray-600"
-  >
-    Rating (1-5)
-  </label>
-  <input
-    type="number"
-    id="rating"
-    name="rating"
-    value={formData.rating}
-    onChange={handleInputChange}
-    min="1"
-    max="5"
-    required
-    className="mt-1 p-4 block w-full rounded-md border border-gray-300 shadow-sm focus:border-blue-600 focus:ring focus:ring-blue-600 focus:ring-opacity-50 bg-transparent text-gray-600 text-lg font-bold font-cursive"
-    style={{
-      transition: 'transform 0.3s',
-      fontSize: '1.25rem', // Larger font size
-    }}
-    onMouseEnter={() => {
-      document.getElementById('rating').style.transform = 'scale(1.05)';
-    }}
-    onMouseLeave={() => {
-      document.getElementById('rating').style.transform = 'scale(1)';
-    }}
-  />
-</div>
-
-          <input
-            type="hidden"
-            id="totalQuestions"
-            name="totalQuestions"
-            value={formData.totalQuestions}
-          />
-          <input
-            type="hidden"
-            id="solvedQuestions"
-            name="solvedQuestions"
-            value={score} // Set solvedQuestions directly from state
-          />
-          <button
-            type="submit"
-            className="px-4 py-2 mt-4 bg-blue-600 hover:bg-blue-600 text-white rounded"
-          >
-            Submit
-          </button>
-        </div>
-      </form>
-    </div>
+     
     </>
   );
 };
 
-export default Mock0;
+export default Mock1;
