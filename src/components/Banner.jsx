@@ -2,10 +2,16 @@ import React, { useEffect, useState } from "react";
 import Typewriter from "typewriter-effect";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import fwu from "../../public/fwu.jpeg"
+import fwu from "../../public/fwu.jpeg";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import validator from "validator";
 
 function Banner() {
   const [typewriterVisible, setTypewriterVisible] = useState(false);
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Initialize AOS
@@ -22,6 +28,16 @@ function Banner() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validator.isEmail(email)) {
+      localStorage.setItem("userEmail", email);
+      navigate('/mock');
+    } else {
+      toast.error("Please enter a valid email address.");
+    }
+  };
 
   const renderTextWithHoverEffect = (text) => {
     return text.split("").map((char, index) => (
@@ -64,7 +80,7 @@ function Banner() {
                 }}
               />
             )}
-            <form className="mt-8 space-y-4 w-full max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4 w-full max-w-md mx-auto">
               <div className="flex flex-col md:flex-row md:space-x-4" data-aos="fade-right">
                 <div className="flex-1 md:mr-2">
                   <label className="input input-bordered flex items-center gap-2 bg-white bg-opacity-30 p-2 rounded-md">
@@ -79,6 +95,8 @@ function Banner() {
                     </svg>
                     <input
                       type="text"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="grow p-2 bg-transparent border-none text-white placeholder-white text-sm"
                       placeholder="Email"
                     />
@@ -98,9 +116,8 @@ function Banner() {
       {/* Mobile view (image covering screen) */}
       <div className="md:hidden relative h-screen">
         <img
-          src="https://lh3.googleusercontent.com/p/AF1QipPzfh964Fkk34H5Zb0uRbCviPMnWVutO4wO1CAd=s0"
-          alt="Mobile background"
-          className="absolute inset-0 w-full h-full object-cover z-0 filter blur-md"
+          src={fwu}
+          className="absolute inset-0 w-full h-full object-cover z-0 filter blur-sm"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-10">
           <div className="max-w-screen-lg mx-auto p-8 text-white" data-aos="fade-up">
@@ -123,7 +140,7 @@ function Banner() {
                 }}
               />
             )}
-            <form className="mt-8 space-y-4 w-full max-w-md mx-auto">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4 w-full max-w-sm mx-auto">
               <div className="flex flex-col md:flex-row md:space-x-4">
                 <div className="flex-1 md:mr-2">
                   <label className="input input-bordered flex items-center gap-2 bg-white bg-opacity-30 p-2 rounded-md">
@@ -137,14 +154,20 @@ function Banner() {
                       <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                     </svg>
                     <input
-                      type="text"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       className="grow p-2 bg-transparent border-none text-white placeholder-white text-sm"
                       placeholder="Email"
+                      required
                     />
                   </label>
                 </div>
                 <div>
-                  <button className="bg-orange-500 text-white px-4 py-2 w-full rounded-md hover:bg-orange-700 transition duration-300 mt-4 md:mt-0">
+                  <button
+                    type="submit"
+                    className="bg-orange-500 text-white px-4 py-2 w-full rounded-md hover:bg-orange-700 transition duration-300 mt-4 md:mt-0"
+                  >
                     Get Started
                   </button>
                 </div>
@@ -153,6 +176,9 @@ function Banner() {
           </div>
         </div>
       </div>
+      
+      {/* Toast Container */}
+      <ToastContainer />
     </div>
   );
 }
