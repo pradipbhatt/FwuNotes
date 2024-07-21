@@ -12,7 +12,7 @@ import {
   HiHome,
   HiBookOpen,
   HiClipboardList,
-  HiUserCircle,
+  HiInformationCircle,
 } from "react-icons/hi";
 
 function Navbar() {
@@ -106,11 +106,11 @@ function Navbar() {
         </Link>
       </li>
       <li
-        className="relative"
+        className="relative  lg:block"
         onMouseEnter={handleDropdownMouseEnter}
         onMouseLeave={handleDropdownMouseLeave}
       >
-        <a href="#" className="hover:text-orange-500">
+        <a href="/mock" className="hover:text-orange-500">
           Entrance Test
         </a>
         {showDropdown && (
@@ -126,6 +126,11 @@ function Navbar() {
             ))}
           </ul>
         )}
+      </li>
+      <li className="lg:hidden">
+        <Link to="/entrance-test" className="hover:text-orange-500">
+          Entrance Test
+        </Link>
       </li>
       <li>
         <Link to="/quizresult" className="hover:text-orange-500">
@@ -254,6 +259,31 @@ function Navbar() {
               )}
             </div>
           </div>
+        </div>
+      </div>
+      {/* Bottom Navigation Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-200 dark:bg-slate-700 lg:hidden">
+        <div className="flex justify-around py-2">
+          <Link to="/" className="flex flex-col items-center text-gray-900 dark:text-white">
+            <HiHome className="w-6 h-6" />
+            <span className="text-xs">Home</span>
+          </Link>
+          <Link to="/showbook" className="flex flex-col items-center text-gray-900 dark:text-white">
+            <HiBookOpen className="w-6 h-6" />
+            <span className="text-xs">SoeNotes</span>
+          </Link>
+          <Link to="/mock" className="flex flex-col items-center text-gray-900 dark:text-white">
+            <HiClipboardList className="w-6 h-6" />
+            <span className="text-xs">Entrance Test</span>
+          </Link>
+          <Link to="/quizresult" className="flex flex-col items-center text-gray-900 dark:text-white">
+            <HiClipboardList className="w-6 h-6" />
+            <span className="text-xs">Results</span>
+          </Link>
+          <Link to="/about" className="flex flex-col items-center text-gray-900 dark:text-white">
+            <HiInformationCircle className="w-6 h-6" />
+            <span className="text-xs">About</span>
+          </Link>
         </div>
       </div>
     </>
