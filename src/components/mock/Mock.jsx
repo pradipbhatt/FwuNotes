@@ -94,8 +94,8 @@ const Mock = () => {
               <Tilt
                 key={year}
                 className="parallax-effect-img"
-                tiltMaxAngleX={30}
-                tiltMaxAngleY={30}
+                tiltMaxAngleX={10}
+                tiltMaxAngleY={10}
                 perspective={1400}
                 transitionSpeed={2500}
                 scale={1.1}
