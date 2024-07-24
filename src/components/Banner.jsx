@@ -157,7 +157,7 @@ function Banner() {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="grow p-2 bg-transparent border-none text-white placeholder-white text-sm"
+                      className="grow  bg-transparent border-none text-white placeholder-white text-sm"
                       placeholder="Email"
                       required
                     />
