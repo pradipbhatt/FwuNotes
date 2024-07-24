@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import AOS from 'aos';
@@ -134,21 +135,56 @@ const teamMembers = [
     contactUrl: 'https://github.com/suddhababa', // Replace with actual social media URL
   },
 ];
-
 function About() {
+  const timelineRefs = useRef([]);
+  const teamMemberRefs = useRef([]);
+
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
       mirror: false,
     });
+
+    // GSAP animations for timeline elements
+    timelineRefs.current.forEach((ref, index) => {
+      if (ref) {
+        gsap.fromTo(
+          ref,
+          { opacity: 0, x: index % 2 === 0 ? -100 : 100 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 1,
+            delay: index * 0.3,
+            ease: 'power3.out',
+          }
+        );
+      }
+    });
+
+    // GSAP animations for team member cards
+    teamMemberRefs.current.forEach((ref, index) => {
+      if (ref) {
+        gsap.fromTo(
+          ref,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            delay: index * 0.2,
+            ease: 'power3.out',
+          }
+        );
+      }
+    });
   }, []);
 
   const handleContactClick = (url) => {
-    window.open(url, '_blank'); // Open the provided URL in a new tab
+    window.open(url, '_blank');
   };
 
-  // Sorting teamMembers by position (ascending)
   teamMembers.sort((a, b) => a.position - b.position);
 
   return (
@@ -157,9 +193,11 @@ function About() {
 
       <div className="w-full flex flex-col items-center mt-12">
         <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical mt-10 w-full md:w-3/4">
-          <li className="flex" data-aos="fade-right">
+          <li className="flex" ref={(el) => (timelineRefs.current[0] = el)}>
             <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+              </svg>
             </div>
             <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md">
               <time className="font-mono italic">2020</time>
@@ -168,9 +206,11 @@ function About() {
             </div>
             <hr />
           </li>
-          <li className="flex justify-center" data-aos="fade-left">
+          <li className="flex justify-center" ref={(el) => (timelineRefs.current[1] = el)}>
             <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+              </svg>
             </div>
             <div className="timeline-start mb-10 bg-gray-100 p-4 rounded-md">
               <time className="font-mono italic">2020-2021</time>
@@ -179,9 +219,11 @@ function About() {
             </div>
             <hr />
           </li>
-          <li className="flex" data-aos="fade-right">
+          <li className="flex" ref={(el) => (timelineRefs.current[2] = el)}>
             <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" /></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+              </svg>
             </div>
             <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md">
               <time className="font-mono italic">2021-2022</time>
@@ -194,51 +236,44 @@ function About() {
       </div>
 
       <section className="bg-gray-900 py-20 mt-16 dark:bg-gray-100">
-  <div className="w-full flex flex-col items-center">
-    <h2 className="text-3xl font-bold mb-8 text-gray-100 dark:text-gray-900">
-      Executive Committee - 2080/81
-    </h2>
-    <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
-      {teamMembers.map((member, index) => (
-        <div
-          key={index}
-          className="bg-gray-700 dark:bg-gray-100 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
-          data-aos="fade-up"
-          data-aos-delay={index * 100}
-        >
-          <img
-            className="w-32 h-32 rounded-full mx-auto mb-4"
-            src={member.image}
-            alt={member.name}
-          />
-          <h3 className="text-lg font-semibold text-center text-gray-100 dark:text-gray-900 mb-2">
-            {member.name}
-          </h3>
-          <p className="text-center text-gray-100 dark:text-gray-900  mb-4">
-            {member.role}
-          </p>
-          <p className="text-center text-gray-100 dark:text-gray-900  text-sm">
-            {member.contribution}
-          </p>
-          <button
-            className="bg-blue-500 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-200 text-xs md:text-sm hover:bg-blue-600 transform hover:scale-110"
-            style={{
-              height: '32px',
-              padding: '0 10px',
-              backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
-              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
-              transition: 'background-image 1s ease, transform 1s ease',
-            }}
-            onClick={() => handleContactClick(member.contactUrl)}
-          >
-            Contact
-          </button>
+        <div className="w-full flex flex-col items-center">
+          <h2 className="text-3xl font-bold mb-8 text-gray-100 dark:text-gray-900">
+            Executive Committee - 2080/81
+          </h2>
+          <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
+            {teamMembers.map((member, index) => (
+              <div
+                key={index}
+                ref={(el) => (teamMemberRefs.current[index] = el)}
+                className="bg-gray-700 dark:bg-gray-100 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
+              >
+                <img
+                  className="w-32 h-32 rounded-full mx-auto mb-4"
+                  src={member.image}
+                  alt={member.name}
+                />
+                <h3 className="text-lg font-semibold text-center text-gray-100 dark:text-gray-900 mb-2">
+                  {member.name}
+                </h3>
+                <p className="text-center text-gray-300 dark:text-gray-700">
+                  {member.role}
+                </p>
+                <p className="text-center text-gray-100 dark:text-gray-900 mt-2">
+                  {member.contribution}
+                </p>
+                <div className="text-center mt-4">
+                  <button
+                    onClick={() => handleContactClick(member.contactUrl)}
+                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                  >
+                    Contact
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
-
+      </section>
 
       <Footer />
     </>

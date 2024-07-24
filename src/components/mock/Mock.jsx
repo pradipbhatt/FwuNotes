@@ -37,7 +37,7 @@ const Mock = () => {
   const handleTestNowClick = (year) => {
     setCurrentYear(year);
     sessionStorage.setItem('currentYear', year.toString());
-    navigate(`/Mock${year - 2070}`);
+    navigate(`/Mock${year - 2071}`);
   };
 
   const handleDismissNotice = () => {
