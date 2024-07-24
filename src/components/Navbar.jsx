@@ -3,23 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
-import {
-  HiMenu,
-  HiX,
-  HiSun,
-  HiMoon,
-  HiSearch,
-  HiHome,
-  HiBookOpen,
-  HiClipboardList,
-  HiInformationCircle,
+import { 
+  HiMenu, HiX, HiSun, HiMoon, HiSearch, 
+  HiHome, HiBookOpen, HiClipboardList, HiUserCircle 
 } from "react-icons/hi";
+import axios from "axios";
 
 function Navbar() {
   const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const [showMenuLeft, setShowMenuLeft] = useState(false);
   const [showMenuRight, setShowMenuRight] = useState(false);
@@ -29,7 +23,7 @@ function Navbar() {
   const [sticky, setSticky] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
-
+  
   const [activeTab, setActiveTab] = useState("home");
 
   useEffect(() => {
@@ -71,8 +65,9 @@ function Navbar() {
     };
   }, []);
 
+  // Simplified function to only handle redirect
   const fetchSearchResults = () => {
-    navigate("/mock");
+    navigate("/mock"); // Redirect to /mock
   };
 
   const handleSearchSubmit = (event) => {
@@ -80,67 +75,45 @@ function Navbar() {
     fetchSearchResults();
   };
 
-  const handleDropdownMouseEnter = () => {
-    setShowDropdown(true);
-  };
-
-  const handleDropdownMouseLeave = () => {
-    setShowDropdown(false);
-  };
-
-  const handleYearClick = (year) => {
-    navigate(`/Mock${year - 2071}`);
-    setShowDropdown(false);
-  };
-
   const navItems = (
     <>
       <li>
-        <Link to="/" className="hover:text-orange-500">
+        <a href="/" className="hover:text-orange-500">
           Home
-        </Link>
+        </a>
       </li>
       <li>
-        <Link to="/showbook" className="hover:text-orange-500">
+        <a href="/showbook" className="hover:text-orange-500">
           SoeNotes
-        </Link>
+        </a>
       </li>
       <li
-        className="relative  lg:block"
-        onMouseEnter={handleDropdownMouseEnter}
-        onMouseLeave={handleDropdownMouseLeave}
+        className="relative"
+        onMouseEnter={() => setShowDropdown(true)}
+        onMouseLeave={() => setShowDropdown(false)}
       >
         <a href="/mock" className="hover:text-orange-500">
           Entrance Test
         </a>
         {showDropdown && (
-          <ul className="absolute top-full left-0 mt-1 w-40 bg-white shadow-lg border border-gray-200 rounded-md dark:bg-slate-700 dark:text-white">
+          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
             {Array.from({ length: 11 }, (_, i) => 2071 + i).map((year) => (
-              <li
-                key={year}
-                className="px-4 py-2 hover:bg-gray-200 dark:hover:bg-slate-600 cursor-pointer"
-                onClick={() => handleYearClick(year)}
-              >
-                {year}
+              <li key={year} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
+                <Link to={`/mock${year - 2071}`}>{year}</Link>
               </li>
             ))}
           </ul>
         )}
       </li>
-      <li className="lg:hidden">
-        <Link to="/entrance-test" className="hover:text-orange-500">
-          Entrance Test
-        </Link>
-      </li>
       <li>
-        <Link to="/quizresult" className="hover:text-orange-500">
+        <a href="/quizresult" className="hover:text-orange-500">
           Entrance Results
-        </Link>
+        </a>
       </li>
       <li>
-        <Link to="/about" className="hover:text-orange-500">
+        <a href="/about" className="hover:text-orange-500">
           About
-        </Link>
+        </a>
       </li>
     </>
   );
@@ -149,7 +122,7 @@ function Navbar() {
     <>
       <div
         className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out  
-        ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
+      ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
       >
         <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
           <div className="navbar flex justify-between items-center py-4">
@@ -161,11 +134,7 @@ function Navbar() {
                   className="btn btn-ghost lg:hidden"
                   onClick={() => setShowMenuLeft(!showMenuLeft)}
                 >
-                  {showMenuLeft ? (
-                    <HiX className="h-5 w-5" />
-                  ) : (
-                    <HiMenu className="h-5 w-5" />
-                  )}
+                  {showMenuLeft ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
                 </div>
                 {showMenuLeft && (
                   <ul
@@ -177,10 +146,7 @@ function Navbar() {
                   </ul>
                 )}
               </div>
-              <Link
-                to="/"
-                className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black"
-              >
+              <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
                 SoeNotes
               </Link>
             </div>
@@ -190,10 +156,7 @@ function Navbar() {
                   {navItems}
                 </ul>
               </div>
-              <form
-                onSubmit={handleSearchSubmit}
-                className="hidden md:flex items-center"
-              >
+              <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
                 <label className="flex items-center gap-2 px-3 py-2 border rounded-md bg-gray-100 dark:bg-slate-300">
                   <input
                     type="text"
@@ -210,9 +173,7 @@ function Navbar() {
                   type="checkbox"
                   className="theme-controller"
                   checked={theme === "dark"}
-                  onChange={() =>
-                    setTheme(theme === "dark" ? "light" : "dark")
-                  }
+                  onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
                 />
                 {theme === "light" ? (
                   <HiSun className="swap-off fill-current w-7 h-7" />
@@ -249,8 +210,10 @@ function Navbar() {
               ) : (
                 <div className="">
                   <a
-                    className="bg-orange-500 text-white px-3 py-2 rounded-md font-medium hover:bg-orange-600"
-                    href="#my-modal"
+                    className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
+                    onClick={() =>
+                      document.getElementById("my_modal_3").showModal()
+                    }
                   >
                     Login
                   </a>
@@ -261,27 +224,60 @@ function Navbar() {
           </div>
         </div>
       </div>
-      {/* Bottom Navigation Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-slate-200 dark:bg-slate-700 lg:hidden">
-        <div className="flex justify-around py-2">
-          <Link to="/" className="flex flex-col items-center text-gray-900 dark:text-white">
+      <div
+        className={`fixed bottom-0 left-0 right-0 z-50 transition-transform transform ${
+          sticky ? "translate-y-0" : "translate-y-full"
+        }`}
+      >
+        <div className="w-full bg-slate-300 dark:bg-slate-500 shadow-md py-2 flex justify-around">
+          <Link
+            to="/"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "home" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("home")}
+          >
             <HiHome className="w-6 h-6" />
             <span className="text-xs">Home</span>
           </Link>
-          <Link to="/showbook" className="flex flex-col items-center text-gray-900 dark:text-white">
+          <Link
+            to="/showbook"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "soenotes" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("soenotes")}
+          >
             <HiBookOpen className="w-6 h-6" />
             <span className="text-xs">SoeNotes</span>
           </Link>
-          <Link to="/mock" className="flex flex-col items-center text-gray-900 dark:text-white">
+          <Link
+            to="/mock"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "entrance" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("entrance")}
+          >
             <HiClipboardList className="w-6 h-6" />
             <span className="text-xs">Entrance Test</span>
           </Link>
-          <Link to="/quizresult" className="flex flex-col items-center text-gray-900 dark:text-white">
-            <HiClipboardList className="w-6 h-6" />
+          <Link
+            to="/quizresult"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "results" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("results")}
+          >
+            <HiUserCircle className="w-6 h-6" />
             <span className="text-xs">Results</span>
           </Link>
-          <Link to="/about" className="flex flex-col items-center text-gray-900 dark:text-white">
-            <HiInformationCircle className="w-6 h-6" />
+          <Link
+            to="/about"
+            className={`flex flex-col items-center space-y-1 ${
+              activeTab === "about" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
+            }`}
+            onClick={() => setActiveTab("about")}
+          >
+            <HiUserCircle className="w-6 h-6" />
             <span className="text-xs">About</span>
           </Link>
         </div>
