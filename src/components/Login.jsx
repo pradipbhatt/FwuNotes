@@ -16,7 +16,6 @@ function Login() {
   const onSubmit = async (data) => {
     setLoading(true); // Set loading to true when login starts
     try {
-      toast.loading("Logging in, please wait..."); // Display loading toast
       const userInfo = {
         email: data.email,
         password: data.password,
