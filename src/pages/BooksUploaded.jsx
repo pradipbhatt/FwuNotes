@@ -5,7 +5,6 @@ import Footer from '../components/Footer';
 import arrowUp from '../../public/up-arrow.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import bannerImage from '../assets/pokhara.jpg'; // Import the banner image
 import coverImage from '../assets/pkr.jpg'; // Import the cover image
 
 function BooksUploaded() {
@@ -50,11 +49,15 @@ function BooksUploaded() {
   }, []);
 
   useEffect(() => {
-    // Get semester from query parameter
     const query = new URLSearchParams(location.search);
     const semester = query.get("semester");
     if (semester) {
-      setCurrentPage(parseInt(semester) - 1);
+      const semesterNumber = parseInt(semester, 10);
+      if (semesterNumber >= 0 && semesterNumber <= 8) {
+        setCurrentPage(semesterNumber);
+      } else {
+        setCurrentPage(0);
+      }
     }
   }, [location.search]);
 
@@ -89,11 +92,11 @@ function BooksUploaded() {
 
   const groupedBooks = groupBooksBySemester();
   const semesters = Object.keys(groupedBooks);
-  const totalSemesters = semesters.length;
+  const totalSemesters = 9; // 9 semesters including Semester 0
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    navigate(`/showbook?semester=${newPage + 1}`); // Update URL with new semester
+    navigate(`/showbook?semester=${newPage}`); // Update URL with new semester
   };
 
   const scrollToTop = () => {
@@ -116,47 +119,32 @@ function BooksUploaded() {
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="flex items-center justify-center space-x-2">
-              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500"></div>
-              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500 animation-delay-200"></div>
-              <div className="w-2 h-2 rounded-full animate-bounce bg-blue-500 animation-delay-400"></div>
+              <div className="w-12 h-12 border-4 border-t-4 border-blue-500 border-opacity-50 rounded-full animate-spin"></div>
             </div>
-            <p className="text-gray-700 mt-4">Please wait, notes are loading...</p>
+            <p className="text-gray-700 mt-4">Hold on, notes are loading...</p>
           </div>
         ) : (
           <>
             {semesters.map((semester, index) => (
               index === currentPage && (
                 <div key={index} className="mb-8" data-aos="zoom-in-left">
-                  <h2 className="text-xl font-semibold mb-2">Semester {semester} Notes</h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                  <h2 className="text-2xl font-semibold mb-4">Semester {semester} Notes</h2>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
                     {groupedBooks[semester].map((book, idx) => (
-                      <div key={idx} className="bg-white shadow-md rounded-lg p-4 hover:shadow-xl transition duration-300" data-aos="fade-up">
-                        <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4 rounded-md hover:scale-110 transition duration-500" />
-                        <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
-                        <p className="text-gray-700 mb-1">By: {book.createdBy}</p>
-                        <p className="text-gray-700 mb-1">Semester: {book.semester}</p>
-                        <div className="flex justify-between mt-4">
-                          <button
-                            onClick={() => handleShowPDF(book.pdfLink)}
-                            className="bg-blue-500 text-white font-bold py-2 px-3 rounded focus:outline-none focus:shadow-outline transition duration-300 text-xs md:text-sm"
-                            style={{
-                              height: '32px',
-                              padding: '0 10px',
-                              backgroundImage: 'linear-gradient(to right, #4facfe, #00f2fe)',
-                              boxShadow: '0px 4px 6px rgba(0, 0, 0, 0.1), 0px 1px 3px rgba(0, 0, 0, 0.08)',
-                              transition: 'background-image 3s ease, transform 1s ease',
-                            }}
-                            onMouseEnter={(e) => {
-                              e.target.style.backgroundImage = 'linear-gradient(to right, #45f2fe, #4facfe)';
-                              e.target.style.transform = 'scale(1.05)';
-                            }}
-                            onMouseLeave={(e) => {
-                              e.target.style.backgroundImage = 'linear-gradient(to right, #4facfe, #00f2fe)';
-                              e.target.style.transform = 'scale(1)';
-                            }}
-                          >
-                            Show PDF
-                          </button>
+                      <div key={idx} className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform hover:scale-105" data-aos="fade-up">
+                        <img src={book.image} alt={book.bookTitle} className="w-full h-48 object-cover mb-4" />
+                        <div className="p-4">
+                          <h3 className="text-lg font-semibold mb-2">{book.bookTitle}</h3>
+                          <p className="text-gray-600 mb-2">By: {book.createdBy}</p>
+                          <p className="text-gray-600 mb-4">Semester: {book.semester}</p>
+                          <div className="flex justify-between items-center">
+                            <button
+                              onClick={() => handleShowPDF(book.pdfLink)}
+                              className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 hover:bg-blue-600"
+                            >
+                              Show PDF
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
@@ -164,7 +152,6 @@ function BooksUploaded() {
                 </div>
               )
             ))}
-
           </>
         )}
       </div>
@@ -173,9 +160,9 @@ function BooksUploaded() {
           <button
             key={index}
             onClick={() => handlePageChange(index)}
-            className={`mx-1 px-3 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+            className={`mx-2 px-4 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
           >
-            {index + 1}
+            {index} {/* Displaying the semester number */}
           </button>
         ))}
       </div>

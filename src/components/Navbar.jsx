@@ -96,17 +96,18 @@ function Navbar() {
         </a>
         {showSemesterDropdown && (
           <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 dark:text-white backdrop-blur-md">
-            {Array.from({ length: 9 }, (_, i) => i + 0).map((semester) => (
-              <li
-                key={semester}
-                className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
-                style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
-                onClick={() => handleSemesterClick(semester)}
-              >
-                Semester {semester}
-              </li>
-            ))}
-          </ul>
+          {Array.from({ length: 9}, (_, i) => i).map((semester) => (
+            <li
+              key={semester}
+              className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
+              style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
+              onClick={() => handleSemesterClick(semester)}
+            >
+              Semester {semester}
+            </li>
+          ))}
+        </ul>
+        
         )}
       </li>
       <li
