@@ -21,6 +21,7 @@ const Quiz = () => {
   const [editMode, setEditMode] = useState(false);
   const [currentQuiz, setCurrentQuiz] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
+  const [searchTerm, setSearchTerm] = useState(''); // State for search input
   const quizzesPerPage = 10;
   const [showButtons, setShowButtons] = useState(true); // State to manage button visibility
 
@@ -40,7 +41,7 @@ const Quiz = () => {
     // Hide buttons after 3 seconds of no scroll activity
     setTimeout(() => {
       setShowButtons(false);
-    }, 800); // Adjust hiding delay as needed (e.g., 3000ms)
+    }, 3000); // Adjust hiding delay as needed (e.g., 3000ms)
   };
 
   const fetchQuizzes = async () => {
@@ -133,7 +134,7 @@ const Quiz = () => {
   const paginatedQuizzes = () => {
     const years = [...new Set(quizzes.map(quiz => quiz.yearID))].sort((a, b) => a - b);
     const currentYear = years[currentPage];
-    return quizzes.filter(quiz => quiz.yearID === currentYear);
+    return quizzes.filter(quiz => quiz.yearID === currentYear && quiz.question.toLowerCase().includes(searchTerm.toLowerCase()));
   };
 
   const totalPages = () => {
@@ -225,97 +226,106 @@ const Quiz = () => {
                 required
               />
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center justify-between">
               <button
                 type="submit"
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
               >
-                {editMode ? 'Update Quiz' : (isLoading ? (
-                  <div className="flex items-center">
-                    <ClipLoader color={'#ffffff'} loading={isLoading} size={20} />
-                    <span className="ml-2">Uploading...</span>
-                  </div>
-                ) : 'Submit Quiz')}
+                {editMode ? 'Update Quiz' : 'Add Quiz'}
               </button>
             </div>
           </form>
+          
+          <div className="mb-4">
+            <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="search">
+              Search Questions:
+            </label>
+            <input
+              type="text"
+              id="search"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline bg-transparent text-gray-500"
+              placeholder="Search for a question"
+            />
+          </div>
 
-
-          <div className="fixed bottom-20 right-5 z-10 flex justify-end w-full mt-10 ">
-  <button
-    onClick={handleGoToBottom}
-    className="bg-green-500 hover:bg-green-700 text-white font-bold py-3 px-3 rounded-full focus:outline-none focus:shadow-outline ml-2"
-  >
-    <FaArrowCircleDown className="text-3xl" />
-  </button>
-  <button
-    onClick={handleGoToTop}
-    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-3 rounded-full focus:outline-none focus:shadow-outline ml-2"
-  >
-    <FaArrowCircleUp className="text-3xl" />
-  </button>
-</div>
-
-            
-          <div className="mt-10">
-            <h2 className="text-2xl font-bold mb-4">Quiz List</h2>
-            {quizzes.length === 0 ? (
-              <p className="text-gray-700">No quizzes available.</p>
-            ) : (
-              <div className="space-y-4">
-                {paginatedQuizzes().map((quiz, index) => (
-                  <div key={quiz._id} className="bg-white shadow-md rounded px-8 py-6">
-                    <p className="text-lg font-bold">{`Question ${index + 1}: ${quiz.question}`}</p>
-                    <ul className="list-disc list-inside mt-2">
-                      {quiz.answers.map((answer, ansIndex) => (
-                        <li key={answer._id} className={`${answer.correct ? 'text-green-500' : 'text-gray-700'}`}>
-                          {answer.text}
-                        </li>
-                      ))}
-                    </ul>
-                    <p className="text-sm mt-2">{`Explanation: ${quiz.explanation}`}</p>
-                    <p className="text-sm">{`Year ID: ${quiz.yearID}`}</p>
-                    <div className="flex mt-2">
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mr-2"
-                        onClick={() => handleEditQuiz(quiz)}
-                      >
-                        Edit
-                      </button>
-                      <button
-                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                        onClick={() => handleDeleteQuiz(quiz._id)}
-                      >
-                        Delete
-                      </button>
-                    </div>
+          {isLoading ? (
+            <div className="flex items-center justify-center">
+              <ClipLoader color="blue" loading={isLoading} size={50} />
+            </div>
+          ) : (
+            <div>
+              {paginatedQuizzes().map((quiz) => (
+                <div key={quiz._id} className="mb-4 p-4 border border-gray-300 rounded">
+                  <h3 className="text-lg font-semibold">{quiz.question}</h3>
+                  <ul className="list-disc pl-5">
+                    {quiz.answers.map((answer, index) => (
+                      <li key={index} className={`${answer.correct ? 'text-green-500' : 'text-gray-700'}`}>
+                        {answer.text}
+                      </li>
+                    ))}
+                  </ul>
+                  <p className="text-gray-600 mt-2">Explanation: {quiz.explanation}</p>
+                  <p className="text-gray-600 mt-2">Year ID: {quiz.yearID}</p>
+                  <div className="mt-4 flex gap-2">
+                    <button
+                      onClick={() => handleEditQuiz(quiz)}
+                      className="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteQuiz(quiz._id)}
+                      className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                    >
+                      Delete
+                    </button>
                   </div>
-                ))}
+                </div>
+              ))}
+
+              {totalPages() > 1 && (
+                <div className="flex justify-between mt-4">
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 0))}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Previous
+                  </button>
+                  <span className="text-lg font-semibold">
+                    Page {currentPage + 1} of {totalPages()}
+                  </span>
+                  <button
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages() - 1))}
+                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                  >
+                    Next
+                  </button>
+                </div>
+              )}
+
+              <div className={`fixed bottom-0 left-0 w-full flex justify-between p-4 ${showButtons ? '' : 'hidden'}`}>
+                <button
+                  onClick={handleGoToTop}
+                  className="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  <FaArrowCircleUp />
+                </button>
+                <button
+                  onClick={handleGoToBottom}
+                  className="bg-gray-800 hover:bg-gray-600 text-white font-bold py-2 px-4 rounded"
+                >
+                  <FaArrowCircleDown />
+                </button>
               </div>
-            )}
-          </div>
-          <div className="flex justify-center mb-10">
-            <button
-              disabled={currentPage === 0}
-              onClick={() => setCurrentPage(currentPage - 1)}
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-l focus:outline-none focus:shadow-outline disabled:bg-gray-300 disabled:cursor-not-allowed mr-20"
-            >
-              Previous
-            </button>
-            <button
-              disabled={currentPage === totalPages() - 1}
-              onClick={() => setCurrentPage(currentPage + 1)}
-              className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-r focus:outline-none focus:shadow-outline disabled:bg-gray-300 disabled:cursor-not-allowed mr-20"
-            >
-              Next
-            </button>
-          </div>
+            </div>
+          )}
         </div>
       </div>
-      {/* <Footer/> */}
+      {/* <Footer /> Uncomment if you have a Footer component */}
     </>
   );
 };
 
 export default Quiz;
-// make next and previous bottom working

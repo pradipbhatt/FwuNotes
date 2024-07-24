@@ -7,7 +7,7 @@ import Navbar from '../Navbar';
 import Tilt from 'react-parallax-tilt'; // Adjust import path for tilt effect
 import imgTree from '../../assets/bg.jpg'; // Adjusted import path for background image
 
-const years = [2071, 2072, 2073, 2074, 2075, 2076, 2077, 2078, 2079, 2080, 2081];
+const years = [2071, 2072, 2073, 2074, 2075, 2076, 2077, 2078, 2079, 2080];
 
 const Mock = () => {
   const [currentYear, setCurrentYear] = useState(null);

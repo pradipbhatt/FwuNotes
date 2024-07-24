@@ -120,7 +120,7 @@ function Navbar() {
         </a>
         {showDropdown && (
           <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
-            {Array.from({ length: 11 }, (_, i) => 2071 + i).map((year) => (
+            {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
               <li key={year} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                 <Link to={`/mock${year - 2071}`}>{year}</Link>
               </li>
