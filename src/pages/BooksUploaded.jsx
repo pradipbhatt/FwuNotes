@@ -12,6 +12,10 @@ function BooksUploaded() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [showScroll, setShowScroll] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredBooks, setFilteredBooks] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null); // State to manage selected book for PDF
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -21,6 +25,7 @@ function BooksUploaded() {
       .then(data => {
         const sortedBooks = data.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
         setBooks(sortedBooks);
+        setFilteredBooks(sortedBooks);
         setLoading(false);
       })
       .catch(error => {
@@ -61,27 +66,35 @@ function BooksUploaded() {
     }
   }, [location.search]);
 
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredBooks(books);
+      setShowSuggestions(false);
+    } else {
+      const lowercasedQuery = searchQuery.toLowerCase();
+      const filtered = books.filter(book =>
+        book.bookTitle.toLowerCase().includes(lowercasedQuery)
+      );
+      setFilteredBooks(filtered);
+      setShowSuggestions(true);
+    }
+  }, [searchQuery, books]);
+
+  useEffect(() => {
+    if (selectedBook) {
+      window.open(selectedBook.pdfLink, '_blank');
+      setSelectedBook(null); // Clear selection after opening
+    }
+  }, [selectedBook]);
+
   const handleShowPDF = (pdfLink) => {
     window.open(pdfLink, '_blank');
   };
 
-  const handleDeleteBook = (id) => {
-    fetch(`https://fwu-soe.onrender.com/book/deleteBook/${id}`, {
-      method: 'DELETE',
-    })
-    .then(response => {
-      if (response.ok) {
-        setBooks(prevBooks => prevBooks.filter(book => book._id !== id));
-      } else {
-        console.error('Failed to delete book');
-      }
-    })
-    .catch(error => console.error('Error:', error));
-  };
 
   const groupBooksBySemester = () => {
     const groupedBooks = {};
-    books.forEach(book => {
+    filteredBooks.forEach(book => {
       if (!groupedBooks[book.semester]) {
         groupedBooks[book.semester] = [];
       }
@@ -116,6 +129,33 @@ function BooksUploaded() {
           }}
         ></div>
 
+        <div className="relative z-10 mb-8">
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search by book title..."
+            className="w-full px-4 py-2 border rounded-md dark:bg-slate-700 dark:text-white"
+          />
+          {showSuggestions && (
+            <ul className="absolute z-20 w-full mt-2 bg-white dark:bg-slate-700 shadow-lg rounded-md max-h-60 overflow-auto">
+              {filteredBooks.map((book) => (
+                <li
+                  key={book._id}
+                  className="px-4 py-2 cursor-pointer hover:bg-gray-200 dark:hover:bg-slate-600"
+                  onClick={() => {
+                    setSelectedBook(book); // Set selected book to open PDF
+                    setSearchQuery(''); // Clear search query
+                    setShowSuggestions(false); // Hide suggestions
+                  }}
+                >
+                  {book.bookTitle}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
         {loading ? (
           <div className="flex flex-col items-center justify-center min-h-screen">
             <div className="flex items-center justify-center space-x-2">
@@ -144,6 +184,12 @@ function BooksUploaded() {
                             >
                               Show PDF
                             </button>
+                            {/* <button
+                              onClick={() => handleDeleteBook(book._id)}
+                              className="bg-red-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 hover:bg-red-600"
+                            >
+                              Delete
+                            </button> */}
                           </div>
                         </div>
                       </div>
@@ -160,7 +206,7 @@ function BooksUploaded() {
           <button
             key={index}
             onClick={() => handlePageChange(index)}
-            className={`mx-2 px-4 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+            className={`mx-1 px-2 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
           >
             {index} {/* Displaying the semester number */}
           </button>
