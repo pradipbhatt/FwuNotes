@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import arrowUp from '../../public/up-arrow.png';
@@ -12,6 +13,8 @@ function BooksUploaded() {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
   const [showScroll, setShowScroll] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   const getBooks = () => {
     fetch('https://fwu-soe.onrender.com/book/getBook')
@@ -45,6 +48,15 @@ function BooksUploaded() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Get semester from query parameter
+    const query = new URLSearchParams(location.search);
+    const semester = query.get("semester");
+    if (semester) {
+      setCurrentPage(parseInt(semester) - 1);
+    }
+  }, [location.search]);
 
   const handleShowPDF = (pdfLink) => {
     window.open(pdfLink, '_blank');
@@ -81,6 +93,7 @@ function BooksUploaded() {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
+    navigate(`/showbook?semester=${newPage + 1}`); // Update URL with new semester
   };
 
   const scrollToTop = () => {
@@ -90,19 +103,6 @@ function BooksUploaded() {
   return (
     <>
       <Navbar />
-      {/* Banner Section */}
-      <div
-        className="relative bg-cover bg-center h-64 md:h-96"
-        style={{ backgroundImage: `url(${bannerImage})` }}
-      >
-        <div className="absolute inset-0 bg-gray-900 opacity-60"></div>
-        <div className="absolute inset-0 flex items-center justify-center">
-          <h1 className="text-white text-3xl md:text-5xl font-bold text-center px-4 md:px-10">
-            Books Uploaded
-          </h1>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 py-8 mt-20 overflow-hidden relative">
         {/* Cover Section Behind Cards */}
         <div
@@ -168,17 +168,17 @@ function BooksUploaded() {
           </>
         )}
       </div>
-            <div className="flex justify-center mt-8 mb-10">
-              {Array.from({ length: totalSemesters + 1 }, (_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handlePageChange(index)}
-                  className={`mx-1 px-3 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-                >
-                  {index}
-                </button>
-              ))}
-            </div>
+      <div className="flex justify-center mt-8 mb-10">
+        {Array.from({ length: totalSemesters }, (_, index) => (
+          <button
+            key={index}
+            onClick={() => handlePageChange(index)}
+            className={`mx-1 px-3 py-2 rounded ${currentPage === index ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+          >
+            {index + 1}
+          </button>
+        ))}
+      </div>
 
       <Footer />
       {showScroll && (

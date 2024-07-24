@@ -54,7 +54,7 @@ function Login() {
               ✕
             </Link>
 
-            <h3 className="font-bold text-2xl text-gray-800 mb-6 text-center">
+            <h3 className="font-bold text-2xl text-gray-100 mb-6 text-center">
               Login using College Mail
             </h3>
             <div className="space-y-4">

@@ -13,17 +13,16 @@ function Navbar() {
   const [authUser] = useAuth();
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
   const element = document.documentElement;
-  const navigate = useNavigate(); // Initialize useNavigate hook
+  const navigate = useNavigate();
 
   const [showMenuLeft, setShowMenuLeft] = useState(false);
   const [showMenuRight, setShowMenuRight] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
+  const [showSemesterDropdown, setShowSemesterDropdown] = useState(false);
 
   const profileRef = useRef(null);
   const [sticky, setSticky] = useState(false);
-
   const [searchQuery, setSearchQuery] = useState("");
-  
   const [activeTab, setActiveTab] = useState("home");
 
   useEffect(() => {
@@ -56,6 +55,7 @@ function Navbar() {
         event.target.closest(".navbar-end") === null
       ) {
         setShowMenuRight(false);
+        setShowSemesterDropdown(false);
       }
     };
 
@@ -65,14 +65,18 @@ function Navbar() {
     };
   }, []);
 
-  // Simplified function to only handle redirect
   const fetchSearchResults = () => {
-    navigate("/mock"); // Redirect to /mock
+    navigate("/mock");
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     fetchSearchResults();
+  };
+
+  const handleSemesterClick = (semester) => {
+    navigate(`/showbook?semester=${semester}`);
+    setShowSemesterDropdown(false);
   };
 
   const navItems = (
@@ -82,10 +86,28 @@ function Navbar() {
           Home
         </a>
       </li>
-      <li>
+      <li
+        className="relative"
+        onMouseEnter={() => setShowSemesterDropdown(true)}
+        onMouseLeave={() => setShowSemesterDropdown(false)}
+      >
         <a href="/showbook" className="hover:text-orange-500">
           SoeNotes
         </a>
+        {showSemesterDropdown && (
+          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 dark:text-white backdrop-blur-md">
+            {Array.from({ length: 9 }, (_, i) => i + 0).map((semester) => (
+              <li
+                key={semester}
+                className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
+                style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
+                onClick={() => handleSemesterClick(semester)}
+              >
+                Semester {semester}
+              </li>
+            ))}
+          </ul>
+        )}
       </li>
       <li
         className="relative"
@@ -121,8 +143,8 @@ function Navbar() {
   return (
     <>
       <div
-        className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out  
-      ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
+        className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
+        ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
       >
         <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
           <div className="navbar flex justify-between items-center py-4">
@@ -196,24 +218,19 @@ function Navbar() {
                   {showMenuRight && (
                     <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/">About Us</Link>
+                        <Link to="/about">About</Link>
                       </li>
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/">Settings</Link>
-                      </li>
-                      <li className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Logout />
                       </li>
                     </ul>
                   )}
                 </div>
               ) : (
-                <div className="">
+                <div>
                   <a
                     className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
-                    onClick={() =>
-                      document.getElementById("my_modal_3").showModal()
-                    }
+                    onClick={() => document.getElementById("my_modal_3").showModal()}
                   >
                     Login
                   </a>
@@ -224,17 +241,13 @@ function Navbar() {
           </div>
         </div>
       </div>
-      <div
-        className={`fixed bottom-0 left-0 right-0 z-50 transition-transform transform ${
-          sticky ? "translate-y-0" : "translate-y-full"
-        }`}
-      >
-        <div className="w-full bg-slate-300 dark:bg-slate-500 shadow-md py-2 flex justify-around">
+
+      {/* Bottom Navigation Bar for Mobile */}
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-800 text-white shadow-lg">
+        <div className="flex justify-around py-2">
           <Link
             to="/"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "home" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex flex-col items-center ${activeTab === "home" ? "text-orange-500" : "text-gray-400"}`}
             onClick={() => setActiveTab("home")}
           >
             <HiHome className="w-6 h-6" />
@@ -242,39 +255,23 @@ function Navbar() {
           </Link>
           <Link
             to="/showbook"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "soenotes" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex flex-col items-center ${activeTab === "soenotes" ? "text-orange-500" : "text-gray-400"}`}
             onClick={() => setActiveTab("soenotes")}
           >
             <HiBookOpen className="w-6 h-6" />
-            <span className="text-xs">SoeNotes</span>
+            <span className="text-xs">Notes</span>
           </Link>
           <Link
             to="/mock"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "entrance" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex flex-col items-center ${activeTab === "entrance" ? "text-orange-500" : "text-gray-400"}`}
             onClick={() => setActiveTab("entrance")}
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Entrance Test</span>
-          </Link>
-          <Link
-            to="/quizresult"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "results" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
-            onClick={() => setActiveTab("results")}
-          >
-            <HiUserCircle className="w-6 h-6" />
-            <span className="text-xs">Results</span>
+            <span className="text-xs">Test</span>
           </Link>
           <Link
             to="/about"
-            className={`flex flex-col items-center space-y-1 ${
-              activeTab === "about" ? "text-orange-500" : "text-gray-700 dark:text-gray-300"
-            }`}
+            className={`flex flex-col items-center ${activeTab === "about" ? "text-orange-500" : "text-gray-400"}`}
             onClick={() => setActiveTab("about")}
           >
             <HiUserCircle className="w-6 h-6" />
