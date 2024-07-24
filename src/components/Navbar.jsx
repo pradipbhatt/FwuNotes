@@ -268,8 +268,19 @@ function Navbar() {
             onClick={() => setActiveTab("entrance")}
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Test</span>
+            <span className="text-xs">Entrance Test</span>
           </Link>
+
+          <Link
+            to="/quizresult"
+            className={`flex flex-col items-center ${activeTab === "entrance" ? "text-orange-500" : "text-gray-400"}`}
+            onClick={() => setActiveTab("entrance")}
+          >
+            <HiClipboardList className="w-6 h-6" />
+            <span className="text-xs">testResults</span>
+          </Link>
+
+
           <Link
             to="/about"
             className={`flex flex-col items-center ${activeTab === "about" ? "text-orange-500" : "text-gray-400"}`}

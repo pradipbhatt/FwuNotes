@@ -1,17 +1,19 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AOS from 'aos';
-import 'aos/dist/aos.css'; // Import AOS CSS
-import logo from '../../../public/fwu.png'; // Adjust the import path as necessary
+import 'aos/dist/aos.css';
+import logo from '../../../public/fwu.png'; // Adjust import path
 import Navbar from '../Navbar';
-import Tilt from 'react-parallax-tilt'; // Correct import for react-parallax-tilt
-import imgTree from '../../assets/bg.jpg'; // Adjusted import for your image
+import Tilt from 'react-parallax-tilt'; // Adjust import path for tilt effect
+import imgTree from '../../assets/bg.jpg'; // Adjusted import path for background image
 
 const years = [2071, 2072, 2073, 2074, 2075, 2076, 2077, 2078, 2079, 2080, 2081];
 
 const Mock = () => {
   const [currentYear, setCurrentYear] = useState(null);
-  const [visibleYears, setVisibleYears] = useState([]);
+  const [showNotice, setShowNotice] = useState(true);
+  const audioRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Initialize AOS
@@ -21,65 +23,26 @@ const Mock = () => {
       once: true,
     });
 
-    // Retrieve current year from localStorage on component mount
-    const storedYear = localStorage.getItem('currentYear');
-    if (storedYear && years.includes(parseInt(storedYear))) {
-      setCurrentYear(parseInt(storedYear));
-    }
-
-    // AOS initialization for scroll events
-    window.addEventListener('scroll', AOS.refresh);
-
-    return () => {
-      window.removeEventListener('scroll', AOS.refresh);
-    };
+    // Ensure notice is shown on page refresh
+    sessionStorage.setItem('noticeShown', 'true');
+    playNotificationSound();
   }, []);
+
+  const playNotificationSound = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
 
   const handleTestNowClick = (year) => {
     setCurrentYear(year);
-    // Store current year in localStorage
-    localStorage.setItem('currentYear', year.toString());
+    sessionStorage.setItem('currentYear', year.toString());
+    navigate(`/Mock${year - 2070}`);
   };
 
-  // Lazy load logic
-  const useLazyLoad = (callback) => {
-    const [isVisible, setIsVisible] = useState(false);
-    const ref = useRef();
-
-    useEffect(() => {
-      const observer = new IntersectionObserver(([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      }, {
-        threshold: 0.1, // Adjust the threshold as needed
-      });
-
-      if (ref.current) {
-        observer.observe(ref.current);
-      }
-
-      return () => {
-        if (ref.current) {
-          observer.unobserve(ref.current);
-        }
-      };
-    }, []);
-
-    useEffect(() => {
-      if (isVisible && callback) {
-        callback();
-      }
-    }, [isVisible, callback]);
-
-    return ref;
-  };
-
-  const handleCardVisibility = (index) => {
-    if (!visibleYears.includes(years[index])) {
-      setVisibleYears((prev) => [...prev, years[index]]);
-    }
+  const handleDismissNotice = () => {
+    setShowNotice(false);
+    sessionStorage.setItem('noticeDismissed', 'true');
   };
 
   return (
@@ -90,7 +53,7 @@ const Mock = () => {
         style={{
           backgroundImage: `url(${imgTree})`,
           backgroundSize: 'cover',
-          filter: 'blur(8px)', // Adjust blur intensity as needed
+          filter: 'blur(8px)',
         }}
       ></div>
 
@@ -100,26 +63,42 @@ const Mock = () => {
       <div className="relative z-10">
         <Navbar />
 
+        {showNotice && (
+          <div className="fixed top-0 left-0 right-0 bg-gradient-to-r from-blue-500 to-teal-500 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg animate__animated animate__fadeInDown">
+            <div className="font-bold">
+              <p className="text-lg">
+                After completing the test, please fill out the form with your real name.
+              </p>
+            </div>
+            <button
+              className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+              onClick={handleDismissNotice}
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
+
         <div className="container mx-auto text-center mt-20 p-4">
           <div className="header mb-4" data-aos="fade-right">
             <img src={logo} alt="University Logo" className="mx-auto w-32 h-auto mb-4" />
-            <h1 className="text-2xl font-bold text-white">FAR WESTERN UNIVERSITY</h1>
-            <h2 className="text-xl text-white">Faculty of Engineering</h2>
-            <h3 className="text-lg text-white">Mahendranagar, Kanchanpur, Nepal</h3>
-            <h3 className="text-lg text-white">BE Entrance Examination</h3>
+            <h1 className="text-3xl font-bold text-white mb-2">Far Western University</h1>
+            <h2 className="text-xl text-white mb-2">Faculty of Engineering</h2>
+            <h3 className="text-lg text-white mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
+            <h4 className="text-lg text-white">BE Entrance Examination</h4>
           </div>
         </div>
 
         {/* Admission Guidelines Card */}
-        <div className="max-w-sm mx-auto bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out transform hover:scale-105 mt-8 mb-8 relative z-10">
+        <div className="max-w-md mx-auto bg-white rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300 ease-in-out transform hover:scale-105 mt-8 mb-8 relative z-10">
           <div className="p-6">
-            <h2 className="text-xl font-bold text-gray-800 mb-4">Admission Guidelines</h2>
-            <p className="text-gray-600 mb-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Admission Guidelines</h2>
+            <p className="text-gray-700 mb-6">
               The admission guidelines for Far Western University's Faculty of Engineering provide a comprehensive overview of the admission process, including eligibility criteria, application procedures, and other important details.
             </p>
             <Link to={`/AdmissionGuidelines/`}>
               <button
-                className="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 px-4 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-all duration-400 ease-in-out shadow-inner"
+                className="bg-gradient-to-r from-purple-500 to-blue-600 text-white py-2 px-4 rounded-full hover:bg-gradient-to-l hover:from-blue-600 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out shadow-lg"
                 onClick={() => handleTestNowClick()}
               >
                 View Guidelines
@@ -129,55 +108,43 @@ const Mock = () => {
         </div>
 
         {/* Entrance Papers Cards */}
-        <div className="flex-grow flex justify-center items-center mt-8 mb-8 m-10 relative z-10">
+        <div className="flex-grow flex justify-center items-center mt-8 mb-8 mx-10 relative z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
-            {years.map((year, index) => {
-              const ref = useLazyLoad(() => handleCardVisibility(index));
-
-              return (
-                <div
-                  key={year}
-                  ref={ref}
-                  className={`max-w-sm mx-auto bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out transform hover:scale-105 mb-8 relative ${visibleYears.includes(year) ? '' : 'opacity-0'}`}
-                  data-aos="fade-up"
-                  data-aos-delay={`${index * 10}`} // Adjust delay timing (in milliseconds)
+            {years.map((year, index) => (
+              <div
+                key={year}
+                className="max-w-sm mx-auto bg-white rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 ease-in-out transform hover:scale-105 mb-8 relative"
+                data-aos="fade-up"
+                data-aos-delay={`${index * 100}`} // Adjust delay timing
+              >
+                <Tilt
+                  className="parallax-effect-img"
+                  tiltMaxAngleX={10}
+                  tiltMaxAngleY={10}
+                  perspective={1500}
+                  transitionSpeed={100}
+                  scale={1.1}
+                  gyroscope={true}
                 >
-                  <Tilt
-                    className="parallax-effect-img"
-                    tiltMaxAngleX={10}
-                    tiltMaxAngleY={10}
-                    perspective={1400}
-                    transitionSpeed={50}
-                    scale={1.1}
-                    gyroscope={true}
-                  >
-                    <div className="relative z-10 p-6 flex flex-col items-center">
-                      <h2 className="text-xl font-bold mb-2">Entrance Paper of {year}</h2>
-                      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-12 w-12 mb-4" viewBox="0 0 16 16">
-                        <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                        <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                      </svg>
-                      <p className="mb-4 text-center text-sm font-medium text-gray-600">
-                        Unlock your potential with our entrance papers!
-                      </p>
-                      <Link to={`/Mock${index}/`}>
-                        <button
-                          className="bg-gradient-to-r from-purple-500 to-blue-500 text-white py-2 px-4 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-purple-500 focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-opacity-75 transition-all duration-400 ease-in-out shadow-inner"
-                          onClick={() => handleTestNowClick(year)}
-                        >
-                          Take a Test Now
-                        </button>
-                      </Link>
-                    </div>
-                  </Tilt>
-                </div>
-              );
-            })}
+                  <div className="relative z-10 p-6 flex flex-col items-center">
+                    <h2 className="text-xl font-bold mb-2">Entrance Paper of {year}</h2>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-12 w-12 mb-4 text-gray-700" viewBox="0 0 16 16">
+                      <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.5A2.5 2.5 0 0 1 9.5 10h4.5A2.5 2.5 0 0 1 16 12.5v.793c.026.009.051.02.076.032L16 13v-7h1a1.5 1.5 0 0 0 1.5-1.5V4.5A1.5 1.5 0 0 0 17 3H2.5zM1 7.5V4.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 17 4.5v3a2.5 2.5 0 0 1-2.5 2.5H2.5A2.5 2.5 0 0 1 1 7.5zm6 2.622a.75.75 0 0 1 .75-.75h.5a.75.75 0 0 1 .75.75v2.378a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75v-2.378z"/>
+                    </svg>
+                    <button
+                      className="bg-gradient-to-r from-green-400 to-blue-500 text-white py-2 px-4 rounded-full hover:bg-gradient-to-l hover:from-blue-500 hover:to-green-400 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out shadow-lg"
+                      onClick={() => handleTestNowClick(year)}
+                    >
+                      Start Test
+                    </button>
+                  </div>
+                </Tilt>
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Uncomment Footer if implemented */}
-        {/* <Footer /> */}
+        <audio ref={audioRef} src="../../public/simple-notification-152054.mp3" preload="auto" />
       </div>
     </div>
   );
