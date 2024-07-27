@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false); // State to track loading status
+  const [userImage, setUserImage] = useState(""); // State for user image URL
   const navigate = useNavigate();
   const {
     register,
@@ -24,6 +25,7 @@ function Signup() {
         password: data.password,
         registrationNumber: data.registrationNumber,
         isAdmin: true, // Assuming you set isAdmin based on your logic
+        userImage: userImage || "https://pradipbhatt.netlify.app/media/pradip-removebg-preview.png", // Default image URL
       };
       const res = await axios.post("https://fwu-soe.onrender.com/user/signup", userInfo, {
         headers: {
@@ -34,10 +36,8 @@ function Signup() {
       console.log(res.data);
       if (res.data) {
         toast.success("Successfully signed up");
-        // Save user data to local storage
+        navigate("/"); // Redirect to homepage
         localStorage.setItem("Users", JSON.stringify(res.data.user));
-        // Redirect to homepage
-        navigate("/"); 
       }
     } catch (err) {
       if (err.response) {
@@ -129,6 +129,21 @@ function Signup() {
               </div>
               {errors.password && (
                 <span className="text-sm text-red-500">{errors.password.message}</span>
+              )}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700">Profile Image URL (Optional)</label>
+              <input
+                type="text"
+                placeholder="Enter image URL"
+                value={userImage}
+                onChange={(e) => setUserImage(e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+              />
+              {userImage && (
+                <div className="mt-2">
+                  <img src={userImage} alt="Preview" className="w-32 h-32 object-cover rounded-md" />
+                </div>
               )}
             </div>
             <div className="flex justify-between items-center mt-6">
