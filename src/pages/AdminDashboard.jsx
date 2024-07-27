@@ -5,8 +5,8 @@ import Footer from '../components/Footer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import QuizResultForm from '../components/mock/QuizResultForm';
-import Quiz from "../../src/components/mock/Quiz";
-import Addbook from "../pages/Addbook";
+import Quiz from '../components/mock/Quiz';
+import AddBook from './Addbook';
 
 
 const AdminDashboard = () => {
@@ -18,7 +18,11 @@ const AdminDashboard = () => {
     registrationNumber: '',
     password: '',
     isAdmin: false,
+    profileImageURL: '',
+    userImage: '' // Added field for user image
   });
+  const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   useEffect(() => {
     fetchUsers();
@@ -29,11 +33,13 @@ const AdminDashboard = () => {
       const response = await axios.get('https://fwu-soe.onrender.com/admin/users', {
         headers: {
           'Content-Type': 'application/json',
-          'Is-Admin': 'true'
+          'Is-Admin': 'true',
         },
       });
-      console.log('Fetched users:', response.data);
-      setUsers(response.data);
+      const sortedUsers = response.data.sort((a, b) =>
+        a.fullname.localeCompare(b.fullname)
+      );
+      setUsers(sortedUsers);
     } catch (error) {
       console.error('Error fetching users:', error.response ? error.response.data : error.message);
       toast.error('Error fetching users');
@@ -41,11 +47,12 @@ const AdminDashboard = () => {
   };
 
   const handleDelete = async (id) => {
+    setLoading(true);
     try {
       await axios.delete(`https://fwu-soe.onrender.com/admin/users/${id}`, {
         headers: {
           'Content-Type': 'application/json',
-          'Is-Admin': 'true'
+          'Is-Admin': 'true',
         },
       });
       fetchUsers();
@@ -53,15 +60,30 @@ const AdminDashboard = () => {
     } catch (error) {
       console.error('Error deleting user:', error.response ? error.response.data : error.message);
       toast.error('Error deleting user');
+    } finally {
+      setLoading(false);
     }
   };
 
   const handleUpdate = async (id) => {
+    setLoading(true);
     try {
-      await axios.put(`https://fwu-soe.onrender.com/admin/updateUser/${id}`, form, {
+      // Only include the password if it is not empty
+      const updateData = {
+        fullname: form.fullname,
+        email: form.email,
+        registrationNumber: form.registrationNumber,
+        isAdmin: form.isAdmin,
+        profileImageURL: form.profileImageURL,
+        userImage: form.userImage,
+      };
+      if (form.password) {
+        updateData.password = form.password;
+      }
+      await axios.put(`https://fwu-soe.onrender.com/user/users/${id}`, updateData, {
         headers: {
           'Content-Type': 'application/json',
-          'Is-Admin': 'true'
+          'Is-Admin': 'true',
         },
       });
       fetchUsers();
@@ -72,11 +94,15 @@ const AdminDashboard = () => {
         registrationNumber: '',
         password: '',
         isAdmin: false,
+        profileImageURL: '',
+        userImage: '' // Reset userImage
       });
       toast.success('User updated successfully');
     } catch (error) {
       console.error('Error updating user:', error.response ? error.response.data : error.message);
       toast.error('Error updating user');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -87,6 +113,8 @@ const AdminDashboard = () => {
       email: user.email,
       registrationNumber: user.registrationNumber,
       isAdmin: user.isAdmin,
+      profileImageURL: user.profileImageURL || '',
+      userImage: user.userImage || '', // Populate userImage
     });
   };
 
@@ -100,11 +128,12 @@ const AdminDashboard = () => {
 
   const handleSubmitNewUser = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.post('https://fwu-soe.onrender.com/user/signup', form, {
         headers: {
           'Content-Type': 'application/json',
-          'Is-Admin': 'true'
+          'Is-Admin': 'true',
         },
       });
       fetchUsers();
@@ -114,47 +143,77 @@ const AdminDashboard = () => {
         registrationNumber: '',
         password: '',
         isAdmin: false,
+        profileImageURL: '',
+        userImage: '' // Reset userImage
       });
       toast.success('User created successfully');
     } catch (error) {
       console.error('Error creating user:', error.response ? error.response.data : error.message);
       toast.error('Error creating user');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <>
       <Navbar />
-      <div className="container mx-auto p-4 mt-20">
-        <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
-        <div className="overflow-x-auto">
-          <table className="min-w-full bg-white border border-gray-300">
+      <div className="container mx-auto px-4 py-6 mt-20 bg-gray-800 dark:bg-gray-100 rounded-lg shadow-md">
+        <h1 className="text-3xl font-bold mb-6 text-center text-gray-100 dark:text-gray-900">Admin Dashboard</h1>
+        <div className="overflow-x-auto mb-8">
+          <table className="min-w-full bg-white dark:bg-gray-100 border border-gray-100 dark:border-gray-100 rounded-lg shadow-sm">
             <thead>
-              <tr>
-                <th className="py-2 px-4 border-b">Full Name</th>
-                <th className="py-2 px-4 border-b">Email</th>
-                <th className="py-2 px-4 border-b">Registration Number</th>
-                <th className="py-2 px-4 border-b">Admin</th>
-                <th className="py-2 px-4 border-b">Actions</th>
+              <tr className="bg-gray-700 dark:bg-gray-800 text-gray-100 dark:text-gray-100">
+                <th className="py-3 px-4 border-b">Full Name</th>
+                <th className="py-3 px-4 border-b">Email</th>
+                <th className="py-3 px-4 border-b">Registration Number</th>
+                <th className="py-3 px-4 border-b">Admin</th>
+                <th className="py-3 px-4 border-b">Profile Image</th>
+                <th className="py-3 px-4 border-b">User Image</th>
+                <th className="py-3 px-4 border-b">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
-                <tr key={user._id}>
-                  <td className="py-2 px-4 border-b">{user.fullname}</td>
-                  <td className="py-2 px-4 border-b">{user.email}</td>
-                  <td className="py-2 px-4 border-b">{user.registrationNumber}</td>
-                  <td className="py-2 px-4 border-b">{user.isAdmin ? 'Yes' : 'No'}</td>
-                  <td className="py-2 px-4 border-b">
+                <tr key={user._id} className="transition-transform duration-300 transform hover:bg-gray-100 dark:hover:bg-gray-700">
+                  <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.fullname}</td>
+                  <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.email}</td>
+                  <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.registrationNumber}</td>
+                  <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.isAdmin ? 'Yes' : 'No'}</td>
+                  <td className="py-3 px-4 border-b">
+                    {user.profileImageURL ? (
+                      <img
+                        src={user.profileImageURL}
+                        alt={user.fullname}
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                    ) : (
+                      'No Image'
+                    )}
+                  </td>
+                  <td className="py-3 px-4 border-b">
+                    {user.userImage ? (
+                      <img
+                        src={user.userImage}
+                        alt={user.fullname}
+                        className="w-12 h-12 rounded-full object-cover"
+                      />
+                    ) : (
+                      'No Image'
+                    )}
+                  </td>
+                  <td className="py-3 px-4 border-b flex space-x-2">
                     <button
                       onClick={() => handleEdit(user)}
-                      className="bg-blue-500 text-white px-2 py-1 rounded mr-2"
+                      className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600 transition"
+                      disabled={loading}
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDelete(user._id)}
-                      className="bg-red-500 text-white px-2 py-1 rounded"
+                      className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
+                      disabled={loading}
                     >
                       Delete
                     </button>
@@ -166,58 +225,100 @@ const AdminDashboard = () => {
         </div>
 
         {selectedUser && (
-          <div className="mt-6">
-            <h2 className="text-xl font-bold mb-2">Edit User</h2>
+          <div className="mb-8 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+            <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-500">Edit User</h2>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
                 handleUpdate(selectedUser);
               }}
             >
-              <div className="mb-4">
-                <label className="block text-gray-700">Full Name</label>
-                <input
-                  type="text"
-                  name="fullname"
-                  value={form.fullname}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Email</label>
-                <input
-                  type="email"
-                  name="email"
-                  value={form.email}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Registration Number</label>
-                <input
-                  type="text"
-                  name="registrationNumber"
-                  value={form.registrationNumber}
-                  onChange={handleChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700">Admin</label>
-                <input
-                  type="checkbox"
-                  name="isAdmin"
-                  checked={form.isAdmin}
-                  onChange={handleChange}
-                  className="mr-2 leading-tight"
-                />
-                <span className="text-gray-700">Is Admin</span>
+              <div className="grid gap-4 mb-4 md:grid-cols-2">
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Full Name</label>
+                  <input
+                    type="text"
+                    name="fullname"
+                    value={form.fullname}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Email</label>
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Registration Number</label>
+                  <input
+                    type="text"
+                    name="registrationNumber"
+                    value={form.registrationNumber}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Password (optional)</label>
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    name="password"
+                    value={form.password}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="text-blue-800 hover:underline mt-1"
+                  >
+                    {showPassword ? 'Hide' : 'Show'}
+                  </button>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Is Admin</label>
+                  <input
+                    type="checkbox"
+                    name="isAdmin"
+                    checked={form.isAdmin}
+                    onChange={handleChange}
+                    className="form-checkbox h-5 w-5 text-blue-600"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">Profile Image URL</label>
+                  <input
+                    type="text"
+                    name="profileImageURL"
+                    value={form.profileImageURL}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-700 dark:text-gray-400">User Image URL</label>
+                  <input
+                    type="text"
+                    name="userImage"
+                    value={form.userImage}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  />
+                </div>
               </div>
               <button
                 type="submit"
-                className="bg-green-500 text-white px-4 py-2 rounded"
+                className="bg-blue-900 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
+                disabled={loading}
               >
                 Update User
               </button>
@@ -225,78 +326,107 @@ const AdminDashboard = () => {
           </div>
         )}
 
-        <div className="mt-6">
-          <h2 className="text-xl font-bold mb-2">Add New User</h2>
+        <div className="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md">
+          <h2 className="text-2xl font-semibold mb-4 text-gray-800 dark:text-gray-500">Add New User</h2>
           <form onSubmit={handleSubmitNewUser}>
-            <div className="mb-4">
-              <label className="block text-gray-700">Full Name</label>
-              <input
-                type="text"
-                name="fullname"
-                value={form.fullname}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Registration Number</label>
-              <input
-                type="text"
-                name="registrationNumber"
-                value={form.registrationNumber}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Password</label>
-              <input
-                type="password"
-                name="password"
-                value={form.password}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border border-gray-300 rounded text-gray-100"
-                required
-              />
-            </div>
-            <div className="mb-4">
-              <label className="block text-gray-700">Admin</label>
-              <input
-                type="checkbox"
-                name="isAdmin"
-                checked={form.isAdmin}
-                onChange={handleChange}
-                className="mr-2 leading-tight"
-              />
-              <span className="text-gray-700">Is Admin</span>
+            <div className="grid gap-4 mb-4 md:grid-cols-2">
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Full Name</label>
+                <input
+                  type="text"
+                  name="fullname"
+                  value={form.fullname}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Registration Number</label>
+                <input
+                  type="text"
+                  name="registrationNumber"
+                  value={form.registrationNumber}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  required
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Password</label>
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={form.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="text-blue-500 hover:underline mt-1"
+                >
+                  {showPassword ? 'Hide' : 'Show'}
+                </button>
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Is Admin</label>
+                <input
+                  type="checkbox"
+                  name="isAdmin"
+                  checked={form.isAdmin}
+                  onChange={handleChange}
+                  className="form-checkbox h-5 w-5 text-blue-600"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">Profile Image URL</label>
+                <input
+                  type="text"
+                  name="profileImageURL"
+                  value={form.profileImageURL}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-gray-700 dark:text-gray-400">User Image URL</label>
+                <input
+                  type="text"
+                  name="userImage"
+                  value={form.userImage}
+                  onChange={handleChange}
+                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
+                />
+              </div>
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded"
+              className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+              disabled={loading}
             >
               Add User
             </button>
           </form>
         </div>
       </div>
-      <QuizResultForm/>
-      <Quiz/>
-      <Footer />
+   <QuizResultForm/>
+    <Quiz/>
+     <AddBook/>
       <ToastContainer />
-      <Addbook/>
+
     </>
   );
 };
