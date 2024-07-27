@@ -295,16 +295,6 @@ const AdminDashboard = () => {
                   />
                 </div>
                 <div className="mb-4">
-                  <label className="block text-gray-700 dark:text-gray-400">Profile Image URL</label>
-                  <input
-                    type="text"
-                    name="profileImageURL"
-                    value={form.profileImageURL}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
-                  />
-                </div>
-                <div className="mb-4">
                   <label className="block text-gray-700 dark:text-gray-400">User Image URL</label>
                   <input
                     type="text"
@@ -389,16 +379,6 @@ const AdminDashboard = () => {
                   checked={form.isAdmin}
                   onChange={handleChange}
                   className="form-checkbox h-5 w-5 text-blue-600"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-gray-700 dark:text-gray-400">Profile Image URL</label>
-                <input
-                  type="text"
-                  name="profileImageURL"
-                  value={form.profileImageURL}
-                  onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded text-gray-100 dark:text-gray-100"
                 />
               </div>
               <div className="mb-4">

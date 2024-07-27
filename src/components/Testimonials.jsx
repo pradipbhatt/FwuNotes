@@ -8,7 +8,7 @@ import 'aos/dist/aos.css';
 const Testimonials = () => {
   useEffect(() => {
     AOS.init({
-      duration: 1000,
+      duration: 2000,
     });
   }, []);
 
@@ -53,11 +53,11 @@ const Testimonials = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 600, // Slide every 1 second
+    speed: 2000, // Slide every 1 second
     slidesToShow: 1, // Show 1 card at a time
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 1500, // Auto slide every 2 seconds
+    autoplaySpeed: 2500, // Auto slide every 2 seconds
     responsive: [
       {
         breakpoint: 1024, // lg breakpoint

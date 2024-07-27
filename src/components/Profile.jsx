@@ -132,7 +132,7 @@ const Profile = () => {
           </div>
 
           {/* Charts */}
-          <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300">
+          <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-300 h-auto overflow-hidden">
             <h2 className="text-2xl font-semibold text-gray-800 mb-4">Charts</h2>
             <div className="flex flex-col items-center space-y-8">
               {/* Line Chart */}
@@ -146,7 +146,7 @@ const Profile = () => {
                 <Bar data={chartData} />
               </div>
               {/* Pie Chart */}
-              <div className="w-full h-64">
+              <div className="w-full h-64 ">
                 <h3 className="text-xl font-semibold mb-2">Pie Chart</h3>
                 <Pie data={pieChartData} />
               </div>
@@ -169,7 +169,7 @@ const Profile = () => {
                 {Object.entries(localStorageData).map(([key, value]) => (
                   <tr key={key}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{key}</td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{value || 'N/A'}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{value}</td>
                   </tr>
                 ))}
               </tbody>
