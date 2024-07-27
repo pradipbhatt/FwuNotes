@@ -34,8 +34,10 @@ function Signup() {
       console.log(res.data);
       if (res.data) {
         toast.success("Successfully signed up");
-        navigate("/"); // Redirect to homepage
+        // Save user data to local storage
         localStorage.setItem("Users", JSON.stringify(res.data.user));
+        // Redirect to homepage
+        navigate("/"); 
       }
     } catch (err) {
       if (err.response) {

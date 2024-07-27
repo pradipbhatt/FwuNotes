@@ -219,7 +219,7 @@ function Navbar() {
                   {showMenuRight && (
                     <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
-                        <Link to="/about">About</Link>
+                        <Link to="/profile">Profile</Link>
                       </li>
                       <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Logout />
@@ -277,7 +277,7 @@ function Navbar() {
             onClick={() => setActiveTab("entrance")}
           >
             <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">testResults</span>
+            <span className="text-xs">TestResults</span>
           </Link>
 
 
