@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import QuizResultForm from '../components/mock/QuizResultForm';
@@ -18,7 +17,6 @@ const AdminDashboard = () => {
     registrationNumber: '',
     password: '',
     isAdmin: false,
-    profileImageURL: '',
     userImage: '' // Added field for user image
   });
   const [loading, setLoading] = useState(false);
@@ -36,8 +34,9 @@ const AdminDashboard = () => {
           'Is-Admin': 'true',
         },
       });
+      // Assuming `lastModified` is a string in ISO 8601 format (e.g., '2024-07-30T12:34:56Z')
       const sortedUsers = response.data.sort((a, b) =>
-        a.fullname.localeCompare(b.fullname)
+        new Date(b.lastModified) - new Date(a.lastModified)
       );
       setUsers(sortedUsers);
     } catch (error) {
@@ -45,6 +44,7 @@ const AdminDashboard = () => {
       toast.error('Error fetching users');
     }
   };
+  
 
   const handleDelete = async (id) => {
     setLoading(true);
@@ -74,7 +74,6 @@ const AdminDashboard = () => {
         email: form.email,
         registrationNumber: form.registrationNumber,
         isAdmin: form.isAdmin,
-        profileImageURL: form.profileImageURL,
         userImage: form.userImage,
       };
       if (form.password) {
@@ -94,7 +93,6 @@ const AdminDashboard = () => {
         registrationNumber: '',
         password: '',
         isAdmin: false,
-        profileImageURL: '',
         userImage: '' // Reset userImage
       });
       toast.success('User updated successfully');
@@ -113,7 +111,7 @@ const AdminDashboard = () => {
       email: user.email,
       registrationNumber: user.registrationNumber,
       isAdmin: user.isAdmin,
-      profileImageURL: user.profileImageURL || '',
+     
       userImage: user.userImage || '', // Populate userImage
     });
   };
@@ -143,7 +141,7 @@ const AdminDashboard = () => {
         registrationNumber: '',
         password: '',
         isAdmin: false,
-        profileImageURL: '',
+       
         userImage: '' // Reset userImage
       });
       toast.success('User created successfully');
@@ -168,7 +166,7 @@ const AdminDashboard = () => {
                 <th className="py-3 px-4 border-b">Email</th>
                 <th className="py-3 px-4 border-b">Registration Number</th>
                 <th className="py-3 px-4 border-b">Admin</th>
-                <th className="py-3 px-4 border-b">Profile Image</th>
+              
                 <th className="py-3 px-4 border-b">User Image</th>
                 <th className="py-3 px-4 border-b">Actions</th>
               </tr>
@@ -180,17 +178,6 @@ const AdminDashboard = () => {
                   <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.email}</td>
                   <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.registrationNumber}</td>
                   <td className="py-3 px-4 border-b text-gray-700 dark:text-gray-500">{user.isAdmin ? 'Yes' : 'No'}</td>
-                  <td className="py-3 px-4 border-b">
-                    {user.profileImageURL ? (
-                      <img
-                        src={user.profileImageURL}
-                        alt={user.fullname}
-                        className="w-12 h-12 rounded-full object-cover"
-                      />
-                    ) : (
-                      'No Image'
-                    )}
-                  </td>
                   <td className="py-3 px-4 border-b">
                     {user.userImage ? (
                       <img
