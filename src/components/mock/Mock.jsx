@@ -86,17 +86,17 @@ const Mock = () => {
     if ('Notification' in window && Notification.permission === 'granted') {
       const now = new Date();
       const morningTime = new Date();
-      morningTime.setHours(8, 0, 0); // Schedule for 8:00 AM
+      morningTime.setHours(7, 0, 0); // Schedule for 8:00 AM
       const eveningTime = new Date();
-      eveningTime.setHours(18, 0, 0); // Schedule for 6:00 PM
-
+      eveningTime.setHours(7, 52, 0); // Schedule for 12:52 AM
+  
       const notify = (title, body) => {
         new Notification(title, {
           body: body,
           icon: logo // Add your icon here
         });
       };
-
+  
       const scheduleNotification = (time, title, body) => {
         const delay = time.getTime() - now.getTime();
         if (delay > 0) {
@@ -107,11 +107,12 @@ const Mock = () => {
           }, delay);
         }
       };
-
+  
       scheduleNotification(morningTime, 'Practice Reminder', 'Time to practice for the entrance exam!');
       scheduleNotification(eveningTime, 'Evening Reminder', 'Don’t forget to review your notes before bed!');
     }
   };
+  
 
   return (
     <>
