@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Navbar";
 import { FaCheck, FaArrowRight, FaTimes } from "react-icons/fa";
-import backgroundImage from "../../../src/assets/bg-image.jpeg";
+import backgroundImage from "../../../public/fwu.jpeg";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
+import logo from '../../../public/fwu.png'; // Adjust import path
 const NUM_QUESTIONS = 75;
 const QUESTION_TIME = 2 * 60;
 const TOTAL_TIME = NUM_QUESTIONS * QUESTION_TIME;
@@ -35,6 +35,23 @@ const Mock1 = () => {
   });
 
   const [submittedAnswers, setSubmittedAnswers] = useState([]);
+  const [progress, setProgress] = useState(0); // Progress for loading indicator
+
+  useEffect(() => {
+    let progressInterval;
+    if (showLoader) {
+      progressInterval = setInterval(() => {
+        setProgress(prev => {
+          if (prev < 90) {
+            return prev + 1; // Gradually increase progress
+          } else {
+            return prev; // Hold at 90% until data is fetched
+          }
+        });
+      }, 100); // Interval duration can be adjusted as needed
+    }
+    return () => clearInterval(progressInterval);
+  }, [showLoader]);
 
   useEffect(() => {
     const fetchQuizData = async () => {
@@ -47,15 +64,34 @@ const Mock1 = () => {
         }
         const data = await response.json();
         const filteredData = data.filter((quiz) => quiz.yearID === 2078);
-        setQuizData(filteredData);
+    
+        // Add _id to answers and randomize options
+        const processedData = filteredData.map(quiz => {
+          // Add _id to each answer
+          const answersWithIds = quiz.answers.map((answer, index) => ({
+            ...answer,
+            _id: `answer_${index}_${Math.random().toString(36).substr(2, 9)}` // Generate unique _id
+          }));
+    
+          // Shuffle answers
+          const shuffledAnswers = answersWithIds.sort(() => Math.random() - 0.5);
+    
+          return {
+            ...quiz,
+            answers: shuffledAnswers
+          };
+        });
+    
+        setQuizData(processedData);
       } catch (error) {
         console.error("Error fetching quiz data:", error);
       } finally {
         setShowLoader(false);
         setShowTitles(true);
+        setProgress(100); // Set progress to 100% once data is loaded
       }
     };
-
+    
     fetchQuizData();
   }, []);
 
@@ -102,7 +138,7 @@ const Mock1 = () => {
   useEffect(() => {
     const titlesTimer = setTimeout(() => {
       setShowTitles(false);
-    }, 4000);
+    }, 10000);
 
     return () => clearTimeout(titlesTimer);
   }, [showTitles]);
@@ -227,9 +263,10 @@ const Mock1 = () => {
         <div className="relative bg-opacity-75 bg-gray-800 py-20">
           <div className="container mx-auto text-center">
             {showLoader && (
-              <div className="text-center">
+              <div className="flex flex-col items-center">
+                <div className="radial-progress" style={{ "--value": progress }} role="progressbar">{progress}%</div>
                 <h4 className="text-2xl font-bold text-white mt-12">
-                  Loading questions wait few time ...
+                  Loading questions, please wait...
                 </h4>
               </div>
             )}
@@ -238,12 +275,11 @@ const Mock1 = () => {
                 {showTitles && (
                   <>
                     <div className="header mb-4">
-                      <h1 className="text-3xl font-bold text-white">
-                        Quiz Title
-                      </h1>
-                      <p className="text-lg text-gray-300">
-                        Quiz Description
-                      </p>
+                    <img src={logo} alt="University Logo" className="mx-auto w-32 h-auto mb-4" />
+            <h1 className="text-3xl font-bold text-white mb-2">Far Western University</h1>
+            <h2 className="text-xl text-white mb-2">Faculty of Engineering</h2>
+            <h3 className="text-lg text-white mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
+            <h4 className="text-lg text-white">BE Entrance Examination</h4>
                     </div>
                     <div className="exam-info mb-4">
                       <p className="text-md text-white">
@@ -309,50 +345,49 @@ const Mock1 = () => {
                       </div>
                     ) : (
                       <>
-                        <div className="text-xl font-semibold mb-4 text-center text-black">
-                          Question {currentQuestion + 1}
+                      <div className="text-xl font-semibold mb-4 text-center text-black mx-4 sm:mx-6 md:mx-8">
+                        Question {currentQuestion + 1}
+                      </div>
+                      <div className="text-lg font-bold mb-4 text-black">
+                        {quizData[currentQuestion]?.question}
+                      </div>
+                      {quizData[currentQuestion]?.answers.map((answerOption) => (
+                        <div
+                          key={answerOption._id} // Use _id for uniqueness
+                          className={`cursor-pointer px-4 py-2 mb-2 rounded border flex items-center transform transition-transform duration-200 ease-in-out text-black ${
+                            selectedAnswer === answerOption
+                              ? answerOption.correct
+                                ? "bg-green-400"
+                                : "bg-red-400"
+                              : correctAnswer === answerOption
+                              ? "bg-green-200"
+                              : "bg-white"
+                          }`}
+                          onClick={() => handleAnswerOptionClick(answerOption)}
+                        >
+                          {selectedAnswer === answerOption && (
+                            <FaCheck className="text-black mr-3" />
+                          )}
+                          <span className="text-lg">{answerOption.text}</span>
                         </div>
-                        <div className="text-lg font-bold mb-4 text-black">
-                          {quizData[currentQuestion]?.question}
-                        </div>
-                        {quizData[currentQuestion]?.answers.map(
-                          (answerOption) => (
-                            <div
-                              key={answerOption.id}
-                              className={`cursor-pointer px-4 py-2 mb-2 rounded border flex items-center transform transition-transform duration-200 ease-in-out text-black ${
-                                selectedAnswer === answerOption
-                                  ? answerOption.correct
-                                    ? "bg-green-400"
-                                    : "bg-red-400"
-                                  : correctAnswer === answerOption
-                                  ? "bg-green-200"
-                                  : "bg-white"
-                              }`}
-                              onClick={() => handleAnswerOptionClick(answerOption)}
-                            >
-                              {selectedAnswer === answerOption && (
-                                <FaCheck className="text-black mr-3" />
-                              )}
-                              <span className="text-lg">{answerOption.text}</span>
-                            </div>
-                          )
-                        )}
-
-                        <div className="flex justify-between mt-4">
-                          <button
-                            onClick={handleRestartQuiz}
-                            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
-                          >
-                            Restart Quiz
-                          </button>
-                          <button
-                            onClick={handleNextQuestion}
-                            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center transform transition-transform duration-200 ease-in-out"
-                          >
-                            Next <FaArrowRight className="ml-2" />
-                          </button>
-                        </div>
-                      </>
+                      ))}
+                    
+                      <div className="flex justify-between mt-4">
+                        <button
+                          onClick={handleRestartQuiz}
+                          className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+                        >
+                          Restart Quiz
+                        </button>
+                        <button
+                          onClick={handleNextQuestion}
+                          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 flex items-center transform transition-transform duration-200 ease-in-out"
+                        >
+                          Next <FaArrowRight className="ml-2" />
+                        </button>
+                      </div>
+                    </>
+                    
                     )}
                   </div>
                 </div>
@@ -361,82 +396,87 @@ const Mock1 = () => {
           </div>
         </div>
         {showForm && (
-  <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
-    <div className="bg-white dark:bg-gray-200 p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 relative">
-      <button
-        onClick={() => setShowForm(false)}
-        className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-600"
-      >
-        <FaTimes size={20} />
-      </button>
-      <h2 className="text-xl font-semibold mb-4 text-black dark:text-black">
-        Submit Quiz Result
-      </h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-gray-900 dark:text-gray-900">Name:</label>
-          <input
-            type="text"
-            placeholder="Enter your name here "
-            name="userName"
-            value={formData.userName}
-            onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-900"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-900 dark:text-gray-900">
-            Engineering Field:
-          </label>
-          <select
-            name="engineeringField"
-            value={formData.engineeringField}
-            onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
-            required
-          >
-            <option value="Computer">Computer</option>
-            <option value="Civil">Civil</option>
-          </select>
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-900 dark:text-gray-900">Review:</label>
-          <textarea
-           placeholder="Give your feedbacks !"
-            name="review"
-            value={formData.review}
-            onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
-            rows="4"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-gray-900 dark:text-gray-900">Rating:</label>
-          <input
-            type="number"
-            name="rating"
-            placeholder="Rate from 0-5"
-            value={formData.rating}
-            onChange={handleInputChange}
-            className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
-            min="1"
-            max="5"
-            required
-          />
-        </div>
-        <button
-          type="submit"
-          className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600"
-        >
-          Submit
-        </button>
-      </form>
-    </div>
-  </div>
-)}
-
+          <div className="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+            <div className="bg-white dark:bg-gray-200 p-6 rounded-lg shadow-lg w-full sm:w-3/4 md:w-1/2 lg:w-1/3 relative">
+              <button
+                onClick={() => setShowForm(false)}
+                className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-600"
+              >
+                <FaTimes size={20} />
+              </button>
+              <h2 className="text-xl font-semibold mb-4 text-black dark:text-black">
+                Submit Quiz Result
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label className="block text-gray-900 dark:text-gray-900">
+                    Name:
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Enter your name here "
+                    name="userName"
+                    value={formData.userName}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-900"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-900 dark:text-gray-900">
+                    Engineering Field:
+                  </label>
+                  <select
+                    name="engineeringField"
+                    value={formData.engineeringField}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
+                    required
+                  >
+                    <option value="Computer">Computer</option>
+                    <option value="Civil">Civil</option>
+                  </select>
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-900 dark:text-gray-900">
+                    Review:
+                  </label>
+                  <textarea
+                    placeholder="Give your feedbacks !"
+                    name="review"
+                    value={formData.review}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
+                    rows="4"
+                    required
+                  />
+                </div>
+                <div className="mb-4">
+                  <label className="block text-gray-900 dark:text-gray-900">
+                    Rating:
+                  </label>
+                  <input
+                    type="number"
+                    name="rating"
+                    placeholder="Rate from 0-5"
+                    value={formData.rating}
+                    onChange={handleInputChange}
+                    className="mt-1 block w-full border-gray-300 rounded text-gray-900 bg-blue-100 dark:bg-gray-700 dark:text-gray-200"
+                    min="1"
+                    max="5"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 dark:bg-blue-700 dark:hover:bg-blue-600"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </>
   );

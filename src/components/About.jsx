@@ -4,6 +4,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import logo from "../../public/logo-icec.png"
 
 const teamMembers = [
   {
@@ -135,6 +136,7 @@ const teamMembers = [
     contactUrl: 'https://github.com/suddhababa', // Replace with actual social media URL
   },
 ];
+
 function About() {
   const timelineRefs = useRef([]);
   const teamMemberRefs = useRef([]);
@@ -191,89 +193,102 @@ function About() {
     <>
       <Navbar />
 
-      <div className="w-full flex flex-col items-center mt-12">
-        <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical mt-10 w-full md:w-3/4">
-          <li className="flex" ref={(el) => (timelineRefs.current[0] = el)}>
-            <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md">
-              <time className="font-mono italic">2020</time>
-              <div className="text-lg font-black">Our Journey Begins</div>
-              <p className="max-w-md">Our journey began in the first semester of our college in 2020. Initially, we started with a simple HTML and CSS website to support college students by providing necessary notes, tutorials, old question collections, and other resources. We collaborated with our juniors and added them as drive maintainers to share their resources with fellow juniors, creating a learning environment within the college.</p>
-            </div>
-            <hr />
-          </li>
-          <li className="flex justify-center" ref={(el) => (timelineRefs.current[1] = el)}>
-            <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="timeline-start mb-10 bg-gray-100 p-4 rounded-md">
-              <time className="font-mono italic">2020-2021</time>
-              <div className="text-lg font-black">Continuous Growth</div>
-              <p className="max-w-md">During this period, we expanded our website features, adding a cloud integration for file storage and management using MongoDB and Cloudinary. We also added more resources and sections for notes, question papers, and mock tests for engineering students.</p>
-            </div>
-            <hr />
-          </li>
-          <li className="flex" ref={(el) => (timelineRefs.current[2] = el)}>
-            <div className="timeline-middle">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-              </svg>
-            </div>
-            <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md">
-              <time className="font-mono italic">2021-2022</time>
-              <div className="text-lg font-black">Future Expansion</div>
-              <p className="max-w-md">Looking forward, we aim to expand our platform further, introducing new features and resources to support the academic journey of engineering students in our college. We plan to enhance user experience and engagement through continuous improvement and feedback.</p>
-            </div>
-            <hr />
-          </li>
-        </ul>
-      </div>
-
-      <section className="bg-gray-900 py-20 mt-16 dark:bg-gray-100">
-        <div className="w-full flex flex-col items-center">
-          <h2 className="text-3xl font-bold mb-8 text-gray-100 dark:text-gray-900">
-            Executive Committee - 2080/81
-          </h2>
-          <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
-            {teamMembers.map((member, index) => (
-              <div
-                key={index}
-                ref={(el) => (teamMemberRefs.current[index] = el)}
-                className="bg-gray-700 dark:bg-gray-100 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
-              >
-                <img
-                  className="w-32 h-32 rounded-full mx-auto mb-4"
-                  src={member.image}
-                  alt={member.name}
-                />
-                <h3 className="text-lg font-semibold text-center text-gray-100 dark:text-gray-900 mb-2">
-                  {member.name}
-                </h3>
-                <p className="text-center text-gray-300 dark:text-gray-700">
-                  {member.role}
-                </p>
-                <p className="text-center text-gray-100 dark:text-gray-900 mt-2">
-                  {member.contribution}
-                </p>
-                <div className="text-center mt-4">
-                  <button
-                    onClick={() => handleContactClick(member.contactUrl)}
-                    className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-                  >
-                    Contact
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
+      <div className="container mx-auto px-8 py-12 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
+        {/* Formal Header */}
+        <div className="text-center mb-12">
+          <img src={logo} alt="University Logo" className="mx-auto w-40 h-auto mb-4" />
+          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-2">School of Engineering</h1>
+          <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Innovative Computer Engineering Club (iCEC-FWU)</h2>
+          <h3 className="text-xl text-gray-600 dark:text-gray-400 mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
+          <h4 className="text-xl font-medium text-gray-600 dark:text-gray-300">About Us</h4>
         </div>
-      </section>
+
+        {/* Timeline Section */}
+        <div className="w-full flex flex-col items-center mt-12">
+          <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical mt-10 w-full md:w-3/4">
+            <li className="flex" ref={(el) => (timelineRefs.current[0] = el)}>
+              <div className="timeline-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md dark:bg-gray-700 dark:text-gray-100">
+                <time className="font-mono italic text-gray-900 dark:text-gray-100">2020</time>
+                <div className="text-lg font-black text-gray-900 dark:text-gray-100">Our Journey Begins</div>
+                <p className="max-w-md text-gray-900 dark:text-gray-100">Our journey began in the first semester of our college in 2020. Initially, we started with a simple HTML and CSS website to support college students by providing necessary notes, tutorials, old question collections, and other resources. We collaborated with our juniors and added them as drive maintainers to share their resources with fellow juniors, creating a learning environment within the college.</p>
+              </div>
+              <hr />
+            </li>
+            <li className="flex justify-center" ref={(el) => (timelineRefs.current[1] = el)}>
+              <div className="timeline-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="timeline-start mb-10 bg-gray-100 p-4  rounded-md dark:bg-gray-700  text-gray-900 dark:text-gray-100">
+                <time className="font-mono italic text-gray-900 dark:text-gray-100">2020-2021</time>
+                <div className="text-lg font-black text-gray-800 dark:text-gray-100">Continuous Growth</div>
+                <p className="max-w-md">During this period, we expanded our website features, adding a cloud integration for file storage and management using MongoDB and Cloudinary. We also added more resources and sections for notes, question papers, and mock tests for engineering students.</p>
+              </div>
+              <hr />
+            </li>
+            <li className="flex" ref={(el) => (timelineRefs.current[2] = el)}>
+              <div className="timeline-middle">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
+                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
+                </svg>
+              </div>
+              <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md dark:bg-gray-700 dark:text-gray-100">
+                <time className="font-mono italic text-gray-900 dark:text-gray-100">2021-2022</time>
+                <div className="text-lg font-black text-gray-800 dark:text-gray-100">Future Expansion</div>
+                <p className="max-w-md text-gray-900 dark:text-gray-100">Looking forward, we aim to expand our platform further, introducing new features and resources to support the academic journey of engineering students in our college. We plan to enhance user experience and engagement through continuous improvement and feedback.</p>
+              </div>
+              <hr />
+            </li>
+          </ul>
+        </div>
+
+        {/* Team Members Section */}
+        <section className="bg-gray-100 py-20 mt-16 dark:bg-gray-800">
+          <div className="w-full flex flex-col items-center">
+            <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
+              Executive Committee - 2080/81
+            </h2>
+            <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
+              {teamMembers.map((member, index) => (
+                <div
+                  key={index}
+                  ref={(el) => (teamMemberRefs.current[index] = el)}
+                  className="bg-gray-100 dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
+                >
+                  <img
+                    className="w-32 h-32 rounded-full mx-auto mb-4"
+                    src={member.image}
+                    alt={member.name}
+                  />
+                  <h3 className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100 mb-2">
+                    {member.name}
+                  </h3>
+                  <p className="text-center text-gray-900 dark:text-gray-100">
+                    {member.role}
+                  </p>
+                  <p className="text-center text-gray-900 dark:text-gray-100 mt-2">
+                    {member.contribution}
+                  </p>
+                  <div className="text-center mt-4">
+                    <button
+                      onClick={() => handleContactClick(member.contactUrl)}
+                      className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                    >
+                      Contact
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
 
       <Footer />
     </>

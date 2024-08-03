@@ -7,7 +7,6 @@ import {
   HiMenu, HiX, HiSun, HiMoon, HiSearch, 
   HiHome, HiBookOpen, HiClipboardList, HiUserCircle 
 } from "react-icons/hi";
-import axios from "axios";
 
 function Navbar() {
   const [authUser] = useAuth();
@@ -24,6 +23,21 @@ function Navbar() {
   const [sticky, setSticky] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("home");
+
+  const [userData, setUserData] = useState({
+    userImage: 'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png'
+  });
+
+  useEffect(() => {
+    // Fetch user data from local storage
+    const storedUsers = localStorage.getItem('Users');
+    if (storedUsers) {
+      const users = JSON.parse(storedUsers);
+      if (users && users.userImage) {
+        setUserData({ userImage: users.userImage });
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (theme === "dark") {
@@ -82,32 +96,31 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <a href="/" className="hover:text-orange-500">
+        <Link to="/" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
           Home
-        </a>
+        </Link>
       </li>
       <li
         className="relative"
         onMouseEnter={() => setShowSemesterDropdown(true)}
         onMouseLeave={() => setShowSemesterDropdown(false)}
       >
-        <a href="/showbook" className="hover:text-orange-500">
+        <Link to="/showbook" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
           SoeNotes
-        </a>
+        </Link>
         {showSemesterDropdown && (
-          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 dark:text-white backdrop-blur-md">
-          {Array.from({ length: 9}, (_, i) => i).map((semester) => (
-            <li
-              key={semester}
-              className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
-              style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
-              onClick={() => handleSemesterClick(semester)}
-            >
-              Semester {semester}
-            </li>
-          ))}
-        </ul>
-        
+          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md">
+            {Array.from({ length: 9 }, (_, i) => i).map((semester) => (
+              <li
+                key={semester}
+                className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
+                style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
+                onClick={() => handleSemesterClick(semester)}
+              >
+                Semester {semester}
+              </li>
+            ))}
+          </ul>
         )}
       </li>
       <li
@@ -115,13 +128,13 @@ function Navbar() {
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
       >
-        <a href="/mock" className="hover:text-orange-500">
+        <Link to="/mock" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
           Entrance Test
-        </a>
+        </Link>
         {showDropdown && (
-          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
+          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100">
             {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
-              <li key={year} className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
+              <li key={year} className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                 <Link to={`/mock${year - 2071}`}>{year}</Link>
               </li>
             ))}
@@ -129,14 +142,14 @@ function Navbar() {
         )}
       </li>
       <li>
-        <a href="/quizresult" className="hover:text-orange-500">
+        <Link to="/quizresult" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
           Entrance Results
-        </a>
+        </Link>
       </li>
       <li>
-        <a href="/about" className="hover:text-orange-500">
+        <Link to="/about" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
           About
-        </a>
+        </Link>
       </li>
     </>
   );
@@ -145,7 +158,7 @@ function Navbar() {
     <>
       <div
         className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
-        ${sticky ? "bg-slate-300 shadow-md dark:bg-slate-300" : "bg-slate-200"}`}
+        ${sticky ? "bg-slate-200 shadow-md dark:bg-slate-900" : "dark:bg-slate-900 bg-slate-100"}`}
       >
         <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
           <div className="navbar flex justify-between items-center py-4">
@@ -157,19 +170,34 @@ function Navbar() {
                   className="btn btn-ghost lg:hidden"
                   onClick={() => setShowMenuLeft(!showMenuLeft)}
                 >
-                  {showMenuLeft ? <HiX className="h-5 w-5" /> : <HiMenu className="h-5 w-5" />}
+                  {showMenuLeft ? (
+                    <HiX className={`h-5 w-5 ${theme === "dark" ? "text-white" : "text-black"}`} />
+                  ) : (
+                    <HiMenu className={`h-5 w-5 ${theme === "dark" ? "text-white" : "text-black"}`} />
+                  )}
                 </div>
                 {showMenuLeft && (
-                  <ul
-                    tabIndex={0}
-                    className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 dark:bg-slate-700 dark:text-white"
-                    onClick={() => setShowMenuLeft(false)}
+                  <div
+                    className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'}`}
                   >
-                    {navItems}
-                  </ul>
+                    <div className="flex justify-between items-center p-4 border-b dark:border-slate-600">
+                      <Link to="/" className="text-2xl font-serif text-gray-900 dark:text-gray-100">
+                        SoeNotes
+                      </Link>
+                      <button
+                        className="text-gray-900 dark:text-gray-100"
+                        onClick={() => setShowMenuLeft(false)}
+                      >
+                        <HiX className={`h-6 w-6 ${theme === "dark" ? "text-white" : "text-black"}`} />
+                      </button>
+                    </div>
+                    <ul className="mt-4 space-y-2 p-4">
+                      {navItems}
+                    </ul>
+                  </div>
                 )}
               </div>
-              <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-black">
+              <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-gray-100">
                 SoeNotes
               </Link>
             </div>
@@ -180,10 +208,10 @@ function Navbar() {
                 </ul>
               </div>
               <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
-                <label className="flex items-center gap-2 px-3 py-2 border rounded-md bg-gray-100 dark:bg-slate-300">
+                <label className="flex items-center gap-2 px-3 py-2 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-slate-800">
                   <input
                     type="text"
-                    className="grow outline-none rounded-md px-1 bg-gray-100 dark:bg-slate-300 dark:text-black"
+                    className="outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
                     placeholder="Search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
@@ -191,7 +219,7 @@ function Navbar() {
                   <HiSearch className="w-4 h-4 opacity-70" />
                 </label>
               </form>
-              <label className="swap swap-rotate">
+              <label className="swap swap-rotate text-gray-900 dark:text-gray-100">
                 <input
                   type="checkbox"
                   className="theme-controller"
@@ -207,21 +235,21 @@ function Navbar() {
               {authUser ? (
                 <div className="relative" ref={profileRef}>
                   <button
-                    className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white"
+                    className="relative z-10 block h-10 w-10 rounded-full overflow-hidden border-2 border-gray-600 focus:outline-none focus:border-white text-gray-900 dark:text-gray-100"
                     onClick={() => setShowMenuRight(!showMenuRight)}
                   >
                     <img
-                      className="h-full w-full object-cover"
-                      src="https://cdn.onlinewebfonts.com/svg/img_206976.png"
-                      alt="Your profile"
+                      className="h-full w-full object-cover text-gray-900 dark:text-gray-100"
+                      src={userData.userImage}
+                      alt="User Avatar"
                     />
                   </button>
                   {showMenuRight && (
                     <ul className="dropdown-content absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 dark:text-white">
-                      <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
+                      <li className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Link to="/profile">Profile</Link>
                       </li>
-                      <li className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
+                      <li className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
                         <Logout />
                       </li>
                     </ul>
@@ -230,7 +258,7 @@ function Navbar() {
               ) : (
                 <div>
                   <a
-                    className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
+                    className="bg-orange-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
                     onClick={() => document.getElementById("my_modal_3").showModal()}
                   >
                     Login
@@ -244,7 +272,7 @@ function Navbar() {
       </div>
 
       {/* Bottom Navigation Bar for Mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-800 text-white shadow-lg">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg">
         <div className="flex justify-around py-2">
           <Link
             to="/"
@@ -270,7 +298,6 @@ function Navbar() {
             <HiClipboardList className="w-6 h-6" />
             <span className="text-xs">Entrance Test</span>
           </Link>
-
           <Link
             to="/quizresult"
             className={`flex flex-col items-center ${activeTab === "entrance" ? "text-orange-500" : "text-gray-400"}`}
@@ -279,8 +306,6 @@ function Navbar() {
             <HiClipboardList className="w-6 h-6" />
             <span className="text-xs">TestResults</span>
           </Link>
-
-
           <Link
             to="/about"
             className={`flex flex-col items-center ${activeTab === "about" ? "text-orange-500" : "text-gray-400"}`}

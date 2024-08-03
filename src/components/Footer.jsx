@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="footer footer-center p-10 text-base-content rounded dark:bg-slate-900 dark:text-white">
+    <footer className="footer footer-center p-10 text-base-content rounded bg-gray-200 dark:bg-slate-900 dark:text-white">
       <nav className="grid grid-flow-col gap-4">
-        <Link className="link link-hover" to="/about">About us</Link>
-        <Link className="link link-hover" to="/showbook">SoeNotes</Link>
-        <Link className="link link-hover" to="/mock">Mock</Link>
-        <a className="link link-hover" to="/about" target="_blank" rel="noopener noreferrer">About Developer</a>
+        <Link className="link link-hover text-gray-900 dark:text-gray-100" to="/about">About us</Link>
+        <Link className="link link-hover text-gray-900 dark:text-gray-100" to="/showbook">SoeNotes</Link>
+        <Link className="link link-hover text-gray-900 dark:text-gray-100" to="/mock">Mock</Link>
+        <a className="link link-hover text-gray-900 dark:text-gray-100" to="/about" target="_blank" rel="noopener noreferrer">About Developer</a>
       </nav>
       <nav>
-        <div className="grid grid-flow-col gap-4 mt-4">
+        <div className="grid grid-flow-col gap-4 mt-4 text-gray-900 dark:text-gray-100">
           <a href="https://x.com/Pradipbhatt11" target="_blank" rel="noopener noreferrer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const Footer = () => {
           </a>
         </div>
       </nav>
-      <aside className="mt-4">
+      <aside className="mt-4 text-gray-900 dark:text-gray-100">
         <p>Copyright © 2024 - All rights reserved by FWU-Notes-SOE</p>
       </aside>
     </footer>

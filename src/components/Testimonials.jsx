@@ -43,7 +43,7 @@ const Testimonials = () => {
       name: 'Mukul Bhatt',
       title: 'CSE Student',
       company: 'Far Western University',
-      img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images', // Replace with actual image URL
+      img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images',
       quoteTitle: 'Handwritten Notes Provider Second Batch',
       quote: 'The handwritten notes provided by Mukul have been crucial in supporting our education.',
       rating: 5
@@ -53,11 +53,11 @@ const Testimonials = () => {
   const sliderSettings = {
     dots: true,
     infinite: true,
-    speed: 2000, // Slide every 1 second
+    speed: 3000, // Slide every 1 second
     slidesToShow: 1, // Show 1 card at a time
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 2500, // Auto slide every 2 seconds
+    autoplaySpeed: 4000, // Auto slide every 2 seconds
     responsive: [
       {
         breakpoint: 1024, // lg breakpoint
@@ -83,13 +83,13 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent overflow-hidden">
-      <h1 className="text-3xl font-serif text-center mb-12 dark:text-gray-500">Testimonials</h1>
+    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent overflow-hidden bg-white dark:bg-gray-800">
+      <h1 className="text-4xl font-serif text-center mb-12 text-gray-900 dark:text-gray-100">Testimonials</h1>
       <Slider {...sliderSettings} className="mx-auto max-w-9xl">
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="bg-gray-900 dark:bg-white dark:text-black text-white rounded-lg p-6 shadow-md mx-4 md:mx-2 my-4 lg:my-0 lg:w-full lg:mx-0"
+            className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-6 shadow-lg mx-4 my-8 lg:my-12 transition-transform transform hover:scale-105"
             data-aos={index % 2 === 0 ? 'flip-left' : 'flip-right'}
             data-aos-easing="ease-out-cubic"
             data-aos-duration="2000"
@@ -103,10 +103,10 @@ const Testimonials = () => {
               />
             </div>
             <div className="text-center">
-              <h4 className="text-lg font-bold text-gray-300 dark:text-black">{testimonial.name}</h4>
-              <p className="text-sm text-gray-400 dark:text-gray-600 mb-2">{testimonial.title} | {testimonial.company}</p>
-              <h2 className="italic text-lg font-bold text-gray-300 dark:text-black mb-2">{testimonial.quoteTitle}</h2>
-              <p className="text-sm text-gray-300 dark:text-black leading-relaxed">{testimonial.quote}</p>
+              <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 hover:text-bringal transition-colors duration-300">{testimonial.name}</h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{testimonial.title} | {testimonial.company}</p>
+              <h2 className="italic text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">{testimonial.quoteTitle}</h2>
+              <p className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed">{testimonial.quote}</p>
               <div className="flex justify-center mt-4">
                 {[...Array(testimonial.rating)].map((_, starIndex) => (
                   <svg key={starIndex} className="w-5 h-5 fill-current text-yellow-500" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
