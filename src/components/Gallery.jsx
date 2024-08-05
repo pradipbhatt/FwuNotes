@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import 'tailwindcss/tailwind.css';
-import { FaExpand, FaCompress } from 'react-icons/fa'; // Import icons
+import { FaExpand, FaCompress } from 'react-icons/fa';
 
 // Import images
 import image1 from '../../public/fu1.jpg';
@@ -15,6 +15,7 @@ const Gallery = () => {
 
   // Array of imported images
   const images = [image1, image2, image3];
+  const titles = ['Distance view', 'Top view', 'University Block']; // Titles for images
 
   useEffect(() => {
     containerRefs.current.forEach((containerRef, index) => {
@@ -151,27 +152,32 @@ const Gallery = () => {
             className={`relative bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xl overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 ${
               fullScreenIndex === index ? 'z-50' : ''
             }`}
+            style={{ width: '300px', height: '300px' }} // Square aspect ratio
           >
+            {/* Title */}
+            <div className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-md z-10">
+              {titles[index]}
+            </div>
+            {/* Panorama viewer */}
             <div
-              className="panorama-viewer filter saturate-200" // Increased saturation
+              className="panorama-viewer filter saturate-200 overflow-hidden"
               ref={(el) => (containerRefs.current[index] = el)}
-              style={{ width: '100%', height: '300px' }}
+              style={{ width: '100%', height: '100%' }}
             >
               {/* Container for the 360 panorama */}
             </div>
-            <p className="text-center mt-4 text-lg font-semibold text-gray-900 dark:text-gray-100">Image {index + 1}</p>
+            {/* Full screen and close buttons */}
             <button
               onClick={() => openFullScreen(index)}
-              className="absolute top-2 right-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none"
+              className="absolute top-2 right-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
             >
               <FaExpand size={24} />
             </button>
             {fullScreenIndex === index && (
               <button
                 onClick={closeFullScreen}
-                className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none"
+                className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
               >
-                <FaCompress size={24} />
               </button>
             )}
           </div>
