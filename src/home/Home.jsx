@@ -12,7 +12,7 @@ function Home() {
     <>
       <Navbar />
       <Banner />
-      <Gallary/>
+      {/* <Gallary/> */}
       {/* <Dean/> */}
       <Testimonials/>
       {/* <Freebook /> */}
