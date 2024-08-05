@@ -4,16 +4,17 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import 'tailwindcss/tailwind.css';
 import { FaExpand, FaCompress } from 'react-icons/fa'; // Import icons
 
+// Import images
+import image1 from '../../public/fu1.jpg';
+import image2 from '../../public/fu2.jpg';
+import image3 from '../../public/fwu.jpeg';
+
 const Gallery = () => {
   const containerRefs = useRef([]);
   const [fullScreenIndex, setFullScreenIndex] = useState(null); // Track full-screen mode
 
-  const images = [
-    'public/fu1.jpg',  // Local image path
-    'public/fu2.jpg',  // Local image path
-    'public/fwu.jpeg',  // Local image path
-    // Add more local image paths as needed
-  ];
+  // Array of imported images
+  const images = [image1, image2, image3];
 
   useEffect(() => {
     containerRefs.current.forEach((containerRef, index) => {
