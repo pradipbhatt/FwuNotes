@@ -143,45 +143,48 @@ const Gallery = () => {
   };
 
   return (
-    <div className="py-10 px-4 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
+    <div className="py-10 px-2 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">Gallery</h2>
-      <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`relative bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xl overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 ${
-              fullScreenIndex === index ? 'z-50' : ''
-            }`}
-            style={{ width: '300px', height: '300px' }} // Square aspect ratio
-          >
-            {/* Title */}
-            <div className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-md z-10">
-              {titles[index]}
-            </div>
-            {/* Panorama viewer */}
+      <div className="flex justify-center">
+        <div className="grid gap-6 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
+          {images.map((image, index) => (
             <div
-              className="panorama-viewer filter saturate-200 overflow-hidden"
-              ref={(el) => (containerRefs.current[index] = el)}
-              style={{ width: '100%', height: '100%' }}
+              key={index}
+              className={`relative bg-white dark:bg-gray-800 p-4 rounded-lg shadow-xl overflow-hidden transition-transform duration-300 ease-in-out transform hover:scale-105 ${
+                fullScreenIndex === index ? 'z-50' : ''
+              }`}
+              style={{ width: '300px', height: '300px' }} // Square aspect ratio
             >
-              {/* Container for the 360 panorama */}
-            </div>
-            {/* Full screen and close buttons */}
-            <button
-              onClick={() => openFullScreen(index)}
-              className="absolute top-2 right-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
-            >
-              <FaExpand size={24} />
-            </button>
-            {fullScreenIndex === index && (
-              <button
-                onClick={closeFullScreen}
-                className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
+              {/* Title */}
+              <div className="absolute top-2 left-2 bg-transparent text-gray-800 dark:text-gray-900 p-2 rounded-md z-10">
+  {titles[index]}
+</div>
+
+              {/* Panorama viewer */}
+              <div
+                className="panorama-viewer filter saturate-200 overflow-hidden"
+                ref={(el) => (containerRefs.current[index] = el)}
+                style={{ width: '100%', height: '100%' }}
               >
+                {/* Container for the 360 panorama */}
+              </div>
+              {/* Full screen and close buttons */}
+              <button
+                onClick={() => openFullScreen(index)}
+                className="absolute top-0 right-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
+              >
+                <FaExpand size={14} />
               </button>
-            )}
-          </div>
-        ))}
+              {fullScreenIndex === index && (
+                <button
+                  onClick={closeFullScreen}
+                  className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
+                >
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
