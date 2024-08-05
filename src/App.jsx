@@ -31,6 +31,7 @@ import Mock10 from "./components/mock/Mock10.jsx";
 import Quiz from "./components/mock/Quiz.jsx";
 import QuizResultForm from "./components/mock/QuizResultForm.jsx";
 import QuizResult from "./components/mock/QuizResult.jsx";
+import Gallary from "../src/components/Gallery.jsx"
 function App() {
   const [authUser] = useAuth();
   return (
@@ -66,6 +67,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
+          <Route path="/gallary" element={<Gallary />} />
           <Route
             path="/admin"
             element={
