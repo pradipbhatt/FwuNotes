@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import 'tailwindcss/tailwind.css';
-import { FaExpand, FaCompress } from 'react-icons/fa';
+import { FaExpand } from 'react-icons/fa';
 
 // Import images
 import image1 from '../../public/fu1.jpg';
@@ -11,7 +11,7 @@ import image3 from '../../public/fwu.jpeg';
 
 const Gallery = () => {
   const containerRefs = useRef([]);
-  const [fullScreenIndex, setFullScreenIndex] = useState(null); // Track full-screen mode
+  const [fullScreenIndex, setFullScreenIndex] = useState(null);
 
   // Array of imported images
   const images = [image1, image2, image3];
@@ -53,8 +53,12 @@ const Gallery = () => {
         const sphere = new THREE.Mesh(geometry, material);
         scene.add(sphere);
 
-        // Apply a slow rotation to the panorama
-        let rotationSpeed = 0.0005; // Adjusted slow rotation speed
+        // Initial rotation state
+        const originalRotation = 0;
+        sphere.rotation.y = originalRotation;
+
+        // Animation loop
+        let rotationSpeed = 0.0005;
         const animate = () => {
           requestAnimationFrame(animate);
           sphere.rotation.y += rotationSpeed;
@@ -64,20 +68,29 @@ const Gallery = () => {
 
         // Handle user interaction
         let isInteracting = false;
+        let lastInteractionTime = 0;
+        let returnToOriginal = null;
 
         const handleMouseDown = () => {
           isInteracting = true;
+          rotationSpeed = 0; // Pause rotation during interaction
+          clearTimeout(returnToOriginal); // Clear any pending return-to-original timeout
         };
 
         const handleMouseUp = () => {
           isInteracting = false;
+          lastInteractionTime = Date.now();
+
+          // After 1 second of no interaction, return to the original perspective
+          returnToOriginal = setTimeout(() => {
+            sphere.rotation.y = originalRotation;
+            rotationSpeed = 0.0005; // Resume rotation
+          }, 1000);
         };
 
-        const handleMouseMove = (event) => {
+        const handleMouseMove = () => {
           if (isInteracting) {
             rotationSpeed = 0; // Pause rotation during interaction
-          } else {
-            rotationSpeed = 0.0005; // Resume rotation after interaction
           }
         };
 
@@ -89,12 +102,13 @@ const Gallery = () => {
           window.removeEventListener('mousedown', handleMouseDown);
           window.removeEventListener('mouseup', handleMouseUp);
           window.removeEventListener('mousemove', handleMouseMove);
+          clearTimeout(returnToOriginal); // Cleanup timeout on component unmount
         };
       });
 
       // Add OrbitControls
       const controls = new OrbitControls(camera, renderer.domElement);
-      controls.enableZoom = true;  // Enable zooming
+      controls.enableZoom = true; // Enable zooming
       controls.enablePan = false;
 
       // Handle window resize
@@ -111,6 +125,19 @@ const Gallery = () => {
         window.removeEventListener('resize', onResize);
       };
     });
+
+    // Listen for full-screen changes to reset z-index
+    const handleFullScreenChange = () => {
+      if (!document.fullscreenElement) {
+        setFullScreenIndex(null);
+      }
+    };
+
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullScreenChange);
+    };
   }, [images]);
 
   const openFullScreen = (index) => {
@@ -129,19 +156,6 @@ const Gallery = () => {
     }
   };
 
-  const closeFullScreen = () => {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.mozCancelFullScreen) { // Firefox
-      document.mozCancelFullScreen();
-    } else if (document.webkitExitFullscreen) { // Chrome, Safari and Opera
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { // IE/Edge
-      document.msExitFullscreen();
-    }
-    setFullScreenIndex(null);
-  };
-
   return (
     <div className="py-10 px-2 sm:px-6 lg:px-8 bg-gray-100 dark:bg-gray-900">
       <h2 className="text-4xl font-bold text-center mb-10 text-gray-900 dark:text-gray-100">Gallery</h2>
@@ -157,8 +171,8 @@ const Gallery = () => {
             >
               {/* Title */}
               <div className="absolute top-2 left-2 bg-transparent text-gray-800 dark:text-gray-900 p-2 rounded-md z-10">
-  {titles[index]}
-</div>
+                {titles[index]}
+              </div>
 
               {/* Panorama viewer */}
               <div
@@ -168,20 +182,13 @@ const Gallery = () => {
               >
                 {/* Container for the 360 panorama */}
               </div>
-              {/* Full screen and close buttons */}
+              {/* Full screen button */}
               <button
                 onClick={() => openFullScreen(index)}
                 className="absolute top-0 right-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
               >
                 <FaExpand size={14} />
               </button>
-              {fullScreenIndex === index && (
-                <button
-                  onClick={closeFullScreen}
-                  className="absolute top-2 left-2 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition duration-300 ease-in-out focus:outline-none z-10"
-                >
-                </button>
-              )}
             </div>
           ))}
         </div>
