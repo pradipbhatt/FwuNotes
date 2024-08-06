@@ -19,6 +19,9 @@ export default {
               'saturate-150': 'saturate(150%)',
               'saturate-200': 'saturate(200%)',
           },
+          colors: {
+            brinjal: '#a06c8c', // Custom color resembling brinjal
+          },
       },
   },
   plugins: [require("daisyui"), require('tailwindcss-filters')],
