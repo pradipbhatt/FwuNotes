@@ -24,7 +24,7 @@
         "chart.js": "^4.4.3",
         "cloudinary": "^2.3.1",
         "clsx": "^2.1.1",
-        "framer-motion": "^11.2.10",
+        "framer-motion": "^11.3.21",
         "gsap": "^3.12.5",
         "leaflet": "^1.9.4",
         "pinch-zoom": "^0.3.9",
