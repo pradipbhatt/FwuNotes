@@ -68,7 +68,7 @@ const Mock1 = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        const filteredData = data.filter((quiz) => quiz.yearID === 2074);
+        const filteredData = data.filter((quiz) => quiz.yearID === 2082);
 
         const processedData = filteredData.map(quiz => {
           const answersWithIds = quiz.answers.map((answer, index) => ({
@@ -217,7 +217,7 @@ const Mock1 = () => {
   const formatTime = (timeInSeconds) => {
     const minutes = Math.floor(timeInSeconds / 60);
     const seconds = timeInSeconds % 60;
-    return `${minutes} minutes ${seconds} seconds`;
+    return `${minutes} m ${seconds} s`;
   };
 
   const handleInputChange = (e) => {
@@ -283,27 +283,12 @@ const Mock1 = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-           <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center sm:mx-4 mt-4 sm:mt-12 space-y-4 sm:space-y-0 text-left sm:text-center">
-      <motion.img
-        src={logo}
-        alt="Logo"
-        className="w-24 h-24 sm:w-28 sm:h-28"
-        initial={{ rotate: 0 }}
-        whileHover={{ rotate: [0, 20, -20, 20, 0] }}
-        transition={{ duration: 1, ease: "easeInOut" }}
-      />
-      <div className="sm:ml-4">
-        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
-          School of Engineering <span className="text-blue-600">Far Western University</span>
-        </h1>
-        <p className="text-base sm:text-sm text-gray-900 dark:text-gray-100">
-          <span className="font-semibold">Total Time Left:</span> {formatTime(timer)}
-        </p>
-        <p className="text-base sm:text-sm text-gray-900 dark:text-gray-100">
-          <span className="font-semibold">Time Left for Question:</span> {formatTime(questionTimer)}
-        </p>
-      </div>
-    </div>
+            <p className="text-base lg:mt-10 sm:text-sm text-gray-900 dark:text-gray-100">
+              <span className="font-semibold">Total Time Left:</span> {formatTime(timer)}
+            </p>
+            <p className="text-base sm:text-sm text-gray-900 dark:text-gray-100">
+              <span className="font-semibold">Time Left for Question:</span> {formatTime(questionTimer)}
+            </p>
 
 
 
@@ -359,60 +344,75 @@ const Mock1 = () => {
 
                   </>
                 ) : (
-                  <p>Loading questions...</p>
+                  <div className="flex flex-col items-center sm:flex-row sm:justify-center sm:items-center sm:mx-4 mt-4 sm:mt-12 space-y-4 sm:space-y-0 text-left sm:text-center">
+                    <motion.img
+                      src={logo}
+                      alt="Logo"
+                      className="w-24 h-24 sm:w-28 sm:h-28"
+                      initial={{ rotate: 0 }}
+                      whileHover={{ rotate: [0, 20, -20, 20, 0] }}
+                      transition={{ duration: 1, ease: "easeInOut" }}
+                    />
+                    <div className="sm:ml-4">
+                      <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100 sm:text-2xl">
+                        School of Engineering <span className="text-blue-600">Far Western University</span>
+                      </h1>
+                    </div>
+                    <p>Loading questions...</p>
+                  </div>
                 )}
               </>
             ) : (
               <div className="text-left mt-0 bg-white dark:bg-gray-900 dark:bg-opacity-10 p-4 sm:p-6">
-  {showScore && (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 1 }}
-      className="w-full sm:max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg"
-    >
-      <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">Quiz Completed!</h2>
-      <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
-        You scored <span className="font-bold text-blue-600 dark:text-blue-400">{score}</span> out of{' '}
-        <span className="font-bold text-blue-600 dark:text-blue-400">{quizData.length}</span>.
-      </p>
+                {showScore && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="w-full sm:max-w-2xl mx-auto p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg"
+                  >
+                    <h2 className="text-3xl font-bold mb-4 text-gray-800 dark:text-gray-100">Quiz Completed!</h2>
+                    <p className="text-lg mb-6 text-gray-700 dark:text-gray-300">
+                      You scored <span className="font-bold text-blue-600 dark:text-blue-400">{score}</span> out of{' '}
+                      <span className="font-bold text-blue-600 dark:text-blue-400">{quizData.length}</span>.
+                    </p>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="space-y-4"
-      >
-        {submittedAnswers.map((answer, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.2 }}
-            className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-lg"
-          >
-            <p className="text-md font-semibold text-gray-800 dark:text-gray-100">Question {index + 1}:</p>
-            <p className="text-gray-600 dark:text-gray-300"><strong>Question:</strong> {answer.question}</p>
-            <p className="text-gray-600 dark:text-gray-300"><strong>Your Answer:</strong> {answer.userAnswer}</p>
-            <p className="text-gray-600 dark:text-gray-300"><strong>Correct Answer:</strong> {answer.correctAnswer}</p>
-            <p className="text-gray-600 dark:text-gray-300">
-              <strong>Explanation:</strong>{' '}
-              <span className="font-serif text-purple-600 dark:text-purple-400">{answer.explanation}</span>
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      className="space-y-4"
+                    >
+                      {submittedAnswers.map((answer, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ duration: 0.5, delay: index * 0.2 }}
+                          className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-lg"
+                        >
+                          <p className="text-md font-semibold text-gray-800 dark:text-gray-100">Question {index + 1}:</p>
+                          <p className="text-gray-600 dark:text-gray-300"><strong>Question:</strong> {answer.question}</p>
+                          <p className="text-gray-600 dark:text-gray-300"><strong>Your Answer:</strong> {answer.userAnswer}</p>
+                          <p className="text-gray-600 dark:text-gray-300"><strong>Correct Answer:</strong> {answer.correctAnswer}</p>
+                          <p className="text-gray-600 dark:text-gray-300">
+                            <strong>Explanation:</strong>{' '}
+                            <span className="font-serif text-purple-600 dark:text-purple-400">{answer.explanation}</span>
+                          </p>
+                        </motion.div>
+                      ))}
+                    </motion.div>
 
-      <button
-        onClick={handleRestartQuiz}
-        className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400"
-      >
-        Restart
-      </button>
-    </motion.div>
-  )}
-</div>
+                    <button
+                      onClick={handleRestartQuiz}
+                      className="mt-6 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-blue-500 dark:hover:bg-blue-400"
+                    >
+                      Restart
+                    </button>
+                  </motion.div>
+                )}
+              </div>
 
 
             )}
@@ -436,7 +436,7 @@ const Mock1 = () => {
             )}
             {showPopup === "fail" && (
               <motion.div
-                className="fixed inset-y-0 right-0 flex items-end mt-20 mb-10 pt-10 justify-end"
+                className="fixed inset-y-0 right-0 flex items-center mt-20 mb-10 pt-10 justify-center"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
