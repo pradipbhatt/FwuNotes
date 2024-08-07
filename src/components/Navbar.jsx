@@ -297,44 +297,44 @@ function Navbar() {
 
       {/* Bottom Navigation Bar for Mobile */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100">
-        <div className="flex justify-around py-2">
-          <Link
-            to="/"
-            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-            onClick={() => setActiveTab("home")}
-          >
-            <FontAwesomeIcon icon={faHome} className="w-10 h-10" />
-          </Link>
-          <Link
-            to="/showbook"
-            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-            onClick={() => setActiveTab("soenotes")}
-          >
-            <FontAwesomeIcon icon={faBook} className="w-10 h-10" />
-          </Link>
-          <Link
-            to="/mock"
-            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-            onClick={() => setActiveTab("entrance")}
-          >
-            <FontAwesomeIcon icon={faFileAlt} className="w-10 h-10" />
-          </Link>
-          <Link
-            to="/quizresult"
-            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-            onClick={() => setActiveTab("results")}
-          >
-            <FontAwesomeIcon icon={faChartBar} className="w-10 h-10" />
-          </Link>
-          <Link
-            to="/profile"
-            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "profile" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-            onClick={() => setActiveTab("about")}
-          >
-            <FontAwesomeIcon icon={faUserCircle} className="w-10 h-10" />
-          </Link>
-        </div>
-      </div>
+  <div className="flex justify-around py-1">
+    <Link
+      to="/"
+      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+      onClick={() => setActiveTab("home")}
+    >
+      <FontAwesomeIcon icon={faHome} className="w-8 h-8" />
+    </Link>
+    <Link
+      to="/showbook"
+      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+      onClick={() => setActiveTab("soenotes")}
+    >
+      <FontAwesomeIcon icon={faBook} className="w-8 h-8" />
+    </Link>
+    <Link
+      to="/mock"
+      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+      onClick={() => setActiveTab("entrance")}
+    >
+      <FontAwesomeIcon icon={faFileAlt} className="w-8 h-8" />
+    </Link>
+    <Link
+      to="/quizresult"
+      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+      onClick={() => setActiveTab("results")}
+    >
+      <FontAwesomeIcon icon={faChartBar} className="w-8 h-8" />
+    </Link>
+    <Link
+      to="/profile"
+      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "profile" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+      onClick={() => setActiveTab("profile")}
+    >
+      <FontAwesomeIcon icon={faUserCircle} className="w-8 h-8" />
+    </Link>
+  </div>
+</div>
 
     </>
   );
