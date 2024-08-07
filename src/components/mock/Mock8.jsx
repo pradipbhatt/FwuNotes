@@ -68,7 +68,7 @@ const Mock1 = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        const filteredData = data.filter((quiz) => quiz.yearID === 2082);
+        const filteredData = data.filter((quiz) => quiz.yearID === 2079);
 
         const processedData = filteredData.map(quiz => {
           const answersWithIds = quiz.answers.map((answer, index) => ({
