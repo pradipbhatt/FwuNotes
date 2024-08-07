@@ -3,10 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import { useAuth } from "../context/AuthProvider";
-import { 
-  HiMenu, HiX, HiSun, HiMoon, HiSearch, 
-  HiHome, HiBookOpen, HiClipboardList, HiUserCircle 
+import {
+  HiMenu, HiX, HiSun, HiMoon, HiSearch,
+  HiHome, HiBookOpen, HiClipboardList, HiUserCircle
 } from "react-icons/hi";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHome, faBook, faClipboard, faChartBar, faFileAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+
 
 function Navbar() {
   const [authUser] = useAuth();
@@ -96,7 +99,7 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <Link to="/" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
+        <Link to="/" className="hover:text-[#4338ca] text-gray-900 dark:text-gray-100">
           Home
         </Link>
       </li>
@@ -167,13 +170,17 @@ function Navbar() {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost lg:hidden"
+                  className="btn btn-ghost lg:hidden flex items-center justify-center w-16 h-16 rounded-full transition-all duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-700 border-2 border-gray-300 dark:border-gray-600"
                   onClick={() => setShowMenuLeft(!showMenuLeft)}
                 >
                   {showMenuLeft ? (
-                    <HiX className={`h-5 w-5 ${theme === "dark" ? "text-white" : "text-black"}`} />
+                    <HiX
+                      className={`h-10 w-10 ${theme === "dark" ? "text-white" : "text-black"} transition-all duration-300 ease-in-out transform hover:scale-110`}
+                    />
                   ) : (
-                    <HiMenu className={`h-5 w-5 ${theme === "dark" ? "text-white" : "text-black"}`} />
+                    <HiMenu
+                      className={`h-10 w-10 ${theme === "dark" ? "text-white" : "text-black"} transition-all duration-300 ease-in-out transform hover:scale-110`}
+                    />
                   )}
                 </div>
                 {showMenuLeft && (
@@ -181,8 +188,16 @@ function Navbar() {
                     className={`fixed top-0 left-0 h-full w-64 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'}`}
                   >
                     <div className="flex justify-between items-center p-4 border-b dark:border-slate-600">
-                      <Link to="/" className="text-2xl font-serif text-gray-900 dark:text-gray-100">
-                        SoeNotes
+                      <Link
+                        to="/"
+                        className="text-2xl font-extrabold cursor-pointer text-gray-900 dark:text-gray-100 tracking-wide flex items-center transition-transform duration-300 ease-in-out transform hover:scale-105 relative"
+                      >
+                        <span className="relative text-4xl font-serif text-blue-500 transition-all duration-300 ease-in-out hover:text-blue-400 hover:before:absolute hover:before:inset-0 hover:before:bg-gradient-to-r hover:before:from-blue-400 hover:before:to-blue-600 hover:before:opacity-50 hover:before:blur-sm hover:before:z-[-1] hover:before:rounded-md">
+                          SOE
+                        </span>
+                        <span className="text-2xl text-gray-900 dark:text-gray-100 font-serif ml-2">
+                          notes
+                        </span>
                       </Link>
                       <button
                         className="text-gray-900 dark:text-gray-100"
@@ -197,9 +212,18 @@ function Navbar() {
                   </div>
                 )}
               </div>
-              <Link to="/" className="text-2xl font-serif cursor-pointer text-gray-900 dark:text-gray-100">
-                SoeNotes
+              <Link
+                to="/"
+                className="text-2xl font-extrabold cursor-pointer text-gray-900 dark:text-gray-100 tracking-wide flex items-center transition-transform duration-300 ease-in-out transform hover:scale-105 relative"
+              >
+                <span className="relative text-4xl font-serif text-blue-500 transition-all duration-300 ease-in-out hover:text-blue-400 hover:before:absolute hover:before:inset-0 hover:before:bg-gradient-to-r hover:before:from-blue-400 hover:before:to-blue-600 hover:before:opacity-50 hover:before:blur-sm hover:before:z-[-1] hover:before:rounded-md">
+                  SOE
+                </span>
+                <span className="text-2xl text-gray-900 dark:text-gray-100 font-serif ml-2">
+                  notes
+                </span>
               </Link>
+
             </div>
             <div className="navbar-end flex items-center space-x-3">
               <div className="navbar-center hidden lg:flex">
@@ -258,7 +282,7 @@ function Navbar() {
               ) : (
                 <div>
                   <a
-                    className="bg-orange-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
+                    className="bg-[#60a5fa] text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-[#4338ca] duration-300 cursor-pointer"
                     onClick={() => document.getElementById("my_modal_3").showModal()}
                   >
                     Login
@@ -272,50 +296,46 @@ function Navbar() {
       </div>
 
       {/* Bottom Navigation Bar for Mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg">
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100">
         <div className="flex justify-around py-2">
           <Link
             to="/"
-            className={`flex flex-col items-center ${activeTab === "home" ? "text-orange-500" : "text-gray-400"}`}
+            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
             onClick={() => setActiveTab("home")}
           >
-            <HiHome className="w-6 h-6" />
-            <span className="text-xs">Home</span>
+            <FontAwesomeIcon icon={faHome} className="w-10 h-10" />
           </Link>
           <Link
             to="/showbook"
-            className={`flex flex-col items-center ${activeTab === "soenotes" ? "text-orange-500" : "text-gray-400"}`}
+            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
             onClick={() => setActiveTab("soenotes")}
           >
-            <HiBookOpen className="w-6 h-6" />
-            <span className="text-xs">Notes</span>
+            <FontAwesomeIcon icon={faBook} className="w-10 h-10" />
           </Link>
           <Link
             to="/mock"
-            className={`flex flex-col items-center ${activeTab === "entrance" ? "text-orange-500" : "text-gray-400"}`}
+            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
             onClick={() => setActiveTab("entrance")}
           >
-            <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">Entrance Test</span>
+            <FontAwesomeIcon icon={faFileAlt} className="w-10 h-10" />
           </Link>
           <Link
             to="/quizresult"
-            className={`flex flex-col items-center ${activeTab === "entrance" ? "text-orange-500" : "text-gray-400"}`}
-            onClick={() => setActiveTab("entrance")}
+            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
+            onClick={() => setActiveTab("results")}
           >
-            <HiClipboardList className="w-6 h-6" />
-            <span className="text-xs">TestResults</span>
+            <FontAwesomeIcon icon={faChartBar} className="w-10 h-10" />
           </Link>
           <Link
-            to="/about"
-            className={`flex flex-col items-center ${activeTab === "about" ? "text-orange-500" : "text-gray-400"}`}
+            to="/profile"
+            className={`flex flex-col items-center p-3 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "profile" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
             onClick={() => setActiveTab("about")}
           >
-            <HiUserCircle className="w-6 h-6" />
-            <span className="text-xs">About</span>
+            <FontAwesomeIcon icon={faUserCircle} className="w-10 h-10" />
           </Link>
         </div>
       </div>
+
     </>
   );
 }

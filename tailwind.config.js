@@ -22,6 +22,13 @@ export default {
           colors: {
             brinjal: '#a06c8c', // Custom color resembling brinjal
           },
+          boxShadow: {
+            'blue-glow': '0 0 6px rgba(0, 0, 255, 0.6), 0 0 12px rgba(0, 0, 255, 0.4), 0 0 18px rgba(0, 0, 255, 0.2)',
+          },
+          fontFamily: {
+            cursive: ['Dancing Script', 'cursive'],
+          },
+          
       },
   },
   plugins: [require("daisyui"), require('tailwindcss-filters')],

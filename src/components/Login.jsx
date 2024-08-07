@@ -101,7 +101,7 @@ function Login() {
               <div className="flex justify-around mt-6">
                 <button
                   type="submit"
-                  className="bg-orange-500 text-white px-3 py-2 rounded-md hover:bg-orange-700 duration-300 cursor-pointer"
+                  className="bg-[#60a5fa] text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-[#4338ca] duration-300 cursor-pointer"
                   disabled={loading} // Disable button when loading
                 >
                   {loading ? "Logging in..." : "Login"}

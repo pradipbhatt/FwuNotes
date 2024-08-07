@@ -18,7 +18,6 @@ function Signup() {
   const onSubmit = async (data) => {
     setLoading(true); // Set loading to true when signup starts
     try {
-      toast.loading("Signing up, please wait..."); // Display loading toast
       const userInfo = {
         fullname: data.fullname,
         email: data.email,
@@ -35,18 +34,36 @@ function Signup() {
       });
       console.log(res.data);
       if (res.data) {
-        toast.success("Successfully signed up");
+        toast.success("Successfully signed up!", {
+          duration: 4000, // Show for 4 seconds
+        });
         navigate("/"); // Redirect to homepage
         localStorage.setItem("Users", JSON.stringify(res.data.user));
       }
     } catch (err) {
+      let message = "An error occurred. Please try again.";
       if (err.response) {
         console.log(err);
-        toast.error("Error: " + err.response.data.message);
+        const { status, data } = err.response;
+        if (status === 400) {
+          if (data.message.includes("email")) {
+            message = "This email is already in use. Please use a different email.";
+          } else if (data.message.includes("registration number")) {
+            message = "This registration number is already in use. Please use a different number.";
+          } else {
+            message = "Invalid input. Please check your details and try again.";
+          }
+        } else {
+          message = "An unexpected error occurred. Please try again later.";
+        }
+      } else {
+        message = "Network error. Please check your connection and try again.";
       }
+      toast.error(message, {
+        duration: 4000, // Show for 4 seconds
+      });
     } finally {
       setLoading(false); // Set loading to false regardless of success or failure
-      toast.dismiss(); // Hide any active toasts
     }
   };
 
@@ -71,14 +88,14 @@ function Signup() {
             &times;
           </button>
           <form onSubmit={handleSubmit(onSubmit)} method="dialog" className="space-y-6">
-            <h3 className="font-bold text-2xl text-gray-800 mb-4 text-center">Signup using .cse@fwu.edu.np</h3>
+            <h3 className="font-bold text-2xl text-gray-800 mb-4 text-center mt-20">Signup using College issued mail ID (fwu.edu.np)</h3>
             <div className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700">Name</label>
                 <input
                   type="text"
                   placeholder="Enter your fullname"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+                  className={`w-full px-4 py-2 border ${errors.fullname ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white`}
                   {...register("fullname", { required: "Name is required" })}
                 />
                 {errors.fullname && (
@@ -90,7 +107,7 @@ function Signup() {
                 <input
                   type="email"
                   placeholder="Enter your email @fwu.edu.np"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+                  className={`w-full px-4 py-2 border ${errors.email ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white`}
                   {...register("email", { 
                     required: "Email is required",
                     pattern: {
@@ -108,7 +125,7 @@ function Signup() {
                 <input
                   type="text"
                   placeholder="Enter registration number eg.BCT07733"
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+                  className={`w-full px-4 py-2 border ${errors.registrationNumber ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white`}
                   {...register("registrationNumber", { required: "Registration number is required" })}
                 />
                 {errors.registrationNumber && (
@@ -121,7 +138,7 @@ function Signup() {
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="Enter your password"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white"
+                    className={`w-full px-4 py-2 border ${errors.password ? 'border-red-500' : 'border-gray-300'} rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 text-black bg-white`}
                     {...register("password", { 
                       required: "Password is required",
                       minLength: {
@@ -161,36 +178,19 @@ function Signup() {
             <div className="flex flex-col lg:flex-row justify-between items-center mt-6">
               <button
                 type="submit"
-                className="bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-700 transition duration-300"
-                disabled={loading} // Disable button when loading
+                className={`bg-[#c084fc] text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-[#6b21a8] duration-300 cursor-pointer ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                disabled={loading} // Disable button while loading
               >
-                {loading ? "Signing up..." : "Signup"}
+                Signup
               </button>
-              <p className="text-sm text-gray-600 mt-4 lg:mt-0">
-                Have an account?{" "}
-                <Link
-                  to="/"
-                  className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition duration-300"
-                >
-                  Login
-                </Link>
+              <p className="mt-4 lg:mt-0">
+                Already have an account?{" "}
+                <Link to="/login" className="text-[#d946ef] hover:text-[#9b5de5]">Login</Link>
               </p>
             </div>
           </form>
         </div>
       </div>
-
-      {/* Preloader Modal */}
-      {loading && (
-        <div className="fixed inset-0 flex items-center justify-center bg-gray-500 bg-opacity-50 z-50">
-          <div className="bg-white p-8 rounded-lg shadow-lg flex flex-col items-center">
-            <div className="border-4 border-orange-500 border-t-transparent border-solid rounded-full w-8 h-8 animate-spin" role="status">
-              <span className="sr-only">Signing up...</span>
-            </div>
-            <p className="mt-4 text-lg text-gray-800">Signing up, please wait...</p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
