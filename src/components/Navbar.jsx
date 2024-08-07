@@ -99,7 +99,7 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <Link to="/" className="hover:text-[#4338ca] text-gray-900 dark:text-gray-100">
+        <Link to="/" className="hover:text-[#4338ca] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
           Home
         </Link>
       </li>
@@ -108,15 +108,15 @@ function Navbar() {
         onMouseEnter={() => setShowSemesterDropdown(true)}
         onMouseLeave={() => setShowSemesterDropdown(false)}
       >
-        <Link to="/showbook" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
+        <Link to="/showbook" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#a78bfa]">
           SoeNotes
         </Link>
         {showSemesterDropdown && (
-          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md">
+          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md dark:hover:text-[#6d28d9]">
             {Array.from({ length: 9 }, (_, i) => i).map((semester) => (
               <li
                 key={semester}
-                className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-orange-500 dark:hover:text-orange-400 transition-colors duration-200"
+                className="block px-4 py-2 mt-4 mb-2 text-sm text-gray-900 dark:text-[#ede9fe] hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-[#6d28d9] dark:hover:text-[#6d28d9] transition-colors duration-200"
                 style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
                 onClick={() => handleSemesterClick(semester)}
               >
@@ -131,13 +131,13 @@ function Navbar() {
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
       >
-        <Link to="/mock" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
+        <Link to="/mock" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
           Entrance Test
         </Link>
         {showDropdown && (
-          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100">
+          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100 ">
             {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
-              <li key={year} className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600">
+              <li key={year} className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-[#6d28d9]">
                 <Link to={`/mock${year - 2071}`}>{year}</Link>
               </li>
             ))}
@@ -145,12 +145,12 @@ function Navbar() {
         )}
       </li>
       <li>
-        <Link to="/quizresult" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
+        <Link to="/quizresult" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
           Entrance Results
         </Link>
       </li>
       <li>
-        <Link to="/about" className="hover:text-orange-500 text-gray-900 dark:text-gray-100">
+        <Link to="/about" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
           About
         </Link>
       </li>
