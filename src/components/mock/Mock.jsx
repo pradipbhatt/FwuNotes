@@ -41,7 +41,7 @@ const Mock = () => {
     playNotificationSound();
 
     // Set the music URL dynamically (for example, based on some condition or API)
-    setMusicUrl('public/simple-notification-152054.mp3'); // Replace with actual URL
+    setMusicUrl('/simple-notification-152054.mp3'); // Replace with actual URL
 
     // Request notification permission and set reminders
     requestNotificationPermission();

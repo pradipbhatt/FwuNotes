@@ -170,7 +170,7 @@ function Navbar() {
                 <div
                   tabIndex={0}
                   role="button"
-                  className="btn btn-ghost lg:hidden flex items-center justify-center w-16 h-16 rounded-full transition-all duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-700 border-2 border-gray-300 dark:border-gray-600"
+                  className="btn btn-ghost lg:hidden flex items-center justify-center w-16 h-16 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-700 border-1 mr-3 border-gray-300 dark:border-gray-600"
                   onClick={() => setShowMenuLeft(!showMenuLeft)}
                 >
                   {showMenuLeft ? (

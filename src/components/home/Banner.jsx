@@ -25,7 +25,7 @@ function Banner() {
       ".banner-image",
       { y: "0%" },
       {
-        y: "20%", duration: 10, ease: "none", scrollTrigger: {
+        y: "40%", duration: 10, ease: "none", scrollTrigger: {
           trigger: bannerRef.current,
           start: "top top",
           end: "bottom top",
@@ -88,8 +88,8 @@ function Banner() {
         {word.split("").map((char, charIndex) => (
           <span
             key={charIndex}
-            className={`inline-block transition-transform duration-300 transform ${charIndex === 0 ? "text-blue-500 font-bold" : "text-[#93c5fd]"
-              } hover:scale-125 hover:text-[#1e3a8a]`}
+            className={`inline-block transition-transform duration-300 transform text-3xl ${charIndex === 0 ? "text-orange-500 font-bold" : "text-[#f59e0b]"
+              } hover:scale-125 hover:text-[#fdba74]`}
           >
             {char}
           </span>
@@ -124,20 +124,16 @@ function Banner() {
               {renderTextWithHoverEffect("Welcome to SoeNotes")}
               <span className="relative block text-2xl md:text-3xl font-cursive font-bold text-blue-700 mt-4 cursor-pointer group">
                 <span className="absolute inset-0 w-full h-full  opacity-30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
-                <motion.div
-                  className="relative inline-block text-2xl md:text-3xl font-cursive font-bold text-blue-700 mt-4 cursor-pointer"
-                  whileHover={{ y: -5, transition: { duration: 0.4, ease: 'easeInOut' } }}
-                >
-                  <motion.span
-                    className="relative text-blue-700"
-                    whileHover={{
-                      scale: 1.05,
-                      textShadow: '0 0 10px rgba(0, 0, 255, 0.8)' // Glowing text effect
-                    }}
-                  >
-                    Far Western University School of Engineering Notes & Online Entrance Test Portal!
-                  </motion.span>
-                </motion.div>
+                <motion.span
+                className="relative text-yellow-500 font-bold text-4xl"
+                whileHover={{
+                  scale: 1.05,
+                  textShadow: '0 0 10px rgba(255, 215, 0, 0.8)' // Golden glowing text effect
+                }}
+                style={{ fontFamily: 'Times New Roman, serif' }} // Applying the chosen font
+              >
+                Far Western University <span className="text-blue-700 font-extrabold">School of Engineering</span> <span className="text-orange-500 font-bold text-xl">Online Entrance Test Portal!</span>
+              </motion.span>
               </span>
             </h1>
             <div className="text-center mt-4">
@@ -207,19 +203,14 @@ function Banner() {
             <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 leading-tight">
               {renderTextWithHoverEffect("Welcome to SoeNotes")}
               <motion.span
-                className="relative block text-2xl md:text-3xl font-cursive font-bold text-blue-700 mt-4 cursor-pointer"
-                whileHover={{ y: -10, transition: { duration: 0.3, ease: 'easeInOut' } }}
+                className="relative text-yellow-500 font-bold text-2.5xl"
+                whileHover={{
+                  scale: 1.05,
+                  textShadow: '0 0 10px rgba(255, 215, 0, 0.8)' // Golden glowing text effect
+                }}
+                style={{ fontFamily: 'Times New Roman, serif' }} // Applying the chosen font
               >
-                <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 opacity-30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
-                <motion.span
-                  className="relative block text-2xl md:text-3xl font-cursive font-bold text-blue-700 mt-4 cursor-pointer"
-                  whileHover={{ y: -10, transition: { duration: 0.3, ease: 'easeInOut' } }}
-                >
-                  <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-300 via-blue-400 to-blue-500 opacity-30 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></span>
-                  <span className="relative z-10">
-                    Far Western University School of Engineering Notes & Online Entrance Test Portal!
-                  </span>
-                </motion.span>
+                Far Western University <span className="text-blue-400 font-extrabold">School of Engineering</span> <span className="text-orange-400 font-bold">Online Entrance Test Portal!</span>
               </motion.span>
             </h1>
             {typewriterVisible && (

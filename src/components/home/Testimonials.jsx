@@ -106,13 +106,13 @@ const Testimonials = () => {
             </div>
             <div className="text-center">
               <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-bringal transition-colors duration-300">
-                <span className="text-blue-600 dark:text-blue-400">{testimonial.name}</span>
+                <span className="text-pink-900 dark:text-blue-300">{testimonial.name}</span>
               </h4>
               <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="text-blue-600 dark:text-blue-400">{testimonial.title}</span> | <span className="text-blue-600 dark:text-blue-400">{testimonial.company}</span>
+                <span className="text-black-900 dark:text-white">{testimonial.title}</span> | <span className="text-orange-900 dark:text-orange-400">{testimonial.company}</span>
               </p>
               <h2 className="italic text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
-                <span className="text-blue-600 dark:text-blue-400">{testimonial.quoteTitle}</span>
+                <span className="text-blue-600 dark:text-blue-300">{testimonial.quoteTitle}</span>
               </h2>
               <p className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed">
                 {testimonial.quote}
