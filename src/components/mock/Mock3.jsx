@@ -284,31 +284,37 @@ const Mock1 = () => {
               transition={{ duration: 1 }}
               className="flex flex-col items-center"
             >
-              <img
-                src={logo}
-                alt="Logo"
-                className="h-32 w-auto mb-6"
-              />
-              <h1 className="text-4xl font-bold text-white mb-4">
-                Entrance Exam Prepration Test
-              </h1>
-              {showTitles && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1 }}
-                  className="text-lg text-white mb-8"
-                >
-                  <h2>Attempt all the questions.</h2>
-                  <h3>Read the following questions carefully and tick the correct answer.</h3>
-                </motion.div>
-              )}
+              {
+             showTitles && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-center text-white mb-12 px-4"
+              >
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="h-32 w-auto mx-auto mb-6"
+                />
+                <h1 className="text-4xl font-bold mb-4 leading-tight">
+                  Entrance Exam Preparation Test
+                </h1>
+                <h2 className="text-2xl font-semibold mb-2">
+                  Attempt all the questions.
+                </h2>
+                <h3 className="text-lg mb-6">
+                  Read the following questions carefully and tick the correct answer.
+                </h3>
+              </motion.div>
+            )
+              }
               {showLoader && (
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 1 }}
-                  className="w-full max-w-md mx-auto mb-8"
+                  className="w-full max-w-md mx-auto mb-8 mt-20"
                 >
                   <div className="w-full max-w-5xl bg-gray-700 h-2 rounded">
                     <motion.div
@@ -322,12 +328,12 @@ const Mock1 = () => {
                 </motion.div>
               )}
               {!showLoader && quizData.length > 0 && !showScore && (
-                <div className="w-full max-w-4xl h-screen flex items-center justify-center rounded-2xl shadow-lg  bg-gray-100 dark:bg-gray-800">
+                <div className="w-full max-w-3xl h-screen flex items-center justify-center rounded-2xl shadow-lg  bg-gray-100 dark:bg-gray-800">
                   <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg dark:shadow-gray-700">
-                    <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-gray-100">
+                    <h2 className="text-xl font-bold mb-4 text-gray-900 dark:text-gray-100">
                       Question {currentQuestion + 1} of {quizData.length}
                     </h2>
-                    <p className="text-lg font-medium mb-6 text-gray-800 dark:text-gray-200">
+                    <p className="text-2xl font-medium mb-6 text-gray-800 dark:text-gray-200">
                       {quizData[currentQuestion].question}
                     </p>
                     {quizData[currentQuestion].answers.map((answer) => (

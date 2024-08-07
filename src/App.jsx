@@ -1,22 +1,22 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Home from "./home/Home";
-import Mock from "./components/mock/Mock";
-import Signup from "./components/Signup";
+import Home from "./components/home/Home.jsx";
+import Mock from "./components/mock/Mock.jsx";
+import Signup from "./pages/Signup.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
 import Mock1 from "./components/mock/Mock1";
 import Mock2 from "./components/mock/Mock2";
 import Mock3 from "./components/mock/Mock3";
 import Mock4 from "./components/mock/Mock4";
-import About from "./components/About";
+import About from "./pages/About.jsx";
 import Mock0 from "./components/mock/Mock0";
 import Mock6 from "./components/mock/Mock6";
 import Mock7 from "./components/mock/Mock7";
 import Mock5 from "./components/mock/Mock5";
 import AdmissionGuidelines from "./components/mock/AdmissionGuidelines";
-import PdfUploadPage from "./components/soenotes/PdfUploadPage";
-import NotesUploaded from "./components/soenotes/NotesUploaded";
+import PdfUploadPage from "./components/notes/PdfUploadPage.jsx";
+import NotesUploaded from "./components/notes/NotesUploaded.jsx";
 import Courses from "../src/courses/Courses";
 import Profile from "./components/Profile";
 // import Settings from "./components/Settings";
@@ -31,7 +31,7 @@ import Mock10 from "./components/mock/Mock10.jsx";
 import Quiz from "./components/mock/Quiz.jsx";
 import QuizResultForm from "./components/mock/QuizResultForm.jsx";
 import QuizResult from "./components/mock/QuizResult.jsx";
-import Gallary from "../src/components/Gallery.jsx"
+import Gallary from "./components/Gallery.jsx"
 function App() {
   const [authUser] = useAuth();
   return (

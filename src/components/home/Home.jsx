@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Banner from "../components/Banner";
+import Navbar from "../Navbar";
+import Banner from "./Banner";
 // import Freebook from "../components/Freebook";
-import Footer from "../components/Footer";
-import Testimonials from "../components/Testimonials";
+import Footer from "./Footer";
+import Testimonials from "./Testimonials";
 // import Dean from "../components/Dean"
-import Gallary from "../components/Gallery";
+import Gallary from "../Gallery";
 
 function Home() {
   return (

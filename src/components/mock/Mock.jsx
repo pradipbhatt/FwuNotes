@@ -6,7 +6,7 @@ import logo from '../../../public/fwu.png'; // Adjust import path
 import Navbar from '../Navbar';
 import Tilt from 'react-parallax-tilt'; // Adjust import path for tilt effect
 import imgTree from '../../../public/fwu.jpeg'; // Adjusted import path for background image
-import Footer from '../Footer';
+import Footer from '../home/Footer';
 
 const years = [
   { year: 2071, slogan: "Your gateway to success! 🚀" },

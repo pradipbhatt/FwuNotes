@@ -52,7 +52,7 @@
         "react-tilt": "^1.0.2",
         "react-toastify": "^10.0.5",
         "slick-carousel": "^1.8.1",
-        "swiper": "^11.1.4",
+        "swiper": "^11.1.9",
         "tailwind-merge": "^2.3.0",
         "tailwindcss-filters": "^3.0.0",
         "three": "^0.167.1",

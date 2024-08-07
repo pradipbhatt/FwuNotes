@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from "../Navbar";
-import Footer from "../Footer";
+import Footer from "../home/Footer";
 import logo from '../../../public/fwu.png'; // Ensure this path is correct
 
 const QuizResult = () => {

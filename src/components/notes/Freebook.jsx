@@ -1,10 +1,10 @@
 import React from "react";
-import list from "../../public/list.json";
+import list from "../../../public/list.json";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import { BsChevronLeft, BsChevronRight } from "react-icons/bs"; // Import icons
-import Cards from "./Cards";
+import Cards from "../home/Cards";
 
 function Freebook() {
   // Define semester categories

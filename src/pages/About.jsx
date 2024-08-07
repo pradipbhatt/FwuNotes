@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from '../components/Navbar';
+import Footer from '../components/home/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import logo from "../../public/logo-icec.png"

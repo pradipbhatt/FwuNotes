@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Footer from '../components/home/Footer';
 import arrowUp from '../../public/up-arrow.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';

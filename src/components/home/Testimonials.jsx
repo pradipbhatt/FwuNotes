@@ -1,17 +1,13 @@
 import React, { useEffect } from 'react';
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import Swiper from 'swiper';
+import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/keyboard';
+import 'swiper/css/mousewheel';
 
 const Testimonials = () => {
-  useEffect(() => {
-    AOS.init({
-      duration: 2000,
-    });
-  }, []);
-
   const testimonials = [
     {
       name: 'Pradip Bhatt',
@@ -36,6 +32,7 @@ const Testimonials = () => {
       title: 'CSE Student',
       company: 'Far Western University',
       img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images',
+      quoteTitle: 'Handwritten Notes Provider Second Batch',
       quote: 'The handwritten notes provided by Bijay have been crucial in supporting our education.',
       rating: 5
     },
@@ -50,63 +47,73 @@ const Testimonials = () => {
     }
   ];
 
-  const sliderSettings = {
-    dots: true,
-    infinite: true,
-    speed: 3000, // Slide every 1 second
-    slidesToShow: 1, // Show 1 card at a time
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 4000, // Auto slide every 2 seconds
-    responsive: [
-      {
-        breakpoint: 1024, // lg breakpoint
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          infinite: true,
-          dots: true
-        }
+  useEffect(() => {
+    // Initialize Swiper after component mounts
+    const swiper = new Swiper('.swiper', {
+      // Configure Swiper to use modules
+      modules: [Navigation, Pagination, Keyboard, Mousewheel],
+      spaceBetween: 30, // Gap between slides
+      slidesPerView: 2, // Number of slides to show at once
+      navigation: true, // Show navigation arrows
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true, // Make pagination dots clickable
       },
-      {
-        breakpoint: 768, // md breakpoint
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 0,
-          infinite: true,
-          dots: true,
-          arrows: false // Hide arrows on mobile
-        }
-      }
-    ]
-  };
+      autoplay: {
+        delay: 5000, // Auto slide delay (5 seconds)
+        disableOnInteraction: false, // Continue autoplay after user interaction
+      },
+      loop: true, // Infinite loop
+      keyboard: {
+        enabled: true, // Enable keyboard control
+      },
+      breakpoints: {
+        // Responsive breakpoints
+        640: {
+          slidesPerView: 1,
+        },
+        768: {
+          slidesPerView: 2,
+        },
+      },
+    });
+
+    return () => {
+      // Clean up Swiper instance on component unmount
+      swiper.destroy();
+    };
+  }, []);
 
   return (
     <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent overflow-hidden bg-white dark:bg-gray-800">
-      <h1 className="text-4xl font-serif text-center mb-12 text-gray-900 dark:text-gray-100">Testimonials</h1>
-      <Slider {...sliderSettings} className="mx-auto max-w-9xl">
+    <h1 className="text-4xl font-serif text-center mb-12 text-gray-900 dark:text-gray-100">Testimonials</h1>
+    <div className="swiper">
+      <div className="swiper-wrapper">
         {testimonials.map((testimonial, index) => (
           <div
             key={index}
-            className="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-6 shadow-lg mx-4 my-8 lg:my-12 transition-transform transform hover:scale-105"
-            data-aos={index % 2 === 0 ? 'flip-left' : 'flip-right'}
-            data-aos-easing="ease-out-cubic"
-            data-aos-duration="2000"
-            style={{ width: '100%', maxWidth: '400px', margin: '0 auto' }} // Set max width for mobile and center align
+            className="swiper-slide bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-6 shadow-lg mx-auto my-8 lg:my-12 transition-transform transform hover:scale-105"
           >
             <div className="overflow-hidden rounded-full w-24 h-24 mx-auto mb-6">
               <img
                 src={testimonial.img}
                 alt={testimonial.name}
-                className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110" // Added hover zoom effect
+                className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
               />
             </div>
             <div className="text-center">
-              <h4 className="text-lg font-semibold text-gray-800 dark:text-gray-100 hover:text-bringal transition-colors duration-300">{testimonial.name}</h4>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">{testimonial.title} | {testimonial.company}</p>
-              <h2 className="italic text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">{testimonial.quoteTitle}</h2>
-              <p className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed">{testimonial.quote}</p>
+              <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-bringal transition-colors duration-300">
+                <span className="text-blue-600 dark:text-blue-400">{testimonial.name}</span>
+              </h4>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
+                <span className="text-blue-600 dark:text-blue-400">{testimonial.title}</span> | <span className="text-blue-600 dark:text-blue-400">{testimonial.company}</span>
+              </p>
+              <h2 className="italic text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                <span className="text-blue-600 dark:text-blue-400">{testimonial.quoteTitle}</span>
+              </h2>
+              <p className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed">
+                {testimonial.quote}
+              </p>
               <div className="flex justify-center mt-4">
                 {[...Array(testimonial.rating)].map((_, starIndex) => (
                   <svg key={starIndex} className="w-5 h-5 fill-current text-yellow-500" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
@@ -122,8 +129,10 @@ const Testimonials = () => {
             </div>
           </div>
         ))}
-      </Slider>
+      </div>
+      <div className="swiper-pagination"></div>
     </div>
+  </div>
   );
 };
 

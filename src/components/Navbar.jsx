@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Login from "./Login";
-import Logout from "./Logout";
-import { useAuth } from "../context/AuthProvider";
+import Login from "../pages/Login";
+import Logout from "./home/Logout";
+import { useAuth } from "../../src/context/AuthProvider";
 import {
   HiMenu, HiX, HiSun, HiMoon, HiSearch,
   HiHome, HiBookOpen, HiClipboardList, HiUserCircle
