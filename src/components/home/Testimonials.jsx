@@ -53,7 +53,7 @@ const Testimonials = () => {
       // Configure Swiper to use modules
       modules: [Navigation, Pagination, Keyboard, Mousewheel],
       spaceBetween: 30, // Gap between slides
-      slidesPerView: 2, // Number of slides to show at once
+      slidesPerView: 1, // Number of slides to show at once
       navigation: true, // Show navigation arrows
       pagination: {
         el: '.swiper-pagination',
@@ -73,8 +73,11 @@ const Testimonials = () => {
           slidesPerView: 1,
         },
         768: {
-          slidesPerView: 2,
+          slidesPerView: 1,
         },
+        1024:{
+          slidesPerView: 2,
+        }
       },
     });
 
