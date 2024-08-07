@@ -470,6 +470,7 @@ const Mock1 = () => {
                           <option value="Computer">Computer</option>
 
                           <option value="Civil">Civil</option>
+                          <option value="architecture" >Architecture</option>
                         </select>
                       </div>
                       <div className="mb-4">
