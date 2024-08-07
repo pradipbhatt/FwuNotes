@@ -68,7 +68,7 @@ const Mock1 = () => {
           throw new Error("Network response was not ok");
         }
         const data = await response.json();
-        const filteredData = data.filter((quiz) => quiz.yearID === 2079);
+        const filteredData = data.filter((quiz) => quiz.yearID === 2082);
 
         const processedData = filteredData.map(quiz => {
           const answersWithIds = quiz.answers.map((answer, index) => ({
@@ -470,7 +470,6 @@ const Mock1 = () => {
                           <option value="Computer">Computer</option>
 
                           <option value="Civil">Civil</option>
-                          <option value="architecture" >Architecture</option>
                         </select>
                       </div>
                       <div className="mb-4">

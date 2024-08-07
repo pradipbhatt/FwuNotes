@@ -468,7 +468,7 @@ const Mock1 = () => {
                           className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
                         >
                           <option value="Computer">Computer</option>
-                          <option value="architecture" >Architecture</option>
+
                           <option value="Civil">Civil</option>
                         </select>
                       </div>
