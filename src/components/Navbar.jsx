@@ -304,6 +304,7 @@ function Navbar() {
       onClick={() => setActiveTab("home")}
     >
       <FontAwesomeIcon icon={faHome} className="w-8 h-8" />
+      <span className="text-xs mt-1">Home</span>
     </Link>
     <Link
       to="/showbook"
@@ -311,6 +312,7 @@ function Navbar() {
       onClick={() => setActiveTab("soenotes")}
     >
       <FontAwesomeIcon icon={faBook} className="w-8 h-8" />
+      <span className="text-xs mt-1">Books</span>
     </Link>
     <Link
       to="/mock"
@@ -318,6 +320,7 @@ function Navbar() {
       onClick={() => setActiveTab("entrance")}
     >
       <FontAwesomeIcon icon={faFileAlt} className="w-8 h-8" />
+      <span className="text-xs mt-1">Mock</span>
     </Link>
     <Link
       to="/quizresult"
@@ -325,6 +328,7 @@ function Navbar() {
       onClick={() => setActiveTab("results")}
     >
       <FontAwesomeIcon icon={faChartBar} className="w-8 h-8" />
+      <span className="text-xs mt-1">Results</span>
     </Link>
     <Link
       to="/profile"
@@ -332,6 +336,7 @@ function Navbar() {
       onClick={() => setActiveTab("profile")}
     >
       <FontAwesomeIcon icon={faUserCircle} className="w-8 h-8" />
+      <span className="text-xs mt-1">Profile</span>
     </Link>
   </div>
 </div>
