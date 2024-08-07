@@ -152,11 +152,14 @@ const Mock1 = () => {
   const handleAnswerOptionClick = (answerOption) => {
     if (!selectedAnswer) {
       setSelectedAnswer(answerOption);
+
+      // Determine the correct answer
       const correct = quizData[currentQuestion].answers.find(
         (option) => option.correct
       );
       setCorrectAnswer(correct);
 
+      // Check if the selected answer is correct
       const isCorrect = answerOption.correct;
       if (isCorrect) {
         setScore((prevScore) => prevScore + 1);
@@ -165,6 +168,7 @@ const Mock1 = () => {
         setShowPopup("fail");
       }
 
+      // Record the user's answer
       setSubmittedAnswers((prev) => [
         ...prev,
         {
@@ -285,29 +289,29 @@ const Mock1 = () => {
               className="flex flex-col items-center"
             >
               {
-             showTitles && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="text-center text-white mb-12 px-4"
-              >
-                <img
-                  src={logo}
-                  alt="Logo"
-                  className="h-32 w-auto mx-auto mb-6"
-                />
-                <h1 className="text-4xl font-bold mb-4 leading-tight">
-                  Entrance Exam Preparation Test
-                </h1>
-                <h2 className="text-2xl font-semibold mb-2">
-                  Attempt all the questions.
-                </h2>
-                <h3 className="text-lg mb-6">
-                  Read the following questions carefully and tick the correct answer.
-                </h3>
-              </motion.div>
-            )
+                showTitles && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="text-center text-white mb-12 px-4"
+                  >
+                    <img
+                      src={logo}
+                      alt="Logo"
+                      className="h-32 w-auto mx-auto mb-6"
+                    />
+                    <h1 className="text-4xl font-bold mb-4 leading-tight">
+                      Entrance Exam Preparation Test
+                    </h1>
+                    <h2 className="text-2xl font-semibold mb-2">
+                      Attempt all the questions.
+                    </h2>
+                    <h3 className="text-lg mb-6">
+                      Read the following questions carefully and tick the correct answer.
+                    </h3>
+                  </motion.div>
+                )
               }
               {showLoader && (
                 <motion.div
@@ -327,66 +331,81 @@ const Mock1 = () => {
                   </p>
                 </motion.div>
               )}
-             {!showLoader && quizData.length > 0 && !showScore && (
-  <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-2">
-    <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
-      Question {currentQuestion + 1} of {quizData.length}
-    </h2>
-    <p className="text-xl font-medium mb-6 text-gray-800 dark:text-gray-200">
-      {quizData[currentQuestion].question}
-    </p>
-    {quizData[currentQuestion].answers.map((answer) => (
-      <motion.button
-        key={answer._id}
-        onClick={() => handleAnswerOptionClick(answer)}
-        className={`w-full p-4 mb-3 rounded-lg text-white ${selectedAnswer === answer ? (answer.correct ? 'bg-green-700 dark:bg-green-600' : 'bg-red-700 dark:bg-red-600') : 'bg-[#86198f] hover:bg-[#d946ef] dark:bg-blue-500'} shadow-md transform transition-transform duration-300 ease-in-out flex items-center `}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
-      >
-        {selectedAnswer === answer && (
-          <span className="mr-3">
-            {answer.correct ? (
-              <FaCheck className="text-green-400 dark:text-green-300" />
-            ) : (
-              <FaTimes className="text-red-400 dark:text-red-300" />
-            )}
-          </span>
-        )}
-        {answer.text}
-      </motion.button>
-    ))}
-    {selectedAnswer && (
-      <motion.div
-        className="mt-6"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-        <p className={`text-base font-semibold ${correctAnswer && selectedAnswer.correct ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'}`}>
-          {selectedAnswer.correct ? 'Correct!' : `Incorrect. The correct answer is: ${correctAnswer?.text}`}
-        </p>
-        <p className="text-sm font-medium text-brinjal dark:text-gray-300 mt-2 p-3 border border-brinjal dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
-          {quizData[currentQuestion]?.explanation || "No explanation provided."}
-        </p>
-      </motion.div>
-    )}
-    <div className="flex justify-between mt-8">
-      <button
-        onClick={handleRestartQuiz}
-        className="px-6 py-3 bg-gray-700 dark:bg-gray-600 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-500 shadow-lg hover:shadow-xl ring-2 ring-transparent hover:ring-4 hover:ring-opacity-60 hover:ring-gray-400 dark:hover:ring-gray-500"
-      >
-        Restart
-      </button>
-      <button
-        onClick={handleNextQuestion}
-        className="px-6 py-3 bg-[#6b21a8] dark:bg-[#a78bfa] text-white rounded-lg hover:bg-[#9333ea] dark:hover:bg-blue-500 shadow-lg hover:shadow-xl ring-2 "
-      >
-        Next
-      </button>
-    </div>
-  </div>
-)}
-
+              {!showLoader && quizData.length > 0 && !showScore && (
+                <div className="w-full max-w-3xl bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-2">
+                  <h2 className="text-lg font-bold mb-4 text-gray-900 dark:text-gray-100">
+                    Question {currentQuestion + 1} of {quizData.length}
+                  </h2>
+                  <p className="text-xl font-medium mb-6 text-gray-800 dark:text-gray-200">
+                    {quizData[currentQuestion].question}
+                  </p>
+                  {quizData[currentQuestion].answers.map((answer) => (
+                    <motion.button
+                      key={answer._id}
+                      onClick={() => handleAnswerOptionClick(answer)}
+                      className={`w-full p-4 mb-3 rounded-lg text-white ${selectedAnswer
+                          ? answer.correct
+                            ? 'bg-green-700 dark:bg-green-600'
+                            : answer === selectedAnswer
+                              ? 'bg-red-700 dark:bg-red-600'
+                              : 'bg-[#86198f] dark:bg-blue-500'
+                          : 'bg-[#86198f] hover:bg-[#d946ef] dark:bg-blue-500'
+                        } shadow-md transform transition-transform duration-300 ease-in-out flex items-center`}
+                      whileHover={{ scale: 1.06 }}
+                      whileTap={{ scale: 0.94 }}
+                    >
+                      {selectedAnswer === answer && (
+                        <span className="mr-3">
+                          {answer.correct ? (
+                            <FaCheck className="text-green-400 dark:text-green-300" />
+                          ) : (
+                            <FaTimes className="text-red-400 dark:text-red-300" />
+                          )}
+                        </span>
+                      )}
+                      {answer.text}
+                    </motion.button>
+                  ))}
+                  {selectedAnswer && (
+                    <motion.div
+                      className="mt-6"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.5 }}
+                    >
+                      <p className="text-base font-semibold">
+                        {selectedAnswer.correct ? (
+                          <span className="text-green-600 dark:text-green-500">Correct!</span>
+                        ) : (
+                          <>
+                            <span className="text-red-600 dark:text-red-500">Incorrect.</span>
+                            <span className="ml-1 text-gray-800 dark:text-gray-300">
+                              The correct answer is: <strong>{correctAnswer?.text}</strong>
+                            </span>
+                          </>
+                        )}
+                      </p>
+                      <p className="text-sm font-medium text-brinjal dark:text-gray-300 mt-2 p-3 border border-brinjal dark:border-gray-600 bg-gray-50 dark:bg-gray-800 rounded-lg shadow-md">
+                        {quizData[currentQuestion]?.explanation || "No explanation provided."}
+                      </p>
+                    </motion.div>
+                  )}
+                  <div className="flex justify-between mt-8">
+                    <button
+                      onClick={handleRestartQuiz}
+                      className="px-6 py-3 bg-gray-700 dark:bg-gray-600 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-500 shadow-lg hover:shadow-xl ring-2 ring-transparent hover:ring-4 hover:ring-opacity-60 hover:ring-gray-400 dark:hover:ring-gray-500"
+                    >
+                      Restart
+                    </button>
+                    <button
+                      onClick={handleNextQuestion}
+                      className="px-6 py-3 bg-[#6b21a8] dark:bg-[#a78bfa] text-white rounded-lg hover:bg-[#9333ea] dark:hover:bg-blue-500 shadow-lg hover:shadow-xl ring-2"
+                    >
+                      Next
+                    </button>
+                  </div>
+                </div>
+              )}
 
 
 
@@ -470,7 +489,7 @@ const Mock1 = () => {
                           <option value="Computer">Computer</option>
 
                           <option value="Civil">Civil</option>
-                          
+
                         </select>
                       </div>
                       <div className="mb-4">
