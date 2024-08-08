@@ -7,6 +7,7 @@ import Navbar from '../Navbar';
 import Tilt from 'react-parallax-tilt'; // Adjust import path for tilt effect
 import imgTree from '../../../public/fwu.jpeg'; // Adjusted import path for background image
 import Footer from '../home/Footer';
+import Chat from '../AI/Chat';
 
 const years = [
   { year: 2071, slogan: "Your gateway to success! 🚀" },
@@ -223,6 +224,7 @@ const Mock = () => {
         <audio ref={audioRef} src={musicUrl} preload="auto" />
       )}
     </div>
+    <Chat/>
     <Footer/>
     </>
   );

@@ -5,6 +5,7 @@ import Footer from '../components/home/Footer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import logo from "../../public/logo-icec.png"
+import Chat from '../components/AI/Chat';
 
 const teamMembers = [
   {
@@ -289,7 +290,7 @@ function About() {
           </div>
         </section>
       </div>
-
+      <Chat/>
       <Footer />
     </>
   );

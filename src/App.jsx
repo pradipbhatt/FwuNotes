@@ -32,6 +32,7 @@ import Quiz from "./components/mock/Quiz.jsx";
 import QuizResultForm from "./components/mock/QuizResultForm.jsx";
 import QuizResult from "./components/mock/QuizResult.jsx";
 import Gallary from "./components/Gallery.jsx"
+import Chat from "../src/components/AI/Chat.jsx"
 function App() {
   const [authUser] = useAuth();
   return (
@@ -59,6 +60,7 @@ function App() {
           <Route path="/Mock8" element={<Mock8 />} />
           <Route path="/Mock9" element={<Mock9 />} />
           <Route path="/Mock10" element={<Mock10 />} />
+          <Route path="/chat" element={<Chat />} />
           <Route path="/quizresult" element={<QuizResult/>} />
           <Route path="/quizresultadmin" element={ <ProtectedRoute> <QuizResultForm /> </ProtectedRoute>} />
           <Route path="/About" element={<About />} />

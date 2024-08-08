@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Testimonials from "./Testimonials";
 // import Dean from "../components/Dean"
 import Gallary from "../Gallery";
+import Chat from "../AI/Chat";
 
 function Home() {
   return (
@@ -16,6 +17,7 @@ function Home() {
       {/* <Dean/> */}
       <Testimonials/>
       {/* <Freebook /> */}
+      <Chat/>
       <Footer />
     </>
   );

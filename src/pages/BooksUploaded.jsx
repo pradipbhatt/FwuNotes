@@ -6,6 +6,7 @@ import arrowUp from '../../public/up-arrow.png';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import coverImage from '../assets/pkr.jpg'; // Import the cover image
+import Chat from '../components/AI/Chat';
 
 function BooksUploaded() {
   const [books, setBooks] = useState([]);
@@ -212,7 +213,7 @@ function BooksUploaded() {
           </button>
         ))}
       </div>
-
+     <Chat/>
       <Footer />
       {showScroll && (
         <button
