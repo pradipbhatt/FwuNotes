@@ -4,9 +4,10 @@ import Banner from "./Banner";
 // import Freebook from "../components/Freebook";
 import Footer from "./Footer";
 import Testimonials from "./Testimonials";
-// import Dean from "../components/Dean"
+// import Dean from "../components/Dean";
 import Gallary from "../Gallery";
 import Chat from "../AI/Chat";
+import PopupNotice from "./PopupNotice";
 
 function Home() {
   return (
@@ -15,10 +16,11 @@ function Home() {
       <Banner />
       {/* <Gallary/> */}
       {/* <Dean/> */}
-      <Testimonials/>
+      <Testimonials />
       {/* <Freebook /> */}
-      <Chat/>
+      <Chat />
       <Footer />
+      <PopupNotice />
     </>
   );
 }

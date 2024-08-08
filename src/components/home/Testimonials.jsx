@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
+import jelina from "../../../public/u.jpg"
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -22,7 +23,7 @@ const Testimonials = () => {
       name: 'Jelina Bhatt',
       title: 'CSE Student 4th Batch',
       company: 'Far Western University',
-      img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images',
+      img:jelina,
       quoteTitle: 'Resourceful Support',
       quote: 'SOE Notes brings a new perspective to comparing educational institutions and providing essential resources.',
       rating: 4
