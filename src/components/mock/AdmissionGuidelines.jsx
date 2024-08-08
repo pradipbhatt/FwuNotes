@@ -101,7 +101,7 @@ const AdmissionGuidelines = () => {
             <li>Recent passport-size photo with a plain background</li>
             <li>SEE or equivalent exam marksheet, character certificate, and transfer certificate</li>
             <li>10+2 or equivalent exam transcript, character certificate, and transfer certificate</li>
-            <li>Bank voucher of NPR 3,000 deposited in account no. 1110010736225000 at Rastriya Banijya Bank, Mahendranagar branch</li>
+            <li>Bank voucher of NPR 2,500 deposited in account no. 1110010736225000 at Rastriya Banijya Bank, Mahendranagar branch</li>
           </ul>
 
           <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
