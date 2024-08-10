@@ -84,7 +84,7 @@ const AdmissionGuidelines = () => {
               Examination Fee:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              NPR 2500/- (Nepalese Rupees Two Thousand Five Hundred only) payable to FWU Department of Civil Engineering's current account at Rastriya Banijya Bank, Mahendranagar branch, account no. <span className="font-semibold">1110010736225000</span>
+              NPR 2500/- (Nepalese Rupees Two Thousand Five Hundred only) payable to FWU Department of Civil Engineering's current account at Nepal Bank Limited, Mahendranagar branch, account no. <span className="font-semibold">1110010736225000</span>
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
