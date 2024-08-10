@@ -31,5 +31,21 @@ export default {
           
       },
   },
-  plugins: [require("daisyui"), require('tailwindcss-filters')],
+  plugins: [require("daisyui"), require('tailwindcss-filters'),
+    function({ addUtilities }) {
+      addUtilities(
+        {
+          '.scrollbar-hidden': {
+            'overflow': 'auto',
+            'scrollbar-width': 'none', /* For Firefox */
+            '-ms-overflow-style': 'none', /* For Internet Explorer and Edge */
+          },
+          '.scrollbar-hidden::-webkit-scrollbar': {
+            'display': 'none', /* For WebKit browsers (Chrome, Safari) */
+          },
+        },
+        ['responsive', 'hover']
+      );
+    },
+  ],
 };
