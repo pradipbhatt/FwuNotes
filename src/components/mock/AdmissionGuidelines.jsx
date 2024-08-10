@@ -49,7 +49,7 @@ const AdmissionGuidelines = () => {
               Admission Form Submission Date:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              <span className="font-semibold text-red-500">From 2081/04/23 to 2081/04/25</span>
+              <span className="font-semibold text-red-500">From 2081/04/23 to 2081/05/25</span>
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
