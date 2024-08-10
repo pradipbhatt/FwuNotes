@@ -8,7 +8,7 @@ import {
   HiHome, HiBookOpen, HiClipboardList, HiUserCircle
 } from "react-icons/hi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faBook, faClipboard, faChartBar, faFileAlt, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { faHome, faBook, faClipboard, faChartBar, faFileAlt, faUserCircle ,faBell} from '@fortawesome/free-solid-svg-icons';
 
 
 function Navbar() {
@@ -331,12 +331,12 @@ function Navbar() {
       <span className="text-xs mt-1">Results</span>
     </Link>
     <Link
-      to="/profile"
+      to="/AdmissionGuidelines"
       className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "profile" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("profile")}
+      onClick={() => setActiveTab("notice")}
     >
-      <FontAwesomeIcon icon={faUserCircle} className="w-8 h-8" />
-      <span className="text-xs mt-1">Profile</span>
+      <FontAwesomeIcon icon={faBell} className="w-8 h-8" />
+      <span className="text-xs mt-1">Notice</span>
     </Link>
   </div>
 </div>
