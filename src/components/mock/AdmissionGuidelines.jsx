@@ -40,9 +40,9 @@ const AdmissionGuidelines = () => {
               Number of Seats:
             </h3>
             <ul className="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-300">
-              <li><span className="font-semibold">B.E. Computer Program:</span> 48 (Regular - 20, Full Fee - 28)</li>
+              <li><span className="font-semibold">B.E. Computer Program:</span> 48 (Regular - 24, Full Fee - 24)</li>
               <li><span className="font-semibold">B.E. Civil Program:</span> 48 (Regular - 24, Full Fee - 24)</li>
-              <li><span className="font-semibold">B.Architecture Program:</span> 24 (Regular - 12, Full Fee - 12)</li>
+              <li><span className="font-semibold">B.Architecture Program:</span> 24 (Regular - 24, Full Fee - 24)</li>
             </ul>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
