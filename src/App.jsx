@@ -3,6 +3,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import Home from "./components/home/Home.jsx";
 import Mock from "./components/mock/Mock.jsx";
 import Signup from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
 import { Toaster } from "react-hot-toast";
 import { useAuth } from "./context/AuthProvider";
 import Mock1 from "./components/mock/Mock1";
@@ -66,6 +67,7 @@ function App() {
           <Route path="/About" element={<About />} />
           <Route path="/courses" element={<Courses/>} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
