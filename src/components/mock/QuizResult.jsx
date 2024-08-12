@@ -154,10 +154,10 @@ const QuizResult = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-8 py-12 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
+      <div className="container mx-auto px-8 py-1 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
         {/* Formal Header */}
         <motion.div 
-      className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100"
+      className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 relative rounded-3xl w-1/2 bg-opacity-40 dark:bg-opacity-30 shadow-lg"
       initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px below
       animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
       transition={{ duration: 0.8, ease: "easeOut" }} // Control the duration and easing of the animation
