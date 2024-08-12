@@ -201,24 +201,25 @@ function Navbar() {
   </div>
   {showMenuLeft && (
   <div
-    className={`fixed top-0 left-0 w-64 h-screen bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'} backdrop-blur-md shadow-lg`}
+    className={`fixed top-0 left-0 w-2/3 h-[100vh] bg-opacity-80 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'} backdrop-blur-md shadow-lg`}
   >
     <div className="flex items-center justify-between p-4 border-b dark:border-slate-600 bg-gray-50 dark:bg-slate-700">
-    <button
-  className="btn btn-ghost flex items-center justify-center w-16 h-16 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-600 border-2 border-gray-300 dark:border-gray-600 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"
-  onClick={() => setShowMenuLeft(false)}
->
-  <HiX className={`h-10 w-10 ${theme === "dark" ? "text-white" : "text-black"} transition-transform duration-300 ease-in-out transform hover:scale-125`} />
-</button>
+      <button
+        className="btn btn-ghost flex items-center justify-center w-14 h-14 bg-opacity-90 transition-all duration-300 ease-in-out hover:bg-gray-200 dark:hover:bg-gray-600 border-2 border-gray-300 dark:border-gray-600 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-300"
+        onClick={() => setShowMenuLeft(false)}
+      >
+        <HiX className={`h-10 w-10 ${theme === "dark" ? "text-white" : "text-black"} transition-transform duration-300 ease-in-out transform hover:scale-125`} />
+      </button>
 
       <Link
         to="/"
-        className="flex items-center space-x-2 transition-transform duration-300 ease-in-out transform hover:scale-105"
+        className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105"
       >
-        <span className="text-2xl font-semibold text-blue-500 dark:text-blue-400 transition-all duration-300 ease-in-out hover:text-blue-400">
+        <span className="relative text-3xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
           SOE
+          <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-sm transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-sm"></span>
         </span>
-        <span className="text-lg text-gray-900 dark:text-gray-100 font-serif">
+        <span className="text-xl font-serif text-gray-900 dark:text-gray-100">
           notes
         </span>
       </Link>
@@ -229,6 +230,7 @@ function Navbar() {
     </ul>
   </div>
 )}
+
 
 </div>
 
@@ -276,8 +278,8 @@ function Navbar() {
         <div
           className={`absolute w-7 h-7 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
         >
-          <HiMoon className={`text-gray-100 ${theme === "dark" ? 'block' : 'hidden'}`} />
-          <HiSun className={`text-gray-900 ${theme === "dark" ? 'hidden' : 'block'}`} />
+          <HiSun className={`text-gray-100 ${theme === "dark" ? 'block' : 'hidden'}`} />
+          <HiMoon className={`text-gray-900 ${theme === "dark" ? 'hidden' : 'block'}`} />
         </div>
         <div
           className={`absolute w-6 h-6 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-8' : 'translate-x-0'}`}

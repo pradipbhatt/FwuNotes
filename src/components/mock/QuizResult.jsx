@@ -154,34 +154,35 @@ const QuizResult = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-8 py-1 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
+      <div className="container mx-auto px-8 sm:mt-0 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
         {/* Formal Header */}
         <motion.div 
-      className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 relative rounded-3xl w-1/2 bg-opacity-40 dark:bg-opacity-30 shadow-lg"
-      initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px below
-      animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
-      transition={{ duration: 0.8, ease: "easeOut" }} // Control the duration and easing of the animation
-    >
-      <motion.div 
-        className="header mb-8"
-        initial={{ opacity: 0, x: -50 }} // Fade in from the left
-        animate={{ opacity: 1, x: 0 }} // Move to the original position
-        transition={{ duration: 1, ease: "easeOut" }}
-      >
-        <motion.img 
-          src={logo} 
-          alt="University Logo" 
-          className="mx-auto w-24 h-auto mb-4"
-          initial={{ rotate: -180, opacity: 0 }} // Rotate in and fade in
-          animate={{ rotate: 0, opacity: 1 }} // Rotate back to original and fade in
-          transition={{ duration: 1, ease: "easeOut" }}
-        />
-        <h1 className="text-2xl font-bold mb-2">Far Western University</h1>
-        <h2 className="text-xl mb-2">School of Engineering</h2>
-        <h3 className="text-lg mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
-        <h4 className="text-lg">BE Test Examination Results</h4>
-      </motion.div>
-    </motion.div>
+  className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 relative rounded-3xl w-full sm:w-1/2 bg-opacity-40 dark:bg-opacity-30 shadow-lg lg:mt-20"
+  initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px below
+  animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
+  transition={{ duration: 0.8, ease: "easeOut" }} // Control the duration and easing of the animation
+>
+  <motion.div 
+    className="header mb-8"
+    initial={{ opacity: 0, x: -50 }} // Fade in from the left
+    animate={{ opacity: 1, x: 0 }} // Move to the original position
+    transition={{ duration: 1, ease: "easeOut" }}
+  >
+    <motion.img 
+      src={logo} 
+      alt="University Logo" 
+      className="mx-auto w-24 h-auto mb-4"
+      initial={{ rotate: -180, opacity: 0 }} // Rotate in and fade in
+      animate={{ rotate: 0, opacity: 1 }} // Rotate back to original and fade in
+      transition={{ duration: 1, ease: "easeOut" }}
+    />
+    <h1 className="text-2xl font-bold mb-2">Far Western University</h1>
+    <h2 className="text-xl mb-2">School of Engineering</h2>
+    <h3 className="text-lg mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
+    <h4 className="text-lg">BE Test Examination Results</h4>
+  </motion.div>
+</motion.div>
+
 
 
         {/* Results Section */}
