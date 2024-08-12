@@ -26,6 +26,26 @@ function Navbar() {
   const [sticky, setSticky] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("home");
+  // const [activeTab, setActiveTab] = useState("home");
+  const [isVisible, setIsVisible] = useState(true);
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+
+    const handleScroll = () => {
+      if (window.scrollY > lastScrollY) {
+        setIsVisible(false);
+      } else {
+        setIsVisible(true);
+      }
+      lastScrollY = window.scrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   const [userData, setUserData] = useState({
     userImage: 'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png'
@@ -54,15 +74,6 @@ function Navbar() {
     }
   }, [theme]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setSticky(window.scrollY > 0);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -96,6 +107,8 @@ function Navbar() {
     setShowSemesterDropdown(false);
   };
 
+   
+    
   const navItems = (
     <>
       <li>
@@ -156,6 +169,8 @@ function Navbar() {
       </li>
     </>
   );
+
+  
 
   return (
     <>
@@ -296,51 +311,65 @@ function Navbar() {
       </div>
 
       {/* Bottom Navigation Bar for Mobile */}
-      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100">
-  <div className="flex justify-around py-1">
-    <Link
-      to="/"
-      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("home")}
+      <div
+      className={`lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out ${
+        isVisible ? "transform translate-y-0" : "transform translate-y-full"
+      }`}
+      style={{ height: "50px" }}
     >
-      <FontAwesomeIcon icon={faHome} className="w-8 h-8" />
-      <span className="text-xs mt-1">Home</span>
-    </Link>
-    <Link
-      to="/showbook"
-      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("soenotes")}
-    >
-      <FontAwesomeIcon icon={faBook} className="w-8 h-8" />
-      <span className="text-xs mt-1">Books</span>
-    </Link>
-    <Link
-      to="/mock"
-      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("entrance")}
-    >
-      <FontAwesomeIcon icon={faFileAlt} className="w-8 h-8" />
-      <span className="text-xs mt-1">Mock</span>
-    </Link>
-    <Link
-      to="/quizresult"
-      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("results")}
-    >
-      <FontAwesomeIcon icon={faChartBar} className="w-8 h-8" />
-      <span className="text-xs mt-1">Results</span>
-    </Link>
-    <Link
-      to="/AdmissionGuidelines"
-      className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "profile" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"}`}
-      onClick={() => setActiveTab("notice")}
-    >
-      <FontAwesomeIcon icon={faBell} className="w-8 h-8" />
-      <span className="text-xs mt-1">Notice</span>
-    </Link>
-  </div>
-</div>
-
+      <div className="flex justify-around py-1">
+        <Link
+          to="/"
+          className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${
+            activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
+          }`}
+          onClick={() => setActiveTab("home")}
+        >
+          <FontAwesomeIcon icon={faHome} className="w-5 h-5" />
+          <span className="text-xs mt-1">Home</span>
+        </Link>
+        <Link
+          to="/showbook"
+          className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${
+            activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
+          }`}
+          onClick={() => setActiveTab("soenotes")}
+        >
+          <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
+          <span className="text-xs mt-1">Books</span>
+        </Link>
+        <Link
+          to="/mock"
+          className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${
+            activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
+          }`}
+          onClick={() => setActiveTab("entrance")}
+        >
+          <FontAwesomeIcon icon={faFileAlt} className="w-5 h-5" />
+          <span className="text-xs mt-1">Mock</span>
+        </Link>
+        <Link
+          to="/quizresult"
+          className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${
+            activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
+          }`}
+          onClick={() => setActiveTab("results")}
+        >
+          <FontAwesomeIcon icon={faChartBar} className="w-5 h-5" />
+          <span className="text-xs mt-1">Results</span>
+        </Link>
+        <Link
+          to="/AdmissionGuidelines"
+          className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${
+            activeTab === "notice" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
+          }`}
+          onClick={() => setActiveTab("notice")}
+        >
+          <FontAwesomeIcon icon={faBell} className="w-5 h-5" />
+          <span className="text-xs mt-1">Notice</span>
+        </Link>
+      </div>
+    </div>
     </>
   );
 }
