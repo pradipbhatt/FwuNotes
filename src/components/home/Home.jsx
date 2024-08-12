@@ -21,7 +21,7 @@ function Home() {
       <Chat />
       <Footer />
       <PopupNotice />
-      <DownloadButton/>
+      {/* <DownloadButton/> */}
     </>
   );
 }
