@@ -8,7 +8,7 @@ import Testimonials from "./Testimonials";
 import Gallary from "../Gallery";
 import Chat from "../AI/Chat";
 import PopupNotice from "./PopupNotice";
-
+import DownloadButton from "./DownloadButton"; // Import your download button
 function Home() {
   return (
     <>
@@ -21,6 +21,7 @@ function Home() {
       <Chat />
       <Footer />
       <PopupNotice />
+      <DownloadButton/>
     </>
   );
 }
