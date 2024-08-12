@@ -135,7 +135,7 @@ const Mock = () => {
         <Navbar />
 
         {showNotice && (
-          <div className="fixed top-0 left-0 right-0 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg">
+          <div className="fixed top-12 left-0 right-0 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg">
             <div className="font-bold">
               <p className="text-lg">
                 After completing the test, please fill out the form with your real name.

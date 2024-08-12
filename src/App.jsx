@@ -37,7 +37,7 @@ function App() {
   const [authUser] = useAuth();
   return (
     <>
-      <div className="dark:bg-slate-100 dark:text-black">
+      <div className="bg-gray-100 dark:bg-slate-900 dark:text-black">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addbook" element={ <ProtectedRoute><Addbook/></ProtectedRoute> } />
