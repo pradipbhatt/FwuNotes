@@ -272,11 +272,11 @@ const QuizResult = () => {
         </motion.span>
       </motion.h3>
       
-      <FacebookComments pageUrl={pageUrl} />
     </div>
     </div>
         )}
       </div>
+        <FacebookComments pageUrl={pageUrl} />
       
       <Chat/>
       
