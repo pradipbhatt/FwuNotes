@@ -11,10 +11,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import MathJax from 'react-mathjax2';
 
 const NUM_QUESTIONS = 75;
-const QUESTION_TIME = 2 * 60;
+const QUESTION_TIME = 2 * 60; // 2 minutes in seconds
 const TOTAL_TIME = NUM_QUESTIONS * QUESTION_TIME;
 
 const Mock1 = () => {
+  // State variables
   const [currentQuestion, setCurrentQuestion] = useState(() =>
     parseInt(localStorage.getItem("currentQuestion")) || 0
   );
@@ -43,31 +44,12 @@ const Mock1 = () => {
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [showPopup, setShowPopup] = useState(null);
 
-  useEffect(() => {
-    let progressInterval;
-    if (showLoader) {
-      progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev < 90) {
-            return prev + 1;
-          } else {
-            return prev;
-          }
-        });
-      }, 100);
-    }
-    return () => clearInterval(progressInterval);
-  }, [showLoader]);
-
+  // Fetch quiz data
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
-        const response = await fetch(
-          "https://fwu-soe.onrender.com/api/quizzes/"
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
+        const response = await fetch("https://fwu-soe.onrender.com/api/quizzes/");
+        if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         const filteredData = data.filter((quiz) => quiz.yearID === 2076);
 
@@ -76,12 +58,9 @@ const Mock1 = () => {
             ...answer,
             _id: `answer_${index}_${Math.random().toString(36).substr(2, 9)}`
           }));
-
-          const shuffledAnswers = answersWithIds.sort(() => Math.random() - 0.5);
-
           return {
             ...quiz,
-            answers: shuffledAnswers
+            answers: answersWithIds.sort(() => Math.random() - 0.5)
           };
         });
 
@@ -98,16 +77,18 @@ const Mock1 = () => {
     fetchQuizData();
   }, []);
 
+  // Timer functionality
   useEffect(() => {
-    let countdown;
-    if (timer > 0 && !showScore) {
-      countdown = setInterval(() => {
-        setTimer((prevTimer) => {
-          localStorage.setItem("timer", prevTimer - 1);
-          return prevTimer - 1;
-        });
-      }, 1000);
-    } else if (timer === 0) {
+    const countdown = timer > 0 && !showScore
+      ? setInterval(() => {
+          setTimer(prevTimer => {
+            localStorage.setItem("timer", prevTimer - 1);
+            return prevTimer - 1;
+          });
+        }, 1000)
+      : null;
+
+    if (timer === 0) {
       setShowScore(true);
       setShowForm(true);
       localStorage.removeItem("currentQuestion");
@@ -118,74 +99,69 @@ const Mock1 = () => {
     return () => clearInterval(countdown);
   }, [timer, showScore]);
 
+  // Question timer
   useEffect(() => {
-    let questionCountdown;
-    if (questionTimer > 0 && !showScore && selectedAnswer === null) {
-      questionCountdown = setInterval(() => {
-        setQuestionTimer((prevTimer) => prevTimer - 1);
-      }, 1000);
-    }
+    const questionCountdown = questionTimer > 0 && !showScore && selectedAnswer === null
+      ? setInterval(() => {
+          setQuestionTimer(prevTimer => prevTimer - 1);
+        }, 1000)
+      : null;
 
-    if (questionTimer === 0) {
-      handleNextQuestion();
-    }
+    if (questionTimer === 0) handleNextQuestion();
 
     return () => clearInterval(questionCountdown);
   }, [questionTimer, showScore, selectedAnswer]);
 
+  // Update localStorage
   useEffect(() => {
     localStorage.setItem("currentQuestion", currentQuestion);
     localStorage.setItem("score", score.toString());
   }, [currentQuestion, score]);
 
+  // Hide titles after 10 seconds
   useEffect(() => {
-    const titlesTimer = setTimeout(() => {
-      setShowTitles(false);
-    }, 10000);
-
-    return () => clearTimeout(titlesTimer);
+    if (showTitles) {
+      const titlesTimer = setTimeout(() => setShowTitles(false), 10000);
+      return () => clearTimeout(titlesTimer);
+    }
   }, [showTitles]);
 
+  // Initialize AOS
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  // Handlers
   const handleAnswerOptionClick = (answerOption) => {
-    if (!selectedAnswer) {
-      setSelectedAnswer(answerOption);
+    if (selectedAnswer) return;
 
-      // Determine the correct answer
-      const correct = quizData[currentQuestion].answers.find(
-        (option) => option.correct
-      );
-      setCorrectAnswer(correct);
+    setSelectedAnswer(answerOption);
 
-      // Check if the selected answer is correct
-      const isCorrect = answerOption.correct;
-      if (isCorrect) {
-        setScore((prevScore) => prevScore + 1);
-        setShowPopup("success");
-      } else {
-        setShowPopup("fail");
-      }
+    const correct = quizData[currentQuestion].answers.find(option => option.correct);
+    setCorrectAnswer(correct);
 
-      // Record the user's answer
-      setSubmittedAnswers((prev) => [
-        ...prev,
-        {
-          question: quizData[currentQuestion].question,
-          userAnswer: answerOption.text,
-          correctAnswer: correct.text,
-          explanation: quizData[currentQuestion].explanation || "No explanation provided.",
-        },
-      ]);
-
-      // Show the popup animation for a few seconds before auto-advancing
-      setTimeout(() => {
-        setShowPopup(null);
-        handleNextQuestion();
-      }, 4000);
+    const isCorrect = answerOption.correct;
+    if (isCorrect) {
+      setScore(prevScore => prevScore + 1);
+      setShowPopup("success");
+    } else {
+      setShowPopup("fail");
     }
+
+    setSubmittedAnswers(prev => [
+      ...prev,
+      {
+        question: quizData[currentQuestion].question,
+        userAnswer: answerOption.text,
+        correctAnswer: correct.text,
+        explanation: quizData[currentQuestion].explanation || "No explanation provided.",
+      }
+    ]);
+
+    setTimeout(() => {
+      setShowPopup(null);
+      handleNextQuestion();
+    }, 4000);
   };
 
   const handleNextQuestion = () => {
@@ -205,38 +181,16 @@ const Mock1 = () => {
   };
 
   const handleFinishQuiz = () => {
-    // Clear selected answer and correct answer (optional)
     setSelectedAnswer(null);
     setCorrectAnswer(null);
-
-    // Reset the timer (optional)
     setQuestionTimer(QUESTION_TIME);
-
-    // Set the state to show the score and form
     setShowScore(true);
     setShowForm(true);
-
-    // Clear local storage
     localStorage.removeItem("currentQuestion");
     localStorage.removeItem("score");
     localStorage.removeItem("timer");
-
-    // Optionally, handle any additional finalization logic here
-    // For example, you might want to submit the results or navigate to another page
-    // Example: submitQuizResults();
-    // Example: history.push('/results-summary');
   };
 
-  // Check if quizData and currentQuestion are valid
-  const currentQuestionData = quizData[currentQuestion] || { question: '', answers: [], explanation: '' };
-
-  // Function to determine if the question is mathematical
-  const isMathQuestion = (question) => {
-    // A simple regex to check for mathematical symbols
-    return /[\+\-\*\/\=\(\)\^]/.test(question);
-  };
-
-  const isMath = isMathQuestion(currentQuestionData.question);
   const handleRestartQuiz = () => {
     setCurrentQuestion(0);
     setScore(0);
@@ -265,30 +219,24 @@ const Mock1 = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     if (isFormSubmitted) {
       toast.info("You have already submitted the form.");
       return;
     }
 
     try {
-      const response = await fetch(
-        "https://fwu-soe.onrender.com/api/quiz-results/",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            ...formData,
-            totalQuestions: quizData.length,
-            solvedQuestions: score,
-          }),
-        }
-      );
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
+      const response = await fetch("https://fwu-soe.onrender.com/api/quiz-results/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          totalQuestions: quizData.length,
+          solvedQuestions: score,
+        }),
+      });
+      if (!response.ok) throw new Error("Network response was not ok");
       toast.success("Quiz result submitted successfully!");
       setIsFormSubmitted(true);
       setFormData({
@@ -297,14 +245,19 @@ const Mock1 = () => {
         review: "Any feedback or suggestions?",
         rating: "5",
       });
-      setShowForm(false); // Close the form after successful submission
+      setShowForm(false);
     } catch (error) {
       toast.error("There was an error submitting the form.");
-      setShowForm(false); // Optionally close the form on error
+      setShowForm(false);
     }
   };
 
+  // Check if quizData and currentQuestion are valid
+  const currentQuestionData = quizData[currentQuestion] || { question: '', answers: [], explanation: '' };
 
+  // Function to determine if the question is mathematical
+  const isMathQuestion = (question) => /[\+\-\*\/\=\(\)\^]/.test(question);
+  const isMath = isMathQuestion(currentQuestionData.question);
   return (
     <>
       <Navbar />
@@ -315,7 +268,7 @@ const Mock1 = () => {
           alt="Background Image"
         />
         <div className="relative bg-gray-800 bg-opacity-80 py-20">
-          <div className="container mx-auto text-center px-4">
+          <div className="container mx-auto text-center px-4 w-full">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -367,7 +320,7 @@ const Mock1 = () => {
               )}
               {!showLoader && quizData.length > 0 && !showScore && (
                 <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
-                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-md rounded-xl"></div>
+                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
                   <div className="relative z-10">
                     <h2 className="text-lg md:text-xl font-bold mb-4 text-gray-900 dark:text-gray-100 tracking-wider">
                       Question {currentQuestion + 1} of {quizData.length}
@@ -571,7 +524,7 @@ const Mock1 = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 0.9, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="w-full max-w-4xl mx-auto mt-8 p-8  rounded-lg shadow-xl "
+    className="w-full max-w-full mx-auto mt-8 p-0  rounded-lg shadow-xl "
   >
     <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-900">Entrance Completed!</h2>
     <p className="text-xl mb-8 text-gray-800 dark:text-gray-300">
@@ -584,7 +537,7 @@ const Mock1 = () => {
       viewport={{ once: true }}
       className="space-y-6"
     >
-      <div className="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg dark:shadow-gray-700">
+      <div className="bg-white bg-opacity-80 dark:bg-opacity-80 dark:bg-gray-900  rounded-lg shadow-lg dark:shadow-gray-700 sm:w-full">
         <h2 className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Scoreboard</h2>
         <ul className="space-y-4">
           {submittedAnswers.map((answer, index) => (
@@ -594,12 +547,12 @@ const Mock1 = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.2 }}
-              className="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg shadow-md dark:shadow-gray-700"
+              className=""
             >
               <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">Question {index + 1}:</p>
 
               <p
-                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200"
+                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 break-words overflow-scroll scrollbar-hidden"
                 style={{
                   letterSpacing: '0.05em',
                   overflowWrap: 'break-word',
@@ -686,76 +639,67 @@ const Mock1 = () => {
 
 
 
-              {showForm && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center"
+{showForm && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4"
+        >
+          <div className="bg-gray-100 dark:bg-gray-900 p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md">
+            <h3 className="font-semibold mb-4 text-black dark:text-white">Requested to fill form with your Correct Name</h3>
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Name:</label>
+                <input
+                  type="text"
+                  name="userName"
+                  value={formData.userName}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
+                />
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Engineering Field:</label>
+                <select
+                  name="engineeringField"
+                  value={formData.engineeringField}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
                 >
-                  <div className="bg-gray-100 dark:bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-md">
-                    <h3 className=" font-semibold mb-4 text-black  dark:text-white">Requested to fill form with your Correct Name</h3>
-                    <form onSubmit={handleSubmit}>
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white">Name:</label>
-                        <input
-                          type="text"
-                          name="userName"
-                          value={formData.userName}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 "
-                        />
-                      </div>
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white">Engineering Field:</label>
-                        <select
-                          name="engineeringField"
-                          value={formData.engineeringField}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                        >
-                          <option value="Computer">Computer</option>
+                  <option value="Computer">Computer</option>
+                  <option value="Civil">Civil</option>
+                  <option value="Architecture">Architecture</option>
+                </select>
+              </div>
+              <div className="mb-4">
+                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Review:</label>
+                <textarea
+                  name="review"
+                  value={formData.review}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
+                />
+              </div>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+              >
+                Submit
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowForm(false)}
+                className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
+              >
+                Close
+              </button>
+            </form>
+          </div>
+        </motion.div>
+      )}
 
-                          <option value="Civil">Civil</option>
-
-                        </select>
-                      </div>
-                      <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white">Review:</label>
-                        <textarea
-                          name="review"
-                          value={formData.review}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                        />
-                      </div>
-                      {/* <div className="mb-4">
-                        <label className="block text-sm font-medium mb-2">Rating:</label>
-                        <input
-                          type="hidden"
-                          name="rating"
-                          value="5"
-                          onChange={handleInputChange}
-                        />
-                        <p className="text-sm">Rating: 5 (hidden)</p>
-                      </div> */}
-                      <button
-                        type="submit"
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 "
-                      >
-                        Submit
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => setShowForm(false)}
-                        className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-                      >
-                        Close
-                      </button>
-                    </form>
-                  </div>
-                </motion.div>
-              )}
+    
             </motion.div>
           </div>
         </div>

@@ -320,7 +320,7 @@ const Mock1 = () => {
               )}
               {!showLoader && quizData.length > 0 && !showScore && (
                 <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
-                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-md rounded-xl"></div>
+                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
                   <div className="relative z-10">
                     <h2 className="text-lg md:text-xl font-bold mb-4 text-gray-900 dark:text-gray-100 tracking-wider">
                       Question {currentQuestion + 1} of {quizData.length}
@@ -524,7 +524,7 @@ const Mock1 = () => {
     initial={{ opacity: 0, y: 20 }}
     animate={{ opacity: 0.9, y: 0 }}
     transition={{ duration: 0.5 }}
-    className="w-full max-w-full mx-auto mt-8 p-8  rounded-lg shadow-xl "
+    className="w-full max-w-full mx-auto mt-8 p-0  rounded-lg shadow-xl "
   >
     <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-900">Entrance Completed!</h2>
     <p className="text-xl mb-8 text-gray-800 dark:text-gray-300">
@@ -537,7 +537,7 @@ const Mock1 = () => {
       viewport={{ once: true }}
       className="space-y-6"
     >
-      <div className="bg-white bg-opacity-40 dark:bg-gray-900  rounded-lg shadow-lg dark:shadow-gray-700 sm:w-full">
+      <div className="bg-white bg-opacity-80 dark:bg-opacity-80 dark:bg-gray-900  rounded-lg shadow-lg dark:shadow-gray-700 sm:w-full">
         <h2 className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Scoreboard</h2>
         <ul className="space-y-4">
           {submittedAnswers.map((answer, index) => (
