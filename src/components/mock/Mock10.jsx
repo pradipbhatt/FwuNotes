@@ -10,7 +10,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import MathJax from 'react-mathjax2';
 
-const NUM_QUESTIONS = 75;
+const NUM_QUESTIONS = 150;
 const QUESTION_TIME = 2 * 60; // 2 minutes in seconds
 const TOTAL_TIME = NUM_QUESTIONS * QUESTION_TIME;
 
@@ -43,6 +43,7 @@ const Mock1 = () => {
   const [progress, setProgress] = useState(0);
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
   const [showPopup, setShowPopup] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // Fetch quiz data
   useEffect(() => {
@@ -165,20 +166,25 @@ const Mock1 = () => {
   };
 
   const handleNextQuestion = () => {
+    // Disable the button or add loading state if needed
     setSelectedAnswer(null);
     setCorrectAnswer(null);
     setQuestionTimer(QUESTION_TIME);
-    const nextQuestion = currentQuestion + 1;
-    if (nextQuestion < quizData.length) {
-      setCurrentQuestion(nextQuestion);
-    } else {
-      setShowScore(true);
-      setShowForm(true);
-      localStorage.removeItem("currentQuestion");
-      localStorage.removeItem("score");
-      localStorage.removeItem("timer");
-    }
+  
+    setTimeout(() => {
+      const nextQuestion = currentQuestion + 1;
+      if (nextQuestion < quizData.length) {
+        setCurrentQuestion(nextQuestion);
+      } else {
+        setShowScore(true);
+        setShowForm(true);
+        localStorage.removeItem("currentQuestion");
+        localStorage.removeItem("score");
+        localStorage.removeItem("timer");
+      }
+    }, 10); // Delay of 2 seconds
   };
+  
 
   const handleFinishQuiz = () => {
     setSelectedAnswer(null);
@@ -318,186 +324,205 @@ const Mock1 = () => {
                   </p>
                 </motion.div>
               )}
-              {!showLoader && quizData.length > 0 && !showScore && (
-                <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
-                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
-                  <div className="relative z-10">
-                    <h2 className="text-lg md:text-xl font-bold mb-4 text-gray-900 dark:text-gray-100 tracking-wider">
-                      Question {currentQuestion + 1} of {quizData.length}
-                    </h2>
-                    <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
-                      {isMath ? (
-                        <div className="w-full break-words overflow-scroll scrollbar-hidden">
-                          <MathJax.Context input='tex'>
-                            <MathJax.Node
-                              className="whitespace-pre-wrap"
-                              style={{
-                                letterSpacing: '0.05em',
-                                overflowWrap: 'break-word',
-                                wordWrap: 'break-word',
-                                whiteSpace: 'pre-wrap',
-                                fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
-                              }}
-                            >
-                              {currentQuestionData.question}
-                            </MathJax.Node>
-                          </MathJax.Context>
-                        </div>
-                      ) : (
-                        <p
-                          className="whitespace-pre-wrap break-words scrollbar-hidden"
-                          style={{
-                            letterSpacing: '0.05em',
-                            overflowWrap: 'break-word',
-                            wordWrap: 'break-word',
-                            whiteSpace: 'pre-wrap',
-                            fontSize: 'calc(0.875rem + 0.2vw)', // Responsive font size
-                          }}
-                        >
-                          {currentQuestionData.question}
-                        </p>
-                      )}
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                      {currentQuestionData.answers.map((answer) => (
-                        <motion.button
-                          key={answer._id}
-                          onClick={() => handleAnswerOptionClick(answer)}
-                          className={`w-full p-4 rounded-2xl flex items-center justify-start transition-transform duration-500 ease-in-out ${selectedAnswer
-                            ? answer.correct
-                              ? 'bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 text-white shadow-inner shadow-green-500' // Correct answer background
-                              : answer === selectedAnswer
-                                ? 'bg-gradient-to-r from-red-600 to-red-800 dark:from-red-400 dark:to-red-600 text-white shadow-inner shadow-red-500' // Incorrect selected answer background
-                                : 'bg-gray-700 dark:bg-gray-800 text-gray-300 dark:text-gray-400 shadow-inner shadow-gray-500' // Non-selected answer background
-                            : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-blue-400 dark:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 text-white shadow-inner shadow-blue-500' // Default background
-                            } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600`}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          {selectedAnswer === answer && (
-                            <span className="mr-3 flex items-center">
-                              {answer.correct ? (
-                                <FaCheck className="w-5 h-5 text-green-300 dark:text-green-200" />
-                              ) : (
-                                <FaTimes className="w-5 h-5 text-red-300 dark:text-red-200" />
-                              )}
-                            </span>
-                          )}
-                          <span
-                            className={isMath ? 'font-math' : 'font-normal'}
-                            style={{
-                              fontSize: 'calc(0.65rem + 0.5vw)', // Smaller, responsive font size
-                              letterSpacing: '0.05em',
-                              overflowWrap: 'break-word',
-                              wordWrap: 'break-word',
-                              whiteSpace: 'pre-wrap',
-                            }}
-                          >
-                            {isMath ? (
-                              <MathJax.Context input='tex'>
-                                <MathJax.Node
-                                  className="whitespace-pre-wrap break-words"
-                                  style={{ letterSpacing: '0.05em' }}
-                                >
-                                  {answer.text}
-                                </MathJax.Node>
-                              </MathJax.Context>
-                            ) : (
-                              answer.text
-                            )}
-                          </span>
-                        </motion.button>
-                      ))}
-
-
-                    </div>
-                    {selectedAnswer && (
-                      <motion.div
-                        className="mt-6"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ duration: 0.5 }}
-                      >
-                        <p className="text-base font-semibold mb-2 tracking-wider flex flex-col space-y-2">
-                          {selectedAnswer?.correct ? (
-                            <span className="text-green-600 dark:text-green-500 flex items-center">
-                              <span className="mr-2">✔️</span> Correct!
-                            </span>
-                          ) : (
-                            <>
-                              <span className="text-red-600 dark:text-red-500 flex items-center">
-                                <span className="mr-2">❌</span> Incorrect.
-                              </span>
-                              <span className="text-gray-800 dark:text-gray-300 flex items-center">
-                                <span className="mr-2">🔍</span> The correct answer is
-                                {isMath ? (
-                                  <MathJax.Context input='tex'>
-                                    <MathJax.Node
-                                      className="ml-2 text-green-600 dark:text-green-500 font-semibold"
-                                      style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
-                                    >
-                                      {correctAnswer?.text || "No correct answer provided."}
-                                    </MathJax.Node>
-                                  </MathJax.Context>
-                                ) : (
-                                  <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
-                                    {correctAnswer?.text || "No correct answer provided."}
-                                  </span>
-                                )}
-                              </span>
-                            </>
-                          )}
-                        </p>
-                        <p
-                          className="w-full bg-white dark:bg-gray-100 p-6 rounded-xl shadow-lg dark:shadow-gray-900 overflow-scroll scrollbar-hidden text-black dark:text-gray-900"
-                          style={{
-                            letterSpacing: '0.05em',
-                            overflowWrap: 'break-word',
-                            wordWrap: 'break-word',
-                            whiteSpace: 'pre-wrap',
-                            fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                          }}
-                        >
-                          {isMath ? (
-                            <MathJax.Context input='tex'>
-                              <MathJax.Node
-                                className="whitespace-pre-wrap break-words"
-                                style={{
-                                  letterSpacing: '0.05em',
-                                  overflowWrap: 'break-word',
-                                  wordWrap: 'break-word',
-                                  whiteSpace: 'pre-wrap',
-                                  fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                                  color: 'inherit' // Inherit text color
-                                }}
-                              >
-                                {currentQuestionData.explanation || "No explanation provided."}
-                              </MathJax.Node>
-                            </MathJax.Context>
-                          ) : (
-                            <span
-                              style={{
-                                letterSpacing: '0.05em',
-                                overflowWrap: 'break-word',
-                                wordWrap: 'break-word',
-                                whiteSpace: 'pre-wrap',
-                                fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                                color: 'inherit' // Inherit text color
-                              }}
-                            >
-                              {currentQuestionData.explanation || "No explanation provided."}
-                            </span>
-                          )}
-                        </p>
-                      </motion.div>
-                    )}
-                  </div>
-                </div>
-
-
-
-
+             {!showLoader && quizData.length > 0 && !showScore && (
+  <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
+    <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
+    <div className="relative z-10">
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-md md:text-md sm:text-sm  font-bold text-gray-900 dark:text-gray-100 tracking-wider">
+          Question {currentQuestion + 1} of {quizData.length}
+        </h2>
+        <div className="flex items-center space-x-4">
+        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+             Time: {formatTime(questionTimer)}
+              </p>
+          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+            Time left: {String(Math.floor(timer / 60)).padStart(2, '0')}:
+            {String(timer % 60).padStart(2, '0')}
+          </p>
+        </div>
+          
+      </div>
+      <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
+        {isMath ? (
+          <div className="w-full break-words overflow-scroll scrollbar-hidden">
+            <MathJax.Context input='tex'>
+              <MathJax.Node
+                className="whitespace-pre-wrap"
+                style={{
+                  letterSpacing: '0.05em',
+                  overflowWrap: 'break-word',
+                  wordWrap: 'break-word',
+                  whiteSpace: 'pre-wrap',
+                  fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
+                }}
+                >
+            
+                {currentQuestionData.question}
+              </MathJax.Node>
+            </MathJax.Context>
+          </div>
+        ) : (
+          <p
+            className="whitespace-pre-wrap break-words scrollbar-hidden"
+            style={{
+              letterSpacing: '0.05em',
+              overflowWrap: 'break-word',
+              wordWrap: 'break-word',
+              whiteSpace: 'pre-wrap',
+              fontSize: 'calc(0.875rem + 0.2vw)', // Responsive font size
+            }}
+          >
+            {currentQuestionData.question}
+          </p>
+        )}
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {currentQuestionData.answers.map((answer) => (
+          <motion.button
+            key={answer._id}
+            onClick={() => handleAnswerOptionClick(answer)}
+            className={`w-full p-4 rounded-2xl flex items-center justify-start transition-transform duration-500 ease-in-out ${selectedAnswer
+              ? answer.correct
+                ? 'bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 text-white shadow-inner shadow-green-500' // Correct answer background
+                : answer === selectedAnswer
+                  ? 'bg-gradient-to-r from-red-600 to-red-800 dark:from-red-400 dark:to-red-600 text-white shadow-inner shadow-red-500' // Incorrect selected answer background
+                  : 'bg-gray-700 dark:bg-gray-800 text-gray-300 dark:text-gray-400 shadow-inner shadow-gray-500' // Non-selected answer background
+              : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-blue-400 dark:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 text-white shadow-inner shadow-blue-500' // Default background
+              } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600`}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {selectedAnswer === answer && (
+              <span className="mr-3 flex items-center">
+                {answer.correct ? (
+                  <FaCheck className="w-5 h-5 text-green-300 dark:text-green-200" />
+                ) : (
+                  <FaTimes className="w-5 h-5 text-red-300 dark:text-red-200" />
+                )}
+              </span>
+            )}
+            <span
+              className={isMath ? 'font-math' : 'font-normal'}
+              style={{
+                fontSize: 'calc(0.65rem + 0.5vw)', // Smaller, responsive font size
+                letterSpacing: '0.05em',
+                overflowWrap: 'break-word',
+                wordWrap: 'break-word',
+                whiteSpace: 'pre-wrap',
+              }}
+            >
+              {isMath ? (
+                <MathJax.Context input='tex'>
+                  <MathJax.Node
+                    className="whitespace-pre-wrap break-words"
+                    style={{ letterSpacing: '0.05em' }}
+                  >
+                    {answer.text}
+                  </MathJax.Node>
+                </MathJax.Context>
+              ) : (
+                answer.text
               )}
+            </span>
+          </motion.button>
+          
+        ))}
+        
+      </div>
+      {/* <div className="flex justify-end p-4"> 
+  <button
+    onClick={handleNextQuestion}
+    className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
+  >
+    <span className="text-lg font-semibold">&gt;</span> 
+  </button>
+</div> */}
+
+      {selectedAnswer && (
+        <motion.div
+          className="mt-6"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="text-base font-semibold mb-2 tracking-wider flex flex-col space-y-2">
+            {selectedAnswer?.correct ? (
+              <span className="text-green-600 dark:text-green-500 flex items-center">
+                <span className="mr-2">✔️</span> Correct!
+              </span>
+            ) : (
+              <>
+                <span className="text-red-600 dark:text-red-500 flex items-center">
+                  <span className="mr-2">❌</span> Incorrect.
+                </span>
+                <span className="text-gray-800 dark:text-gray-300 flex items-center">
+                  <span className="mr-2">🔍</span> The correct answer is
+                  {isMath ? (
+                    <MathJax.Context input='tex'>
+                      <MathJax.Node
+                        className="ml-2 text-green-600 dark:text-green-500 font-semibold"
+                        style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
+                      >
+                        {correctAnswer?.text || "No correct answer provided."}
+                      </MathJax.Node>
+                    </MathJax.Context>
+                  ) : (
+                    <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
+                      {correctAnswer?.text || "No correct answer provided."}
+                    </span>
+                  )}
+                </span>
+              </>
+            )}
+          </p>
+          <p
+            className="w-full bg-white dark:bg-gray-100 p-6 rounded-xl shadow-lg dark:shadow-gray-900 overflow-scroll scrollbar-hidden text-black dark:text-gray-900"
+            style={{
+              letterSpacing: '0.05em',
+              overflowWrap: 'break-word',
+              wordWrap: 'break-word',
+              whiteSpace: 'pre-wrap',
+              fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+            }}
+          >
+            {isMath ? (
+              <MathJax.Context input='tex'>
+                <MathJax.Node
+                  className="whitespace-pre-wrap break-words"
+                  style={{
+                    letterSpacing: '0.05em',
+                    overflowWrap: 'break-word',
+                    wordWrap: 'break-word',
+                    whiteSpace: 'pre-wrap',
+                    fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+                    color: 'inherit' // Inherit text color
+                  }}
+                >
+                  {currentQuestionData.explanation || "No explanation provided."}
+                </MathJax.Node>
+              </MathJax.Context>
+            ) : (
+              <span
+                style={{
+                  letterSpacing: '0.05em',
+                  overflowWrap: 'break-word',
+                  wordWrap: 'break-word',
+                  whiteSpace: 'pre-wrap',
+                  fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+                  color: 'inherit' // Inherit text color
+                }}
+              >
+                {currentQuestionData.explanation || "No explanation provided."}
+              </span>
+            )}
+          </p>
+        </motion.div>
+      )}
+    </div>
+  </div>
+)}
+
 
               <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-8 ">
                 <button
@@ -705,6 +730,14 @@ const Mock1 = () => {
         </div>
       </div>
       <ToastContainer />
+      <div className="fixed bottom-16 right-4 z-50 hidden lg:block"> {/* Hide on mobile and show on laptops and larger screens */}
+  <button
+    onClick={handleNextQuestion}
+    className="flex items-center justify-center p-3 bg-opacity-10 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-1 focus:ring-blue-400 "
+  >
+    <span className="text-lg font-semibold">&gt;</span> {/* Enhanced text styling */}
+  </button>
+</div>
     </>
   );
 };
