@@ -182,7 +182,10 @@ function BooksUploaded() {
                           <div className="flex justify-between items-center">
                             <button
                               onClick={() => handleShowPDF(book.pdfLink)}
-                              className="bg-blue-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300 hover:bg-blue-600"
+                              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold"
                             >
                               Show PDF
                             </button>

@@ -138,8 +138,8 @@ function AddBook() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8 mt-20">
-        <h1 className="text-3xl font-bold mb-4">Books Uploaded</h1>
+      <div className="container mx-auto px-4 py-8 mt-0">
+        <h1 className="text-3xl font-bold mb-4 mt-14">Books Uploaded</h1>
 
         {/* Form to add or edit a book */}
         <form id="book-form" onSubmit={handleSubmit} className="mb-8">
@@ -185,7 +185,7 @@ function AddBook() {
                   <p className="text-sm text-gray-600 mb-2">Created By: {book.createdBy}</p>
                   <button
                     onClick={() => handleShowPDF(book.pdfLink)}
-                    className="bg-green-500 text-white font-bold py-1 px-2 rounded mb-2 hover:bg-green-600 transition duration-300"
+                    className="mr-2 bg-green-500 text-white font-bold py-1 px-2 rounded mb-2 hover:bg-green-600 transition duration-300"
                   >
                     View PDF
                   </button>
