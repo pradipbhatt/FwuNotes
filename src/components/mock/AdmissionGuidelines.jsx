@@ -49,28 +49,28 @@ const AdmissionGuidelines = () => {
               Admission Form Submission Date:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              <span className="font-semibold text-red-500">From 2081/04/23 to 2081/05/25</span>
+              <span className="font-semibold text-red-500">From 2081/05/23 to 2081/05/25</span>
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
               Form Submission Method:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              Through the Far Western University website: <a href="http://www.fwu.edu.np" className="text-blue-500 dark:text-blue-300 underline">www.fwu.edu.np</a> in the Engineering Admission Open tab, from <span className="font-semibold text-red-500">2081/04/22 to 2081/04/25</span>.
+              Through the Far Western University website: <a href="http://www.fwu.edu.np" className="text-blue-500 dark:text-blue-300 underline">www.fwu.edu.np</a> in the Engineering Admission Open tab, from <span className="font-semibold text-red-500">2081/05/22 to 2081/05/25</span>.
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
               Last Date for Form Submission:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              <span className="font-semibold text-red-500">2081/04/25, by 5:00 PM</span>
+              <span className="font-semibold text-red-500">2081/05/25, by 5:00 PM</span>
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
               Entrance Examination Date and Time:
             </h3>
             <p className="mb-6 text-gray-700 dark:text-gray-300">
-              <span className="font-semibold text-red-500">2081/04/29, from 10:00 AM onwards</span>
+              <span className="font-semibold text-red-500">2081/05/29, from 10:00 AM onwards</span>
             </p>
 
             <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
