@@ -104,14 +104,14 @@ function Banner() {
   return (
     <div
       ref={bannerRef}
-      className="banner-container max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden bg-gray-100 dark:bg-gray-900  bg-opacity-100 dark:bg-opacity-80"
+      className="banner-container max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden bg-gray-100 dark:bg-gray-900  bg-opacity-100 dark:bg-opacity-80 "
     >
       {/* Desktop and Tablet view */}
       <div className="hidden md:block relative h-screen">
         <img
           src={fwu}
           alt="Desktop background"
-          className="banner-image absolute inset-0 w-full h-full object-cover z-0"
+          className="banner-image absolute inset-0 w-full h-full object-cover z-0 blur-sm"
         />
         <img
           src={studentImage}
