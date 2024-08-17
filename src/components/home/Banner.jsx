@@ -178,7 +178,10 @@ function Banner() {
                   </label>
                 </div>
                 <div className="flex-shrink-0">
-                  <button className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/50 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 mt-4 md:mt-0 w-full md:w-auto">
+                  <button className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold">
                     Get Started
                   </button>
                 </div>
@@ -250,7 +253,10 @@ function Banner() {
                   </label>
                 </div>
                 <div>
-                  <button className="bg-blue-500 text-white px-4 py-2 w-full rounded-md hover:bg-blue-700 transition duration-300 mt-4 md:mt-0">
+                  <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold">
                     Get Started
                   </button>
 

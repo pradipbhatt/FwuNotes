@@ -154,7 +154,7 @@ const QuizResult = () => {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-8 sm:mt-0 mt-10 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg">
+      <div className="container mx-auto px-8 sm:mt-0 mt-0 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg">
         {/* Formal Header */}
         <motion.div
           className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 relative rounded-3xl w-full sm:w-1/2 bg-opacity-40 dark:bg-opacity-30 shadow-lg lg:mt-20"

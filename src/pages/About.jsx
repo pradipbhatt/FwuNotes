@@ -194,7 +194,7 @@ function About() {
     <>
       <Navbar />
 
-      <div className="container mx-auto px-8 py-12 mt-20 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
+      <div className="container mx-auto px-8 py-12 mt-0 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
         {/* Formal Header */}
         <div className="text-center mb-12">
           <img src={logo} alt="University Logo" className="mx-auto w-40 h-auto mb-4" />
@@ -279,7 +279,10 @@ function About() {
                   <div className="text-center mt-4">
                     <button
                       onClick={() => handleContactClick(member.contactUrl)}
-                      className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+                      className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold"
                     >
                       Contact
                     </button>

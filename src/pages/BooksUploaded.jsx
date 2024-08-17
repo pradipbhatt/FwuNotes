@@ -120,7 +120,7 @@ function BooksUploaded() {
   return (
     <>
       <Navbar />
-      <div className="container mx-auto px-4 py-8 mt-20 overflow-hidden relative">
+      <div className="container mx-auto px-4 py-8 mt-2 overflow-hidden relative">
         {/* Cover Section Behind Cards */}
         <div
           className="absolute inset-0 bg-cover bg-center"
@@ -130,16 +130,17 @@ function BooksUploaded() {
           }}
         ></div>
 
-        <div className="relative z-10 mb-8">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search by book title..."
-            className="w-full px-4 py-2 border rounded-md dark:bg-slate-700 dark:text-white"
-          />
+<div className="relative z-10 mt-16 sm:mt-20 md:mt-28 lg:mt-32">
+      <input
+        type="text"
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
+        placeholder="Search any Book..."
+        className="w-full px-4 py-2 border rounded-md bg-slate-100 text-black dark:bg-slate-800 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-300 transition duration-300 ease-in-out"
+      />
+    
           {showSuggestions && (
-            <ul className="absolute z-20 w-full mt-2 bg-white dark:bg-slate-700 shadow-lg rounded-md max-h-60 overflow-auto">
+            <ul className="absolute z-20 w-full mt-2 bg-white dark:bg-slate-700 shadow-lg rounded-md max-h-100 overflow-auto">
               {filteredBooks.map((book) => (
                 <li
                   key={book._id}

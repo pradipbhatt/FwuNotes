@@ -135,14 +135,17 @@ const Mock = () => {
         <Navbar />
 
         {showNotice && (
-          <div className="fixed top-12 left-0 right-0 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg">
+          <div className="fixed top-28 left-0 right-0 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg">
             <div className="font-bold">
               <p className="text-lg">
                 After completing the test, please fill out the form with your real name.
               </p>
             </div>
             <button
-              className="bg-red-600 hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full"
+              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold"
               onClick={handleDismissNotice}
             >
               Dismiss
@@ -150,7 +153,7 @@ const Mock = () => {
           </div>
         )}
 
-        <div className="container mx-auto text-center mt-20 p-4 text-gray-100">
+        <div className="container mx-auto text-center mt-2 p-4 text-gray-100">
           <div className="header mb-8" data-aos="fade-right">
             <img src={logo} alt="University Logo" className="mx-auto w-24 h-auto mb-4" />
             <h1 className="text-3xl font-bold mb-2">Far Western University</h1>
@@ -169,7 +172,10 @@ const Mock = () => {
             </p>
             <Link to={`/AdmissionGuidelines/`}>
               <button
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out shadow-lg"
+                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold"
                 onClick={() => handleTestNowClick()}
               >
                 View Guidelines
@@ -188,15 +194,7 @@ const Mock = () => {
                 data-aos="fade-up"
                 data-aos-delay={`${index * 100}`} // Adjust delay timing
               >
-                <Tilt
-                  className="parallax-effect-img"
-                  tiltMaxAngleX={10}
-                  tiltMaxAngleY={10}
-                  perspective={1500}
-                  transitionSpeed={100}
-                  scale={1.1}
-                  gyroscope={true}
-                >
+               
                   <div className="relative z-10 p-6 flex flex-col items-center">
                     <h2 className="text-xl font-bold mb-2">📝 Entrance Paper of {item.year}</h2>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">
@@ -206,13 +204,18 @@ const Mock = () => {
                       <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.5A2.5 2.5 0 0 1 9.5 10h4.5A2.5 2.5 0 0 1 16 12.5v.793c.026.009.051.02.076.032L16 13v-7h1a1.5 1.5 0 0 0 1.5-1.5V4.5A1.5 1.5 0 0 0 17 3H2.5zM1 7.5V4.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 17 4.5v3a2.5 2.5 0 0 1-2.5 2.5H2.5A2.5 2.5 0 0 1 1 7.5zm6 2.622a.75.75 0 0 1 .75-.75h.5a.75.75 0 0 1 .75.75v2.378a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75v-2.378z"/>
                     </svg>
                     <button
-                      className="bg-green-600 hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600 text-white py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out shadow-lg"
-                      onClick={() => handleTestNowClick(item.year)}
-                    >
-                      Start Test
-                    </button>
+  className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+             text-lg font-semibold"
+  onClick={() => handleTestNowClick(item.year)}
+>
+  Start Test
+</button>
+
+
                   </div>
-                </Tilt>
+               
               </div>
             ))}
           </div>
