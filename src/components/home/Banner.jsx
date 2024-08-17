@@ -117,7 +117,7 @@ function Banner() {
         
           src={studentImage}
           alt="Student"
-          className="student-image absolute right-0 top-1/3 w-2/3 z-10 opacity-100"
+          className="student-image absolute right-0 top-1/2 w-2/2 z-10 opacity-85"
         />
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-70 bg-opacity-10 flex flex-col justify-center items-center text-center z-20">
           <div className="banner-content  p-8 text-white">
