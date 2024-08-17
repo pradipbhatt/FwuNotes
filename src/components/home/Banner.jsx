@@ -196,8 +196,8 @@ function Banner() {
           className="banner-image absolute inset-0 w-full h-full object-cover z-0"
         />
         <img
-          src={studentImage}
-          className="student-image absolute right-0 top-1/2 w-full h-1/2 z-100 opacity-100"
+          // src={studentImage}
+          className="student-image absolute right-0 top-1 w-full h-1/2 z-100 opacity-100"
         />
         <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-20">
           <div className="banner-content  px-8 text-white text-center">
