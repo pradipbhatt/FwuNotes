@@ -3,7 +3,7 @@ import Typewriter from "typewriter-effect";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import fwu from "../../../public/fwu.jpeg";
-import studentImage from "../../../public/university-student.png";
+import studentImage from "../../../public/sis.png";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -114,9 +114,10 @@ function Banner() {
           className="banner-image absolute inset-0 w-full h-full object-cover z-0 blur-sm"
         />
         <img
+        
           src={studentImage}
           alt="Student"
-          className="student-image absolute right-0 top-1/2 w-1/4 z-10 opacity-100"
+          className="student-image absolute right-0 top-1/3 w-2/3 z-10 opacity-100"
         />
         <div className="absolute inset-0 bg-gray-100 dark:bg-gray-900 dark:bg-opacity-70 bg-opacity-10 flex flex-col justify-center items-center text-center z-20">
           <div className="banner-content  p-8 text-white">

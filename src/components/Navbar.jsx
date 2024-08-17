@@ -21,7 +21,8 @@ function Navbar() {
   const [showMenuRight, setShowMenuRight] = useState(false);
   const [showDropdown, setShowDropdown] = useState(false);
   const [showSemesterDropdown, setShowSemesterDropdown] = useState(false);
-
+  const isLargeScreen = window.innerWidth >= 1024;
+  const isSmallScreen = window.innerWidth < 1024;
   const profileRef = useRef(null);
   const [sticky, setSticky] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -171,14 +172,38 @@ function Navbar() {
   );
 
   
+  const [scrolling, setScrolling] = useState(false);
+
+  // Effect to handle scroll events
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolling(true);
+      } else {
+        setScrolling(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup the event listener on component unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
     <>
-   <div
-  className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
-  ${sticky ? "bg-slate-200 shadow-md dark:bg-slate-900" : "dark:bg-slate-900 bg-slate-100"} 
-  ${window.innerWidth >= 1024 ? 'h-17' : 'h-16'}`} // Navbar height adjustment
->
+ <div
+      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
+        ${isSmallScreen
+          ? 'bg-transparent border-transparent shadow-none'
+          : scrolling
+          ? 'bg-slate-200 shadow-md dark:bg-slate-900 dark:shadow-md border-b border-slate-300 dark:border-slate-600'
+          : 'bg-transparent dark:bg-transparent border-b border-slate-100 dark:border-slate-700 shadow-md dark:shadow-lg'}
+        ${isLargeScreen ? 'h-17' : 'h-16'}
+      `}
+    >
   <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
     <div className={`navbar flex justify-between items-center py-2 ${window.innerWidth >= 1024 ? 'py-4' : 'py-2'}`}>
       <div className="navbar-start flex items-center">
