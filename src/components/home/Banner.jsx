@@ -83,23 +83,27 @@ function Banner() {
   };
 
   const renderTextWithHoverEffect = (text) => {
-    return text.split(" ").map((word, wordIndex) => (
-      <span key={wordIndex} className="inline-block mr-2">
-        {word.split("").map((char, charIndex) => (
-          <span
-            key={charIndex}
-            className={`inline-block transition-transform duration-300 transform text-3xl ${charIndex === 0 ? "text-orange-500 font-bold" : "text-[#f59e0b]"
-              } hover:scale-125 hover:text-[#fdba74]`}
-          >
-            {char}
+    return (
+      <span className="flex flex-nowrap justify-center">
+        {text.split(" ").map((word, wordIndex) => (
+          <span key={wordIndex} className="inline-block mr-2">
+            {word.split("").map((char, charIndex) => (
+              <span
+                key={charIndex}
+                className={`inline-block transition-transform duration-300 transform text-xs sm:text-sm md:text-base lg:text-xl ${charIndex === 0 ? "text-orange-500 font-bold" : "text-[#f59e0b]"} hover:scale-125 hover:text-[#fdba74]`}
+              >
+                {char}
+              </span>
+            ))}
+            {wordIndex < text.split(" ").length - 1 && (
+              <span className="inline-block mr-2"> </span> // Adds space between words
+            )}
           </span>
         ))}
-        {wordIndex < text.split(" ").length - 1 && (
-          <span className="inline-block mr-2"> </span> // Adds space between words
-        )}
       </span>
-    ));
+    );
   };
+  
 
   return (
     <div
@@ -139,20 +143,21 @@ function Banner() {
             </h1>
             <div className="text-center mt-4">
               {typewriterVisible && (
-                <div className="text-3xl md:text-2xl font-bold text-[#4d7c0f]">
-                  <Typewriter
-                    options={{
-                      strings: [
-                        "Access all the resources you need to excel in your studies.",
-                        "Find notes, tutorials, books, solutions, and guidance from seniors.",
-                        "Prepare for Mock Tests and more.",
-                      ],
-                      autoStart: true,
-                      loop: true,
-                      delay: 50, // Adjust delay for typing effect speed
-                    }}
-                  />
-                </div>
+               <div className="text-3xl md:text-2xl font-bold bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 bg-clip-text text-transparent">
+               <Typewriter
+                 options={{
+                   strings: [
+                     "Access all the resources you need to excel in your studies.",
+                     "Find notes, tutorials, books, solutions, and guidance from seniors.",
+                     "Prepare for Mock Tests and more.",
+                   ],
+                   autoStart: true,
+                   loop: true,
+                   delay: 50, // Adjust delay for typing effect speed
+                 }}
+               />
+             </div>
+             
               )}
             </div>
             <form onSubmit={handleSubmit} className="mt-8 space-y-4 w-full max-w-md mx-auto">
@@ -202,70 +207,85 @@ function Banner() {
           // src={studentImage}
           className="student-image absolute right-0 top-1 w-full h-1/2 z-100 opacity-100"
         />
-        <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-20">
-          <div className="banner-content  px-8 text-white text-center">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-medium mb-4 leading-tight">
-              {renderTextWithHoverEffect("Welcome to SoeNotes")}
-              <motion.span
-                className="relative text-yellow-500 font-bold text-2.5xl"
-                whileHover={{
-                  scale: 1.05,
-                  textShadow: '0 0 10px rgba(255, 215, 0, 0.8)' // Golden glowing text effect
-                }}
-                style={{ fontFamily: 'Times New Roman, serif' }} // Applying the chosen font
-              >
-                Far Western University <span className="text-blue-400 font-extrabold">School of Engineering</span> <span className="text-orange-400 font-bold">Online Entrance Test Portal!</span>
-              </motion.span>
-            </h1>
-            {typewriterVisible && (
-              <Typewriter
-                options={{
-                  strings: [
-                    "Access all the resources you need to excel in your studies.",
-                    "Find notes, tutorials, books, solutions, and guidance from seniors.",
-                    "Prepare for Mock Tests and more.",
-                  ],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
-            )}
-            <form onSubmit={handleSubmit} className="mt-8 space-y-4 w-full max-w-sm mx-auto">
-              <div className="flex flex-col md:flex-row md:space-x-4">
-                <div className="flex-1 md:mr-2">
-                  <label className="input input-bordered flex items-center gap-2 bg-white bg-opacity-30 p-2 rounded-md">
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 16 16"
-                      fill="currentColor"
-                      className="w-4 h-4 opacity-70"
-                    >
-                      <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
-                      <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
-                    </svg>
-                    <input
-                      type="text"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="grow p-2 bg-transparent border-none text-white placeholder-white text-sm"
-                      placeholder="Email"
-                    />
-                  </label>
-                </div>
-                <div>
-                  <button className="w-full mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
-             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
-             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
-             text-lg font-semibold">
-                    Get Started
-                  </button>
+       <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-center z-20 px-4">
+  <div className="banner-content px-8 text-white text-center">
+    
+{/* Smallest font */}
+<h5 className="text-xs sm:text-sm md:text-md lg:text-lg mb-2 leading-tight">
+  {renderTextWithHoverEffect("Welcome to SoeNotes")}
+</h5>
 
-                </div>
-              </div>
-            </form>
-          </div>
-
+    
+    {/* Larger font */}
+    <h4 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold mb-2">
+      Far Western University
+    </h4>
+    
+    {/* Largest font */}
+    <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-blue-400 mb-2">
+      School of Engineering
+    </h3>
+    
+    {/* Medium size */}
+    <h2 className="text-md sm:text-lg md:text-xl lg:text-2xl font-bold text-orange-400">
+      Online Entrance Test Portal!
+    </h2>
+    
+    {typewriterVisible && (
+      <Typewriter
+        options={{
+          strings: [
+            "Access all the resources you need to excel in your studies.",
+            "Find notes, tutorials, books, solutions, and guidance from seniors.",
+            "Prepare for Mock Tests and more.",
+          ],
+          autoStart: true,
+          loop: true,
+        }}
+      />
+    )}
+    
+    <form onSubmit={handleSubmit} className="mt-8 space-y-4 w-full max-w-sm mx-auto">
+      <div className="flex flex-col md:flex-row md:space-x-4">
+        
+        <div className="flex-1 md:mr-2">
+          <label className="input input-bordered flex items-center gap-2 bg-white bg-opacity-30 p-2 rounded-md">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 16 16"
+              fill="currentColor"
+              className="w-4 h-4 opacity-70"
+            >
+              <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.51c.206.1.446.1.652 0l6.598-3.185A.755.755 0 0 1 15 5.293V4.5A1.5 1.5 0 0 0 13.5 3h-11Z" />
+              <path d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
+            </svg>
+            <input
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="grow p-2 bg-transparent border-none text-white placeholder-white text-sm"
+              placeholder="Email"
+            />
+          </label>
         </div>
+        
+        <div>
+          <button
+            className="w-full mt-4 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
+              focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
+              shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
+              text-lg font-semibold"
+          >
+            Get Started
+          </button>
+        </div>
+        
+      </div>
+    </form>
+    
+  </div>
+</div>
+
       </div>
 
       <ToastContainer />
