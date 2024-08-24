@@ -5,7 +5,7 @@ import Logout from "./home/Logout";
 import { useAuth } from "../../src/context/AuthProvider";
 import {
   HiMenu, HiX, HiSun, HiMoon, HiSearch,
-  HiHome, HiBookOpen, HiClipboardList, HiUserCircle
+  HiHome, HiBookOpen, HiClipboardList, HiUserCircle,HiChevronDown
 } from "react-icons/hi";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHome, faBook, faClipboard, faChartBar, faFileAlt, faUserCircle ,faBell} from '@fortawesome/free-solid-svg-icons';
@@ -160,12 +160,18 @@ function Navbar() {
       </li>
       <li>
         <Link to="/quizresult" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
-          Entrance Results
+         TestResults
         </Link>
       </li>
       <li>
         <Link to="/about" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
           About
+        </Link>
+       
+      </li>
+      <li>
+      <Link to="/profile" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
+          Profile
         </Link>
       </li>
     </>
@@ -205,7 +211,7 @@ function Navbar() {
       `}
     >
 <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
-  <div className={`navbar flex justify-between items-center py-2 ${window.innerWidth >= 1024 ? 'py-4' : 'py-2'}`}>
+  <div className={`navbar flex justify-between items-center py-2 ${window.innerWidth >= 1024 ? 'py-0' : 'py-2'}`}>
   <div className="navbar-start flex items-center">
   <div className="dropdown">
   <div
@@ -274,7 +280,7 @@ function Navbar() {
                 </Link>
               </div>
               <div>
-              {/* <Logout /> */}
+              <Logout />
             </div>
             </div>
             
@@ -311,12 +317,12 @@ function Navbar() {
 
 <div className={`navbar-end flex items-center space-x-6 ${window.innerWidth >= 2224 ? 'fixed top-0 right-0' : 'relative'}`}>
   <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-gray-100">
+    <ul className="menu menu-horizontal px-1 w-full text-gray-900 dark:text-gray-100">
       {navItems}
     </ul>
   </div>
 
-  <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
+{/* <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
   <label className="flex items-center gap-2 px-1 py-1 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-slate-800 max-w-xs">
     <input
       type="text"
@@ -327,7 +333,7 @@ function Navbar() {
     />
     <HiSearch className="w-2 h-4 opacity-70" />
   </label>
-</form>
+</form> */}
 
   <label className="relative flex items-center cursor-pointer">
     <input
@@ -348,9 +354,22 @@ function Navbar() {
       ></div>
     </div>
   </label>
-  <div className="flex items-center">
-    <Logout className="text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#a78bfa] transition-colors duration-300" />
-  </div>
+  <div className="p-4 mt-auto">
+          {authUser ? (
+              <Logout />
+            
+          ) : (
+            <div>
+              <a
+                className="bg-blue-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-blue-700 duration-300 cursor-pointer"
+                onClick={() => document.getElementById("my_modal_3").showModal()}
+              >
+                Login
+              </a>
+              <Login />
+            </div>
+          )}
+        </div>
 
 </div>
 
