@@ -273,7 +273,11 @@ function Navbar() {
                   View Profile
                 </Link>
               </div>
+              <div>
+              {/* <Logout /> */}
             </div>
+            </div>
+            
           ) : (
             <div>
               <a
@@ -305,46 +309,51 @@ function Navbar() {
 </div>
 
 
-    <div className="navbar-end flex items-center space-x-3">
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-gray-100">
-          {navItems}
-        </ul>
-      </div>
-      <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
-        <label className="flex items-center gap-2 px-3 py-2 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-slate-800">
-          <input
-            type="text"
-            className="outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400"
-            placeholder="Search"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-          />
-          <HiSearch className="w-4 h-4 opacity-70" />
-        </label>
-      </form>
-
-      <label className="relative flex items-center cursor-pointer">
-  <input
-    type="checkbox"
-    className="hidden"
-    checked={theme === "dark"}
-    onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-  />
-  <div className="relative w-14 h-7 lg:w-16 lg:h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 transition-colors duration-300">
-    <div
-      className={`absolute w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
-    >
-      <HiSun className={`text-gray-100 text-xl lg:text-2xl ${theme === "dark" ? 'block' : 'hidden'}`} />
-      <HiMoon className={`text-gray-900 text-xl lg:text-2xl ${theme === "dark" ? 'hidden' : 'block'}`} />
-    </div>
-    <div
-      className={`absolute w-6 h-6 lg:w-7 lg:h-7 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-7' : 'translate-x-0'}`}
-    ></div>
+<div className={`navbar-end flex items-center space-x-6 ${window.innerWidth >= 2224 ? 'fixed top-0 right-0' : 'relative'}`}>
+  <div className="navbar-center hidden lg:flex">
+    <ul className="menu menu-horizontal px-1 text-gray-900 dark:text-gray-100">
+      {navItems}
+    </ul>
   </div>
-</label>
 
+  <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
+  <label className="flex items-center gap-2 px-1 py-1 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-slate-800 max-w-xs">
+    <input
+      type="text"
+      className="outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 text-sm"
+      placeholder="Search"
+      value={searchQuery}
+      onChange={(e) => setSearchQuery(e.target.value)}
+    />
+    <HiSearch className="w-2 h-4 opacity-70" />
+  </label>
+</form>
+
+  <label className="relative flex items-center cursor-pointer">
+    <input
+      type="checkbox"
+      className="hidden"
+      checked={theme === "dark"}
+      onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+    />
+    <div className="relative w-14 h-7 lg:w-16 lg:h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 transition-colors duration-300">
+      <div
+        className={`absolute w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
+      >
+        <HiSun className={`text-gray-100 text-xl lg:text-2xl ${theme === "dark" ? 'block' : 'hidden'}`} />
+        <HiMoon className={`text-gray-900 text-xl lg:text-2xl ${theme === "dark" ? 'hidden' : 'block'}`} />
+      </div>
+      <div
+        className={`absolute w-6 h-6 lg:w-7 lg:h-7 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-7' : 'translate-x-0'}`}
+      ></div>
     </div>
+  </label>
+  <div className="flex items-center">
+    <Logout className="text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#a78bfa] transition-colors duration-300" />
+  </div>
+
+</div>
+
   </div>
 </div>
 
