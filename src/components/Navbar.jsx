@@ -29,23 +29,15 @@ function Navbar() {
   const [activeTab, setActiveTab] = useState("home");
   // const [activeTab, setActiveTab] = useState("home");
   const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+
   useEffect(() => {
-    let lastScrollY = window.scrollY;
-
     const handleScroll = () => {
-      if (window.scrollY > lastScrollY) {
-        setIsVisible(false);
-      } else {
-        setIsVisible(true);
-      }
-      lastScrollY = window.scrollY;
+      setIsScrolled(window.scrollY > 50); // Adjust threshold as needed
     };
 
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const [userData, setUserData] = useState({
@@ -113,7 +105,10 @@ function Navbar() {
   const navItems = (
     <>
       <li>
-        <Link to="/" className="hover:text-[#4338ca] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
+        <Link
+          to="/"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#4338ca] dark:hover:text-[#6d28d9]"
+        >
           Home
         </Link>
       </li>
@@ -122,7 +117,10 @@ function Navbar() {
         onMouseEnter={() => setShowSemesterDropdown(true)}
         onMouseLeave={() => setShowSemesterDropdown(false)}
       >
-        <Link to="/showbook" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#a78bfa]">
+        <Link
+          to="/showbook"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#a78bfa]"
+        >
           SoeNotes
         </Link>
         {showSemesterDropdown && (
@@ -145,7 +143,10 @@ function Navbar() {
         onMouseEnter={() => setShowDropdown(true)}
         onMouseLeave={() => setShowDropdown(false)}
       >
-        <Link to="/mock" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
+        <Link
+          to="/mock"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
+        >
           Entrance Test
         </Link>
         {showDropdown && (
@@ -159,24 +160,32 @@ function Navbar() {
         )}
       </li>
       <li>
-        <Link to="/quizresult" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
-         TestResults
+        <Link
+          to="/quizresult"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
+        >
+          TestResults
         </Link>
       </li>
       <li>
-        <Link to="/about" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
+        <Link
+          to="/about"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
+        >
           About
         </Link>
-       
       </li>
       <li>
-      <Link to="/profile" className="hover:text-[#6d28d9] text-gray-900 dark:text-gray-100 dark:hover:text-[#6d28d9]">
+        <Link
+          to="/profile"
+          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
+        >
           Profile
         </Link>
       </li>
     </>
   );
-
+  
   
   const [scrolling, setScrolling] = useState(false);
 
@@ -200,164 +209,147 @@ function Navbar() {
 
   return (
     <>
- <div
-      className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
-        ${isSmallScreen
-          ? 'bg-transparent border-transparent shadow-none'
-          : scrolling
-          ? 'bg-slate-200 shadow-md dark:bg-slate-900 dark:shadow-md border-b border-slate-300 dark:border-slate-600'
-          : 'bg-transparent dark:bg-transparent border-b border-slate-100 dark:border-slate-700 shadow-md dark:shadow-lg'}
-        ${isLargeScreen ? 'h-17' : 'h-16'}
-      `}
-    >
-<div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
-  <div className={`navbar flex justify-between items-center py-2 ${window.innerWidth >= 1024 ? 'py-0' : 'py-2'}`}>
-  <div className="navbar-start flex items-center">
-  <div className="dropdown">
-  <div
-  tabIndex={0}
-  role="button"
-  className="lg:hidden flex items-center justify-center w-14 h-14 sm:w-12 sm:h-12 transition-transform duration-300 ease-in-out hover:bg-blue-500 dark:hover:bg-blue-700 border-2 border-blue-300 dark:border-blue-600 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
-  onClick={() => setShowMenuLeft(!showMenuLeft)}
+<div
+  className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
+    ${isSmallScreen
+      ? 'border-transparent shadow-none'
+      : scrolling
+      ? 'bg-slate-200 shadow-md dark:bg-slate-900 dark:shadow-md border-b border-slate-300 dark:border-slate-600'
+      : 'border-b border-slate-100 dark:border-slate-700 shadow-md dark:shadow-lg'}
+    ${isLargeScreen ? 'h-17' : 'h-16'}
+  `}
 >
-  {showMenuLeft ? (
-    <HiX
-      className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
-    />
-  ) : (
-    <HiMenu
-      className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
-    />
-  )}
-</div>
-
-
-    {showMenuLeft && (
-      <div
-        className={`fixed top-0 left-0 w-2/3 h-screen bg-opacity-90 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'} backdrop-blur-md shadow-2xl`}
-      >
-        <div className="flex items-center justify-between p-4 border-b dark:border-slate-600 bg-gray-50 dark:bg-slate-700 shadow-md">
-        <button
-  className="btn btn-ghost flex items-center justify-center w-16 h-16 lg:w-14 lg:h-14 bg-opacity-90 transition-transform duration-300 ease-in-out hover:bg-blue-600 dark:hover:bg-blue-800 border-2 border-blue-500 dark:border-blue-700 rounded-full shadow-2xl hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
-  onClick={() => setShowMenuLeft(false)}
->
-  <HiX
-    className={`h-12 w-12 lg:h-10 lg:w-10 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-150`}
-  />
-</button>
-
-
-          <Link
-            to="/"
-            className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 sm:hidden"
+  <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
+    <div className={`navbar fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-2 transition-all duration-300 ${isScrolled ? 'bg-opacity-90 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
+      <div className="navbar-start flex items-center">
+        <div className="dropdown">
+          <div
+            tabIndex={0}
+            role="button"
+            className="lg:hidden flex items-center justify-center w-14 h-14 sm:w-12 sm:h-12 transition-transform duration-300 ease-in-out hover:bg-blue-500 dark:hover:bg-blue-700 border-2 border-blue-300 dark:border-blue-600 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
+            onClick={() => setShowMenuLeft(!showMenuLeft)}
           >
-            <span className="relative text-3xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
-              SOE
-              <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
-            </span>
-            <span className="text-xl font-serif text-gray-900 dark:text-gray-100">
-              notes
-            </span>
-          </Link>
-        </div>
-
-        <ul className="mt-4 space-y-2 p-4 overflow-y-auto max-h-[80vh]">
-          {navItems}
-        </ul>
-
-        <div className="p-4 border-t dark:border-slate-600 mt-auto">
-          {authUser ? (
-            <div className="flex items-center space-x-4">
-              <img
-                className="w-12 h-12 rounded-full border-2 border-gray-600"
-                src={userData.userImage}
-                alt="User Avatar"
+            {showMenuLeft ? (
+              <HiX
+                className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
               />
-              <div className="text-gray-900 dark:text-gray-100">
-                <div className="font-semibold">{userData.username}</div>
-                <Link to="/profile" className="text-sm text-blue-500">
-                  View Profile
+            ) : (
+              <HiMenu
+                className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
+              />
+            )}
+          </div>
+
+          {showMenuLeft && (
+            <div
+              className={`fixed top-0 left-0 w-2/3 h-screen bg-opacity-90 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'} backdrop-blur-md shadow-2xl`}
+            >
+              <div className="flex items-center justify-between p-4 border-b dark:border-slate-600 bg-gray-50 dark:bg-slate-700 shadow-md">
+                <button
+                  className="btn btn-ghost flex items-center justify-center w-16 h-16 lg:w-14 lg:h-14 bg-opacity-90 transition-transform duration-300 ease-in-out hover:bg-blue-600 dark:hover:bg-blue-800 border-2 border-blue-500 dark:border-blue-700 rounded-full shadow-2xl hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
+                  onClick={() => setShowMenuLeft(false)}
+                >
+                  <HiX
+                    className={`h-12 w-12 lg:h-10 lg:w-10 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-150`}
+                  />
+                </button>
+
+                <Link
+                  to="/"
+                  className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 sm:hidden"
+                >
+                  <span className="relative text-3xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
+                    SOE
+                    <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
+                  </span>
+                  <span className="text-xl font-serif text-gray-900 dark:text-gray-100">
+                    notes
+                  </span>
                 </Link>
               </div>
-              <div>
-              <Logout />
-            </div>
-            </div>
-            
-          ) : (
-            <div>
-              <a
-                className="bg-blue-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-blue-700 duration-300 cursor-pointer"
-                onClick={() => document.getElementById("my_modal_3").showModal()}
-              >
-                Login
-              </a>
-              <Login />
+
+              <ul className="mt-4 space-y-2 p-4 overflow-y-auto max-h-[80vh]">
+                {navItems}
+              </ul>
+
+              <div className="p-4 border-t dark:border-slate-600 mt-auto">
+                {authUser ? (
+                  <div className="flex items-center space-x-4">
+                    <img
+                      className="w-12 h-12 rounded-full border-2 border-gray-600"
+                      src={userData.userImage}
+                      alt="User Avatar"
+                    />
+                    <div className="text-gray-900 dark:text-gray-100">
+                      <div className="font-semibold">{userData.username}</div>
+                      <Link to="/profile" className="text-sm text-blue-500">
+                        View Profile
+                      </Link>
+                    </div>
+                    <div>
+                      <Logout />
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <a
+                      className="bg-blue-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-blue-700 duration-300 cursor-pointer"
+                      onClick={() => document.getElementById("my_modal_3").showModal()}
+                    >
+                      Login
+                    </a>
+                    <Login />
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
+
+        <Link
+          to="/"
+          className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 hidden sm:flex"
+        >
+          <span className="relative text-4xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
+            SOE
+            <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
+          </span>
+          <span className="text-2xl font-serif text-gray-900 dark:text-gray-100">
+            notes
+          </span>
+        </Link>
       </div>
-    )}
-  </div>
 
-  <Link
-    to="/"
-    className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 hidden sm:flex"
-  >
-    <span className="relative text-4xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
-      SOE
-      <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
-    </span>
-    <span className="text-2xl font-serif text-gray-900 dark:text-gray-100">
-      notes
-    </span>
-  </Link>
-</div>
+      <div className="navbar-end flex items-center space-x-6">
+       
 
-
-<div className={`navbar-end flex items-center space-x-6 ${window.innerWidth >= 2224 ? 'fixed top-0 right-0' : 'relative'}`}>
-  <div className="navbar-center hidden lg:flex">
-    <ul className="menu menu-horizontal px-1 w-full text-gray-900 dark:text-gray-100">
-      {navItems}
-    </ul>
-  </div>
-
-{/* <form onSubmit={handleSearchSubmit} className="hidden md:flex items-center">
-  <label className="flex items-center gap-2 px-1 py-1 rounded-lg border dark:border-gray-700 bg-gray-100 dark:bg-slate-800 max-w-xs">
-    <input
-      type="text"
-      className="outline-none bg-transparent text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 text-sm"
-      placeholder="Search"
-      value={searchQuery}
-      onChange={(e) => setSearchQuery(e.target.value)}
-    />
-    <HiSearch className="w-2 h-4 opacity-70" />
-  </label>
-</form> */}
-
-  <label className="relative flex items-center cursor-pointer">
-    <input
-      type="checkbox"
-      className="hidden"
-      checked={theme === "dark"}
-      onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-    />
-    <div className="relative w-14 h-7 lg:w-16 lg:h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 transition-colors duration-300">
-      <div
-        className={`absolute w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
-      >
-        <HiSun className={`text-gray-100 text-xl lg:text-2xl ${theme === "dark" ? 'block' : 'hidden'}`} />
-        <HiMoon className={`text-gray-900 text-xl lg:text-2xl ${theme === "dark" ? 'hidden' : 'block'}`} />
-      </div>
-      <div
-        className={`absolute w-6 h-6 lg:w-7 lg:h-7 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-7' : 'translate-x-0'}`}
-      ></div>
-    </div>
-  </label>
-  <div className="p-4 mt-auto">
+        <div className="hidden lg:flex navbar-center items-center space-x-4">
+          <ul className="menu menu-horizontal px-1 w-full text-gray-900 dark:text-gray-100">
+            {navItems}
+          </ul>
+        </div>
+        <label className="relative flex items-center cursor-pointer">
+          <input
+            type="checkbox"
+            className="hidden"
+            checked={theme === "dark"}
+            onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+          />
+          <div className="relative w-14 h-7 lg:w-16 lg:h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 transition-colors duration-300">
+            <div
+              className={`absolute w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
+            >
+              <HiSun className={`text-gray-100 text-xl lg:text-2xl ${theme === "dark" ? 'block' : 'hidden'}`} />
+              <HiMoon className={`text-gray-900 text-xl lg:text-2xl ${theme === "dark" ? 'hidden' : 'block'}`} />
+            </div>
+            <div
+              className={`absolute w-6 h-6 lg:w-7 lg:h-7 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-7' : 'translate-x-0'}`}
+            ></div>
+          </div>
+        </label>
+        <div className="p-4 mt-auto">
           {authUser ? (
-              <Logout />
-            
+            <Logout />
           ) : (
             <div>
               <a
@@ -370,14 +362,11 @@ function Navbar() {
             </div>
           )}
         </div>
-
-</div>
-
+      </div>
+    </div>
   </div>
 </div>
 
-
-</div>
 
 
 
