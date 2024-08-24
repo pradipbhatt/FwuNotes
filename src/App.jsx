@@ -33,6 +33,7 @@ import Quiz from "./components/mock/Quiz.jsx";
 import QuizResultForm from "./components/mock/QuizResultForm.jsx";
 import QuizResult from "./components/mock/QuizResult.jsx";
 import Gallary from "./components/Gallery.jsx"
+import Gallary1 from "../src/components/home/Gallary1.jsx"
 import Chat from "../src/components/AI/Chat.jsx"
 function App() {
   const [authUser] = useAuth();
@@ -72,6 +73,7 @@ function App() {
           <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
           <Route path="/gallary" element={<Gallary />} />
+          <Route path="/gallary1" element={<Gallary1/>}/>
           <Route
             path="/admin"
             element={
