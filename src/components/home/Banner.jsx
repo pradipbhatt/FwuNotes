@@ -115,7 +115,7 @@ function Banner() {
       <iframe
         width="100%"
         height="100%"
-        src="https://www.youtube.com/embed/Ivj-XiyUB-o?si=hwZcDlpM5j9EVOa9&autoplay=1&mute=0&loop=1&playlist=Ivj-XiyUB-o"
+        src="https://www.youtube.com/embed/Ivj-XiyUB-o?si=hwZcDlpM5j9EVOa9&autoplay=1&mute=1&loop=1&playlist=Ivj-XiyUB-o"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
