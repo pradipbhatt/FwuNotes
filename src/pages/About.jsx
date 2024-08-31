@@ -194,7 +194,13 @@ function About() {
     <>
       <Navbar />
 
-      <div className="container mx-auto px-8 py-12 mt-0 bg-gray-100 dark:bg-gray-800 dark:text-white border border-gray-300 rounded-lg shadow-lg">
+      <div
+  className="container mx-auto px-8 sm:mt-0 mt-0 border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg pt-20"
+  style={{
+    background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 182, 193, 0.5))', // Softer neon gradient
+    color: 'white', // Ensuring text is readable on dark backgrounds
+  }}
+>
         {/* Formal Header */}
         <div className="text-center mb-12">
           <img src={logo} alt="University Logo" className="mx-auto w-40 h-auto mb-4" />

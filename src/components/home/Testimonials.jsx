@@ -89,7 +89,13 @@ const Testimonials = () => {
   }, []);
 
   return (
-    <div className="max-w-screen-2xl container mx-auto md:px-20 px-4 py-20 bg-transparent overflow-hidden bg-white dark:bg-gray-800">
+    <div
+  className="container mx-auto px-8 sm:mt-0 mt-0 border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg"
+  style={{
+    background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 182, 193, 0.5))', // Softer neon gradient
+    color: 'white', // Ensuring text is readable on dark backgrounds
+  }}
+>
     <h1 className="text-4xl font-serif text-center mb-12 text-gray-900 dark:text-gray-100">Testimonials</h1>
     <div className="swiper">
       <div className="swiper-wrapper">

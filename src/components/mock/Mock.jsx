@@ -118,24 +118,22 @@ const Mock = () => {
   return (
     <>
     <div className="relative bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-      {/* Background Image with Subtle Blur Effect */}
-      <div
-        className="absolute inset-0 z-0 overflow-hidden"
-        style={{
-          backgroundImage: `url(${imgTree})`,
-          backgroundSize: '100%',
-          filter: 'blur(4px)',
-        }}
-      ></div>
+    <div
+    className="relative py-20" // Added margin-top class for 50px top margin
+    style={{
+      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+      backgroundBlendMode: 'overlay', // Ensure proper blending
+    }}
+  >
 
-      {/* Subtle Overlay */}
-      <div className="absolute inset-0 z-0 bg-gray-800 dark:bg-gray-900 opacity-40"></div>
 
       <div className="relative z-10">
         <Navbar />
 
-        {showNotice && (
-          <div className="fixed top-28 left-0 right-0 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg">
+        {/* {showNotice && (
+          <div className="fixed top-10 left-0 right-14 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg w-1/3">
             <div className="font-bold">
               <p className="text-lg">
                 After completing the test, please fill out the form with your real name.
@@ -151,15 +149,15 @@ const Mock = () => {
               Dismiss
             </button>
           </div>
-        )}
+        )} */}
 
         <div className="container mx-auto text-center mt-2 p-4 text-gray-100">
           <div className="header mb-8" data-aos="fade-right">
             <img src={logo} alt="University Logo" className="mx-auto w-24 h-auto mb-4" />
-            <h1 className="text-3xl font-bold mb-2">Far Western University</h1>
-            <h2 className="text-xl mb-2">Faculty of Engineering</h2>
-            <h3 className="text-lg mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
-            <h4 className="text-lg">BE Entrance Examination</h4>
+            <h1 className="text-3xl font-bold mb-2  text-gray-900">Far Western University</h1>
+            <h2 className="text-xl mb-2 text-gray-900">Faculty of Engineering</h2>
+            <h3 className="text-lg mb-4 text-gray-900">Mahendranagar, Kanchanpur, Nepal</h3>
+            <h4 className="text-lg text-gray-900">BE Entrance Examination</h4>
           </div>
         </div>
 
@@ -222,10 +220,11 @@ const Mock = () => {
         </div>
       </div>
 
-      {/* Audio Player */}
+      {/* Audio Player
       {musicUrl && (
         <audio ref={audioRef} src={musicUrl} preload="auto" />
-      )}
+      )} */}
+    </div>
     </div>
     <Chat/>
     <Footer/>

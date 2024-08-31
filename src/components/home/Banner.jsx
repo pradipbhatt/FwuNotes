@@ -108,11 +108,12 @@ function Banner() {
   return (
     <div
       ref={bannerRef}
-      className="banner-container max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden bg-gray-100 dark:bg-gray-900  bg-opacity-100 dark:bg-opacity-80 "
+      className="banner-container max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden bg-gray-100 dark:bg-gray-900  bg-opacity-100 dark:bg-opacity-80"
     >
       {/* Desktop and Tablet view */}
-      <div className="hidden md:block relative h-screen">
-      <iframe
+      <div className="hidden md:block relative h-screen ">
+      <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' /* 16:9 Aspect Ratio */ }}>
+  <iframe
         width="100%"
         height="100%"
         src="https://www.youtube.com/embed/Ivj-XiyUB-o?si=hwZcDlpM5j9EVOa9&autoplay=1&mute=1&loop=1&playlist=Ivj-XiyUB-o"
@@ -120,9 +121,11 @@ function Banner() {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
-        className="absolute inset-0 w-full h-full object-cover banner-image"
-        style={{ border: 'none', margin: 0, padding: 0 }}
+        style={{ position: 'absolute', top: '80px', left: '1px', right: '1px', bottom: '0', border: 'none' }}
       ></iframe>
+</div>
+
+
         <img
         
           src={studentImage}

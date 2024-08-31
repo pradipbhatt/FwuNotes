@@ -82,11 +82,11 @@ const Mock1 = () => {
   useEffect(() => {
     const countdown = timer > 0 && !showScore
       ? setInterval(() => {
-          setTimer(prevTimer => {
-            localStorage.setItem("timer", prevTimer - 1);
-            return prevTimer - 1;
-          });
-        }, 1000)
+        setTimer(prevTimer => {
+          localStorage.setItem("timer", prevTimer - 1);
+          return prevTimer - 1;
+        });
+      }, 1000)
       : null;
 
     if (timer === 0) {
@@ -104,8 +104,8 @@ const Mock1 = () => {
   useEffect(() => {
     const questionCountdown = questionTimer > 0 && !showScore && selectedAnswer === null
       ? setInterval(() => {
-          setQuestionTimer(prevTimer => prevTimer - 1);
-        }, 1000)
+        setQuestionTimer(prevTimer => prevTimer - 1);
+      }, 1000)
       : null;
 
     if (questionTimer === 0) handleNextQuestion();
@@ -170,7 +170,7 @@ const Mock1 = () => {
     setSelectedAnswer(null);
     setCorrectAnswer(null);
     setQuestionTimer(QUESTION_TIME);
-  
+
     setTimeout(() => {
       const nextQuestion = currentQuestion + 1;
       if (nextQuestion < quizData.length) {
@@ -184,7 +184,7 @@ const Mock1 = () => {
       }
     }, 10); // Delay of 2 seconds
   };
-  
+
 
   const handleFinishQuiz = () => {
     setSelectedAnswer(null);
@@ -268,13 +268,16 @@ const Mock1 = () => {
     <>
       <Navbar />
       <div className="relative">
-        <img
-          className="absolute inset-0 w-full h-full object-cover filter blur-sm"
-          src={backgroundImage}
-          alt="Background Image"
-        />
-        <div className="relative bg-gray-800 bg-opacity-80 py-20">
-          <div className="container mx-auto text-center px-4 w-full">
+      <div
+    className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
+    style={{
+      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+      backgroundBlendMode: 'overlay', // Ensure proper blending
+    }}
+  >
+    <div className="container mx-auto text-center px-4 w-full">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -324,113 +327,113 @@ const Mock1 = () => {
                   </p>
                 </motion.div>
               )}
-             {!showLoader && quizData.length > 0 && !showScore && (
-  <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
-    <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
-    <div className="relative z-10">
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-md md:text-md sm:text-sm  font-bold text-gray-900 dark:text-gray-100 tracking-wider">
-          Question {currentQuestion + 1} of {quizData.length}
-        </h2>
-        <div className="flex items-center space-x-4">
-        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-             Time: {formatTime(questionTimer)}
-              </p>
-          <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-            Time left: {String(Math.floor(timer / 60)).padStart(2, '0')}:
-            {String(timer % 60).padStart(2, '0')}
-          </p>
-        </div>
-          
-      </div>
-      <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
-        {isMath ? (
-          <div className="w-full break-words overflow-scroll scrollbar-hidden">
-            <MathJax.Context input='tex'>
-              <MathJax.Node
-                className="whitespace-pre-wrap"
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
-                }}
-                >
-            
-                {currentQuestionData.question}
-              </MathJax.Node>
-            </MathJax.Context>
-          </div>
-        ) : (
-          <p
-            className="whitespace-pre-wrap break-words scrollbar-hidden"
-            style={{
-              letterSpacing: '0.05em',
-              overflowWrap: 'break-word',
-              wordWrap: 'break-word',
-              whiteSpace: 'pre-wrap',
-              fontSize: 'calc(0.875rem + 0.2vw)', // Responsive font size
-            }}
-          >
-            {currentQuestionData.question}
-          </p>
-        )}
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {currentQuestionData.answers.map((answer) => (
-          <motion.button
-            key={answer._id}
-            onClick={() => handleAnswerOptionClick(answer)}
-            className={`w-full p-4 rounded-2xl flex items-center justify-start transition-transform duration-500 ease-in-out ${selectedAnswer
-              ? answer.correct
-                ? 'bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 text-white shadow-inner shadow-green-500' // Correct answer background
-                : answer === selectedAnswer
-                  ? 'bg-gradient-to-r from-red-600 to-red-800 dark:from-red-400 dark:to-red-600 text-white shadow-inner shadow-red-500' // Incorrect selected answer background
-                  : 'bg-gray-700 dark:bg-gray-800 text-gray-300 dark:text-gray-400 shadow-inner shadow-gray-500' // Non-selected answer background
-              : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-blue-400 dark:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 text-white shadow-inner shadow-blue-500' // Default background
-              } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600`}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            {selectedAnswer === answer && (
-              <span className="mr-3 flex items-center">
-                {answer.correct ? (
-                  <FaCheck className="w-5 h-5 text-green-300 dark:text-green-200" />
-                ) : (
-                  <FaTimes className="w-5 h-5 text-red-300 dark:text-red-200" />
-                )}
-              </span>
-            )}
-            <span
-              className={isMath ? 'font-math' : 'font-normal'}
-              style={{
-                fontSize: 'calc(0.65rem + 0.5vw)', // Smaller, responsive font size
-                letterSpacing: '0.05em',
-                overflowWrap: 'break-word',
-                wordWrap: 'break-word',
-                whiteSpace: 'pre-wrap',
-              }}
-            >
-              {isMath ? (
-                <MathJax.Context input='tex'>
-                  <MathJax.Node
-                    className="whitespace-pre-wrap break-words"
-                    style={{ letterSpacing: '0.05em' }}
-                  >
-                    {answer.text}
-                  </MathJax.Node>
-                </MathJax.Context>
-              ) : (
-                answer.text
-              )}
-            </span>
-          </motion.button>
-          
-        ))}
-        
-      </div>
-      {/* <div className="flex justify-end p-4"> 
+              {!showLoader && quizData.length > 0 && !showScore && (
+                <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
+                  <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
+                  <div className="relative z-10">
+                    <div className="flex items-center justify-between mb-4">
+                      <h2 className="text-md md:text-md sm:text-sm  font-bold text-gray-900 dark:text-gray-100 tracking-wider">
+                        Question {currentQuestion + 1} of {quizData.length}
+                      </h2>
+                      <div className="flex items-center space-x-4">
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          Time: {formatTime(questionTimer)}
+                        </p>
+                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                          Time left: {String(Math.floor(timer / 60)).padStart(2, '0')}:
+                          {String(timer % 60).padStart(2, '0')}
+                        </p>
+                      </div>
+
+                    </div>
+                    <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
+                      {isMath ? (
+                        <div className="w-full break-words overflow-scroll scrollbar-hidden">
+                          <MathJax.Context input='tex'>
+                            <MathJax.Node
+                              className="whitespace-pre-wrap"
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
+                              }}
+                            >
+
+                              {currentQuestionData.question}
+                            </MathJax.Node>
+                          </MathJax.Context>
+                        </div>
+                      ) : (
+                        <p
+                          className="whitespace-pre-wrap break-words scrollbar-hidden"
+                          style={{
+                            letterSpacing: '0.05em',
+                            overflowWrap: 'break-word',
+                            wordWrap: 'break-word',
+                            whiteSpace: 'pre-wrap',
+                            fontSize: 'calc(0.875rem + 0.2vw)', // Responsive font size
+                          }}
+                        >
+                          {currentQuestionData.question}
+                        </p>
+                      )}
+                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                      {currentQuestionData.answers.map((answer) => (
+                        <motion.button
+                          key={answer._id}
+                          onClick={() => handleAnswerOptionClick(answer)}
+                          className={`w-full p-4 rounded-2xl flex items-center justify-start transition-transform duration-500 ease-in-out ${selectedAnswer
+                            ? answer.correct
+                              ? 'bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 text-white shadow-inner shadow-green-500' // Correct answer background
+                              : answer === selectedAnswer
+                                ? 'bg-gradient-to-r from-red-600 to-red-800 dark:from-red-400 dark:to-red-600 text-white shadow-inner shadow-red-500' // Incorrect selected answer background
+                                : 'bg-gray-700 dark:bg-gray-800 text-gray-300 dark:text-gray-400 shadow-inner shadow-gray-500' // Non-selected answer background
+                            : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-blue-400 dark:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 text-white shadow-inner shadow-blue-500' // Default background
+                            } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600`}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          {selectedAnswer === answer && (
+                            <span className="mr-3 flex items-center">
+                              {answer.correct ? (
+                                <FaCheck className="w-5 h-5 text-green-300 dark:text-green-200" />
+                              ) : (
+                                <FaTimes className="w-5 h-5 text-red-300 dark:text-red-200" />
+                              )}
+                            </span>
+                          )}
+                          <span
+                            className={isMath ? 'font-math' : 'font-normal'}
+                            style={{
+                              fontSize: 'calc(0.65rem + 0.5vw)', // Smaller, responsive font size
+                              letterSpacing: '0.05em',
+                              overflowWrap: 'break-word',
+                              wordWrap: 'break-word',
+                              whiteSpace: 'pre-wrap',
+                            }}
+                          >
+                            {isMath ? (
+                              <MathJax.Context input='tex'>
+                                <MathJax.Node
+                                  className="whitespace-pre-wrap break-words"
+                                  style={{ letterSpacing: '0.05em' }}
+                                >
+                                  {answer.text}
+                                </MathJax.Node>
+                              </MathJax.Context>
+                            ) : (
+                              answer.text
+                            )}
+                          </span>
+                        </motion.button>
+
+                      ))}
+
+                    </div>
+                    {/* <div className="flex justify-end p-4"> 
   <button
     onClick={handleNextQuestion}
     className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
@@ -439,89 +442,89 @@ const Mock1 = () => {
   </button>
 </div> */}
 
-      {selectedAnswer && (
-        <motion.div
-          className="mt-6"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <p className="text-base font-semibold mb-2 tracking-wider flex flex-col space-y-2">
-            {selectedAnswer?.correct ? (
-              <span className="text-green-600 dark:text-green-500 flex items-center">
-                <span className="mr-2">✔️</span> Correct!
-              </span>
-            ) : (
-              <>
-                <span className="text-red-600 dark:text-red-500 flex items-center">
-                  <span className="mr-2">❌</span> Incorrect.
-                </span>
-                <span className="text-gray-800 dark:text-gray-300 flex items-center">
-                  <span className="mr-2">🔍</span> The correct answer is
-                  {isMath ? (
-                    <MathJax.Context input='tex'>
-                      <MathJax.Node
-                        className="ml-2 text-green-600 dark:text-green-500 font-semibold"
-                        style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
+                    {selectedAnswer && (
+                      <motion.div
+                        className="mt-6"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.5 }}
                       >
-                        {correctAnswer?.text || "No correct answer provided."}
-                      </MathJax.Node>
-                    </MathJax.Context>
-                  ) : (
-                    <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
-                      {correctAnswer?.text || "No correct answer provided."}
-                    </span>
-                  )}
-                </span>
-              </>
-            )}
-          </p>
-          <p
-            className="w-full bg-white dark:bg-gray-100 p-6 rounded-xl shadow-lg dark:shadow-gray-900 overflow-scroll scrollbar-hidden text-black dark:text-gray-900"
-            style={{
-              letterSpacing: '0.05em',
-              overflowWrap: 'break-word',
-              wordWrap: 'break-word',
-              whiteSpace: 'pre-wrap',
-              fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-            }}
-          >
-            {isMath ? (
-              <MathJax.Context input='tex'>
-                <MathJax.Node
-                  className="whitespace-pre-wrap break-words"
-                  style={{
-                    letterSpacing: '0.05em',
-                    overflowWrap: 'break-word',
-                    wordWrap: 'break-word',
-                    whiteSpace: 'pre-wrap',
-                    fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                    color: 'inherit' // Inherit text color
-                  }}
-                >
-                  {currentQuestionData.explanation || "No explanation provided."}
-                </MathJax.Node>
-              </MathJax.Context>
-            ) : (
-              <span
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                  color: 'inherit' // Inherit text color
-                }}
-              >
-                {currentQuestionData.explanation || "No explanation provided."}
-              </span>
-            )}
-          </p>
-        </motion.div>
-      )}
-    </div>
-  </div>
-)}
+                        <p className="text-base font-semibold mb-2 tracking-wider flex flex-col space-y-2">
+                          {selectedAnswer?.correct ? (
+                            <span className="text-green-600 dark:text-green-500 flex items-center">
+                              <span className="mr-2">✔️</span> Correct!
+                            </span>
+                          ) : (
+                            <>
+                              <span className="text-red-600 dark:text-red-500 flex items-center">
+                                <span className="mr-2">❌</span> Incorrect.
+                              </span>
+                              <span className="text-gray-800 dark:text-gray-300 flex items-center">
+                                <span className="mr-2">🔍</span> The correct answer is
+                                {isMath ? (
+                                  <MathJax.Context input='tex'>
+                                    <MathJax.Node
+                                      className="ml-2 text-green-600 dark:text-green-500 font-semibold"
+                                      style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
+                                    >
+                                      {correctAnswer?.text || "No correct answer provided."}
+                                    </MathJax.Node>
+                                  </MathJax.Context>
+                                ) : (
+                                  <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
+                                    {correctAnswer?.text || "No correct answer provided."}
+                                  </span>
+                                )}
+                              </span>
+                            </>
+                          )}
+                        </p>
+                        <p
+                          className="w-full bg-white dark:bg-gray-100 p-6 rounded-xl shadow-lg dark:shadow-gray-900 overflow-scroll scrollbar-hidden text-black dark:text-gray-900"
+                          style={{
+                            letterSpacing: '0.05em',
+                            overflowWrap: 'break-word',
+                            wordWrap: 'break-word',
+                            whiteSpace: 'pre-wrap',
+                            fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+                          }}
+                        >
+                          {isMath ? (
+                            <MathJax.Context input='tex'>
+                              <MathJax.Node
+                                className="whitespace-pre-wrap break-words"
+                                style={{
+                                  letterSpacing: '0.05em',
+                                  overflowWrap: 'break-word',
+                                  wordWrap: 'break-word',
+                                  whiteSpace: 'pre-wrap',
+                                  fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+                                  color: 'inherit' // Inherit text color
+                                }}
+                              >
+                                {currentQuestionData.explanation || "No explanation provided."}
+                              </MathJax.Node>
+                            </MathJax.Context>
+                          ) : (
+                            <span
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
+                                color: 'inherit' // Inherit text color
+                              }}
+                            >
+                              {currentQuestionData.explanation || "No explanation provided."}
+                            </span>
+                          )}
+                        </p>
+                      </motion.div>
+                    )}
+                  </div>
+                </div>
+              )}
 
 
               <div className="grid grid-cols-2 sm:grid-cols-2 gap-4 mt-8 ">
@@ -545,199 +548,220 @@ const Mock1 = () => {
               </div>
 
               {showScore && (
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 0.9, y: 0 }}
-    transition={{ duration: 0.5 }}
-    className="w-full max-w-full mx-auto mt-8 p-0  rounded-lg shadow-xl "
-  >
-    <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-900">Entrance Completed!</h2>
-    <p className="text-xl mb-8 text-gray-800 dark:text-gray-300">
-      You scored <span className="font-bold text-indigo-600">{score}</span> out of <span className="font-bold text-indigo-600">{quizData.length}</span>.
-    </p>
-
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      className="space-y-6"
-    >
-      <div className="bg-white bg-opacity-80 dark:bg-opacity-80 dark:bg-gray-900  rounded-lg shadow-lg dark:shadow-gray-700 sm:w-full">
-        <h2 className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Scoreboard</h2>
-        <ul className="space-y-4">
-          {submittedAnswers.map((answer, index) => (
-            <motion.li
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.2 }}
-              className=""
-            >
-              <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">Question {index + 1}:</p>
-
-              <p
-                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 break-words overflow-scroll scrollbar-hidden"
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.85rem + 0.2vw)',
-                }}
-              >
-                {isMathQuestion(answer.question) ? (
-                  <MathJax.Context input="tex">
-                    <MathJax.Node>{answer.question}</MathJax.Node>
-                  </MathJax.Context>
-                ) : (
-                  <span>{answer.question || "No question provided."}</span>
-                )}
-              </p>
-
-              <p
-                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2"
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.85rem + 0.2vw)',
-                }}
-              >
-                <strong>Your Answer:</strong>{' '}
-                {isMathQuestion(answer.userAnswer) ? (
-                  <MathJax.Context input="tex">
-                    <MathJax.Node>{answer.userAnswer}</MathJax.Node>
-                  </MathJax.Context>
-                ) : (
-                  <span>{answer.userAnswer || "No answer provided."}</span>
-                )}
-              </p>
-
-              <p
-                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2"
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.85rem + 0.2vw)',
-                }}
-              >
-                <strong>Correct Answer:</strong>{' '}
-                {isMathQuestion(answer.correctAnswer) ? (
-                  <MathJax.Context input="tex">
-                    <MathJax.Node>{answer.correctAnswer}</MathJax.Node>
-                  </MathJax.Context>
-                ) : (
-                  <span>{answer.correctAnswer || "No correct answer provided."}</span>
-                )}
-              </p>
-
-              <p
-                className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2 tracking-wider overflow-scroll scrollbar-hidden"
-                style={{
-                  letterSpacing: '0.05em',
-                  overflowWrap: 'break-word',
-                  wordWrap: 'break-word',
-                  whiteSpace: 'pre-wrap',
-                  fontSize: 'calc(0.85rem + 0.2vw)',
-                }}
-              >
-                <strong>Explanation:</strong>{' '}
-                {isMathQuestion(answer.explanation) ? (
-                  <MathJax.Context input="tex">
-                    <MathJax.Node>{answer.explanation}</MathJax.Node>
-                  </MathJax.Context>
-                ) : (
-                  <span>{answer.explanation || "No explanation provided."}</span>
-                )}
-              </p>
-            </motion.li>
-          ))}
-        </ul>
-      </div>
-    </motion.div>
-  </motion.div>
-)}
-
-
-
-{showForm && (
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4"
-        >
-          <div className="bg-gray-100 dark:bg-gray-900 p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md">
-            <h3 className="font-semibold mb-4 text-black dark:text-white">Requested to fill form with your Correct Name</h3>
-            <form onSubmit={handleSubmit}>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Name:</label>
-                <input
-                  type="text"
-                  name="userName"
-                  value={formData.userName}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Engineering Field:</label>
-                <select
-                  name="engineeringField"
-                  value={formData.engineeringField}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 0.9, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full max-w-full mx-auto mt-8 p-0  rounded-lg shadow-xl "
                 >
-                  <option value="Computer">Computer</option>
-                  <option value="Civil">Civil</option>
-                  <option value="Architecture">Architecture</option>
-                </select>
-              </div>
-              <div className="mb-4">
-                <label className="block text-sm font-medium mb-2 text-black dark:text-white">Review:</label>
-                <textarea
-                  name="review"
-                  value={formData.review}
-                  onChange={handleInputChange}
-                  className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                />
-              </div>
-              <button
-                type="submit"
-                className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              >
-                Submit
-              </button>
-              <button
-                type="button"
-                onClick={() => setShowForm(false)}
-                className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-              >
-                Close
-              </button>
-            </form>
-          </div>
-        </motion.div>
-      )}
+                  <h2 className="text-4xl font-bold mb-6 text-gray-400 dark:text-gray-300">Entrance Completed!</h2>
+                  <p className="text-xl mb-8 text-gray-400 dark:text-gray-300">
+                    You scored <span className="font-bold text-indigo-600">{score}</span> out of <span className="font-bold text-indigo-600">{quizData.length}</span>.
+                  </p>
 
-    
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileInView={{ opacity: 1 }}
+                    viewport={{ once: true }}
+                    className="space-y-6"
+                  >
+                    <div className="bg-white bg-opacity-80 dark:bg-opacity-80 dark:bg-gray-900  rounded-lg shadow-lg dark:shadow-gray-700 sm:w-full">
+                      <h2 className="text-3xl font-semibold mb-4 text-gray-900 dark:text-gray-100">Scoreboard</h2>
+                      <ul className="space-y-4">
+                        {submittedAnswers.map((answer, index) => (
+                          <motion.li
+                            key={index}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, delay: index * 0.2 }}
+                            className="text-left"
+                          >
+                            <p className="text-lg font-semibold text-blue-800 dark:text-blue-300 text-left sm:text-sm">
+                              Question {index + 1}:
+                            </p>
+
+                            <p
+                              className="bg-blue-50 dark:bg-blue-900 p-4 rounded-md text-gray-900 dark:text-gray-100 break-words overflow-scroll scrollbar-hidden text-left sm:text-xs"
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.85rem + 0.2vw)',
+                              }}
+                            >
+                              {isMathQuestion(answer.question) ? (
+                                <MathJax.Context input="tex">
+                                  <MathJax.Node>{answer.question}</MathJax.Node>
+                                </MathJax.Context>
+                              ) : (
+                                <span>{answer.question || "No question provided."}</span>
+                              )}
+                            </p>
+
+                            <p
+                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 text-left sm:text-xs"
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.85rem + 0.2vw)',
+                              }}
+                            >
+                              <strong className="text-blue-700 dark:text-blue-300">Your Answer:</strong>{' '}
+                              {isMathQuestion(answer.userAnswer) ? (
+                                <MathJax.Context input="tex">
+                                  <MathJax.Node>{answer.userAnswer}</MathJax.Node>
+                                </MathJax.Context>
+                              ) : (
+                                <span>{answer.userAnswer || "No answer provided."}</span>
+                              )}
+                            </p>
+
+                            <p
+                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 text-left sm:text-xs"
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.85rem + 0.2vw)',
+                              }}
+                            >
+                              <strong className="text-blue-700 dark:text-blue-300">Correct Answer:</strong>{' '}
+                              {isMathQuestion(answer.correctAnswer) ? (
+                                <MathJax.Context input="tex">
+                                  <MathJax.Node>{answer.correctAnswer}</MathJax.Node>
+                                </MathJax.Context>
+                              ) : (
+                                <span>{answer.correctAnswer || "No correct answer provided."}</span>
+                              )}
+                            </p>
+
+                            <p
+                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 tracking-wider overflow-scroll scrollbar-hidden text-left sm:text-xs"
+                              style={{
+                                letterSpacing: '0.05em',
+                                overflowWrap: 'break-word',
+                                wordWrap: 'break-word',
+                                whiteSpace: 'pre-wrap',
+                                fontSize: 'calc(0.85rem + 0.2vw)',
+                              }}
+                            >
+                              <strong className="text-blue-700 dark:text-blue-300">Explanation:</strong>{' '}
+                              {isMathQuestion(answer.explanation) ? (
+                                <MathJax.Context input="tex">
+                                  <MathJax.Node>{answer.explanation}</MathJax.Node>
+                                </MathJax.Context>
+                              ) : (
+                                <span>{answer.explanation || "No explanation provided."}</span>
+                              )}
+                            </p>
+                          </motion.li>
+                        ))}
+
+                      </ul>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              )}
+
+
+
+              {showForm && (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="fixed inset-0 bg-gray-900 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-70 bg-blur-sm flex items-center justify-center p-4"
+                >
+                  <div className="bg-white dark:bg-gray-900 bg-opacity-30 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md relative">
+                    {/* Enhanced Close Icon */}
+                    <button
+                      type="button"
+                      onClick={() => setShowForm(false)}
+                      className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors duration-300"
+                    >
+                      <FaTimes size={24} />
+                    </button>
+
+                    {/* Improved Instructions */}
+                    <h3 className="font-semibold mb-4 text-black dark:text-white text-left text-lg sm:text-base">
+                      ✨ **Please complete the form with your correct details** ✨
+                    </h3>
+                    <p className="text-sm text-gray-900 dark:text-gray-400 mb-4">
+                      🚀 Your information helps us provide the best service.
+                      Please make sure to fill out all fields accurately.
+                      If you need any help, feel free to contact us! 😊
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          👤 Name:
+                        </label>
+                        <input
+                          type="text"
+                          name="userName"
+                          value={formData.userName}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        />
+                      </div>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          🛠️ Engineering Field:
+                        </label>
+                        <select
+                          name="engineeringField"
+                          value={formData.engineeringField}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        >
+                          <option value="Computer">Computer</option>
+                          <option value="Civil">Civil</option>
+                          <option value="Architecture">Architecture</option>
+                        </select>
+                      </div>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          📝 Review:
+                        </label>
+                        <textarea
+                          name="review"
+                          value={formData.review}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <button
+                          type="submit"
+                          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </motion.div>
+              )}
+
+
             </motion.div>
           </div>
         </div>
       </div>
       <ToastContainer />
       <div className="fixed bottom-16 right-4 z-50 hidden lg:block"> {/* Hide on mobile and show on laptops and larger screens */}
-  <button
-    onClick={handleNextQuestion}
-    className="flex items-center justify-center p-3 bg-opacity-10 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-1 focus:ring-blue-400 "
-  >
-    <span className="text-lg font-semibold">&gt;</span> {/* Enhanced text styling */}
-  </button>
-</div>
+        <button
+          onClick={handleNextQuestion}
+          className="flex items-center justify-center p-3 bg-opacity-10 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-1 focus:ring-blue-400 "
+        >
+          <span className="text-lg font-semibold">&gt;</span> {/* Enhanced text styling */}
+        </button>
+      </div>
     </>
   );
 };

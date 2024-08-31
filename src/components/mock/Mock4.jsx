@@ -262,12 +262,15 @@ const Mock1 = () => {
     <>
     <Navbar />
     <div className="relative">
-      <img
-        className="absolute inset-0 w-full h-full object-cover filter blur-sm"
-        src={backgroundImage}
-        alt="Background Image"
-      />
-      <div className="relative bg-gray-800 bg-opacity-80 py-20">
+    <div
+    className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
+    style={{
+      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
+      backgroundSize: 'cover',
+      backgroundAttachment: 'fixed',
+      backgroundBlendMode: 'overlay', // Ensure proper blending
+    }}
+  >
         <div className="container mx-auto text-center px-4 w-full">
           <motion.div
             initial={{ opacity: 0 }}
@@ -659,66 +662,29 @@ const Mock1 = () => {
 
 
 
-            {showForm && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5 }}
-                className="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center p-4"
+{showForm && (
+                <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 1 }}
+                className="text-center text-white mb-12 px-4"
               >
-                <div className="bg-gray-100 dark:bg-gray-900 p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md">
-                  <h3 className="font-semibold mb-4 text-black dark:text-white">Requested to fill form with your Correct Name</h3>
-                  <form onSubmit={handleSubmit}>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium mb-2 text-black dark:text-white">Name:</label>
-                      <input
-                        type="text"
-                        name="userName"
-                        value={formData.userName}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium mb-2 text-black dark:text-white">Engineering Field:</label>
-                      <select
-                        name="engineeringField"
-                        value={formData.engineeringField}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                      >
-                        <option value="Computer">Computer</option>
-                        <option value="Civil">Civil</option>
-                        <option value="Architecture">Architecture</option>
-                      </select>
-                    </div>
-                    <div className="mb-4">
-                      <label className="block text-sm font-medium mb-2 text-black dark:text-white">Review:</label>
-                      <textarea
-                        name="review"
-                        value={formData.review}
-                        onChange={handleInputChange}
-                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-                    >
-                      Submit
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="ml-4 px-4 py-2 bg-gray-500 text-white rounded-lg hover:bg-gray-600"
-                    >
-                      Close
-                    </button>
-                  </form>
-                </div>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="h-32 w-auto mx-auto mb-6"
+                />
+                <h1 className="text-4xl font-bold mb-4 leading-tight text-gray-600">
+                  Entrance Exam Preparation Test
+                </h1>
+                <h2 className="text-2xl font-semibold mb-2  text-gray-600">
+                  Attempt all the questions.
+                </h2>
+                <h3 className="text-lg mb-6  text-gray-600">
+                  Read the following questions carefully and tick the correct answer.
+                </h3>
               </motion.div>
-            )}
-
+              )}
 
           </motion.div>
         </div>
