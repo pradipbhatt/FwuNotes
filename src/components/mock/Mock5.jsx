@@ -661,30 +661,84 @@ const Mock1 = () => {
             )}
 
 
-
 {showForm && (
                 <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1 }}
-                className="text-center text-white mb-12 px-4"
-              >
-                <img
-                  src={logo}
-                  alt="Logo"
-                  className="h-32 w-auto mx-auto mb-6"
-                />
-                <h1 className="text-4xl font-bold mb-4 leading-tight text-gray-600">
-                  Entrance Exam Preparation Test
-                </h1>
-                <h2 className="text-2xl font-semibold mb-2  text-gray-600">
-                  Attempt all the questions.
-                </h2>
-                <h3 className="text-lg mb-6  text-gray-600">
-                  Read the following questions carefully and tick the correct answer.
-                </h3>
-              </motion.div>
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="fixed inset-0 bg-gray-900 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-70 bg-blur-sm flex items-center justify-center p-4"
+                >
+                  <div className="bg-white dark:bg-gray-900 bg-opacity-30 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md relative">
+                    {/* Enhanced Close Icon */}
+                    <button
+                      type="button"
+                      onClick={() => setShowForm(false)}
+                      className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors duration-300"
+                    >
+                      <FaTimes size={24} />
+                    </button>
+
+                    {/* Improved Instructions */}
+                    <h3 className="font-semibold mb-4 text-black dark:text-white text-left text-lg sm:text-base">
+                      ✨ **Please complete the form with your correct details** ✨
+                    </h3>
+                    <p className="text-sm text-gray-900 dark:text-gray-400 mb-4">
+                      🚀 Your information helps us provide the best service.
+                      Please make sure to fill out all fields accurately.
+                      If you need any help, feel free to contact us! 😊
+                    </p>
+                    <form onSubmit={handleSubmit}>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          👤 Name:
+                        </label>
+                        <input
+                          type="text"
+                          name="userName"
+                          value={formData.userName}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        />
+                      </div>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          🛠️ Engineering Field:
+                        </label>
+                        <select
+                          name="engineeringField"
+                          value={formData.engineeringField}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        >
+                          <option value="Computer">Computer</option>
+                          <option value="Civil">Civil</option>
+                          <option value="Architecture">Architecture</option>
+                        </select>
+                      </div>
+                      <div className="mb-4 sm:flex sm:space-x-2">
+                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                          📝 Review:
+                        </label>
+                        <textarea
+                          name="review"
+                          value={formData.review}
+                          onChange={handleInputChange}
+                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                        />
+                      </div>
+                      <div className="flex flex-col">
+                        <button
+                          type="submit"
+                          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </motion.div>
               )}
+
 
 
           </motion.div>
