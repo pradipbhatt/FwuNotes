@@ -94,7 +94,7 @@ function Chat() {
     {/* Button to toggle chat */}
     <button
         onClick={() => setIsChatVisible(!isChatVisible)}
-        className="fixed bottom-20 right-6 bg-blue-500 text-white rounded-full p-4 shadow-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-300 dark:bg-blue-700 dark:hover:bg-blue-800 z-50"
+        className="fixed bottom-14 right-2 bg-blue-500 text-white rounded-full p-2 shadow-lg flex items-center justify-center hover:bg-blue-600 transition-colors duration-300 dark:bg-blue-700 dark:hover:bg-blue-800 z-50"
         aria-label="Open chat"
     >
         <AiOutlineMessage className="text-2xl" />

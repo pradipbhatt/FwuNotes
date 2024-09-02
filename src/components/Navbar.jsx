@@ -124,7 +124,10 @@ function Navbar() {
           SoeNotes
         </Link>
         {showSemesterDropdown && (
-          <ul className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md dark:hover:text-[#6d28d9]">
+          <ul
+            className="absolute left-0 mt-8 mb-8 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md dark:hover:text-[#6d28d9] z-50"
+            style={{ top: '100%' }} // Adjust if needed to position correctly
+          >
             {Array.from({ length: 9 }, (_, i) => i).map((semester) => (
               <li
                 key={semester}
@@ -150,7 +153,7 @@ function Navbar() {
           Entrance Test
         </Link>
         {showDropdown && (
-          <ul className="absolute left-0 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100 ">
+          <ul className="absolute left-0  z-50 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100 ">
             {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
               <li key={year} className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-[#6d28d9]">
                 <Link to={`/mock${year - 2071}`}>{year}</Link>
@@ -375,7 +378,7 @@ function Navbar() {
       className={`lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out ${
         isVisible ? "transform translate-y-0" : "transform translate-y-full"
       }`}
-      style={{ height: "50px" }}
+      style={{ height: "60px" }}
     >
       <div className="flex justify-around py-1">
         <Link
@@ -396,7 +399,7 @@ function Navbar() {
           onClick={() => setActiveTab("soenotes")}
         >
           <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-          <span className="text-xs mt-1">Books</span>
+          <span className="text-xs mt-1">Notes</span>
         </Link>
         <Link
           to="/mock"

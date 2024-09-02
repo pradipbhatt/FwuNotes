@@ -203,7 +203,7 @@ function BooksUploaded() {
         {showScroll && (
           <button
             onClick={scrollToTop}
-            className="fixed bottom-20 right-10 bg-blue-500 text-white p-2 rounded-full shadow-lg focus:outline-none"
+            className="fixed bottom-16 left-2 bg-blue-500 text-white p-2 rounded-full shadow-lg focus:outline-none"
           >
             <img src={arrowUp} alt="Scroll to top" className="w-6 h-6" />
           </button>
@@ -211,7 +211,7 @@ function BooksUploaded() {
       </div>
 
         {/* Pagination Controls */}
-        <div className="flex justify-between items-center mt-8 fixed bottom-44 left-0 right-0 px-2">
+        <div className="flex justify-between items-center mt-8 fixed bottom-40 left-0 right-0 px-2">
   {/* Previous Button */}
   <button
     onClick={() => handlePageChange(currentPage - 1)}
