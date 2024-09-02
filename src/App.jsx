@@ -43,10 +43,11 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/addbook" element={ <ProtectedRoute><Addbook/></ProtectedRoute> } />
-          <Route
+          {/* <Route
             path="/showbook"
             element={authUser ? <BooksUploaded/> : <Navigate to="/signup" />}
-          />
+          /> */}
+            <Route path="/showbook" element={<BooksUploaded />} />
           <Route path="/Mock" element={<Mock />} />
           <Route path="/AdmissionGuidelines" element={<AdmissionGuidelines />} />
           <Route path="/Mock0" element={<Mock0 />} />
