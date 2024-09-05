@@ -18,6 +18,7 @@ import Mock5 from "./components/mock/Mock5";
 import AdmissionGuidelines from "./components/mock/AdmissionGuidelines";
 import PdfUploadPage from "./components/notes/PdfUploadPage.jsx";
 import NotesUploaded from "./components/notes/NotesUploaded.jsx";
+import BooksUploadedCivil from "./pages/BooksUploadedCivil.jsx"
 import Courses from "../src/courses/Courses";
 import Profile from "./components/Profile";
 // import Settings from "./components/Settings";
@@ -73,6 +74,7 @@ function App() {
           <Route path="/profile" element={<Profile />} />
           <Route path="/pdf-upload" element={ <PdfUploadPage /> } />
           <Route path="/notes-uploaded" element={<NotesUploaded />} />
+          <Route path="/books-uploaded-civil" element={<BooksUploadedCivil/>} />
           <Route path="/gallary" element={<Gallary />} />
           <Route path="/gallary1" element={<Gallary1/>}/>
           <Route

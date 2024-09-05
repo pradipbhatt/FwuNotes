@@ -12,7 +12,7 @@ import Chat from '../components/AI/Chat';
 import SearchComponent from '../components/SearchComponent'; // Import the SearchComponent
 import { FacebookShareButton, FacebookIcon, TwitterShareButton, TwitterIcon, WhatsappShareButton, WhatsappIcon, EmailShareButton, EmailIcon } from 'react-share';
 
-function BooksUploaded() {
+function BooksUploadedCivil() {
   const [books, setBooks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
@@ -28,7 +28,7 @@ function BooksUploaded() {
       .then(response => response.json())
       .then(data => {
         // Filter books where faculty is "Computer"
-        const filteredData = data.filter(book => book.faculty === "Computer");
+        const filteredData = data.filter(book => book.faculty === "Civil");
         const sortedBooks = filteredData.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
         setBooks(sortedBooks);
         setFilteredBooks(sortedBooks);
@@ -100,7 +100,7 @@ function BooksUploaded() {
 
   const handlePageChange = (newPage) => {
     setCurrentPage(newPage);
-    navigate(`/showbook?semester=${newPage}`); // Update URL with new semester
+    navigate(`/books-uploaded-civil?semester=${newPage}`); // Update URL with new semester
   };
 
   const scrollToTop = () => {
@@ -230,4 +230,4 @@ function BooksUploaded() {
   );
 }
 
-export default BooksUploaded;
+export default BooksUploadedCivil;
