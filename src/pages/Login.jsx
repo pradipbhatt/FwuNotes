@@ -20,7 +20,7 @@ function Login() {
         email: data.email,
         password: data.password,
       };
-      const res = await axios.post("https://fwu-soe.onrender.com/user/login", userInfo);
+      const res = await axios.post("https://fwu-soe.vercel.app/user/login", userInfo);
       if (res.data) {
         toast.success("Logged in Successfully");
         document.getElementById("my_modal_3").close();

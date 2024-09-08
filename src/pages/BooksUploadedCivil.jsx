@@ -24,7 +24,7 @@ function BooksUploadedCivil() {
   const navigate = useNavigate();
 
   const getBooks = () => {
-    fetch('https://fwu-soe.onrender.com/book/getBook')
+    fetch('https://fwu-soe.vercel.app/book/getBook')
       .then(response => response.json())
       .then(data => {
         // Filter books where faculty is "Computer"

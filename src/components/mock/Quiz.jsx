@@ -46,7 +46,7 @@ const Quiz = () => {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await axios.get('https://fwu-soe.onrender.com/api/quizzes/');
+      const response = await axios.get('https://fwu-soe.vercel.app/api/quizzes/');
       const sortedQuizzes = response.data.sort((a, b) => a.yearID - b.yearID);
       setQuizzes(sortedQuizzes);
     } catch (error) {
@@ -73,11 +73,11 @@ const Quiz = () => {
 
     try {
       if (editMode) {
-        await axios.put(`https://fwu-soe.onrender.com/api/quizzes/${currentQuiz._id}`, quizData);
+        await axios.put(`https://fwu-soe.vercel.app/api/quizzes/${currentQuiz._id}`, quizData);
         setError(''); // Clear any previous errors
         setEditMode(false);
       } else {
-        await axios.post('https://fwu-soe.onrender.com/api/quizzes/', quizData);
+        await axios.post('https://fwu-soe.vercel.app/api/quizzes/', quizData);
         setError(''); // Clear any previous errors
       }
       setQuestion('');
@@ -123,7 +123,7 @@ const Quiz = () => {
 
   const handleDeleteQuiz = async (quizId) => {
     try {
-      await axios.delete(`https://fwu-soe.onrender.com/api/quizzes/${quizId}`);
+      await axios.delete(`https://fwu-soe.vercel.app/api/quizzes/${quizId}`);
       fetchQuizzes(); // Refresh the list after deletion
     } catch (error) {
       console.error('Error deleting quiz:', error);

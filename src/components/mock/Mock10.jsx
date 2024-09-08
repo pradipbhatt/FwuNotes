@@ -49,7 +49,7 @@ const Mock1 = () => {
   useEffect(() => {
     const fetchQuizData = async () => {
       try {
-        const response = await fetch("https://fwu-soe.onrender.com/api/quizzes/");
+        const response = await fetch("https://fwu-soe.vercel.app/api/quizzes/");
         if (!response.ok) throw new Error("Network response was not ok");
         const data = await response.json();
         const filteredData = data.filter((quiz) => quiz.yearID === 2082);
@@ -231,7 +231,7 @@ const Mock1 = () => {
     }
 
     try {
-      const response = await fetch("https://fwu-soe.onrender.com/api/quiz-results/", {
+      const response = await fetch("https://fwu-soe.vercel.app/api/quiz-results/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

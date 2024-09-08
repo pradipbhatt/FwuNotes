@@ -52,7 +52,7 @@ const QuizResult = () => {
   }, [quizResults, loading]);
 
   const fetchQuizResults = () => {
-    fetch('https://fwu-soe.onrender.com/api/quiz-results/')
+    fetch('https://fwu-soe.vercel.app/api/quiz-results/')
       .then(response => response.json())
       .then(data => {
         setQuizResults(data);
@@ -70,7 +70,7 @@ const QuizResult = () => {
     e.preventDefault();
 
     if (formMode === 'add') {
-      fetch('https://fwu-soe.onrender.com/api/quiz-results/', {
+      fetch('https://fwu-soe.vercel.app/api/quiz-results/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -84,7 +84,7 @@ const QuizResult = () => {
         })
         .catch(error => console.error('Error submitting quiz result:', error));
     } else if (formMode === 'update' && selectedQuizResultId) {
-      fetch(`https://fwu-soe.onrender.com/api/quiz-results/${selectedQuizResultId}`, {
+      fetch(`https://fwu-soe.vercel.app/api/quiz-results/${selectedQuizResultId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -120,7 +120,7 @@ const QuizResult = () => {
   };
 
   const handleDeleteQuizResult = (id) => {
-    fetch(`https://fwu-soe.onrender.com/api/quiz-results/${id}`, {
+    fetch(`https://fwu-soe.vercel.app/api/quiz-results/${id}`, {
       method: 'DELETE',
     })
       .then(response => {

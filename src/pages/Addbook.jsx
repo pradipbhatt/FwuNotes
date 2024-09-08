@@ -18,7 +18,7 @@ function AddBook() {
 
   // Function to fetch books from the backend
   const getBooks = () => {
-    fetch('https://fwu-soe.onrender.com/book/getBook')
+    fetch('https://fwu-soe.vercel.app/book/getBook')
       .then(response => response.json())
       .then(data => {
         const sortedBooks = data.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
@@ -38,7 +38,7 @@ function AddBook() {
 
   // Function to delete a book by ID
   const handleDeleteBook = (id) => {
-    fetch(`https://fwu-soe.onrender.com/book/deleteBook/${id}`, {
+    fetch(`https://fwu-soe.vercel.app/book/deleteBook/${id}`, {
       method: 'DELETE'
     })
     .then(response => {
@@ -64,7 +64,7 @@ function AddBook() {
 
     if (editingBookId) {
       // Update existing book
-      fetch(`https://fwu-soe.onrender.com/book/updateBook/${editingBookId}`, {
+      fetch(`https://fwu-soe.vercel.app/book/updateBook/${editingBookId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -89,7 +89,7 @@ function AddBook() {
       .catch(error => toast.error('Error:', error));
     } else {
       // Add new book
-      fetch('https://fwu-soe.onrender.com/book/addBook', {
+      fetch('https://fwu-soe.vercel.app/book/addBook', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

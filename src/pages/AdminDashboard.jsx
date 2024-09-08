@@ -28,7 +28,7 @@ const AdminDashboard = () => {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('https://fwu-soe.onrender.com/admin/users', {
+      const response = await axios.get('https://fwu-soe.vercel.app/admin/users', {
         headers: {
           'Content-Type': 'application/json',
           'Is-Admin': 'true',
@@ -49,7 +49,7 @@ const AdminDashboard = () => {
   const handleDelete = async (id) => {
     setLoading(true);
     try {
-      await axios.delete(`https://fwu-soe.onrender.com/admin/users/${id}`, {
+      await axios.delete(`https://fwu-soe.vercel.app/admin/users/${id}`, {
         headers: {
           'Content-Type': 'application/json',
           'Is-Admin': 'true',
@@ -79,7 +79,7 @@ const AdminDashboard = () => {
       if (form.password) {
         updateData.password = form.password;
       }
-      await axios.put(`https://fwu-soe.onrender.com/user/users/${id}`, updateData, {
+      await axios.put(`https://fwu-soe.vercel.app/user/users/${id}`, updateData, {
         headers: {
           'Content-Type': 'application/json',
           'Is-Admin': 'true',
@@ -128,7 +128,7 @@ const AdminDashboard = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await axios.post('https://fwu-soe.onrender.com/user/signup', form, {
+      await axios.post('https://fwu-soe.vercel.app/user/signup', form, {
         headers: {
           'Content-Type': 'application/json',
           'Is-Admin': 'true',

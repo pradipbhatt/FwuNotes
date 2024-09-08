@@ -26,7 +26,7 @@ function Signup() {
         isAdmin: true, // Assuming you set isAdmin based on your logic
         userImage: userImage || "https://www.pngplay.com/wp-content/uploads/12/User-Avatar-Profile-PNG-Free-File-Download.png", // Default image URL
       };
-      const res = await axios.post("https://fwu-soe.onrender.com/user/signup", userInfo, {
+      const res = await axios.post("https://fwu-soe.vercel.app/user/signup", userInfo, {
         headers: {
           "Content-Type": "application/json",
           "is-admin": true, // Sending isAdmin as header to identify admin action
