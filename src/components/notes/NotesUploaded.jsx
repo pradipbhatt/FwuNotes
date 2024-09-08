@@ -15,7 +15,7 @@ const NotesUploaded = () => {
 
   const getPdf = async () => {
     try {
-      const result = await axios.get("https://soe-notes-pdf-backend.onrender.com/get-files");
+      const result = await axios.get("https://fwu-soe.vercel.app/get-files");
       setAllImage(result.data.data);
       setLoading(false);
     } catch (error) {
@@ -25,7 +25,7 @@ const NotesUploaded = () => {
   };
 
   const showPdf = (pdf) => {
-    setPdfFile(`https://soe-notes-pdf-backend.onrender.com/files/${pdf}`);
+    setPdfFile(`https://fwu-soe.vercel.app/files/${pdf}`);
   };
 
   return (

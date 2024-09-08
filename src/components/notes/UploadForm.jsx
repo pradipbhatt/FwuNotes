@@ -30,7 +30,7 @@ const UploadForm = ({ getPdf }) => {
     formData.append("file", file);
 
     try {
-      await axios.post("https://soe-notes-pdf-backend.onrender.com/upload-files", formData, {
+      await axios.post("https://fwu-soe.vercel.app/upload-files", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

@@ -15,7 +15,7 @@ const UploadedList = ({ hideDeleteButton }) => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get("https://soe-notes-pdf-backend.onrender.com/get-files");
+      const response = await axios.get("https://fwu-soe.vercel.app/get-files");
       const sortedPdfList = response.data.data.sort((a, b) => a.semester - b.semester);
       setPdfList(sortedPdfList);
     } catch (error) {
@@ -35,7 +35,7 @@ const UploadedList = ({ hideDeleteButton }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://soe-notes-pdf-backend.onrender.com/delete-file/${id}`);
+      await axios.delete(`https://fwu-soe.vercel.app/delete-file/${id}`);
       setPdfList(prevPdfList => prevPdfList.filter(item => item._id !== id));
       handleClosePdf();
     } catch (error) {
@@ -45,7 +45,7 @@ const UploadedList = ({ hideDeleteButton }) => {
 
   const handleUpload = async (formData) => {
     try {
-      const response = await axios.post("https://soe-notes-pdf-backend.onrender.com/upload-file", formData, {
+      const response = await axios.post("https://fwu-soe.vercel.app/upload-file", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

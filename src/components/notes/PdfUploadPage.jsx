@@ -10,7 +10,7 @@ const PdfUploadPage = () => {
 
   const getPdf = async () => {
     try {
-      const res = await axios.get("https://soe-notes-pdf-backend.onrender.com/get-files");
+      const res = await axios.get("https://fwu-soe.vercel.app/get-files");
       setAllImage(res.data.data);
     } catch (error) {
       console.error("Error fetching files:", error);
