@@ -298,8 +298,7 @@ const Mock1 = () => {
                       className="h-32 w-auto mx-auto mb-6"
                     />
                     <h1 className="text-4xl font-bold mb-4 leading-tight text-gray-600">
-                      Entrance Exam Preparation Test
-                    </h1>
+                      Mock Test 1                   </h1>
                     <h2 className="text-2xl font-semibold mb-2  text-gray-600">
                       Attempt all the questions.
                     </h2>
