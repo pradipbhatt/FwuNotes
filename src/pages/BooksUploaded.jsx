@@ -23,16 +23,27 @@ function BooksUploaded() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const getBooks = () => {
-    fetch('https://fwu-soe.vercel.app/book/getBook')
-      .then(response => response.json())
-      .then(data => {
-        const sortedBooks = data.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
-        setBooks(sortedBooks);
-      })
-      .catch(error => console.error('Error:', error));
+  const getBooks = async () => {
+    try {
+      const response = await fetch('https://fwu-soe.vercel.app/book/getBook');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      
+      // Filter and sort books where faculty is "Computer"
+      const filteredData = data.filter(book => book.faculty === "Computer");
+      const sortedBooks = filteredData.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
+      
+      setBooks(sortedBooks);
+      setFilteredBooks(sortedBooks);
+    } catch (error) {
+      console.error('Error fetching books:', error);
+    } finally {
+      setLoading(false);
+    }
   };
-
+  
   useEffect(() => {
     getBooks();
     AOS.init({
