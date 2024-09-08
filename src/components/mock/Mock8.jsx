@@ -262,15 +262,15 @@ const Mock1 = () => {
     <>
     <Navbar />
     <div className="relative">
-    <div
-    className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
-    style={{
-      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
-      backgroundSize: 'cover',
-      backgroundAttachment: 'fixed',
-      backgroundBlendMode: 'overlay', // Ensure proper blending
-    }}
-  >
+      <div
+        className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
+        style={{
+          background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
+          backgroundSize: 'cover',
+          backgroundAttachment: 'fixed',
+          backgroundBlendMode: 'overlay', // Ensure proper blending
+        }}
+      >
         <div className="container mx-auto text-center px-4 w-full">
           <motion.div
             initial={{ opacity: 0 }}
@@ -291,13 +291,13 @@ const Mock1 = () => {
                     alt="Logo"
                     className="h-32 w-auto mx-auto mb-6"
                   />
-                  <h1 className="text-4xl font-bold mb-4 leading-tight">
+                  <h1 className="text-4xl font-bold mb-4 leading-tight text-gray-600">
                     Entrance Exam Preparation Test
                   </h1>
-                  <h2 className="text-2xl font-semibold mb-2">
+                  <h2 className="text-2xl font-semibold mb-2  text-gray-600">
                     Attempt all the questions.
                   </h2>
-                  <h3 className="text-lg mb-6">
+                  <h3 className="text-lg mb-6  text-gray-600">
                     Read the following questions carefully and tick the correct answer.
                   </h3>
                 </motion.div>
@@ -325,26 +325,26 @@ const Mock1 = () => {
               <div className="relative w-full max-w-3xl mx-auto bg-white bg-opacity-70 dark:bg-opacity-20 dark:bg-gray-800 p-6 md:p-8 rounded-xl shadow-lg dark:shadow-gray-700 mt-4 scrollbar-hidden">
                 <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
                 <div className="relative z-10">
-                <div className="flex items-center justify-between mb-4">
-  <h2 className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100 tracking-wider">
-    Q{currentQuestion + 1} of {quizData.length}
-  </h2>
-  <div className="flex items-center space-x-4 text-xs">
-    <p className="font-medium text-gray-700 dark:text-gray-300">
-      Time: {formatTime(questionTimer)}
-    </p>
-    <p className="font-medium text-gray-700 dark:text-gray-300">
-      Total Time: {String(Math.floor(timer / 60)).padStart(2, '0')}:
-      {String(timer % 60).padStart(2, '0')}
-    </p>
-  </div>
-</div>
+                  <div className="flex items-center justify-between mb-4">
+                    <h2 className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100 tracking-wider">
+                      Q{currentQuestion + 1} of {quizData.length}
+                    </h2>
+                    <div className="flex items-center space-x-4 text-xs">
+                      <p className="font-medium text-gray-700 dark:text-gray-300">
+                        Time: {formatTime(questionTimer)}
+                      </p>
+                      <p className="font-medium text-gray-700 dark:text-gray-300">
+                        Total Time: {String(Math.floor(timer / 60)).padStart(2, '0')}:
+                        {String(timer % 60).padStart(2, '0')}
+                      </p>
+                    </div>
+                  </div>
 
 
                   <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
                     {isMath ? (
                       <div className="w-full break-words overflow-scroll scrollbar-hidden">
-                        <MathJax.Context input='tex'>
+                        <MathJax.Context input="tex">
                           <MathJax.Node
                             className="whitespace-pre-wrap"
                             style={{
@@ -352,14 +352,15 @@ const Mock1 = () => {
                               overflowWrap: 'break-word',
                               wordWrap: 'break-word',
                               whiteSpace: 'pre-wrap',
-                              fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
+                              fontSize: 'calc(0.5rem + 0.5vw)', // Adjust font size as needed
                             }}
                           >
-
-                            {currentQuestionData.question}
+                            {`\\scriptsize \\displaystyle ${currentQuestionData.question.replace(/ /g, '\\hspace{0.3em}').replace(/\n/g, '\\newline ')}`}
                           </MathJax.Node>
                         </MathJax.Context>
                       </div>
+
+
                     ) : (
                       <p
                         className="whitespace-pre-wrap break-words scrollbar-hidden"
@@ -376,64 +377,64 @@ const Mock1 = () => {
                     )}
                   </div>
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                  {currentQuestionData.answers.map((answer) => (
-  <motion.button
-    key={answer._id}
-    onClick={() => handleAnswerOptionClick(answer)}
-    className={`w-full p-3 rounded-lg flex items-center justify-start transition-transform duration-300 ease-in-out ${selectedAnswer
-      ? answer.correct
-        ? 'bg-gradient-to-r from-green-500 to-green-700 dark:from-green-300 dark:to-green-500 text-white shadow-md shadow-green-400' // Correct answer background
-        : answer === selectedAnswer
-          ? 'bg-gradient-to-r from-red-500 to-red-700 dark:from-red-300 dark:to-red-500 text-white shadow-md shadow-red-400' // Incorrect selected answer background
-          : 'bg-gray-600 dark:bg-gray-700 text-gray-200 dark:text-gray-400 shadow-md shadow-gray-500' // Non-selected answer background
-      : 'bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 dark:from-blue-300 dark:to-blue-500 dark:hover:from-blue-400 dark:hover:to-blue-600 text-white shadow-md shadow-blue-400' // Default background
-      } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500`}
-    whileHover={{ scale: 1.03 }}
-    whileTap={{ scale: 0.97 }}
-  >
-    {selectedAnswer === answer && (
-      <span className="mr-2 flex items-center">
-        {answer.correct ? (
-          <FaCheck className="w-4 h-4 text-green-200 dark:text-green-100" />
-        ) : (
-          <FaTimes className="w-4 h-4 text-red-200 dark:text-red-100" />
-        )}
-      </span>
-    )}
-    <span
-      className={isMath ? 'font-math' : 'font-normal'}
-      style={{
-        fontSize: '0.875rem', // Smaller font size
-        letterSpacing: '0.02em',
-        overflowWrap: 'break-word',
-        wordWrap: 'break-word',
-        whiteSpace: 'pre-wrap',
-      }}
-    >
-      {isMath ? (
-        <MathJax.Context input='tex'>
-          <MathJax.Node
-            className="whitespace-pre-wrap break-words"
-            style={{ letterSpacing: '0.02em' }}
-          >
-            {answer.text}
-          </MathJax.Node>
-        </MathJax.Context>
-      ) : (
-        answer.text
-      )}
-    </span>
-  </motion.button>
-))}
+                    {currentQuestionData.answers.map((answer) => (
+                      <motion.button
+                        key={answer._id}
+                        onClick={() => handleAnswerOptionClick(answer)}
+                        className={`w-full p-3 rounded-lg flex items-center justify-start transition-transform duration-300 ease-in-out ${selectedAnswer
+                          ? answer.correct
+                            ? 'bg-gradient-to-r from-green-500 to-green-700 dark:from-green-300 dark:to-green-500 text-white shadow-md shadow-green-400' // Correct answer background
+                            : answer === selectedAnswer
+                              ? 'bg-gradient-to-r from-red-500 to-red-700 dark:from-red-300 dark:to-red-500 text-white shadow-md shadow-red-400' // Incorrect selected answer background
+                              : 'bg-gray-600 dark:bg-gray-700 text-gray-200 dark:text-gray-400 shadow-md shadow-gray-500' // Non-selected answer background
+                          : 'bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 dark:from-blue-300 dark:to-blue-500 dark:hover:from-blue-400 dark:hover:to-blue-600 text-white shadow-md shadow-blue-400' // Default background
+                          } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500`}
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        {selectedAnswer === answer && (
+                          <span className="mr-2 flex items-center">
+                            {answer.correct ? (
+                              <FaCheck className="w-4 h-4 text-green-200 dark:text-green-100" />
+                            ) : (
+                              <FaTimes className="w-4 h-4 text-red-200 dark:text-red-100" />
+                            )}
+                          </span>
+                        )}
+                        <span
+                          className={isMath ? 'font-math' : 'font-normal'}
+                          style={{
+                            fontSize: '0.875rem', // Smaller font size
+                            letterSpacing: '0.02em',
+                            overflowWrap: 'break-word',
+                            wordWrap: 'break-word',
+                            whiteSpace: 'pre-wrap',
+                          }}
+                        >
+                          {isMath ? (
+                            <MathJax.Context input='tex'>
+                              <MathJax.Node
+                                className="whitespace-pre-wrap break-words"
+                                style={{ letterSpacing: '0.02em' }}
+                              >
+                                {answer.text}
+                              </MathJax.Node>
+                            </MathJax.Context>
+                          ) : (
+                            answer.text
+                          )}
+                        </span>
+                      </motion.button>
+                    ))}
 
 
                   </div>
                   {/* <div className="flex justify-end p-4"> 
 <button
-  onClick={handleNextQuestion}
-  className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
+onClick={handleNextQuestion}
+className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
 >
-  <span className="text-lg font-semibold">&gt;</span> 
+<span className="text-lg font-semibold">&gt;</span> 
 </button>
 </div> */}
 
@@ -455,16 +456,19 @@ const Mock1 = () => {
                               <span className="mr-2">❌</span> Incorrect.
                             </span>
                             <span className="text-gray-800 dark:text-gray-300 flex items-center">
-                              <span className="mr-2">🔍</span> The correct answer is
+                              <span className="mr-2">🔍</span> The correct answer is =
                               {isMath ? (
                                 <MathJax.Context input='tex'>
                                   <MathJax.Node
                                     className="ml-2 text-green-600 dark:text-green-500 font-semibold"
-                                    style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
+                                    style={{ fontSize: 'calc(0.65rem + 0.2vw)' }} // Adjusted for a slightly smaller responsive font size
                                   >
-                                    {correctAnswer?.text || "No correct answer provided."}
+                                    {correctAnswer?.text
+                                      ? `\\displaystyle ${correctAnswer.text.replace(/ /g, '\\hspace{0.5em}').replace(/\n/g, '\\newline ')}`
+                                      : "No correct answer provided."}
                                   </MathJax.Node>
                                 </MathJax.Context>
+
                               ) : (
                                 <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
                                   {correctAnswer?.text || "No correct answer provided."}
@@ -489,17 +493,20 @@ const Mock1 = () => {
                             <MathJax.Node
                               className="whitespace-pre-wrap break-words"
                               style={{
-                                letterSpacing: '0.05em',
-                                overflowWrap: 'break-word',
-                                wordWrap: 'break-word',
-                                whiteSpace: 'pre-wrap',
-                                fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                                color: 'inherit' // Inherit text color
+                                letterSpacing: '0.05em',          // Slight space between letters
+                                overflowWrap: 'break-word',       // Break long words
+                                wordWrap: 'break-word',           // Break words at the end of the line
+                                whiteSpace: 'pre-wrap',           // Preserve whitespace
+                                fontSize: 'calc(0.65rem + 0.2vw)', // Smaller responsive font size
+                                color: 'inherit'                  // Inherit text color
                               }}
                             >
-                              {currentQuestionData.explanation || "No explanation provided."}
+                              {currentQuestionData.explanation
+                                ? `\\displaystyle ${currentQuestionData.explanation.replace(/ /g, '\\hspace{0.5em}').replace(/\n/g, '\\newline ')}`
+                                : "No explanation provided."}
                             </MathJax.Node>
                           </MathJax.Context>
+
                         ) : (
                           <span
                             style={{
@@ -662,84 +669,83 @@ const Mock1 = () => {
 
 
 
-{showForm && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5 }}
-                  className="fixed inset-0 bg-gray-900 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-70 bg-blur-sm flex items-center justify-center p-4"
-                >
-                  <div className="bg-white dark:bg-gray-900 bg-opacity-30 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md relative">
-                    {/* Enhanced Close Icon */}
-                    <button
-                      type="button"
-                      onClick={() => setShowForm(false)}
-                      className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors duration-300"
-                    >
-                      <FaTimes size={24} />
-                    </button>
+            {showForm && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5 }}
+                className="fixed inset-0 bg-gray-900 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-70 bg-blur-sm flex items-center justify-center p-4"
+              >
+                <div className="bg-white dark:bg-gray-900 bg-opacity-30 backdrop-blur-sm p-6 md:p-8 rounded-lg shadow-lg w-full max-w-md relative">
+                  {/* Enhanced Close Icon */}
+                  <button
+                    type="button"
+                    onClick={() => setShowForm(false)}
+                    className="absolute top-4 right-4 text-gray-700 dark:text-gray-300 hover:text-red-500 transition-colors duration-300"
+                  >
+                    <FaTimes size={24} />
+                  </button>
 
-                    {/* Improved Instructions */}
-                    <h3 className="font-semibold mb-4 text-black dark:text-white text-left text-lg sm:text-base">
-                      ✨ **Please complete the form with your correct details** ✨
-                    </h3>
-                    <p className="text-sm text-gray-900 dark:text-gray-400 mb-4">
-                      🚀 Your information helps us provide the best service.
-                      Please make sure to fill out all fields accurately.
-                      If you need any help, feel free to contact us! 😊
-                    </p>
-                    <form onSubmit={handleSubmit}>
-                      <div className="mb-4 sm:flex sm:space-x-2">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
-                          👤 Name:
-                        </label>
-                        <input
-                          type="text"
-                          name="userName"
-                          value={formData.userName}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
-                        />
-                      </div>
-                      <div className="mb-4 sm:flex sm:space-x-2">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
-                          🛠️ Engineering Field:
-                        </label>
-                        <select
-                          name="engineeringField"
-                          value={formData.engineeringField}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
-                        >
-                          <option value="Computer">Computer</option>
-                          <option value="Civil">Civil</option>
-                          <option value="Architecture">Architecture</option>
-                        </select>
-                      </div>
-                      <div className="mb-4 sm:flex sm:space-x-2">
-                        <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
-                          📝 Review:
-                        </label>
-                        <textarea
-                          name="review"
-                          value={formData.review}
-                          onChange={handleInputChange}
-                          className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
-                        />
-                      </div>
-                      <div className="flex flex-col">
-                        <button
-                          type="submit"
-                          className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300"
-                        >
-                          Submit
-                        </button>
-                      </div>
-                    </form>
-                  </div>
-                </motion.div>
-              )}
-
+                  {/* Improved Instructions */}
+                  <h3 className="font-semibold mb-4 text-black dark:text-white text-left text-lg sm:text-base">
+                    ✨ **Please complete the form with your correct details** ✨
+                  </h3>
+                  <p className="text-sm text-gray-900 dark:text-gray-400 mb-4">
+                    🚀 Your information helps us provide the best service.
+                    Please make sure to fill out all fields accurately.
+                    If you need any help, feel free to contact us! 😊
+                  </p>
+                  <form onSubmit={handleSubmit}>
+                    <div className="mb-4 sm:flex sm:space-x-2">
+                      <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                        👤 Name:
+                      </label>
+                      <input
+                        type="text"
+                        name="userName"
+                        value={formData.userName}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                      />
+                    </div>
+                    <div className="mb-4 sm:flex sm:space-x-2">
+                      <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                        🛠️ Engineering Field:
+                      </label>
+                      <select
+                        name="engineeringField"
+                        value={formData.engineeringField}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                      >
+                        <option value="Computer">Computer</option>
+                        <option value="Civil">Civil</option>
+                        <option value="Architecture">Architecture</option>
+                      </select>
+                    </div>
+                    <div className="mb-4 sm:flex sm:space-x-2">
+                      <label className="block text-sm font-medium mb-2 text-black dark:text-white text-left sm:w-1/3">
+                        📝 Review:
+                      </label>
+                      <textarea
+                        name="review"
+                        value={formData.review}
+                        onChange={handleInputChange}
+                        className="w-full p-2 border border-gray-300 rounded-lg text-black bg-white dark:text-white dark:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 transform transition-transform duration-300 focus:scale-105"
+                      />
+                    </div>
+                    <div className="flex flex-col">
+                      <button
+                        type="submit"
+                        className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-all duration-300"
+                      >
+                        Submit
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </motion.div>
+            )}
 
           </motion.div>
         </div>

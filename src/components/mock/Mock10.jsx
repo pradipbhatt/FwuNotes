@@ -268,16 +268,16 @@ const Mock1 = () => {
     <>
       <Navbar />
       <div className="relative">
-      <div
-    className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
-    style={{
-      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
-      backgroundSize: 'cover',
-      backgroundAttachment: 'fixed',
-      backgroundBlendMode: 'overlay', // Ensure proper blending
-    }}
-  >
-    <div className="container mx-auto text-center px-4 w-full">
+        <div
+          className="relative py-20 mt-[0px]" // Added margin-top class for 50px top margin
+          style={{
+            background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
+            backgroundSize: 'cover',
+            backgroundAttachment: 'fixed',
+            backgroundBlendMode: 'overlay', // Ensure proper blending
+          }}
+        >
+          <div className="container mx-auto text-center px-4 w-full">
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -297,13 +297,13 @@ const Mock1 = () => {
                       alt="Logo"
                       className="h-32 w-auto mx-auto mb-6"
                     />
-                    <h1 className="text-4xl font-bold mb-4 leading-tight">
+                    <h1 className="text-4xl font-bold mb-4 leading-tight text-gray-600">
                       Entrance Exam Preparation Test
                     </h1>
-                    <h2 className="text-2xl font-semibold mb-2">
+                    <h2 className="text-2xl font-semibold mb-2  text-gray-600">
                       Attempt all the questions.
                     </h2>
-                    <h3 className="text-lg mb-6">
+                    <h3 className="text-lg mb-6  text-gray-600">
                       Read the following questions carefully and tick the correct answer.
                     </h3>
                   </motion.div>
@@ -332,24 +332,25 @@ const Mock1 = () => {
                   <div className="absolute inset-0 bg-white bg-opacity-60 dark:bg-gray-900 dark:bg-opacity-60 filter blur-sm rounded-xl"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
-                      <h2 className="text-md md:text-md sm:text-sm  font-bold text-gray-900 dark:text-gray-100 tracking-wider">
-                        Question {currentQuestion + 1} of {quizData.length}
+                      <h2 className="text-sm md:text-base font-bold text-gray-900 dark:text-gray-100 tracking-wider">
+                        Q{currentQuestion + 1} of {quizData.length}
                       </h2>
-                      <div className="flex items-center space-x-4">
-                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                      <div className="flex items-center space-x-4 text-xs">
+                        <p className="font-medium text-gray-700 dark:text-gray-300">
                           Time: {formatTime(questionTimer)}
                         </p>
-                        <p className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                          Time left: {String(Math.floor(timer / 60)).padStart(2, '0')}:
+                        <p className="font-medium text-gray-700 dark:text-gray-300">
+                          Total Time: {String(Math.floor(timer / 60)).padStart(2, '0')}:
                           {String(timer % 60).padStart(2, '0')}
                         </p>
                       </div>
-
                     </div>
+
+
                     <div className="text-base md:text-lg lg:text-xl font-medium mb-6 text-gray-800 dark:text-gray-200 tracking-wider">
                       {isMath ? (
                         <div className="w-full break-words overflow-scroll scrollbar-hidden">
-                          <MathJax.Context input='tex'>
+                          <MathJax.Context input="tex">
                             <MathJax.Node
                               className="whitespace-pre-wrap"
                               style={{
@@ -357,14 +358,15 @@ const Mock1 = () => {
                                 overflowWrap: 'break-word',
                                 wordWrap: 'break-word',
                                 whiteSpace: 'pre-wrap',
-                                fontSize: 'calc(0.75rem + 0.5vw)', // Responsive font size
+                                fontSize: 'calc(0.5rem + 0.5vw)', // Adjust font size as needed
                               }}
                             >
-
-                              {currentQuestionData.question}
+                              {`\\scriptsize \\displaystyle ${currentQuestionData.question.replace(/ /g, '\\hspace{0.3em}').replace(/\n/g, '\\newline ')}`}
                             </MathJax.Node>
                           </MathJax.Context>
                         </div>
+
+
                       ) : (
                         <p
                           className="whitespace-pre-wrap break-words scrollbar-hidden"
@@ -385,31 +387,31 @@ const Mock1 = () => {
                         <motion.button
                           key={answer._id}
                           onClick={() => handleAnswerOptionClick(answer)}
-                          className={`w-full p-4 rounded-2xl flex items-center justify-start transition-transform duration-500 ease-in-out ${selectedAnswer
+                          className={`w-full p-3 rounded-lg flex items-center justify-start transition-transform duration-300 ease-in-out ${selectedAnswer
                             ? answer.correct
-                              ? 'bg-gradient-to-r from-green-600 to-green-800 dark:from-green-400 dark:to-green-600 text-white shadow-inner shadow-green-500' // Correct answer background
+                              ? 'bg-gradient-to-r from-green-500 to-green-700 dark:from-green-300 dark:to-green-500 text-white shadow-md shadow-green-400' // Correct answer background
                               : answer === selectedAnswer
-                                ? 'bg-gradient-to-r from-red-600 to-red-800 dark:from-red-400 dark:to-red-600 text-white shadow-inner shadow-red-500' // Incorrect selected answer background
-                                : 'bg-gray-700 dark:bg-gray-800 text-gray-300 dark:text-gray-400 shadow-inner shadow-gray-500' // Non-selected answer background
-                            : 'bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800 dark:from-blue-400 dark:to-blue-500 dark:hover:from-blue-500 dark:hover:to-blue-600 text-white shadow-inner shadow-blue-500' // Default background
-                            } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600`}
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
+                                ? 'bg-gradient-to-r from-red-500 to-red-700 dark:from-red-300 dark:to-red-500 text-white shadow-md shadow-red-400' // Incorrect selected answer background
+                                : 'bg-gray-600 dark:bg-gray-700 text-gray-200 dark:text-gray-400 shadow-md shadow-gray-500' // Non-selected answer background
+                            : 'bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 dark:from-blue-300 dark:to-blue-500 dark:hover:from-blue-400 dark:hover:to-blue-600 text-white shadow-md shadow-blue-400' // Default background
+                            } shadow-lg transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-300 dark:focus:ring-blue-500`}
+                          whileHover={{ scale: 1.03 }}
+                          whileTap={{ scale: 0.97 }}
                         >
                           {selectedAnswer === answer && (
-                            <span className="mr-3 flex items-center">
+                            <span className="mr-2 flex items-center">
                               {answer.correct ? (
-                                <FaCheck className="w-5 h-5 text-green-300 dark:text-green-200" />
+                                <FaCheck className="w-4 h-4 text-green-200 dark:text-green-100" />
                               ) : (
-                                <FaTimes className="w-5 h-5 text-red-300 dark:text-red-200" />
+                                <FaTimes className="w-4 h-4 text-red-200 dark:text-red-100" />
                               )}
                             </span>
                           )}
                           <span
                             className={isMath ? 'font-math' : 'font-normal'}
                             style={{
-                              fontSize: 'calc(0.65rem + 0.5vw)', // Smaller, responsive font size
-                              letterSpacing: '0.05em',
+                              fontSize: '0.875rem', // Smaller font size
+                              letterSpacing: '0.02em',
                               overflowWrap: 'break-word',
                               wordWrap: 'break-word',
                               whiteSpace: 'pre-wrap',
@@ -419,7 +421,7 @@ const Mock1 = () => {
                               <MathJax.Context input='tex'>
                                 <MathJax.Node
                                   className="whitespace-pre-wrap break-words"
-                                  style={{ letterSpacing: '0.05em' }}
+                                  style={{ letterSpacing: '0.02em' }}
                                 >
                                   {answer.text}
                                 </MathJax.Node>
@@ -429,17 +431,17 @@ const Mock1 = () => {
                             )}
                           </span>
                         </motion.button>
-
                       ))}
+
 
                     </div>
                     {/* <div className="flex justify-end p-4"> 
-  <button
-    onClick={handleNextQuestion}
-    className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
-  >
-    <span className="text-lg font-semibold">&gt;</span> 
-  </button>
+<button
+  onClick={handleNextQuestion}
+  className="flex items-center justify-center p-3 bg-blue-500 dark:bg-blue-700 text-white rounded-full shadow-md hover:bg-blue-600 dark:hover:bg-blue-800 transition-transform transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-400 dark:focus:ring-blue-600"
+>
+  <span className="text-lg font-semibold">&gt;</span> 
+</button>
 </div> */}
 
                     {selectedAnswer && (
@@ -460,16 +462,19 @@ const Mock1 = () => {
                                 <span className="mr-2">❌</span> Incorrect.
                               </span>
                               <span className="text-gray-800 dark:text-gray-300 flex items-center">
-                                <span className="mr-2">🔍</span> The correct answer is
+                                <span className="mr-2">🔍</span> The correct answer is =
                                 {isMath ? (
                                   <MathJax.Context input='tex'>
                                     <MathJax.Node
                                       className="ml-2 text-green-600 dark:text-green-500 font-semibold"
-                                      style={{ fontSize: 'calc(0.75rem + 0.2vw)' }} // Responsive font size
+                                      style={{ fontSize: 'calc(0.65rem + 0.2vw)' }} // Adjusted for a slightly smaller responsive font size
                                     >
-                                      {correctAnswer?.text || "No correct answer provided."}
+                                      {correctAnswer?.text
+                                        ? `\\displaystyle ${correctAnswer.text.replace(/ /g, '\\hspace{0.5em}').replace(/\n/g, '\\newline ')}`
+                                        : "No correct answer provided."}
                                     </MathJax.Node>
                                   </MathJax.Context>
+
                                 ) : (
                                   <span className="ml-2 text-green-600 dark:text-green-500 font-semibold">
                                     {correctAnswer?.text || "No correct answer provided."}
@@ -494,17 +499,20 @@ const Mock1 = () => {
                               <MathJax.Node
                                 className="whitespace-pre-wrap break-words"
                                 style={{
-                                  letterSpacing: '0.05em',
-                                  overflowWrap: 'break-word',
-                                  wordWrap: 'break-word',
-                                  whiteSpace: 'pre-wrap',
-                                  fontSize: 'calc(0.75rem + 0.2vw)', // Responsive font size
-                                  color: 'inherit' // Inherit text color
+                                  letterSpacing: '0.05em',          // Slight space between letters
+                                  overflowWrap: 'break-word',       // Break long words
+                                  wordWrap: 'break-word',           // Break words at the end of the line
+                                  whiteSpace: 'pre-wrap',           // Preserve whitespace
+                                  fontSize: 'calc(0.65rem + 0.2vw)', // Smaller responsive font size
+                                  color: 'inherit'                  // Inherit text color
                                 }}
                               >
-                                {currentQuestionData.explanation || "No explanation provided."}
+                                {currentQuestionData.explanation
+                                  ? `\\displaystyle ${currentQuestionData.explanation.replace(/ /g, '\\hspace{0.5em}').replace(/\n/g, '\\newline ')}`
+                                  : "No explanation provided."}
                               </MathJax.Node>
                             </MathJax.Context>
+
                           ) : (
                             <span
                               style={{
@@ -554,8 +562,8 @@ const Mock1 = () => {
                   transition={{ duration: 0.5 }}
                   className="w-full max-w-full mx-auto mt-8 p-0  rounded-lg shadow-xl "
                 >
-                  <h2 className="text-4xl font-bold mb-6 text-gray-400 dark:text-gray-300">Entrance Completed!</h2>
-                  <p className="text-xl mb-8 text-gray-400 dark:text-gray-300">
+                  <h2 className="text-4xl font-bold mb-6 text-gray-900 dark:text-gray-900">Entrance Completed!</h2>
+                  <p className="text-xl mb-8 text-gray-800 dark:text-gray-300">
                     You scored <span className="font-bold text-indigo-600">{score}</span> out of <span className="font-bold text-indigo-600">{quizData.length}</span>.
                   </p>
 
@@ -575,14 +583,12 @@ const Mock1 = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
                             transition={{ duration: 0.5, delay: index * 0.2 }}
-                            className="text-left"
+                            className=""
                           >
-                            <p className="text-lg font-semibold text-blue-800 dark:text-blue-300 text-left sm:text-sm">
-                              Question {index + 1}:
-                            </p>
+                            <p className="text-lg font-semibold text-gray-800 dark:text-gray-100">Question {index + 1}:</p>
 
                             <p
-                              className="bg-blue-50 dark:bg-blue-900 p-4 rounded-md text-gray-900 dark:text-gray-100 break-words overflow-scroll scrollbar-hidden text-left sm:text-xs"
+                              className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 break-words overflow-scroll scrollbar-hidden"
                               style={{
                                 letterSpacing: '0.05em',
                                 overflowWrap: 'break-word',
@@ -601,7 +607,7 @@ const Mock1 = () => {
                             </p>
 
                             <p
-                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 text-left sm:text-xs"
+                              className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2"
                               style={{
                                 letterSpacing: '0.05em',
                                 overflowWrap: 'break-word',
@@ -610,7 +616,7 @@ const Mock1 = () => {
                                 fontSize: 'calc(0.85rem + 0.2vw)',
                               }}
                             >
-                              <strong className="text-blue-700 dark:text-blue-300">Your Answer:</strong>{' '}
+                              <strong>Your Answer:</strong>{' '}
                               {isMathQuestion(answer.userAnswer) ? (
                                 <MathJax.Context input="tex">
                                   <MathJax.Node>{answer.userAnswer}</MathJax.Node>
@@ -621,7 +627,7 @@ const Mock1 = () => {
                             </p>
 
                             <p
-                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 text-left sm:text-xs"
+                              className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2"
                               style={{
                                 letterSpacing: '0.05em',
                                 overflowWrap: 'break-word',
@@ -630,7 +636,7 @@ const Mock1 = () => {
                                 fontSize: 'calc(0.85rem + 0.2vw)',
                               }}
                             >
-                              <strong className="text-blue-700 dark:text-blue-300">Correct Answer:</strong>{' '}
+                              <strong>Correct Answer:</strong>{' '}
                               {isMathQuestion(answer.correctAnswer) ? (
                                 <MathJax.Context input="tex">
                                   <MathJax.Node>{answer.correctAnswer}</MathJax.Node>
@@ -641,7 +647,7 @@ const Mock1 = () => {
                             </p>
 
                             <p
-                              className="bg-blue-100 dark:bg-blue-800 p-4 rounded-md text-gray-900 dark:text-gray-100 mt-2 tracking-wider overflow-scroll scrollbar-hidden text-left sm:text-xs"
+                              className="bg-gray-200 dark:bg-gray-700 p-4 rounded-md text-gray-900 dark:text-gray-200 mt-2 tracking-wider overflow-scroll scrollbar-hidden"
                               style={{
                                 letterSpacing: '0.05em',
                                 overflowWrap: 'break-word',
@@ -650,7 +656,7 @@ const Mock1 = () => {
                                 fontSize: 'calc(0.85rem + 0.2vw)',
                               }}
                             >
-                              <strong className="text-blue-700 dark:text-blue-300">Explanation:</strong>{' '}
+                              <strong>Explanation:</strong>{' '}
                               {isMathQuestion(answer.explanation) ? (
                                 <MathJax.Context input="tex">
                                   <MathJax.Node>{answer.explanation}</MathJax.Node>
@@ -661,7 +667,6 @@ const Mock1 = () => {
                             </p>
                           </motion.li>
                         ))}
-
                       </ul>
                     </div>
                   </motion.div>
@@ -747,7 +752,6 @@ const Mock1 = () => {
                   </div>
                 </motion.div>
               )}
-
 
             </motion.div>
           </div>
