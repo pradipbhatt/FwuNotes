@@ -28,7 +28,16 @@ export default {
           fontFamily: {
             cursive: ['Dancing Script', 'cursive'],
           },
-          
+          colors: {
+            'dark-blue': '#2C3E50',
+            'soft-white': '#F8F9FA',
+            'sky-blue': '#3498DB',
+            'mint-green': '#1ABC9C',
+            'orange': '#E67E22',
+            'light-gray': '#BDC3C7',
+            'white': '#FFFFFF',
+            'light-beige': '#F4F1DE',
+          },
       },
   },
   plugins: [require("daisyui"), require('tailwindcss-filters'),

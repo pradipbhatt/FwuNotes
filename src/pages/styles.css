@@ -1,0 +1,58 @@
+/* styles.css */
+
+/* Background gradient with bubbles */
+.bubbles-background {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5));
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  pointer-events: none;
+  animation: bubbleAnimation 15s infinite;
+}
+
+.bubble-1 {
+  width: 100px;
+  height: 100px;
+  top: 10%;
+  left: 20%;
+  animation-delay: 0s;
+}
+
+.bubble-2 {
+  width: 80px;
+  height: 80px;
+  top: 40%;
+  left: 60%;
+  animation-delay: 5s;
+}
+
+.bubble-3 {
+  width: 120px;
+  height: 120px;
+  top: 70%;
+  left: 40%;
+  animation-delay: 10s;
+}
+
+@keyframes bubbleAnimation {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
