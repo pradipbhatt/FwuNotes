@@ -27,17 +27,10 @@ function BooksUploaded() {
     fetch('https://fwu-soe.vercel.app/book/getBook')
       .then(response => response.json())
       .then(data => {
-        // Filter books where faculty is "Computer"
-        const filteredData = data.filter(book => book.faculty === "Computer");
-        const sortedBooks = filteredData.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
+        const sortedBooks = data.sort((a, b) => parseInt(a.semester) - parseInt(b.semester));
         setBooks(sortedBooks);
-        setFilteredBooks(sortedBooks);
-        setLoading(false);
       })
-      .catch(error => {
-        console.error('Error:', error);
-        setLoading(false);
-      });
+      .catch(error => console.error('Error:', error));
   };
 
   useEffect(() => {
