@@ -376,24 +376,37 @@ function Navbar() {
                 </ul>
               </div>
               <label className="relative flex items-center cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={theme === "dark"}
-                  onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-                />
-                <div className="relative w-14 h-7 lg:w-16 lg:h-8 bg-gray-300 dark:bg-gray-700 rounded-full flex items-center p-1 transition-colors duration-300">
-                  <div
-                    className={`absolute w-7 h-7 lg:w-8 lg:h-8 flex items-center justify-center transition-transform duration-300 ${theme === "dark" ? 'left-1' : 'right-1'}`}
-                  >
-                    <HiSun className={`text-gray-100 text-xl lg:text-2xl ${theme === "dark" ? 'block' : 'hidden'}`} />
-                    <HiMoon className={`text-gray-900 text-xl lg:text-2xl ${theme === "dark" ? 'hidden' : 'block'}`} />
-                  </div>
-                  <div
-                    className={`absolute w-6 h-6 lg:w-7 lg:h-7 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${theme === "dark" ? 'translate-x-7' : 'translate-x-0'}`}
-                  ></div>
-                </div>
-              </label>
+  <input
+    type="checkbox"
+    className="hidden"
+    checked={theme === "dark"}
+    onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
+  />
+  <div className="relative w-12 h-6 lg:w-14 lg:h-7 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center p-0.5 transition-colors duration-300">
+    <div
+      className={`absolute flex items-center justify-center transition-transform duration-300 ${
+        theme === "dark" ? 'left-0.5' : 'right-0.5'
+      }`}
+      style={{ width: '1.5rem', height: '1.5rem' }}
+    >
+      <HiSun
+        className={`text-gray-100 text-md lg:text-lg ${theme === "dark" ? 'block' : 'hidden'}`}
+        style={{ marginRight: '0.25rem' }} // Padding between icons
+      />
+      <HiMoon
+        className={`text-gray-900 text-md lg:text-lg ${theme === "dark" ? 'hidden' : 'block'}`}
+        style={{ marginLeft: '0.25rem' }} // Padding between icons
+      />
+    </div>
+
+    <div
+      className={`absolute w-5 h-5 lg:w-6 lg:h-6 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${
+        theme === "dark" ? 'translate-x-6' : 'translate-x-0'
+      }`}
+    ></div>
+  </div>
+</label>
+
               <div className="p-4 mt-auto">
                 {authUser ? (
                   <Logout />

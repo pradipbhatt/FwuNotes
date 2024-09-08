@@ -107,7 +107,7 @@ function Banner() {
 
   return (
     <div
-      ref={bannerRef}
+      // ref={bannerRef}
       className="banner-container max-w-screen-2xl container mx-auto md:px-20 px-4 relative w-full h-screen md:h-3/4 lg:h-screen overflow-hidden bg-gray-100 dark:bg-gray-900  bg-opacity-100 dark:bg-opacity-80"
     >
       {/* Desktop and Tablet view */}
