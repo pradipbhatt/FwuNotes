@@ -456,7 +456,7 @@ const Mock1 = () => {
                                 <span className="mr-2">❌</span> Incorrect.
                               </span>
                               <span className="text-gray-800 dark:text-gray-300 flex items-center">
-                                <span className="mr-2">🔍</span> The correct answer is =
+                              <span className="mr-1 sm:text-[10px]">🔍</span>correct =
                                 {isMath ? (
                                   <MathJax.Context input='tex'>
                                     <MathJax.Node

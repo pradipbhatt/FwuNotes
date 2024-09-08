@@ -195,7 +195,7 @@ function Navbar() {
         {showEntranceTestDropdown && (
           <ul className="absolute left-0 z-50 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100">
             {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
-              <li key={year} className="block px-4 py-2 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-[#6d28d9]">
+              <li key={year} className="block px-2 py-1 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-[#6d28d9]">
                 <Link to={`/mock${year - 2071}`}>{year}</Link>
               </li>
             ))}
