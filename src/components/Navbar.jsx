@@ -453,7 +453,7 @@ function Navbar() {
             onClick={() => setActiveTab("soenotes")}
           >
             <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">BCT Notes</span>
+            <span className="text-xs mt-1">BCT</span>
           </Link>
           <Link
             to="/books-uploaded-civil"
@@ -462,7 +462,7 @@ function Navbar() {
             onClick={() => setActiveTab("soenotes")}
           >
             <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">BCE Notes</span>
+            <span className="text-xs mt-1">BCE</span>
           </Link>
           {/* books-uploaded-civil */}
           <Link
@@ -474,7 +474,7 @@ function Navbar() {
             <FontAwesomeIcon icon={faFileAlt} className="w-5 h-5" />
             <span className="text-xs mt-1">Mock</span>
           </Link>
-          <Link
+          {/* <Link
             to="/quizresult"
             className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
               }`}
@@ -482,7 +482,7 @@ function Navbar() {
           >
             <FontAwesomeIcon icon={faChartBar} className="w-5 h-5" />
             <span className="text-xs mt-1">Results</span>
-          </Link>
+          </Link> */}
           <Link
             to="/AdmissionGuidelines"
             className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "notice" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"

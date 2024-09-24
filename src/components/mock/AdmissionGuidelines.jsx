@@ -14,7 +14,7 @@ const AdmissionGuidelines = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-center text-4xl font-extrabold mb-8 mt-20 text-gray-800 dark:text-gray-100">
+          <h1 className="text-center text-xl font-extrabold mb-8 mt-20 text-gray-800 dark:text-gray-100">
             Far Western University School of Engineering
           </h1>
           <p className="text-center text-xl font-medium mb-6 text-gray-600 dark:text-gray-300">

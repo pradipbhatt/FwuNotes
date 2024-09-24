@@ -194,8 +194,8 @@ function BooksUploadedCivil() {
           </>
         )}
 
-        <Chat />
-        <Footer />
+        {/* <Chat /> */}
+    
         {showScroll && (
           <button
             onClick={scrollToTop}
@@ -207,25 +207,22 @@ function BooksUploadedCivil() {
       </div>
 
       {/* Pagination Controls */}
-      <div className="flex justify-between items-center mt-8 fixed bottom-40 left-0 right-0 px-2">
-        {/* Previous Button */}
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 0}
-          className={`flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg ${currentPage === 0 ? 'cursor-not-allowed' : ''}`}
-        >
-          <span className="text-xl">&lt;</span>
-        </button>
+      <div className="flex justify-center space-x-2 sm:space-x-1 flex-wrap">
+                    {Array.from({ length: totalSemesters }).map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => handlePageChange(index)}
+                        className={`border-2 py-1 px-4 sm:py-2 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-md text-sm sm:text-base ${currentPage === index
+                            ? 'bg-blue-600 text-white border-blue-600'
+                            : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white'
+                          }`}
+                      >
+                        {index}
+                      </button>
+                    ))}
+                  </div>
 
-        {/* Next Button */}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage >= totalSemesters - 1}
-          className={`flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white rounded-full transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg ${currentPage >= totalSemesters - 1 ? 'cursor-not-allowed' : ''}`}
-        >
-          <span className="text-xl">&gt;</span>
-        </button>
-      </div>
+                  <Footer />
     </>
   );
 }
