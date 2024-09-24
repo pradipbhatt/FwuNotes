@@ -1,27 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../Navbar';
 import Footer from '../home/Footer';
 import { motion } from 'framer-motion';
 
 const AdmissionGuidelines = () => {
+  const [activeCard, setActiveCard] = useState(null);
+
+  const handleCardClick = (cardId) => {
+    setActiveCard(cardId === activeCard ? null : cardId);
+  };
+
   return (
     <>
       <Navbar />
-      <div className="w-full bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-500">
+      <div className="w-full bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-500 pt-10">
         <motion.section
-          className="container mx-auto p-6 max-w-7xl bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-500"
+          className="container mx-auto p-2 max-w-7xl bg-white text-black dark:bg-gray-900 dark:text-white transition-colors duration-500"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <h1 className="text-center text-xl font-extrabold mb-8 mt-20 text-gray-800 dark:text-gray-100">
-            Far Western University School of Engineering
+          <h1 className="text-center text-2xl font-extrabold mb-8 mt-10 text-gray-800 dark:text-gray-100">
+            Notices and Announcements
           </h1>
-          <p className="text-center text-xl font-medium mb-6 text-gray-600 dark:text-gray-300">
-            Admission Notice (2024/25)
-          </p>
 
-          <motion.section
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Card 1 - FWU Engineering Admission Notice */}
+            <motion.div
+              className="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg cursor-pointer"
+              onClick={() => handleCardClick(1)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">FWU Engineering Admission Notice</h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                Admission notice for B.E. (Civil, Computer) and B.Arch programs for 2024/25.
+              </p>
+            </motion.div>
+
+            {/* Card 2 - ICEC Call for Articles */}
+            <motion.div
+              className="p-6 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg cursor-pointer"
+              onClick={() => handleCardClick(2)}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <h2 className="text-xl font-bold text-gray-800 dark:text-gray-100">ICEC Call for Articles</h2>
+              <p className="text-gray-600 dark:text-gray-300">
+                Call for articles for the 2024 IT Express by the Innovative Engineering Club (ICEC).
+              </p>
+            </motion.div>
+          </div>
+
+          {/* Content for FWU Engineering Admission Notice */}
+          {activeCard === 1 && (
+            <motion.section
+              className="mt-12 px-6 py-8 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
+                Far Western University School of Engineering - Admission Notice (2024/25)
+              </h3>
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                Far Western University, Faculty of Engineering, announces the admission for the academic year 2024/25 in the following undergraduate programs:
+              </p>
+              <ul className="list-disc pl-6 mb-6 text-gray-700 dark:text-gray-300">
+                <li><span className="font-semibold">B.E. Computer Program:</span> 48 seats</li>
+                <li><span className="font-semibold">B.E. Civil Program:</span> 48 seats</li>
+                <li><span className="font-semibold">B.Architecture Program:</span> 24 seats</li>
+              </ul>
+              {/* Add more details here as per the original content */}
+              <motion.section
             className="mb-12 px-6 py-8 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -156,6 +207,30 @@ const AdmissionGuidelines = () => {
               In case of any changes or updates in the admission process, the updated information will be published on the university website.
             </p>
           </motion.section>
+            </motion.section>
+            
+          )}
+
+          {/* Content for ICEC Call for Articles */}
+          {activeCard === 2 && (
+            <motion.section
+              className="mt-12 px-6 py-8 bg-gray-100 dark:bg-gray-800 rounded-lg shadow-lg"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <h3 className="text-xl font-bold mb-4 text-gray-700 dark:text-gray-300">
+                ICEC - Call for Articles (2024 IT Express)
+              </h3>
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                The Innovative Engineering Club (ICEC) invites students to submit articles for the 2024 edition of IT Express. Topics related to emerging IT trends, innovative technologies, and computer science research are encouraged.
+              </p>
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                Submission Deadline: <span className="font-semibold text-red-500">October 30, 2024</span>
+              </p>
+              {/* Add more details about the article call */}
+            </motion.section>
+          )}
         </motion.section>
       </div>
       <Footer />
