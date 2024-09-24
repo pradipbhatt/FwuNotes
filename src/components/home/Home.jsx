@@ -20,7 +20,7 @@ function Home() {
       {/* <Freebook /> */}
       <Chat />
       <Footer />
-      <PopupNotice />
+      {/* <PopupNotice /> */}
       {/* <DownloadButton/> */}
     </>
   );

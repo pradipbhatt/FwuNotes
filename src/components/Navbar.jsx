@@ -453,7 +453,7 @@ function Navbar() {
             onClick={() => setActiveTab("soenotes")}
           >
             <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">Notes</span>
+            <span className="text-xs mt-1">BCT Notes</span>
           </Link>
           <Link
             to="/books-uploaded-civil"
@@ -462,7 +462,7 @@ function Navbar() {
             onClick={() => setActiveTab("soenotes")}
           >
             <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">Civil Notes</span>
+            <span className="text-xs mt-1">BCE Notes</span>
           </Link>
           {/* books-uploaded-civil */}
           <Link
