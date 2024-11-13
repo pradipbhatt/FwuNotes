@@ -164,78 +164,78 @@ function BooksUploaded() {
             </div>
           ) : (
             <>
-              {semesters.length > 0 && (
-                <motion.div
-                  className="mb-8"
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-                >
-                  <h2 className="text-4xl font-bold mb-6 text-blue-800">
-                    Semester {currentPage} Notes
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                    {groupedBooks[currentPage]?.map((book, idx) => (
-                      <motion.div
-                        key={idx}
-                        className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-2 hover:ring-blue-300 hover:ring-opacity-50 px-6 relative"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
-                      >
-                        <div className="relative overflow-hidden rounded-t-lg">
-                          <motion.img
-                            src={book.image}
-                            alt={book.bookTitle}
-                            className="w-full h-48 object-cover mb-4 transform transition-transform duration-500 hover:scale-110"
-                            whileHover={{ scale: 1.1 }}
-                          />
-                        </div>
-                        <div className="p-4">
-                          <h3 className="text-sm font-semibold mb-2 text-blue-700">
-                            {book.bookTitle}
-                          </h3>
-                          <p className="text-sm text-gray-800 mb-2">By: {book.createdBy}</p>
-                          <p className="text-sm text-gray-800 mb-2">Faculty: {book.faculty}</p>
-                          <p className="text-sm text-gray-800 mb-4">Semester: {book.semester}</p>
-                          <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
-                            <motion.button
-                              onClick={() => handleShowPDF(book.pdfLink)}
-                              className="border-2 border-blue-600 text-blue-600 bg-transparent py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-600 hover:text-white"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              View PDF
-                            </motion.button>
-                            <motion.button
-                              onClick={() => handleShare(book)}
-                              className="border-2 border-blue-500 text-blue-500 bg-transparent py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-500 hover:text-white"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              Share
-                            </motion.button>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+            {semesters.length > 0 && (
+  <motion.div
+    className="mb-8"
+    initial={{ opacity: 0, x: -50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+  >
+    <h2 className="text-4xl font-bold mb-6 text-blue-800">
+      Semester {currentPage} Notes
+    </h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+      {groupedBooks[currentPage]?.map((book, idx) => (
+        <motion.div
+          key={idx}
+          className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-2 hover:ring-blue-300 hover:ring-opacity-50 px-6 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: idx * 0.1 }}
+        >
+          <div className="relative overflow-hidden rounded-t-lg">
+            <motion.img
+              src={book.image}
+              alt={book.bookTitle}
+              className="w-full h-48 object-cover mb-4 transform transition-transform duration-500 hover:scale-110"
+              whileHover={{ scale: 1.1 }}
+            />
+          </div>
+          <div className="p-4">
+            <h3 className="text-sm font-semibold mb-2 text-blue-700">
+              {book.bookTitle}
+            </h3>
+            <p className="text-sm text-gray-800 mb-2">By: {book.createdBy}</p>
+            <p className="text-sm text-gray-800 mb-2">Faculty: {book.faculty}</p>
+            <p className="text-sm text-gray-800 mb-4">Semester: {book.semester}</p>
+            <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0">
+              <motion.button
+                onClick={() => handleShowPDF(book.pdfLink)}
+                className="border border-blue-600 text-blue-600 bg-transparent py-1 px-3 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-sm hover:bg-blue-600 hover:text-white text-xs sm:text-sm"
+                whileHover={{ scale: 1.05 }}
+              >
+                View PDF
+              </motion.button>
+              <motion.button
+                onClick={() => handleShare(book)}
+                className="border border-blue-500 text-blue-500 bg-transparent py-1 px-3 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-sm hover:bg-blue-500 hover:text-white text-xs sm:text-sm"
+                whileHover={{ scale: 1.05 }}
+              >
+                Share
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
 
-                  <div className="flex justify-center mt-8 space-x-2 sm:space-x-4 flex-wrap">
-                    {Array.from({ length: totalSemesters }).map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handlePageChange(index)}
-                        className={`border-2 py-1 px-4 sm:py-2 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-md text-sm sm:text-base ${currentPage === index
-                            ? 'bg-blue-600 text-white border-blue-600'
-                            : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white'
-                          }`}
-                      >
-                        {index}
-                      </button>
-                    ))}
-                  </div>
+    <div className="flex justify-center mt-8 space-x-2 sm:space-x-4 flex-wrap">
+      {Array.from({ length: totalSemesters }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => handlePageChange(index)}
+          className={`border py-1 px-3 sm:py-1.5 sm:px-5 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition-transform duration-300 ease-in-out shadow-sm text-xs sm:text-sm ${currentPage === index
+            ? 'bg-blue-600 text-white border-blue-600'
+            : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white'
+          }`}
+        >
+          {index}
+        </button>
+      ))}
+    </div>
+  </motion.div>
+)}
 
-                </motion.div>
-              )}
               <Chat />
             </>
           )}
