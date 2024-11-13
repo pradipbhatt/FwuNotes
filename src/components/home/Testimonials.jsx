@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Swiper from 'swiper';
 import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
 import jelina from "../../../public/u.jpg"
+import pradip from "../../../public/pradip.jpg"
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -14,7 +15,7 @@ const Testimonials = () => {
       name: 'Pradip Bhatt',
       title: 'CSE Student & Backend Developer || President:i-CEC',
       company: 'Far Western University',
-      img: 'https://pradipbhatt.com.np/medias/parry.jpg',
+      img: pradip,
       quoteTitle: 'Software Developer ',
       quote: 'SOE Notes is a testament to our commitment to excellence and innovation in education.',
       rating: 5
