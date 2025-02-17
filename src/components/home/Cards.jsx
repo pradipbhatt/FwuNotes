@@ -1,47 +1,42 @@
 import React from "react";
+import { FaBook, FaTag, FaExternalLinkAlt } from "react-icons/fa";
 
 function Cards({ item }) {
   const handleReadNowClick = () => {
-    window.location.href = item.pdfUrl;
+    window.open(item.pdfUrl, "_blank");
   };
 
   return (
     <div className="mt-4 my-3 p-3 w-full">
-      <div className="card w-full h-full bg-base-100 shadow-xl hover:scale-105 duration-200 dark:bg-slate-900 dark:text-white dark:border">
-        <figure className="h-48 overflow-hidden">
-          <img
-            src={item.image}
-            alt={item.name}
-            className="h-full object-cover mt-5"
-          />
+      <div className="card w-full h-full bg-white dark:bg-slate-900 shadow-lg border rounded-xl hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+        
+        {/* Image Section */}
+        <figure className="h-48 overflow-hidden flex items-center justify-center bg-gray-100 dark:bg-gray-800 rounded-t-xl">
+          <img src={item.image} alt={item.name} className="h-full object-contain" />
         </figure>
-        <div className="card-body">
-          <h2 className="card-title">
-            {item.name}
-            <div className="badge bg-green-500 h-10 text-black w-full ">{item.Category}</div>
+
+        {/* Card Body */}
+        <div className="card-body p-5">
+          {/* Title & Category */}
+          <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
+            <FaBook className="text-orange-500" /> {item.name}
           </h2>
-          <p>{item.title}</p>
-          <div className="card-actions justify-between">
-            <div className="badge badge-outline">${item.Price}</div>
-            <div onClick={handleReadNowClick}>
-              <button className="bg-orange-500 text-white px-2 py-1 rounded-full border-2 border-orange-500 flex items-center gap-2">
-                <span className="text-xs">Read Now</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-4 w-4"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-              </button>
+          <div className="flex items-center gap-2 text-sm text-green-500 font-semibold">
+            <FaTag className="text-green-500" /> {item.Category}
+          </div>
+
+          {/* Price & Read Now */}
+          <div className="card-actions flex justify-between items-center mt-4">
+            <div className="text-lg font-bold text-orange-600 flex items-center gap-2">
+              <FaTag className="text-orange-500" /> ${item.Price}
             </div>
+            <button
+              onClick={handleReadNowClick}
+              className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-300"
+            >
+              <span className="text-sm font-semibold">Read</span>
+              <FaExternalLinkAlt className="text-white" />
+            </button>
           </div>
         </div>
       </div>

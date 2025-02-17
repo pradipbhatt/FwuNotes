@@ -6,6 +6,8 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import logo from "../../public/logo-icec.png"
 import Chat from '../components/AI/Chat';
+import Testimonials from '../components/home/Testimonials';
+import Banner from '../components/home/Banner';
 
 const teamMembers = [
   {
@@ -201,6 +203,7 @@ function About() {
     color: 'white', // Ensuring text is readable on dark backgrounds
   }}
 >
+        {/* <Banner/> */}
         {/* Formal Header */}
         <div className="text-center mb-12">
           <img src={logo} alt="University Logo" className="mx-auto w-40 h-auto mb-4" />
@@ -256,7 +259,7 @@ function About() {
         </div>
 
         {/* Team Members Section */}
-        <section className="bg-gray-100 py-20 mt-16 dark:bg-gray-800">
+        {/* <section className="bg-gray-100 py-20 mt-16 dark:bg-gray-800">
           <div className="w-full flex flex-col items-center">
             <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
               Executive Committee - 2080/81
@@ -297,8 +300,10 @@ function About() {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
+        <Testimonials/>
       </div>
+      
       <Chat/>
       <Footer />
     </>

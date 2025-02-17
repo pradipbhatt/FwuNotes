@@ -9,14 +9,17 @@ import Gallary from "../Gallery";
 import Chat from "../AI/Chat";
 import PopupNotice from "./PopupNotice";
 import DownloadButton from "./DownloadButton"; // Import your download button
+import BooksUploaded from "../../pages/BooksUploaded";
 function Home() {
   return (
     <>
       <Navbar />
-      <Banner />
+      {/* <Banner /> */}
       {/* <Gallary/> */}
       {/* <Dean/> */}
+      <BooksUploaded/>
       <Testimonials />
+      
       {/* <Freebook /> */}
       <Chat />
       <Footer />

@@ -39,7 +39,7 @@ const SearchComponent = ({ books, setFilteredBooks, setShowSuggestions, setSelec
   };
 
   return (
-    <div className="relative z-10 mt-16 sm:mt-20 md:mt-28 lg:mt-32 max-w-2xl mx-auto">
+    <div className="relative top-10 left-0 right-0 z-10 mt-16 sm:mt-20 md:mt-28 lg:my-4 max-w-2xl mx-auto">
       <input
         type="text"
         value={searchQuery}

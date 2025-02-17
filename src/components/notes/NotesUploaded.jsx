@@ -34,7 +34,11 @@ const NotesUploaded = () => {
       <div className="max-w-full mx-auto p-4 mt-20">
         {loading ? (
           <div className="flex justify-center items-center h-screen">
-            <div className="loader">Loading...</div>
+            <div className="loader">
+              {/* Custom Preloader Spinner */}
+              <div className="w-16 h-16 border-4 border-t-4 border-gray-400 rounded-full animate-spin border-t-sky-blue"></div>
+              <p className="mt-4 text-xl text-gray-700">Loading...</p>
+            </div>
           </div>
         ) : (
           <UploadedList allImage={allImage} showPdf={showPdf} getPdf={getPdf} hideDeleteButton={true} />
