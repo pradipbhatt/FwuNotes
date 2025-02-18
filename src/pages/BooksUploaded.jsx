@@ -164,77 +164,82 @@ function BooksUploaded() {
             </div>
           ) : (
             <>
-              {semesters.length > 0 && (
-                <motion.div
-                  className="mb-8"
-                  initial={{ opacity: 0, x: -50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
-                >
-                  <h2 className="text-xl font-bold mb-4 text-blue-900 mt-101">
-                    Semester {currentPage} Notes
-                  </h2>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
-                    {groupedBooks[currentPage]?.map((book, idx) => (
-                      <motion.div
-                        key={idx}
-                        className="bg-white shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 px-6 py-4 relative"
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: idx * 0.1 }}
-                      >
-                        <div className="relative overflow-hidden rounded-t-lg">
-                          <motion.img
-                            src={book.image}
-                            alt={book.bookTitle}
-                            className="w-full h-40 object-cover mb-4 transform transition-transform duration-500 hover:scale-110"
-                            whileHover={{ scale: 1.1 }}
-                          />
-                        </div>
-                        <div className="p-0">
-                          <h3 className="text-lg font-semibold mb-2 text-blue-800">
-                            {book.bookTitle}
-                          </h3>
-                          <p className="text-xs text-gray-700 mb-1">By: {book.createdBy}</p>
-                          <p className="text-xs text-gray-700 mb-1">Faculty: {book.faculty}</p>
-                          <p className="text-xs text-gray-700 mb-3">Semester: {book.semester}</p>
-                          <div className="flex flex-col xs:flex-row xs:space-x-4 space-y-3 xs:space-y-0">
-                            <motion.button
-                              onClick={() => handleShowPDF(book.pdfLink)}
-                              className="border border-blue-700 text-blue-700 bg-transparent py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-700 hover:text-white text-sm"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              Open PDF
-                            </motion.button>
-                            <motion.button
-                              onClick={() => handleShare(book)}
-                              className="border border-blue-600 text-blue-600 bg-transparent py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-600 hover:text-white text-sm"
-                              whileHover={{ scale: 1.05 }}
-                            >
-                              Share
-                            </motion.button>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ))}
-                  </div>
+            {semesters.length > 0 && (
+  <motion.div
+    className="mb-8"
+    initial={{ opacity: 0, x: -50 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.6, type: 'spring', stiffness: 100 }}
+  >
+    <h2 className="text-xl font-bold mb-4 text-blue-900 dark:text-white mt-101">
+      Semester {currentPage} Notes
+    </h2>
 
-                  <div className="flex justify-center mt-8 space-x-4 sm:space-x-6 flex-wrap">
-                  {Array.from({ length: totalSemesters }).map((_, index) => (
-    <button
-      key={index}
-      onClick={() => handlePageChange(index)}
-      className={`border py-2 px-4 sm:py-3 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md text-sm ${currentPage === index
-        ? 'bg-blue-700 text-white border-blue-700'
-        : 'bg-transparent text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white'
-        }`}
-    >
-      {index === 0 ? "Pre-engineering mock" : `Sem ${index}`}
-    </button>
-  ))}
-                  </div>
-                </motion.div>
-              )}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8">
+      {groupedBooks[currentPage]?.map((book, idx) => (
+        <motion.div
+          key={idx}
+          className="bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:ring-2 hover:ring-blue-400 hover:ring-opacity-50 px-6 py-4 relative"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: idx * 0.1 }}
+        >
+          <div className="relative overflow-hidden rounded-t-lg">
+            <motion.img
+              src={book.image}
+              alt={book.bookTitle}
+              className="w-full h-40 object-cover mb-4 transform transition-transform duration-500 hover:scale-110"
+              whileHover={{ scale: 1.1 }}
+            />
+          </div>
+          <div className="p-0">
+            <h3 className="text-lg font-semibold mb-2 text-blue-800 dark:text-white">
+              {book.bookTitle}
+            </h3>
+            <p className="text-xs text-gray-700 dark:text-gray-300 mb-1">By: {book.createdBy}</p>
+            <p className="text-xs text-gray-700 dark:text-gray-300 mb-1">Faculty: {book.faculty}</p>
+            <p className="text-xs text-gray-700 dark:text-gray-300 mb-3">Semester: {book.semester}</p>
+
+            <div className="flex flex-col xs:flex-row xs:space-x-4 space-y-3 xs:space-y-0">
+              <motion.button
+                onClick={() => handleShowPDF(book.pdfLink)}
+                className="border border-blue-700 text-blue-100 bg-blue-500 py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-700 hover:text-white text-sm dark:border-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700"
+                whileHover={{ scale: 1.05 }}
+              >
+                Open PDF
+              </motion.button>
+
+              <motion.button
+                onClick={() => handleShare(book)}
+                className="border border-blue-600 text-blue-600 bg-transparent py-2 px-4 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md hover:bg-blue-600 hover:text-white text-sm dark:border-gray-500 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
+                whileHover={{ scale: 1.05 }}
+              >
+                Share
+              </motion.button>
+            </div>
+          </div>
+        </motion.div>
+      ))}
+    </div>
+
+    <div className="flex justify-center mt-8 space-x-4 sm:space-x-6 flex-wrap">
+      {Array.from({ length: totalSemesters }).map((_, index) => (
+        <button
+          key={index}
+          onClick={() => handlePageChange(index)}
+          className={`border py-2 px-4 sm:py-3 sm:px-6 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-400 transition-transform duration-300 ease-in-out shadow-md text-sm 
+            ${currentPage === index
+              ? 'bg-blue-700 text-white border-blue-700 dark:bg-gray-800 dark:text-white dark:border-gray-600'
+              : 'bg-transparent text-blue-700 border-blue-700 hover:bg-blue-700 hover:text-white dark:text-gray-300 dark:border-gray-500 dark:hover:bg-gray-700 dark:hover:text-white'
+            }`}
+        >
+          {index === 0 ? "Pre-engineering mock" : `Sem ${index}`}
+        </button>
+      ))}
+    </div>
+  </motion.div>
+)}
+
 
               <Chat />
             </>
