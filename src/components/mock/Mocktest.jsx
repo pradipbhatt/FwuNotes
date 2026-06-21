@@ -8,7 +8,7 @@ import Footer from '../home/Footer';
 import Chat from '../AI/Chat';
 
 const years = [
-  { year: 2081, slogan: "The future starts here! 🌟" },
+  { year: 2081, slogan: "The future starts here" },
 ];
 
 const Mock = () => {
@@ -106,16 +106,8 @@ const Mock = () => {
 
   return (
     <>
-    <div className="relative bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div
-    className="relative py-20" // Added margin-top class for 50px top margin
-    style={{
-      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
-      backgroundSize: 'cover',
-      backgroundAttachment: 'fixed',
-      backgroundBlendMode: 'overlay', // Ensure proper blending
-    }}
-  >
+    <div className="bg-gray-50 dark:bg-slate-900 text-gray-900 dark:text-gray-100">
+    <div className="py-10">
 
 
       <div className="relative z-10"> 
@@ -132,7 +124,7 @@ const Mock = () => {
               >
                
                   <div className="relative z-10 p-6 flex flex-col items-center">
-                    <h2 className="text-xl font-bold mb-2">📝 Mock test 2081</h2>
+                    <h2 className="text-xl font-bold mb-2">Mock test 2081</h2>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">
                       <span className="font-medium"></span> Test the mock 2081 set A
                     </p>

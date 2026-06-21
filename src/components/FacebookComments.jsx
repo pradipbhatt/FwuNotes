@@ -1,5 +1,6 @@
 // src/components/FacebookComments.jsx
 import React, { useEffect } from 'react';
+import { HiChatAlt2 } from 'react-icons/hi';
 
 const FacebookComments = ({ pageUrl }) => {
   useEffect(() => {
@@ -19,8 +20,8 @@ const FacebookComments = ({ pageUrl }) => {
 
   return (
     <div className="w-full my-8 px-4 md:px-8 lg:px-16">
-      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4">
-        💬 Discussion Forum
+      <h2 className="text-2xl font-semibold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+        <HiChatAlt2 className="w-6 h-6 text-blue-500 dark:text-blue-400" /> Discussion Forum
       </h2>
       <div 
         className="fb-comments bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700"

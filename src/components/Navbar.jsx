@@ -1,499 +1,358 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Login from "../pages/Login";
 import Logout from "./home/Logout";
-import { useAuth } from "../../src/context/AuthProvider";
+import { useAuth } from "../context/AuthProvider";
 import {
-  HiMenu, HiX, HiSun, HiMoon, HiSearch,
-  HiHome, HiBookOpen, HiClipboardList, HiUserCircle, HiChevronDown
+  HiMenu, HiX, HiSun, HiMoon, HiHome, HiBookOpen,
+  HiClipboardList, HiChartBar, HiInformationCircle, HiUser, HiChevronDown,
 } from "react-icons/hi";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faBook, faClipboard, faChartBar, faFileAlt, faUserCircle, faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faBook, faFileAlt, faBell, faChartBar } from "@fortawesome/free-solid-svg-icons";
 
+const SEMS = Array.from({ length: 9 }, (_, i) => i);
 
 function Navbar() {
   const [authUser] = useAuth();
-  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
-  const element = document.documentElement;
+  const location = useLocation();
   const navigate = useNavigate();
 
-  const [showMenuLeft, setShowMenuLeft] = useState(false);
-  const [showMenuRight, setShowMenuRight] = useState(false);
-  const [showSemesterDropdown, setShowSemesterDropdown] = useState(false);
-  const [showCivilNotesDropdown, setShowCivilNotesDropdown] = useState(false);
-  const [showComputerNotesDropdown, setShowComputerNotesDropdown] = useState(false);
-  const [showEntranceTestDropdown, setShowEntranceTestDropdown] = useState(false);
-  const isLargeScreen = window.innerWidth >= 1024;
-  const isSmallScreen = window.innerWidth < 1024;
-  const profileRef = useRef(null);
-  const [sticky, setSticky] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("home");
-  // const [activeTab, setActiveTab] = useState("home");
-  const [isVisible, setIsVisible] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [openDrop, setOpenDrop] = useState(null); // 'civil' | 'bct' | 'entrance' | null
+  const [isLg, setIsLg] = useState(window.innerWidth >= 1024);
+
+  const dropRef = useRef(null);
+
+  // Active tab for mobile bottom nav
+  const path = location.pathname;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50); // Adjust threshold as needed
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
-  const [userData, setUserData] = useState({
-    userImage: 'https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png'
-  });
-
-  useEffect(() => {
-    // Fetch user data from local storage
-    const storedUsers = localStorage.getItem('Users');
-    if (storedUsers) {
-      const users = JSON.parse(storedUsers);
-      if (users && users.userImage) {
-        setUserData({ userImage: users.userImage });
-      }
-    }
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    const onResize = () => setIsLg(window.innerWidth >= 1024);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => { window.removeEventListener("scroll", onScroll); window.removeEventListener("resize", onResize); };
   }, []);
 
   useEffect(() => {
+    const html = document.documentElement;
     if (theme === "dark") {
-      element.classList.add("dark");
-      localStorage.setItem("theme", "dark");
+      html.classList.add("dark");
       document.body.classList.add("dark");
+      html.setAttribute("data-theme", "dark"); // sync DaisyUI theme
     } else {
-      element.classList.remove("dark");
-      localStorage.setItem("theme", "light");
+      html.classList.remove("dark");
       document.body.classList.remove("dark");
+      html.setAttribute("data-theme", "light"); // sync DaisyUI theme
     }
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
-
+  // Close dropdown on outside click
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        profileRef.current &&
-        !profileRef.current.contains(event.target) &&
-        event.target.closest(".navbar-end") === null
-      ) {
-        setShowMenuRight(false);
-        setShowSemesterDropdown(false);
-      }
+    const handler = (e) => {
+      if (dropRef.current && !dropRef.current.contains(e.target)) setOpenDrop(null);
     };
-
-    window.addEventListener("click", handleClickOutside);
-    return () => {
-      window.removeEventListener("click", handleClickOutside);
-    };
+    document.addEventListener("mousedown", handler);
+    return () => document.removeEventListener("mousedown", handler);
   }, []);
 
-  const fetchSearchResults = () => {
-    navigate("/mock");
-  };
+  // Close mobile menu on route change
+  useEffect(() => { setMobileOpen(false); setOpenDrop(null); }, [location.pathname]);
 
-  const handleSearchSubmit = (event) => {
-    event.preventDefault();
-    fetchSearchResults();
-  };
+  const DEFAULT_AVATAR = "https://www.pngall.com/wp-content/uploads/5/Profile-Avatar-PNG-Picture.png";
+  const userImage = authUser?.userImage || DEFAULT_AVATAR;
+  const userFullname = authUser?.fullname || "";
 
-  const handleSemesterClick = (semester) => {
-    navigate(`/showbook?semester=${semester}`);
-    setShowSemesterDropdown(false);
-  };
+  const isActive = (href) => path === href || path.startsWith(href + "?");
 
-  const handleCivilBook = (semester) => {
-    navigate(`/books-uploaded-civil?semester=${semester}`);
-    setShowSemesterDropdown(false);
-  };
+  const linkCls = (href) =>
+    `relative text-sm font-medium transition-colors duration-200 py-1 ${
+      isActive(href)
+        ? "text-blue-600 dark:text-blue-400"
+        : "text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+    }`;
 
+  const DropdownMenu = ({ label, href, items, id }) => (
+    <li
+      className="relative"
+      onMouseEnter={() => setOpenDrop(id)}
+      onMouseLeave={() => setOpenDrop(null)}
+    >
+      <Link
+        to={href}
+        className={`${linkCls(href)} flex items-center gap-1`}
+      >
+        {label}
+        <HiChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${openDrop === id ? "rotate-180" : ""}`} />
+      </Link>
+      {openDrop === id && (
+        <ul className="absolute left-0 top-full pt-2 w-44 z-50">
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-gray-100 dark:border-gray-700 py-1 overflow-hidden">
+            {items.map(({ label: l, to }) => (
+              <li key={to}>
+                <Link
+                  to={to}
+                  onClick={() => setOpenDrop(null)}
+                  className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                >
+                  {l}
+                </Link>
+              </li>
+            ))}
+          </div>
+        </ul>
+      )}
+    </li>
+  );
 
-
-  const navItems = (
+  const navLinks = (
     <>
       <li>
-        <Link
-          to="/"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#4338ca] dark:hover:text-[#6d28d9]"
-        >
-          Home
-        </Link>
+        <Link to="/" className={linkCls("/")}>Home</Link>
       </li>
-
-      
-      <li
-        className="relative"
-        onMouseEnter={() => setShowCivilNotesDropdown(true)}
-        onMouseLeave={() => setShowCivilNotesDropdown(false)}
-      >
-        <Link
-          to="/books-uploaded-civil"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          Civil Notes
-        </Link>
-        {showCivilNotesDropdown && (
-          <ul
-            className="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md dark:hover:text-[#6d28d9] z-50"
-            style={{ top: '100%' }} // Ensure dropdown is directly below
-          >
-            {Array.from({ length: 9 }, (_, i) => i).map((semester) => (
-              <li
-                key={semester}
-                className="block px-4 py-2 text-sm text-gray-900 dark:text-[#ede9fe] hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-[#6d28d9] dark:hover:text-[#6d28d9] transition-colors duration-200"
-                style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
-                onClick={() => handleCivilBook(semester)}
-              >
-                Semester {semester}
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-
-      <li
-        className="relative"
-        onMouseEnter={() => setShowComputerNotesDropdown(true)}
-        onMouseLeave={() => setShowComputerNotesDropdown(false)}
-      >
-        <Link
-          to="/showbook"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          Computer Notes
-        </Link>
-        {showComputerNotesDropdown && (
-          <ul
-            className="absolute left-0 mt-1 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-10 dark:bg-slate-700 text-gray-900 dark:text-gray-100 backdrop-blur-md dark:hover:text-[#6d28d9] z-50"
-            style={{ top: '100%' }} // Ensure dropdown is directly below
-          >
-            {Array.from({ length: 9 }, (_, i) => i).map((semester) => (
-              <li
-                key={semester}
-                className="block px-4 py-2 text-sm text-gray-900 dark:text-[#ede9fe] hover:bg-gray-100 dark:hover:bg-slate-600 hover:text-[#6d28d9] dark:hover:text-[#6d28d9] transition-colors duration-200"
-                style={{ textShadow: "0 0 2px rgba(255, 165, 0, 0.6)" }}
-                onClick={() => handleSemesterClick(semester)}
-              >
-                Semester {semester}
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-
-      <li
-        className="relative"
-        onMouseEnter={() => setShowEntranceTestDropdown(true)}
-        onMouseLeave={() => setShowEntranceTestDropdown(false)}
-      >
-        <Link
-          to="/mock"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          Entrance Test
-        </Link>
-        {showEntranceTestDropdown && (
-          <ul className="absolute left-0 z-50 mt-10 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 dark:bg-slate-700 text-gray-900 dark:text-gray-100">
-            {Array.from({ length: 10 }, (_, i) => 2071 + i).map((year) => (
-              <li key={year} className="block px-2 py-1 text-sm text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-slate-600 dark:hover:text-[#6d28d9]">
-                <Link to={`/mock${year - 2071}`}>{year}</Link>
-              </li>
-            ))}
-          </ul>
-        )}
-      </li>
-
+      <DropdownMenu
+        id="civil"
+        label="Civil Notes"
+        href="/books-uploaded-civil"
+        items={SEMS.map(s => ({ label: s === 0 ? "Pre-Entrance" : `Semester ${s}`, to: `/books-uploaded-civil?semester=${s}` }))}
+      />
+      <DropdownMenu
+        id="bct"
+        label="Computer Notes"
+        href="/showbook"
+        items={SEMS.map(s => ({ label: s === 0 ? "Pre-Entrance" : `Semester ${s}`, to: `/showbook?semester=${s}` }))}
+      />
+      <DropdownMenu
+        id="entrance"
+        label="Entrance Test"
+        href="/mock"
+        items={Array.from({ length: 10 }, (_, i) => ({ label: `${2071 + i}`, to: `/Mock${i}` }))}
+      />
       <li>
-        <Link
-          to="/quizresult"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          TestResults
-        </Link>
+        <Link to="/quizresult" className={linkCls("/quizresult")}>Results</Link>
       </li>
-
       <li>
-        <Link
-          to="/about"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          About
-        </Link>
-      </li>
-
-      <li>
-        <Link
-          to="/profile"
-          className="link-underline text-gray-900 dark:text-gray-100 hover:text-[#6d28d9] dark:hover:text-[#6d28d9]"
-        >
-          Profile
-        </Link>
+        <Link to="/About" className={linkCls("/About")}>About</Link>
       </li>
     </>
   );
 
-
-
-  const [scrolling, setScrolling] = useState(false);
-
-  // Effect to handle scroll events
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setScrolling(true);
-      } else {
-        setScrolling(false);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    // Cleanup the event listener on component unmount
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
   return (
     <>
-      <div
-        className={`w-full fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out 
-    ${isSmallScreen
-            ? 'border-transparent shadow-none'
-            : scrolling
-              ? 'bg-slate-200 shadow-md dark:bg-slate-900 dark:shadow-md border-b border-slate-300 dark:border-slate-600'
-              : 'border-b border-slate-100 dark:border-slate-700 shadow-md dark:shadow-lg'}
-    ${isLargeScreen ? 'h-17' : 'h-16'}
-  `}
+      {/* ── Top Navbar ── */}
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          scrolled
+            ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-sm border-b border-gray-200 dark:border-gray-700"
+            : "bg-white dark:bg-slate-900 border-b border-gray-100 dark:border-gray-800"
+        }`}
       >
-        <div className="max-w-screen-2xl container mx-auto md:px-20 px-4">
-          <div className={`navbar fixed top-0 left-0 right-0 z-50 flex justify-between items-center py-2 transition-all duration-300 ${isScrolled ? 'bg-opacity-90 backdrop-blur-md shadow-md' : 'bg-transparent'}`}>
-            <div className="navbar-start flex items-center">
-              <div className="dropdown">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="lg:hidden flex items-center justify-center w-14 h-14 sm:w-12 sm:h-12 transition-transform duration-300 ease-in-out hover:bg-blue-500 dark:hover:bg-blue-700 border-2 border-blue-300 dark:border-blue-600 rounded-full shadow-lg hover:shadow-xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
-                  onClick={() => setShowMenuLeft(!showMenuLeft)}
-                >
-                  {showMenuLeft ? (
-                    <HiX
-                      className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
-                    />
-                  ) : (
-                    <HiMenu
-                      className={`h-8 w-8 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-125`}
-                    />
-                  )}
-                </div>
+        <div className="max-w-screen-xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-4">
 
-                {showMenuLeft && (
-                  <div
-                    className={`fixed top-0 left-0 w-2/3 h-screen bg-opacity-90 bg-white dark:bg-slate-800 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out z-50 ${showMenuLeft ? 'translate-x-0' : '-translate-x-full'} backdrop-blur-md shadow-2xl`}
-                  >
-                    <div className="flex items-center justify-between p-4 border-b dark:border-slate-600 bg-gray-50 dark:bg-slate-700 shadow-md">
-                      <button
-                        className="btn btn-ghost flex items-center justify-center w-16 h-16 lg:w-14 lg:h-14 bg-opacity-90 transition-transform duration-300 ease-in-out hover:bg-blue-600 dark:hover:bg-blue-800 border-2 border-blue-500 dark:border-blue-700 rounded-full shadow-2xl hover:shadow-3xl focus:outline-none focus:ring-4 focus:ring-blue-500 dark:focus:ring-blue-300"
-                        onClick={() => setShowMenuLeft(false)}
-                      >
-                        <HiX
-                          className={`h-12 w-12 lg:h-10 lg:w-10 ${theme === "dark" ? "text-white" : "text-black"} transform transition-transform duration-300 ease-in-out hover:scale-150`}
-                        />
-                      </button>
+          {/* Brand */}
+          <Link to="/" className="flex items-center gap-0.5 shrink-0 select-none">
+            <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 leading-none">SOE</span>
+            <span className="text-2xl font-light text-gray-400 dark:text-gray-500 leading-none">notes</span>
+          </Link>
 
-                      <Link
-                        to="/"
-                        className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 sm:hidden"
-                      >
-                        <span className="relative text-3xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
-                          SOE
-                          <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
-                        </span>
-                        <span className="text-xl font-serif text-gray-900 dark:text-gray-100">
-                          notes
-                        </span>
-                      </Link>
-                    </div>
+          {/* Desktop nav links */}
+          <nav className="hidden lg:flex items-center" ref={dropRef}>
+            <ul className="flex items-center gap-6">
+              {navLinks}
+            </ul>
+          </nav>
 
-                    <ul className="mt-4 space-y-2 p-4 overflow-y-auto max-h-[300vh]">
-                      {navItems}
-                    </ul>
+          {/* Right controls */}
+          <div className="flex items-center gap-2 shrink-0">
+            {/* Dark mode toggle */}
+            <button
+              onClick={() => setTheme(t => t === "dark" ? "light" : "dark")}
+              className="w-9 h-9 rounded-lg flex items-center justify-center text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <HiSun className="w-5 h-5" /> : <HiMoon className="w-5 h-5" />}
+            </button>
 
-                    <div className="p-4 border-t dark:border-slate-600 mt-auto">
-                      {authUser ? (
-                        <div className="flex items-center space-x-4">
-                          <img
-                            className="w-12 h-12 rounded-full border-2 border-gray-600"
-                            src={userData.userImage}
-                            alt="User Avatar"
-                          />
-                          <div className="text-gray-900 dark:text-gray-100">
-                            <div className="font-semibold">{userData.username}</div>
-                            <Link to="/profile" className="text-sm text-blue-500">
-                              View Profile
-                            </Link>
-                          </div>
-                          <div>
-                            <Logout />
-                          </div>
-                        </div>
-                      ) : (
-                        <div>
-                          <a
-                            className="bg-blue-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-blue-700 duration-300 cursor-pointer"
-                            onClick={() => document.getElementById("my_modal_3").showModal()}
-                          >
-                            Login
-                          </a>
-                          <Login />
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+            {/* Auth */}
+            {authUser ? (
+              <div className="flex items-center gap-2">
+                <Link to="/profile" className="hidden sm:flex items-center gap-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 px-2 py-1 transition-colors">
+                  <img
+                    src={userImage}
+                    alt={userFullname}
+                    className="w-7 h-7 rounded-full object-cover ring-2 ring-blue-500/30"
+                    onError={e => { e.currentTarget.src = DEFAULT_AVATAR; }}
+                  />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300 max-w-[100px] truncate hidden md:block">
+                    {userFullname}
+                  </span>
+                </Link>
+                <Logout />
               </div>
-
-              <Link
-                to="/"
-                className="relative flex items-center space-x-2 text-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out transform hover:scale-105 hidden sm:flex"
+            ) : (
+              <button
+                onClick={() => document.getElementById("my_modal_3").showModal()}
+                className="px-4 py-1.5 rounded-lg bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm"
               >
-                <span className="relative text-4xl font-serif text-blue-500 group transition-all duration-300 ease-in-out">
-                  SOE
-                  <span className="absolute inset-0 rounded-md bg-gradient-to-r from-blue-400 to-blue-600 opacity-0 blur-md transition-opacity duration-300 ease-in-out group-hover:opacity-50 group-hover:blur-md"></span>
-                </span>
-                <span className="text-2xl font-serif text-gray-900 dark:text-gray-100">
-                  notes
-                </span>
+                Login
+              </button>
+            )}
+
+            {/* Mobile hamburger */}
+            <button
+              className="lg:hidden w-9 h-9 flex items-center justify-center rounded-lg text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              onClick={() => setMobileOpen(o => !o)}
+              aria-label="Open menu"
+            >
+              {mobileOpen ? <HiX className="w-5 h-5" /> : <HiMenu className="w-5 h-5" />}
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Login modal */}
+      {!authUser && <Login />}
+
+      {/* ── Mobile drawer ── */}
+      {mobileOpen && (
+        <div className="fixed inset-0 z-40 lg:hidden">
+          {/* Backdrop */}
+          <div
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
+            onClick={() => setMobileOpen(false)}
+          />
+          {/* Panel */}
+          <div className="absolute top-0 left-0 h-full w-72 bg-white dark:bg-slate-900 shadow-2xl flex flex-col">
+            {/* Header */}
+            <div className="h-14 px-4 flex items-center justify-between border-b border-gray-100 dark:border-gray-800">
+              <Link to="/" className="flex items-center gap-0.5">
+                <span className="text-xl font-bold text-blue-600">SOE</span>
+                <span className="text-xl font-light text-gray-400">notes</span>
               </Link>
+              <button
+                onClick={() => setMobileOpen(false)}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-800"
+              >
+                <HiX className="w-5 h-5" />
+              </button>
             </div>
 
-            <div className="navbar-end flex items-center space-x-6">
+            {/* Nav links */}
+            <nav className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
+              <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <HiHome className="w-5 h-5 text-gray-400" /> Home
+              </Link>
+              {/* Civil Notes */}
+              <details className="group">
+                <summary className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer list-none transition-colors">
+                  <HiBookOpen className="w-5 h-5 text-gray-400" /> Civil Notes
+                  <HiChevronDown className="w-4 h-4 text-gray-400 ml-auto group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="mt-0.5 ml-8 space-y-0.5">
+                  {SEMS.map(s => (
+                    <Link key={s} to={`/books-uploaded-civil?semester=${s}`}
+                      className="block px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {s === 0 ? "Pre-Entrance" : `Semester ${s}`}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+              {/* Computer Notes */}
+              <details className="group">
+                <summary className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer list-none transition-colors">
+                  <HiBookOpen className="w-5 h-5 text-gray-400" /> Computer Notes
+                  <HiChevronDown className="w-4 h-4 text-gray-400 ml-auto group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="mt-0.5 ml-8 space-y-0.5">
+                  {SEMS.map(s => (
+                    <Link key={s} to={`/showbook?semester=${s}`}
+                      className="block px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {s === 0 ? "Pre-Entrance" : `Semester ${s}`}
+                    </Link>
+                  ))}
+                </div>
+              </details>
+              {/* Entrance Test */}
+              <details className="group">
+                <summary className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer list-none transition-colors">
+                  <HiClipboardList className="w-5 h-5 text-gray-400" /> Entrance Test
+                  <HiChevronDown className="w-4 h-4 text-gray-400 ml-auto group-open:rotate-180 transition-transform" />
+                </summary>
+                <div className="mt-0.5 ml-8 space-y-0.5">
+                  {Array.from({ length: 10 }, (_, i) => (
+                    <Link key={i} to={`/Mock${i}`}
+                      className="block px-3 py-2 rounded-lg text-sm text-gray-600 dark:text-gray-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                      {2071 + i}
+                    </Link>
+                  ))}
+                </div>
+              </details>
 
+              <Link to="/quizresult" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <HiChartBar className="w-5 h-5 text-gray-400" /> Test Results
+              </Link>
+              <Link to="/About" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <HiInformationCircle className="w-5 h-5 text-gray-400" /> About
+              </Link>
+              <Link to="/profile" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                <HiUser className="w-5 h-5 text-gray-400" /> Profile
+              </Link>
+            </nav>
 
-              <div className="hidden lg:flex navbar-center items-center space-x-4">
-                <ul className="menu menu-horizontal px-1 w-full text-gray-900 dark:text-gray-100">
-                  {navItems}
-                </ul>
-              </div>
-              <label className="relative flex items-center cursor-pointer">
-  <input
-    type="checkbox"
-    className="hidden"
-    checked={theme === "dark"}
-    onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-  />
-  <div className="relative w-12 h-6 lg:w-14 lg:h-7 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center p-0.5 transition-colors duration-300">
-    <div
-      className={`absolute flex items-center justify-center transition-transform duration-300 ${
-        theme === "dark" ? 'left-0.5' : 'right-0.5'
-      }`}
-      style={{ width: '1.5rem', height: '1.5rem' }}
-    >
-      <HiSun
-        className={`text-gray-100 text-md lg:text-lg ${theme === "dark" ? 'block' : 'hidden'}`}
-        style={{ marginRight: '0.25rem' }} // Padding between icons
-      />
-      <HiMoon
-        className={`text-gray-900 text-md lg:text-lg ${theme === "dark" ? 'hidden' : 'block'}`}
-        style={{ marginLeft: '0.25rem' }} // Padding between icons
-      />
-    </div>
-
-    <div
-      className={`absolute w-5 h-5 lg:w-6 lg:h-6 bg-white dark:bg-gray-800 rounded-full shadow-md transform transition-transform duration-300 ${
-        theme === "dark" ? 'translate-x-6' : 'translate-x-0'
-      }`}
-    ></div>
-  </div>
-</label>
-
-              <div className="p-4 mt-auto">
-                {authUser ? (
-                  <Logout />
-                ) : (
-                  <div>
-                    <a
-                      className="bg-blue-500 text-gray-900 dark:text-gray-100 px-3 py-2 rounded-md hover:bg-blue-700 duration-300 cursor-pointer"
-                      onClick={() => document.getElementById("my_modal_3").showModal()}
-                    >
-                      Login
-                    </a>
-                    <Login />
+            {/* User section */}
+            <div className="border-t border-gray-100 dark:border-gray-800 p-4">
+              {authUser ? (
+                <div className="flex items-center gap-3">
+                  <img src={userImage} alt={userFullname}
+                    className="w-10 h-10 rounded-full object-cover ring-2 ring-blue-500/30"
+                    onError={e => { e.currentTarget.src = DEFAULT_AVATAR; }}
+                  />
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 truncate">{userFullname}</p>
+                    <Link to="/profile" className="text-xs text-blue-500 hover:underline">View profile</Link>
                   </div>
-                )}
-              </div>
+                  <Logout />
+                </div>
+              ) : (
+                <button
+                  onClick={() => { setMobileOpen(false); document.getElementById("my_modal_3").showModal(); }}
+                  className="w-full py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors"
+                >
+                  Login
+                </button>
+              )}
             </div>
           </div>
         </div>
-      </div>
+      )}
 
-
-
-
-      {/* Bottom Navigation Bar for Mobile */}
-      <div
-        className={`lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-gray-100 text-black shadow-lg dark:bg-gray-900 dark:text-gray-100 transition-transform duration-300 ease-in-out ${isVisible ? "transform translate-y-0" : "transform translate-y-full"
-          }`}
-        style={{ height: "60px" }}
-      >
-        <div className="flex justify-around py-1">
-          <Link
-            to="/"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "home" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("home")}
-          >
-            <FontAwesomeIcon icon={faHome} className="w-5 h-5" />
-            <span className="text-xs mt-1">Home</span>
-          </Link>
-          <Link
-            to="/showbook"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("soenotes")}
-          >
-            <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">BCT</span>
-          </Link>
-          <Link
-            to="/books-uploaded-civil"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "soenotes" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("soenotes")}
-          >
-            <FontAwesomeIcon icon={faBook} className="w-5 h-5" />
-            <span className="text-xs mt-1">BCE</span>
-          </Link>
-          {/* books-uploaded-civil */}
-          <Link
-            to="/mock"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "entrance" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("entrance")}
-          >
-            <FontAwesomeIcon icon={faFileAlt} className="w-5 h-5" />
-            <span className="text-xs mt-1">Mock</span>
-          </Link>
-          {/* <Link
-            to="/quizresult"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "results" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("results")}
-          >
-            <FontAwesomeIcon icon={faChartBar} className="w-5 h-5" />
-            <span className="text-xs mt-1">Results</span>
-          </Link> */}
-          <Link
-            to="/AdmissionGuidelines"
-            className={`flex flex-col items-center p-2 transition-transform duration-300 ease-in-out transform hover:scale-110 focus:outline-none ${activeTab === "notice" ? "text-blue-500 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"
-              }`}
-            onClick={() => setActiveTab("notice")}
-          >
-            <FontAwesomeIcon icon={faBell} className="w-5 h-5" />
-            <span className="text-xs mt-1">Notice</span>
-          </Link>
+      {/* ── Bottom Mobile Navigation ── */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white dark:bg-slate-900 border-t border-gray-200 dark:border-gray-800 safe-area-inset-bottom">
+        <div className="flex items-center justify-around h-14">
+          {[
+            { to: "/", icon: faHome, label: "Home" },
+            { to: "/showbook", icon: faBook, label: "BCT" },
+            { to: "/books-uploaded-civil", icon: faBook, label: "BCE" },
+            { to: "/mock", icon: faFileAlt, label: "Mock" },
+            { to: "/AdmissionGuidelines", icon: faBell, label: "Notice" },
+          ].map(({ to, icon, label }) => {
+            const active = path === to || path.startsWith(to + "?") || (to !== "/" && path.startsWith(to));
+            return (
+              <Link key={to} to={to}
+                className={`flex flex-col items-center gap-0.5 px-3 py-1 transition-colors ${
+                  active ? "text-blue-600 dark:text-blue-400" : "text-gray-400 dark:text-gray-500"
+                }`}
+              >
+                <FontAwesomeIcon icon={icon} className="w-5 h-5" />
+                <span className="text-[10px] font-medium">{label}</span>
+              </Link>
+            );
+          })}
         </div>
-      </div>
+      </nav>
     </>
   );
 }

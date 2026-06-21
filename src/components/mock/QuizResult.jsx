@@ -1,298 +1,230 @@
 import React, { useState, useEffect } from 'react';
-import Navbar from "../Navbar";
-import Footer from "../home/Footer";
-import logo from '../../../public/fwu.png'; // Ensure this path is correct
+import { API_BASE_URL } from '../../config';
+import Navbar from '../Navbar';
+import Footer from '../home/Footer';
 import Chat from '../AI/Chat';
-import { motion } from "framer-motion";
-import FacebookComments from "../FacebookComments"
+import logo from '../../../public/fwu.png';
+import FacebookComments from '../FacebookComments';
 
-const QuizResult = () => {
-  const [quizResults, setQuizResults] = useState([]);
-  const [formData, setFormData] = useState({
-    userName: '',
-    engineeringField: 'Computer',
-    review: 'Challenging but fun! and too easy',
-    rating: 4,
-    totalQuestions: 15,
-    solvedQuestions: 12
-  });
-  const [formMode, setFormMode] = useState('add');
-  const [selectedQuizResultId, setSelectedQuizResultId] = useState(null);
+const FIELD_COLORS = {
+  Computer:     'bg-sky-50 dark:bg-sky-900/30 text-sky-700 dark:text-sky-300',
+  Civil:        'bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300',
+  Architecture: 'bg-orange-50 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300',
+};
+
+function pct(solved, total) {
+  if (!total) return 0;
+  return Math.round((solved / total) * 100);
+}
+
+function RankBadge({ rank }) {
+  if (rank === 1) return (
+    <span className="w-7 h-7 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 text-xs font-bold flex items-center justify-center ring-2 ring-amber-300 dark:ring-amber-600">
+      1
+    </span>
+  );
+  if (rank === 2) return (
+    <span className="w-7 h-7 rounded-full bg-gray-200 dark:bg-gray-600 text-gray-600 dark:text-gray-200 text-xs font-bold flex items-center justify-center ring-2 ring-gray-300 dark:ring-gray-500">
+      2
+    </span>
+  );
+  if (rank === 3) return (
+    <span className="w-7 h-7 rounded-full bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-400 text-xs font-bold flex items-center justify-center ring-2 ring-orange-300 dark:ring-orange-600">
+      3
+    </span>
+  );
+  return (
+    <span className="w-7 h-7 rounded-full bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 text-xs font-bold flex items-center justify-center">
+      {rank}
+    </span>
+  );
+}
+
+function ScoreBar({ value }) {
+  const color =
+    value >= 80 ? 'bg-emerald-500' :
+    value >= 60 ? 'bg-amber-500' :
+    value >= 40 ? 'bg-orange-500' : 'bg-red-500';
+  return (
+    <div className="flex items-center gap-2 min-w-0">
+      <div className="flex-1 h-1.5 bg-gray-100 dark:bg-gray-700 rounded-full overflow-hidden min-w-[60px]">
+        <div className={`h-full rounded-full ${color} transition-all duration-700`} style={{ width: `${value}%` }} />
+      </div>
+      <span className="text-xs font-semibold text-gray-700 dark:text-gray-200 tabular-nums w-9 text-right shrink-0">
+        {value}%
+      </span>
+    </div>
+  );
+}
+
+/* Top-3 podium card */
+function PodiumCard({ performer, rank }) {
+  const p = pct(performer.solvedQuestions, performer.totalQuestions);
+  const ringColor = rank === 1 ? 'ring-amber-400' : rank === 2 ? 'ring-gray-400' : 'ring-orange-400';
+  const labelColor = rank === 1 ? 'text-amber-600 dark:text-amber-400' : rank === 2 ? 'text-gray-500 dark:text-gray-400' : 'text-orange-600 dark:text-orange-400';
+
+  return (
+    <div className={`bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 flex flex-col items-center gap-2 shadow-sm ${rank === 1 ? 'ring-2 ring-amber-300 dark:ring-amber-600' : ''}`}>
+      <div className={`w-14 h-14 rounded-full bg-gray-100 dark:bg-gray-700 ring-4 ${ringColor} flex items-center justify-center text-xl font-bold text-gray-700 dark:text-gray-200 mb-1`}>
+        {performer.userName?.charAt(0)?.toUpperCase() || '?'}
+      </div>
+      <RankBadge rank={rank} />
+      <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 text-center leading-tight">{performer.userName}</p>
+      <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${FIELD_COLORS[performer.engineeringField] ?? FIELD_COLORS.Computer}`}>
+        {performer.engineeringField}
+      </span>
+      <p className={`text-2xl font-bold ${labelColor}`}>{p}%</p>
+      <p className="text-xs text-gray-400 dark:text-gray-500">
+        {performer.solvedQuestions}/{performer.totalQuestions} correct
+      </p>
+    </div>
+  );
+}
+
+export default function QuizResult() {
   const [topPerformers, setTopPerformers] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [progress, setProgress] = useState(0);
-  const pageUrl = "https://www.soenotes.com/"; // Replace with your actual page URL
-
-
+  const [error, setError] = useState(null);
+  const pageUrl = 'https://www.soenotes.com/';
 
   useEffect(() => {
-    let progressInterval;
-    if (loading) {
-      progressInterval = setInterval(() => {
-        setProgress(prev => {
-          if (prev < 90) {
-            return prev + 1; // Gradually increase progress
-          } else {
-            return prev; // Hold at 90% until data is fetched
-          }
-        });
-      }, 100); // Interval duration can be adjusted as needed
-    }
-    return () => clearInterval(progressInterval);
-  }, [loading]);
-
-  useEffect(() => {
-    fetchQuizResults();
+    fetch(`${API_BASE_URL}/api/quiz-results/`)
+      .then(r => r.json())
+      .then(data => {
+        const sorted = data
+          .map(r => ({ ...r, _pct: pct(r.solvedQuestions, r.totalQuestions) }))
+          .sort((a, b) => b._pct - a._pct)
+          .slice(0, 30);
+        setTopPerformers(sorted);
+      })
+      .catch(() => setError('Could not load results. Please try again later.'))
+      .finally(() => setLoading(false));
   }, []);
 
-  useEffect(() => {
-    if (!loading) {
-      calculateTopPerformers();
-    }
-  }, [quizResults, loading]);
-
-  const fetchQuizResults = () => {
-    fetch('https://fwu-soe.vercel.app/api/quiz-results/')
-      .then(response => response.json())
-      .then(data => {
-        setQuizResults(data);
-        setLoading(false);
-        setProgress(100); // Set progress to 100% once data is loaded
-      })
-      .catch(error => {
-        console.error('Error fetching quiz results:', error);
-        setLoading(false);
-        setProgress(100); // Ensure progress is set to 100% even on error
-      });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (formMode === 'add') {
-      fetch('https://fwu-soe.vercel.app/api/quiz-results/', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Quiz result submitted successfully:', data);
-          fetchQuizResults();
-        })
-        .catch(error => console.error('Error submitting quiz result:', error));
-    } else if (formMode === 'update' && selectedQuizResultId) {
-      fetch(`https://fwu-soe.vercel.app/api/quiz-results/${selectedQuizResultId}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
-      })
-        .then(response => response.json())
-        .then(data => {
-          console.log('Quiz result updated successfully:', data);
-          fetchQuizResults();
-          setFormMode('add');
-          setSelectedQuizResultId(null);
-        })
-        .catch(error => console.error('Error updating quiz result:', error));
-    }
-
-    setFormData({
-      userName: '',
-      engineeringField: 'Computer',
-      review: 'Challenging but fun! and too easy',
-      rating: 4,
-      totalQuestions: 15,
-      solvedQuestions: 12
-    });
-  };
-
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
-  };
-
-  const handleDeleteQuizResult = (id) => {
-    fetch(`https://fwu-soe.vercel.app/api/quiz-results/${id}`, {
-      method: 'DELETE',
-    })
-      .then(response => {
-        if (response.ok) {
-          console.log(`Quiz result with ID ${id} deleted successfully.`);
-          fetchQuizResults();
-        } else {
-          throw new Error('Failed to delete quiz result.');
-        }
-      })
-      .catch(error => console.error('Error deleting quiz result:', error));
-  };
-
-  const calculateTopPerformers = () => {
-    // Calculate percentage of correct answers
-    const resultsWithPercentages = quizResults.map(result => ({
-      ...result,
-      percentage: (result.solvedQuestions / result.totalQuestions) * 100
-    }));
-
-    // Sort by percentage in descending order
-    const sortedResults = resultsWithPercentages.sort((a, b) => b.percentage - a.percentage);
-
-    // Get the top 20 performers
-    const topPerformersList = sortedResults.slice(0, 30);
-    setTopPerformers(topPerformersList);
-  };
-
-
+  const top3 = topPerformers.slice(0, 3);
+  const rest  = topPerformers.slice(3);
 
   return (
     <>
       <Navbar />
-      <div
-  className="container mx-auto px-8 sm:mt-0 mt-0 border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg"
-  style={{
-    background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 182, 193, 0.5))', // Softer neon gradient
-    color: 'white', // Ensuring text is readable on dark backgrounds
-  }}
->
-        {/* Formal Header */}
-        <motion.div
-          className="container mx-auto text-center mt-1 p-4 bg-white text-gray-900 dark:bg-gray-900 dark:text-gray-100 relative rounded-3xl w-full sm:w-1/2 bg-opacity-40 dark:bg-opacity-30 shadow-lg lg:mt-20"
-          initial={{ opacity: 0, y: 50 }} // Start with opacity 0 and move up from 50px below
-          animate={{ opacity: 1, y: 0 }} // Animate to full opacity and original position
-          transition={{ duration: 0.8, ease: "easeOut" }} // Control the duration and easing of the animation
-        >
-          <motion.div
-            className="header mb-8"
-            initial={{ opacity: 0, x: -50 }} // Fade in from the left
-            animate={{ opacity: 1, x: 0 }} // Move to the original position
-            transition={{ duration: 1, ease: "easeOut" }}
-          >
-            <motion.img
-              src={logo}
-              alt="University Logo"
-              className="mx-auto w-24 h-auto mb-4"
-              initial={{ rotate: -180, opacity: 0 }} // Rotate in and fade in
-              animate={{ rotate: 0, opacity: 1 }} // Rotate back to original and fade in
-              transition={{ duration: 1, ease: "easeOut" }}
-            />
-            <h1 className="text-2xl font-bold mb-2">Far Western University</h1>
-            <h2 className="text-xl mb-2">School of Engineering</h2>
-            <h3 className="text-lg mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
-            <h4 className="text-lg">BE Test Examination Results</h4>
-          </motion.div>
-        </motion.div>
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pt-14 pb-24">
 
-
-
-        {/* Results Section */}
-
-
-        {loading ? (
-          <div className="flex flex-col items-center">
-            <div className="radial-progress" style={{ "--value": progress }} role="progressbar">{progress}%</div>
-            <p className="mt-4 text-gray-700 dark:text-gray-400">Results are loading...</p>
+        {/* Header */}
+        <div className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+          <div className="max-w-3xl mx-auto px-4 py-10 text-center">
+            <img src={logo} alt="FWU Logo" className="w-14 h-auto mx-auto mb-4 drop-shadow" />
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-1">Entrance Exam Leaderboard</h1>
+            <p className="text-sm text-gray-500 dark:text-gray-400">Far Western University · School of Engineering</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-2">Top 30 performers ranked by score percentage</p>
           </div>
-        ) : (
-          <div className="mt-8 px-4 md:px-8 lg:px-16">
-            <motion.h2
-              className="text-2xl sm:text-md font-extrabold text-gray-900 dark:text-white mb-8"
-              initial={{ opacity: 0, y: -40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
-            >
-              🏆 Top Performers
-            </motion.h2>
+        </div>
 
-            {topPerformers.length > 0 ? (
-              topPerformers.map((performer, index) => (
-                <motion.div
-                key={performer._id} // Assuming _id is the unique identifier
-                className="bg-white dark:bg-gray-800 shadow-lg rounded-lg p-6 mb-6 border border-gray-300 dark:border-gray-600 hover:shadow-2xl transition-shadow duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }} // Staggered animation for each result
-              >
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
-                  🥇 Rank {index + 1}
-                </h3>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">User Name:</span>{" "}
-                  <span className="font-semibold text-blue-500 dark:text-blue-400">{performer.userName}</span>
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">Engineering Field:</span>{" "}
-                  <span className="font-semibold text-green-500 dark:text-green-400">{performer.engineeringField}</span>
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">Total Questions:</span>{" "}
-                  <span className="font-semibold text-orange-500 dark:text-orange-400">{performer.totalQuestions}</span>
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">Correct Answers:</span>{" "}
-                  <span className="font-semibold text-purple-500 dark:text-purple-400">{performer.solvedQuestions}</span>
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">Percentage:</span>{" "}
-                  <span className="font-semibold text-red-500 dark:text-red-400">{((performer.solvedQuestions / performer.totalQuestions) * 100).toFixed(2)}%</span>
-                </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-2">
-                  <span className="font-semibold text-gray-900 dark:text-gray-100">Created Time:</span>{" "}
-                  <span className="font-semibold text-gray-500 dark:text-gray-400">{new Date(performer.createdAt).toLocaleString()}</span>
-                </p>
-              </motion.div>
-              ))
-            ) : (
-              <motion.p
-                className="text-gray-700 dark:text-gray-400 text-center text-lg"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-              >
-                No top performers found.
-              </motion.p>
-            )}
-            {/* Add fomr here */}
-            <div className="container mx-auto text-center mt-8 p-4">
-              <motion.h3
-                className="text-md sm:text-sm font-semibold text-gray-800 dark:text-gray-200 mb-8 mt-12"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-              >
-                <motion.span
-                  initial={{ scale: 1 }}
-                  animate={{ scale: [1, 1.05, 1] }}
-                  transition={{ duration: 1, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-                >
-                  🌟 Only the Top 30 Performers Will Be Displayed Here! 🌟
-                </motion.span>
-                <br />
-                <motion.span
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 1, ease: "easeOut", delay: 0.5 }}
-                >
-                  🎯 Give it your best shot and aim to be among the top 30 achievers! 🚀
-                </motion.span>
-              </motion.h3>
+        <div className="max-w-3xl mx-auto px-4 py-10 space-y-10">
 
+          {loading && (
+            <div className="flex flex-col items-center gap-4 py-20">
+              <div className="w-10 h-10 border-4 border-gray-200 dark:border-gray-700 border-t-amber-500 rounded-full animate-spin" />
+              <p className="text-sm text-gray-400 dark:text-gray-500">Loading results…</p>
             </div>
-          </div>
-        )}
+          )}
+
+          {error && (
+            <div className="text-center py-20 text-red-500 dark:text-red-400 text-sm">{error}</div>
+          )}
+
+          {!loading && !error && topPerformers.length === 0 && (
+            <div className="text-center py-20 text-gray-400 dark:text-gray-500 text-sm">No results yet. Be the first to take a mock exam!</div>
+          )}
+
+          {!loading && !error && topPerformers.length > 0 && (
+            <>
+              {/* Podium — top 3 */}
+              {top3.length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">Top Performers</p>
+                  <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                    {top3.map((p, i) => <PodiumCard key={p._id} performer={p} rank={i + 1} />)}
+                  </div>
+                </div>
+              )}
+
+              {/* Rest of the list */}
+              {rest.length > 0 && (
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-4">Full Rankings</p>
+                  <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl overflow-hidden shadow-sm">
+
+                    {/* Table header */}
+                    <div className="hidden sm:grid grid-cols-[40px_1fr_110px_90px_140px] gap-4 px-5 py-3 border-b border-gray-100 dark:border-gray-700 text-xs font-semibold uppercase tracking-wide text-gray-400 dark:text-gray-500">
+                      <span>#</span>
+                      <span>Name</span>
+                      <span>Field</span>
+                      <span>Score</span>
+                      <span>Percentage</span>
+                    </div>
+
+                    {rest.map((performer, i) => {
+                      const rank = i + 4;
+                      const p = performer._pct;
+                      return (
+                        <div
+                          key={performer._id}
+                          className="grid grid-cols-[40px_1fr] sm:grid-cols-[40px_1fr_110px_90px_140px] gap-4 items-center px-5 py-4 border-b border-gray-50 dark:border-gray-700/50 last:border-0 hover:bg-gray-50 dark:hover:bg-gray-700/30 transition-colors"
+                        >
+                          {/* Rank */}
+                          <div className="flex items-center justify-center">
+                            <RankBadge rank={rank} />
+                          </div>
+
+                          {/* Name + mobile meta */}
+                          <div className="min-w-0">
+                            <p className="text-sm font-medium text-gray-900 dark:text-gray-100 truncate">{performer.userName}</p>
+                            <div className="sm:hidden flex items-center gap-2 mt-1 flex-wrap">
+                              <span className={`text-xs px-1.5 py-0.5 rounded-full font-medium ${FIELD_COLORS[performer.engineeringField] ?? FIELD_COLORS.Computer}`}>
+                                {performer.engineeringField}
+                              </span>
+                              <span className="text-xs text-gray-500 dark:text-gray-400">
+                                {performer.solvedQuestions}/{performer.totalQuestions} · {p}%
+                              </span>
+                            </div>
+                          </div>
+
+                          {/* Field — desktop */}
+                          <div className="hidden sm:block">
+                            <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${FIELD_COLORS[performer.engineeringField] ?? FIELD_COLORS.Computer}`}>
+                              {performer.engineeringField}
+                            </span>
+                          </div>
+
+                          {/* Score — desktop */}
+                          <div className="hidden sm:block text-sm text-gray-600 dark:text-gray-300 tabular-nums">
+                            {performer.solvedQuestions}/{performer.totalQuestions}
+                          </div>
+
+                          {/* Bar — desktop */}
+                          <div className="hidden sm:block">
+                            <ScoreBar value={p} />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+
+              {/* Notice */}
+              <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl px-6 py-5 text-center shadow-sm">
+                <p className="text-sm font-semibold text-gray-800 dark:text-gray-100 mb-1">Only the top 30 scores are shown</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">Take a mock exam and aim for the top. Give it your best shot!</p>
+              </div>
+            </>
+          )}
+        </div>
       </div>
+
       <FacebookComments pageUrl={pageUrl} />
       <Chat />
-
       <Footer />
     </>
   );
-};
-
-export default QuizResult;
+}

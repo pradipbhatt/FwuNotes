@@ -69,7 +69,7 @@ function Freebook() {
         </div>
       ))}
       <h2 className="text-xl mt-8 mb-4">
-        Get Login and Go to Courses Section to get Complete Notes Resources ⭐❤️
+        Get Login and Go to Courses Section to get Complete Notes Resources
       </h2>
     </div>
   );

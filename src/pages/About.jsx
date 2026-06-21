@@ -1,313 +1,382 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/home/Footer';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import logo from "../../public/logo-icec.png"
 import Chat from '../components/AI/Chat';
-import Testimonials from '../components/home/Testimonials';
-import Banner from '../components/home/Banner';
+import logo from '../../public/logo-icec.png';
+import {
+  HiLightningBolt, HiAcademicCap, HiUserGroup, HiGlobeAlt,
+  HiExternalLink, HiMail,
+} from 'react-icons/hi';
 
-const teamMembers = [
+/* ─── Data ──────────────────────────────────────────────────────────── */
+
+const STATS = [
+  { label: 'Club Members', value: '16+', icon: HiUserGroup },
+  { label: 'Years Active', value: '5+', icon: HiLightningBolt },
+  { label: 'Notes & Resources', value: '200+', icon: HiAcademicCap },
+  { label: 'Students Helped', value: '1000+', icon: HiGlobeAlt },
+];
+
+const TIMELINE = [
+  {
+    year: '2020',
+    title: 'The Beginning',
+    desc: 'Our journey started in the first semester at FWU School of Engineering. We built a simple HTML/CSS site to share notes, old question papers, and tutorials with fellow students — all hosted on Google Drive with junior batch contributors.',
+  },
+  {
+    year: '2020–21',
+    title: 'Continuous Growth',
+    desc: 'We expanded the platform with MongoDB and Cloudinary for cloud-based resource storage. New sections for mock tests and semester-wise materials were added as the student base grew rapidly.',
+  },
+  {
+    year: '2021–22',
+    title: 'SOE Notes Goes Modern',
+    desc: 'Migrated to a full React + Vite stack with a REST API backend. Introduced user authentication, PDF viewer, AI Chat assistant, and a full entrance exam mock-test portal with real quiz data.',
+  },
+  {
+    year: '2022+',
+    title: 'Looking Ahead',
+    desc: 'We continue enhancing the platform with better search, civil engineering resources, performance improvements, and richer community features — driven by student feedback from every batch.',
+  },
+];
+
+const ROLE_ORDER = {
+  'President': 1,
+  'Vice President': 2,
+  'Treasurer': 3,
+  'Secretary': 4,
+  'General Secretary': 5,
+  'Tech Lead': 6,
+  'Social Media Handler': 7,
+  'Event Organizer': 8,
+  'Member': 9,
+};
+
+const TEAM = [
   {
     name: 'Pradip Bhatt',
     role: 'President',
-    image: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.inXgh5O_Chd56OM6PROU1gAAAA%26pid%3DApi&f=1&ipt=123cec7b67b4e941bf4944dfdae504127a7df4fdb76ed75f92fb9f8a9c9e36ff&ipo=images', // Replace with actual image URL
-    contribution: 'Lead the development and management of i-CEC club activities.',
-    position: 1, // President
-    contactUrl: 'https://pradipbhatt.com.np', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/76877122?v=4',
+    url: 'https://pradipbhatt.com.np',
   },
   {
     name: 'Dipak Raj Giri',
     role: 'Vice President',
-    image: 'https://avatars.githubusercontent.com/u/93638459?v=4', // Replace with actual image URL
-    contribution: 'Assisted in organizing club events and managing club activities.',
-    position: 2, // Vice President
-    contactUrl: 'https://github.com/Dipakrajgiri', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/93638459?v=4',
+    url: 'https://github.com/Dipakrajgiri',
   },
   {
     name: 'Kamal Raj Giri',
     role: 'Treasurer',
-    image: 'https://avatars.githubusercontent.com/u/157484491?v=4', // Replace with actual image URL
-    contribution: 'Managed club finances and budgeting for events and activities.',
-    position: 3, // Treasurer
-    contactUrl: 'https://github.com/kamalrajgiri', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/157484491?v=4',
+    url: 'https://github.com/kamalrajgiri',
   },
   {
     name: 'Ram Bhatta',
     role: 'Secretary',
-    image: 'https://example.com/ram.jpg', // Replace with actual image URL
-    contribution: 'Handled administrative tasks and communication within the club.',
-    position: 4, // Secretary
-    contactUrl: 'https://example.com/ram_social', // Replace with actual social media URL
+    image: null,
+    url: null,
   },
   {
     name: 'Bipesh Khadka',
     role: 'General Secretary',
-    image: 'https://avatars.githubusercontent.com/u/106030583?v=4', // Replace with actual image URL
-    contribution: 'Assisted in organizing club activities and maintaining club records.',
-    position: 5, // General Secretary
-    contactUrl: 'https://github.com/Bipeshkhadka10', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/106030583?v=4',
+    url: 'https://github.com/Bipeshkhadka10',
   },
   {
     name: 'Santosh Upadhyay',
     role: 'Tech Lead',
-    image: 'https://avatars.githubusercontent.com/u/101114463?v=4', // Replace with actual image URL
-    contribution: 'Led technical projects and initiatives within the club.',
-    position: 6, // Tech Lead
-    contactUrl: 'https://github.com/santosupadhyay', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/101114463?v=4',
+    url: 'https://github.com/santosupadhyay',
   },
   {
     name: 'Bhupendra',
     role: 'Tech Lead',
-    image: 'https://avatars.githubusercontent.com/u/121709397?v=4', // Replace with actual image URL
-    contribution: 'Contributed to technical developments and club projects.',
-    position: 6, // Tech Lead
-    contactUrl: 'https://github.com/Bhupendra143', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/121709397?v=4',
+    url: 'https://github.com/Bhupendra143',
   },
   {
     name: 'Adarsh Joshi',
     role: 'Tech Lead',
-    image: 'https://example.com/adarsh.jpg', // Replace with actual image URL
-    contribution: 'Led technical workshops and mentored junior members.',
-    position: 6, // Tech Lead
-    contactUrl: 'https://github.com/adarshherohoo', // Replace with actual social media URL
+    image: null,
+    url: 'https://github.com/adarshherohoo',
   },
   {
     name: 'Dikshya Bam',
     role: 'Social Media Handler',
-    image: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-1/437539765_1141427470638153_8054301702184650461_n.jpg?stp=dst-jpg_p200x200&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=c0RpVMcwVqoQ7kNvgF64Y8F&_nc_ht=scontent.fktm1-1.fna&oh=00_AYApe-3-RDcdsddtAO3r20d5iuhXmNZ0hJox8M7itlYJyg&oe=6699EFE6', // Replace with actual image URL
-    contribution: 'Managed social media presence and engagement for the club.',
-    position: 7, // Social Media Handler
-    contactUrl: 'https://www.facebook.com/dikshyathakuri13?comment_id=Y29tbWVudDoxMjIxMzM4OTgxMjQwNTEyNzFfMjgwNDk1NTA1MTAyNTAw', // Replace with actual social media URL
+    image: 'https://scontent.fktm1-1.fna.fbcdn.net/v/t39.30808-1/437539765_1141427470638153_8054301702184650461_n.jpg?stp=dst-jpg_p200x200&_nc_cat=104&ccb=1-7&_nc_sid=0ecb9b&_nc_ohc=c0RpVMcwVqoQ7kNvgF64Y8F&_nc_ht=scontent.fktm1-1.fna&oh=00_AYApe-3-RDcdsddtAO3r20d5iuhXmNZ0hJox8M7itlYJyg&oe=6699EFE6',
+    url: null,
   },
   {
     name: 'Dileep Pant',
     role: 'Event Organizer',
-    image: 'https://example.com/dileep.jpg', // Replace with actual image URL
-    contribution: 'Organized club events and coordinated event logistics.',
-    position: 8, // Event Organizer
-    contactUrl: 'https://example.com/dileep_social', // Replace with actual social media URL
+    image: null,
+    url: null,
   },
   {
     name: 'Saraswoti Bhandari',
     role: 'Event Organizer',
-    image: 'https://avatars.githubusercontent.com/u/143866362?v=4', // Replace with actual image URL
-    contribution: 'Assisted in planning and executing club events.',
-    position: 8, // Event Organizer
-    contactUrl: 'https://github.com/sarswotibhandari', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/143866362?v=4',
+    url: 'https://github.com/sarswotibhandari',
   },
   {
     name: 'Deepa Joshi',
     role: 'Event Organizer',
-    image: 'https://avatars.githubusercontent.com/u/100353866?v=4', // Replace with actual image URL
-    contribution: 'Contributed to event management and coordination.',
-    position: 8, // Event Organizer
-    contactUrl: 'https://github.com/Dipajoshi', // Replace with actual social media URL
-  },
-  {
-    name: 'Hema Dhami',
-    role: 'Member',
-    image: 'https://example.com/hema.jpg', // Replace with actual image URL
-    contribution: 'Participated in club activities and supported club initiatives.',
-    position: 9, // Member
-    contactUrl: 'https://example.com/hema_social', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/100353866?v=4',
+    url: 'https://github.com/Dipajoshi',
   },
   {
     name: 'Anuradha Bhatta',
     role: 'Member',
-    image: 'https://avatars.githubusercontent.com/u/110050148?v=4', // Replace with actual image URL
-    contribution: 'Engaged in club events and activities as a supporting member.',
-    position: 9, // Member
-    contactUrl: 'https://github.com/Anubhatta', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/110050148?v=4',
+    url: 'https://github.com/Anubhatta',
   },
   {
     name: 'Babita Bhatta',
     role: 'Member',
-    image: 'https://avatars.githubusercontent.com/u/109867371?v=4', // Replace with actual image URL
-    contribution: 'Contributed to club activities and supported club initiatives.',
-    position: 9, // Member
-    contactUrl: 'https://github.com/BabitaBhatt2059', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/109867371?v=4',
+    url: 'https://github.com/BabitaBhatta2059',
   },
   {
     name: 'Yogesh Awasthi',
     role: 'Member',
-    image: 'https://avatars.githubusercontent.com/u/121468998?v=4', // Replace with actual image URL
-    contribution: 'Participated in club events and supported club initiatives.',
-    position: 9, // Member
-    contactUrl: 'https://github.com/suddhababa', // Replace with actual social media URL
+    image: 'https://avatars.githubusercontent.com/u/121468998?v=4',
+    url: 'https://github.com/suddhababa',
   },
+  {
+    name: 'Hema Dhami',
+    role: 'Member',
+    image: null,
+    url: null,
+  },
+].sort((a, b) => (ROLE_ORDER[a.role] ?? 99) - (ROLE_ORDER[b.role] ?? 99));
+
+const ROLE_COLORS = {
+  'President': 'bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300',
+  'Vice President': 'bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300',
+  'Treasurer': 'bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300',
+  'Secretary': 'bg-teal-100 dark:bg-teal-900/40 text-teal-700 dark:text-teal-300',
+  'General Secretary': 'bg-cyan-100 dark:bg-cyan-900/40 text-cyan-700 dark:text-cyan-300',
+  'Tech Lead': 'bg-violet-100 dark:bg-violet-900/40 text-violet-700 dark:text-violet-300',
+  'Social Media Handler': 'bg-pink-100 dark:bg-pink-900/40 text-pink-700 dark:text-pink-300',
+  'Event Organizer': 'bg-orange-100 dark:bg-orange-900/40 text-orange-700 dark:text-orange-300',
+  'Member': 'bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300',
+};
+
+const AVATAR_GRADIENTS = [
+  'from-blue-500 to-indigo-600',
+  'from-emerald-500 to-teal-600',
+  'from-orange-500 to-amber-600',
+  'from-pink-500 to-rose-600',
+  'from-violet-500 to-purple-600',
+  'from-cyan-500 to-blue-600',
 ];
 
-function About() {
-  const timelineRefs = useRef([]);
-  const teamMemberRefs = useRef([]);
+function initials(name) {
+  return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+}
 
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      mirror: false,
-    });
+/* ─── Component ─────────────────────────────────────────────────────── */
 
-    // GSAP animations for timeline elements
-    timelineRefs.current.forEach((ref, index) => {
-      if (ref) {
-        gsap.fromTo(
-          ref,
-          { opacity: 0, x: index % 2 === 0 ? -100 : 100 },
-          {
-            opacity: 1,
-            x: 0,
-            duration: 1,
-            delay: index * 0.3,
-            ease: 'power3.out',
-          }
-        );
-      }
-    });
-
-    // GSAP animations for team member cards
-    teamMemberRefs.current.forEach((ref, index) => {
-      if (ref) {
-        gsap.fromTo(
-          ref,
-          { opacity: 0, y: 50 },
-          {
-            opacity: 1,
-            y: 0,
-            duration: 1,
-            delay: index * 0.2,
-            ease: 'power3.out',
-          }
-        );
-      }
-    });
-  }, []);
-
-  const handleContactClick = (url) => {
-    window.open(url, '_blank');
-  };
-
-  teamMembers.sort((a, b) => a.position - b.position);
+export default function About() {
+  const [imgErrors, setImgErrors] = useState({});
 
   return (
     <>
       <Navbar />
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pt-14">
 
-      <div
-  className="container mx-auto px-8 sm:mt-0 mt-0 border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg pt-20"
-  style={{
-    background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 182, 193, 0.5))', // Softer neon gradient
-    color: 'white', // Ensuring text is readable on dark backgrounds
-  }}
->
-        {/* <Banner/> */}
-        {/* Formal Header */}
-        <div className="text-center mb-12">
-          <img src={logo} alt="University Logo" className="mx-auto w-40 h-auto mb-4" />
-          <h1 className="text-5xl font-bold text-gray-900 dark:text-white mb-2">School of Engineering</h1>
-          <h2 className="text-3xl font-semibold text-gray-800 dark:text-gray-200 mb-2">Innovative Computer Engineering Club (iCEC-FWU)</h2>
-          <h3 className="text-xl text-gray-600 dark:text-gray-400 mb-4">Mahendranagar, Kanchanpur, Nepal</h3>
-          <h4 className="text-xl font-medium text-gray-600 dark:text-gray-300">About Us</h4>
-        </div>
+        {/* ── Hero ── */}
+        <section className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16 text-center">
+            <img src={logo} alt="i-CEC Logo" className="w-20 h-auto mx-auto mb-6 drop-shadow-md" />
 
-        {/* Timeline Section */}
-        <div className="w-full flex flex-col items-center mt-12">
-          <ul className="timeline timeline-snap-icon max-md:timeline-compact timeline-vertical mt-10 w-full md:w-3/4">
-            <li className="flex" ref={(el) => (timelineRefs.current[0] = el)}>
-              <div className="timeline-middle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md dark:bg-gray-700 dark:text-gray-100">
-                <time className="font-mono italic text-gray-900 dark:text-gray-100">2020</time>
-                <div className="text-lg font-black text-gray-900 dark:text-gray-100">Our Journey Begins</div>
-                <p className="max-w-md text-gray-900 dark:text-gray-100">Our journey began in the first semester of our college in 2020. Initially, we started with a simple HTML and CSS website to support college students by providing necessary notes, tutorials, old question collections, and other resources. We collaborated with our juniors and added them as drive maintainers to share their resources with fellow juniors, creating a learning environment within the college.</p>
-              </div>
-              <hr />
-            </li>
-            <li className="flex justify-center" ref={(el) => (timelineRefs.current[1] = el)}>
-              <div className="timeline-middle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="timeline-start mb-10 bg-gray-100 p-4  rounded-md dark:bg-gray-700  text-gray-900 dark:text-gray-100">
-                <time className="font-mono italic text-gray-900 dark:text-gray-100">2020-2021</time>
-                <div className="text-lg font-black text-gray-800 dark:text-gray-100">Continuous Growth</div>
-                <p className="max-w-md">During this period, we expanded our website features, adding a cloud integration for file storage and management using MongoDB and Cloudinary. We also added more resources and sections for notes, question papers, and mock tests for engineering students.</p>
-              </div>
-              <hr />
-            </li>
-            <li className="flex" ref={(el) => (timelineRefs.current[2] = el)}>
-              <div className="timeline-middle">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
-                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="timeline-start md:text-end mb-10 bg-gray-100 p-4 rounded-md dark:bg-gray-700 dark:text-gray-100">
-                <time className="font-mono italic text-gray-900 dark:text-gray-100">2021-2022</time>
-                <div className="text-lg font-black text-gray-800 dark:text-gray-100">Future Expansion</div>
-                <p className="max-w-md text-gray-900 dark:text-gray-100">Looking forward, we aim to expand our platform further, introducing new features and resources to support the academic journey of engineering students in our college. We plan to enhance user experience and engagement through continuous improvement and feedback.</p>
-              </div>
-              <hr />
-            </li>
-          </ul>
-        </div>
+            {/* "First" highlight badge */}
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-300 text-xs font-bold tracking-wide mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-500 dark:bg-amber-400 animate-pulse" />
+              First Computer Engineering Club at FWU
+            </span>
 
-        {/* Team Members Section */}
-        {/* <section className="bg-gray-100 py-20 mt-16 dark:bg-gray-800">
-          <div className="w-full flex flex-col items-center">
-            <h2 className="text-3xl font-bold mb-8 text-gray-900 dark:text-gray-100">
-              Executive Committee - 2080/81
-            </h2>
-            <div className="grid lg:grid-cols-3 sm:grid-cols-1 gap-8 w-full md:w-4/5 lg:w-4/5">
-              {teamMembers.map((member, index) => (
-                <div
-                  key={index}
-                  ref={(el) => (teamMemberRefs.current[index] = el)}
-                  className="bg-gray-100 dark:bg-gray-900 p-6 rounded-lg shadow-lg w-full sm:w-full lg:mx-5"
-                >
-                  <img
-                    className="w-32 h-32 rounded-full mx-auto mb-4"
-                    src={member.image}
-                    alt={member.name}
-                  />
-                  <h3 className="text-lg font-semibold text-center text-gray-900 dark:text-gray-100 mb-2">
-                    {member.name}
-                  </h3>
-                  <p className="text-center text-gray-900 dark:text-gray-100">
-                    {member.role}
-                  </p>
-                  <p className="text-center text-gray-900 dark:text-gray-100 mt-2">
-                    {member.contribution}
-                  </p>
-                  <div className="text-center mt-4">
-                    <button
-                      onClick={() => handleContactClick(member.contactUrl)}
-                      className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
-             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
-             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
-             text-lg font-semibold"
-                    >
-                      Contact
-                    </button>
-                  </div>
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-2 leading-tight">
+              Innovative Computer Engineering Club
+            </h1>
+            <p className="text-lg text-blue-600 dark:text-blue-400 font-semibold mb-1">i-CEC</p>
+            <p className="text-sm text-gray-400 dark:text-gray-500 mb-5">
+              Far Western University · School of Engineering · Mahendranagar, Kanchanpur
+            </p>
+
+            {/* Divider */}
+            <div className="w-12 h-0.5 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto mb-5 rounded-full" />
+
+            <p className="text-gray-500 dark:text-gray-400 text-sm max-w-xl mx-auto leading-relaxed">
+              Founded in 2020, i-CEC is the <span className="font-semibold text-gray-700 dark:text-gray-300">first and only computer engineering club</span> at FWU School of Engineering — a student-led initiative dedicated to making quality academic resources freely accessible to every engineering student, from first semester through final year.
+            </p>
+          </div>
+        </section>
+
+        {/* ── Stats ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 py-12">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {STATS.map(({ label, value, icon: Icon }) => (
+              <div
+                key={label}
+                className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 text-center shadow-sm"
+              >
+                <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center mx-auto mb-3">
+                  <Icon className="w-5 h-5 text-blue-600 dark:text-blue-400" />
                 </div>
-              ))}
+                <p className="text-2xl font-bold text-gray-900 dark:text-gray-100">{value}</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ── Mission & Vision ── */}
+        <section className="max-w-4xl mx-auto px-4 sm:px-6 pb-12">
+          <div className="grid sm:grid-cols-2 gap-4">
+            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-8 h-8 rounded-lg bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center">
+                  <HiLightningBolt className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                </span>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Our Mission</h3>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                To provide free, high-quality academic resources — notes, past papers, and mock tests — to every engineering student at FWU, removing barriers to learning and supporting academic excellence.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-6 shadow-sm">
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-8 h-8 rounded-lg bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
+                  <HiGlobeAlt className="w-4 h-4 text-indigo-600 dark:text-indigo-400" />
+                </span>
+                <h3 className="font-semibold text-gray-900 dark:text-gray-100">Our Vision</h3>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+                To become the go-to digital platform for all FWU engineering students — a collaborative hub where seniors help juniors, knowledge flows freely, and every batch leaves a resource legacy for the next.
+              </p>
             </div>
           </div>
-        </section> */}
-        <Testimonials/>
+        </section>
+
+        {/* ── Timeline ── */}
+        <section className="bg-white dark:bg-gray-900 border-y border-gray-100 dark:border-gray-800 py-16">
+          <div className="max-w-3xl mx-auto px-4 sm:px-6">
+            <div className="text-center mb-10">
+              <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide mb-3">
+                Our Journey
+              </span>
+              <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100">How We Got Here</h2>
+            </div>
+
+            <div className="relative">
+              {/* Vertical line */}
+              <div className="absolute left-5 top-0 bottom-0 w-px bg-gray-200 dark:bg-gray-700" />
+
+              <div className="space-y-8">
+                {TIMELINE.map((item, i) => (
+                  <div key={i} className="relative flex gap-6 pl-14">
+                    {/* Circle on timeline */}
+                    <div className="absolute left-0 top-1 w-10 h-10 rounded-full bg-white dark:bg-gray-900 border-2 border-blue-400 dark:border-blue-500 flex items-center justify-center shrink-0 z-10">
+                      <span className="w-3 h-3 rounded-full bg-blue-500 dark:bg-blue-400" />
+                    </div>
+
+                    <div className="flex-1 bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-xl p-5">
+                      <time className="text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 mb-1 block">
+                        {item.year}
+                      </time>
+                      <h3 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{item.title}</h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ── Team ── */}
+        <section className="max-w-5xl mx-auto px-4 sm:px-6 py-16">
+          <div className="text-center mb-10">
+            <span className="inline-block px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide mb-3">
+              The People Behind It
+            </span>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">Executive Committee 2080/81</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400">The dedicated team that built and runs SOE Notes.</p>
+          </div>
+
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+            {TEAM.map((member, i) => {
+              const showAvatar = member.image && !imgErrors[member.name];
+              return (
+                <div
+                  key={member.name}
+                  className="bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 rounded-2xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md hover:border-blue-200 dark:hover:border-blue-700 transition-all group"
+                >
+                  {/* Avatar */}
+                  {showAvatar ? (
+                    <img
+                      src={member.image}
+                      alt={member.name}
+                      onError={() => setImgErrors(e => ({ ...e, [member.name]: true }))}
+                      className="w-16 h-16 rounded-full object-cover ring-2 ring-white dark:ring-gray-700 mb-3 group-hover:ring-blue-200 dark:group-hover:ring-blue-700 transition-all"
+                    />
+                  ) : (
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br ${AVATAR_GRADIENTS[i % AVATAR_GRADIENTS.length]} flex items-center justify-center text-white font-bold text-lg ring-2 ring-white dark:ring-gray-700 mb-3 shrink-0`}>
+                      {initials(member.name)}
+                    </div>
+                  )}
+
+                  {/* Name */}
+                  <p className="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-snug mb-1">
+                    {member.name}
+                  </p>
+
+                  {/* Role badge */}
+                  <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${ROLE_COLORS[member.role] ?? ROLE_COLORS['Member']}`}>
+                    {member.role}
+                  </span>
+
+                  {/* Link */}
+                  {member.url && (
+                    <a
+                      href={member.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500 hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                    >
+                      <HiExternalLink className="w-3.5 h-3.5" /> Profile
+                    </a>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+
+        {/* ── Contact CTA ── */}
+        <section className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-14">
+          <div className="max-w-xl mx-auto px-4 text-center">
+            <div className="w-12 h-12 rounded-2xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center mx-auto mb-4">
+              <HiMail className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">Want to Contribute?</h2>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mb-6 leading-relaxed">
+              Have notes, past papers, or ideas to improve SOE Notes? We welcome contributions from every batch of FWU engineering students.
+            </p>
+            <a
+              href="mailto:pradip.bhatt@securitypalhq.com"
+              className="inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm"
+            >
+              <HiMail className="w-4 h-4" /> Get in Touch
+            </a>
+          </div>
+        </section>
+
       </div>
-      
-      <Chat/>
+      <Chat />
       <Footer />
     </>
   );
 }
-
-export default About;

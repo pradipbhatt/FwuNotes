@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from "../../config";
 import axios from 'axios';
 import { ClipLoader } from 'react-spinners';
 import { FaArrowCircleUp, FaArrowCircleDown } from 'react-icons/fa'; // Importing icons
@@ -46,7 +47,7 @@ const Quiz = () => {
 
   const fetchQuizzes = async () => {
     try {
-      const response = await axios.get('https://fwu-soe.vercel.app/api/quizzes/');
+      const response = await axios.get(`${API_BASE_URL}/api/quizzes/`);
       const sortedQuizzes = response.data.sort((a, b) => a.yearID - b.yearID);
       setQuizzes(sortedQuizzes);
     } catch (error) {
@@ -73,11 +74,11 @@ const Quiz = () => {
 
     try {
       if (editMode) {
-        await axios.put(`https://fwu-soe.vercel.app/api/quizzes/${currentQuiz._id}`, quizData);
+        await axios.put(`${API_BASE_URL}/api/quizzes/${currentQuiz._id}`, quizData);
         setError(''); // Clear any previous errors
         setEditMode(false);
       } else {
-        await axios.post('https://fwu-soe.vercel.app/api/quizzes/', quizData);
+        await axios.post(`${API_BASE_URL}/api/quizzes/`, quizData);
         setError(''); // Clear any previous errors
       }
       setQuestion('');
@@ -123,7 +124,7 @@ const Quiz = () => {
 
   const handleDeleteQuiz = async (quizId) => {
     try {
-      await axios.delete(`https://fwu-soe.vercel.app/api/quizzes/${quizId}`);
+      await axios.delete(`${API_BASE_URL}/api/quizzes/${quizId}`);
       fetchQuizzes(); // Refresh the list after deletion
     } catch (error) {
       console.error('Error deleting quiz:', error);

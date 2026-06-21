@@ -11,16 +11,16 @@ import Chat from '../AI/Chat';
 import Mocktest from "./Mocktest";
 
 const years = [
-  { year: 2071, slogan: "Your gateway to success! 🚀" },
-  { year: 2072, slogan: "The future starts here! 🌟" },
-  { year: 2073, slogan: "Achieve your dreams with us! 🎯" },
-  { year: 2074, slogan: "Innovation and excellence await! ✨" },
-  { year: 2075, slogan: "Excel in your path to success! 🏆" },
-  { year: 2076, slogan: "Unlock your potential! 🔓" },
-  { year: 2077, slogan: "Shape your future with knowledge! 📚" },
-  { year: 2078, slogan: "Lead the way to success! 🌟" },
-  { year: 2079, slogan: "Your journey to greatness begins here! 🛤️" },
-  { year: 2080, slogan: "Set your sights on success! 🎓" }
+  { year: 2071, slogan: "Your gateway to success" },
+  { year: 2072, slogan: "The future starts here" },
+  { year: 2073, slogan: "Achieve your dreams" },
+  { year: 2074, slogan: "Innovation and excellence" },
+  { year: 2075, slogan: "Excel in your path" },
+  { year: 2076, slogan: "Unlock your potential" },
+  { year: 2077, slogan: "Shape your future" },
+  { year: 2078, slogan: "Lead the way to success" },
+  { year: 2079, slogan: "Your journey to greatness" },
+  { year: 2080, slogan: "Set your sights on success" }
 ];
 
 const Mock = () => {
@@ -118,118 +118,66 @@ const Mock = () => {
 
   return (
     <>
-    <div className="relative bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-    <div
-    className="relative py-20" // Added margin-top class for 50px top margin
-    style={{
-      background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 100, 200, 0.5))', // Softer neon gradient // Light white to neon gradient
-      backgroundSize: 'cover',
-      backgroundAttachment: 'fixed',
-      backgroundBlendMode: 'overlay', // Ensure proper blending
-    }}
-  >
-
-
-      <div className="relative z-10">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
         <Navbar />
 
-        {/* {showNotice && (
-          <div className="fixed top-10 left-0 right-14 bg-gray-800 dark:bg-gray-700 text-white p-4 z-50 shadow-lg flex justify-between items-center rounded-b-lg w-1/3">
-            <div className="font-bold">
-              <p className="text-lg">
-                After completing the test, please fill out the form with your real name.
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-24 pb-24">
+          {/* Header */}
+          <div className="text-center mb-10" data-aos="fade-down">
+            <img src={logo} alt="FWU Logo" className="mx-auto w-20 h-auto mb-4 drop-shadow" />
+            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-1">Far Western University</h1>
+            <p className="text-gray-500 dark:text-gray-400 text-sm">Faculty of Engineering · Mahendranagar, Kanchanpur</p>
+            <span className="inline-block mt-3 px-3 py-1 rounded-full bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300 text-xs font-semibold tracking-wide">
+              BE Entrance Examination
+            </span>
+          </div>
+
+          {/* Admission Guidelines */}
+          <div className="mb-10 bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4 shadow-sm" data-aos="fade-up">
+            <div className="flex-1">
+              <h2 className="text-base font-semibold text-gray-900 dark:text-gray-100 mb-1">Admission Guidelines</h2>
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+                Eligibility criteria, application procedures, and important details for FWU Faculty of Engineering admissions.
               </p>
             </div>
-            <button
-              className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
-             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
-             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
-             text-lg font-semibold"
-              onClick={handleDismissNotice}
+            <Link
+              to="/AdmissionGuidelines"
+              className="shrink-0 px-5 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-colors shadow-sm"
             >
-              Dismiss
-            </button>
-          </div>
-        )} */}
-
-        <div className="container mx-auto text-center mt-2 p-4 text-gray-100">
-          <div className="header mb-8" data-aos="fade-right">
-            <img src={logo} alt="University Logo" className="mx-auto w-24 h-auto mb-4" />
-            <h1 className="text-3xl font-bold mb-2  text-gray-900">Far Western University</h1>
-            <h2 className="text-xl mb-2 text-gray-900">Faculty of Engineering</h2>
-            <h3 className="text-lg mb-4 text-gray-900">Mahendranagar, Kanchanpur, Nepal</h3>
-            <h4 className="text-lg text-gray-900">BE Entrance Examination</h4>
-          </div>
-        </div>
-
-        {/* Admission Guidelines Card */}
-        <div className="max-w-md mx-auto bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out mt-8 mb-8 relative z-10">
-          <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4">📚 Admission Guidelines</h2>
-            <p className="text-gray-700 dark:text-gray-300 mb-6">
-              The admission guidelines for Far Western University's Faculty of Engineering provide a comprehensive overview of the admission process, including eligibility criteria, application procedures, and other important details.
-            </p>
-            <Link to={`/AdmissionGuidelines/`}>
-              <button
-                className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
-             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
-             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
-             text-lg font-semibold"
-                onClick={() => handleTestNowClick()}
-              >
-                View Guidelines
-              </button>
+              View Guidelines
             </Link>
           </div>
-        </div>
 
-        {/* Entrance Papers Cards */}
-        <div className="flex-grow flex justify-center items-center mt-8 mb-8 mx-10 relative z-10">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {/* Year cards */}
+          <h2 className="text-lg font-semibold text-gray-800 dark:text-gray-200 mb-4">Select Entrance Paper</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
             {years.map((item, index) => (
-              <div
+              <button
                 key={item.year}
-                className="max-w-sm mx-auto bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 ease-in-out mb-8 relative"
                 data-aos="fade-up"
-                data-aos-delay={`${index * 100}`} // Adjust delay timing
+                data-aos-delay={`${index * 50}`}
+                onClick={() => handleTestNowClick(item.year)}
+                className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl p-5 flex flex-col items-center gap-3 hover:border-blue-400 dark:hover:border-blue-500 hover:shadow-md transition-all duration-200 text-left"
               >
-               
-                  <div className="relative z-10 p-6 flex flex-col items-center">
-                    <h2 className="text-xl font-bold mb-2">📝 Entrance Paper of {item.year}</h2>
-                    <p className="text-gray-600 dark:text-gray-400 mb-4">
-                      <span className="font-medium"></span> {item.slogan}
-                    </p>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="h-12 w-12 mb-4 text-gray-700 dark:text-gray-300" viewBox="0 0 16 16">
-                      <path d="M2.5 3A1.5 1.5 0 0 0 1 4.5v.793c.026.009.051.02.076.032L7.674 8.5A2.5 2.5 0 0 1 9.5 10h4.5A2.5 2.5 0 0 1 16 12.5v.793c.026.009.051.02.076.032L16 13v-7h1a1.5 1.5 0 0 0 1.5-1.5V4.5A1.5 1.5 0 0 0 17 3H2.5zM1 7.5V4.5a2.5 2.5 0 0 1 2.5-2.5h11A2.5 2.5 0 0 1 17 4.5v3a2.5 2.5 0 0 1-2.5 2.5H2.5A2.5 2.5 0 0 1 1 7.5zm6 2.622a.75.75 0 0 1 .75-.75h.5a.75.75 0 0 1 .75.75v2.378a.75.75 0 0 1-.75.75h-.5a.75.75 0 0 1-.75-.75v-2.378z"/>
-                    </svg>
-                    <button
-  className="bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white py-2 px-4 rounded-full
-             focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75 transition-all duration-300 ease-in-out
-             shadow-lg shadow-blue-500 hover:shadow-2xl dark:shadow-blue-600 dark:hover:shadow-2xl hover:shadow-blue-600 dark:hover:shadow-blue-700
-             text-lg font-semibold"
-  onClick={() => handleTestNowClick(item.year)}
->
-  Start Test
-</button>
-
-
-                  </div>
-               
-              </div>
+                <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/30 flex items-center justify-center group-hover:bg-blue-100 dark:group-hover:bg-blue-900/50 transition-colors">
+                  <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.8" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                </div>
+                <div className="text-center">
+                  <p className="text-base font-bold text-gray-900 dark:text-gray-100">{item.year}</p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 leading-tight">{item.slogan.split("!")[0]}</p>
+                </div>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-semibold group-hover:underline">Start Test →</span>
+              </button>
             ))}
           </div>
         </div>
-      </div>
 
-      {/* Audio Player
-      {musicUrl && (
-        <audio ref={audioRef} src={musicUrl} preload="auto" />
-      )} */}
-    </div>
-    <Mocktest/>
-    </div>
-    <Chat/>
-    <Footer/>
+        <Mocktest />
+      </div>
+      <Chat />
+      <Footer />
     </>
   );
 };

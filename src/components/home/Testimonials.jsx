@@ -1,150 +1,132 @@
-import React, { useEffect } from 'react';
-import Swiper from 'swiper';
-import { Navigation, Pagination, Keyboard, Mousewheel } from 'swiper/modules';
-import jelina from "../../../public/u.jpg"
-import pradip from "../../../public/pradip.jpg"
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/keyboard';
-import 'swiper/css/mousewheel';
+import React, { useState } from 'react';
+import jelina from '../../../public/u.jpg';
+import pradip from '../../../public/pradip.jpg';
 
-const Testimonials = () => {
-  const testimonials = [
-    {
-      name: 'Pradip Bhatt',
-      title: 'CSE Student & Backend Developer || President:i-CEC',
-      company: 'Far Western University',
-      img: pradip,
-      quoteTitle: 'Software Developer ',
-      quote: 'SOE Notes is a testament to our commitment to excellence and innovation in education.',
-      rating: 5
-    },
-    {
-      name: 'Jelina Bhatt',
-      title: 'CSE Student 4th Batch',
-      company: 'Far Western University',
-      img:jelina,
-      quoteTitle: 'Resourceful Support',
-      quote: 'SOE Notes brings a new perspective to comparing educational institutions and providing essential resources.',
-      rating: 4
-    },
-    {
-      name: 'Bijay Saud',
-      title: 'CSE Student',
-      company: 'Far Western University',
-      img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images',
-      quoteTitle: 'Handwritten Notes Provider Second Batch',
-      quote: 'The handwritten notes provided by Bijay have been crucial in supporting our education.',
-      rating: 5
-    },
-    {
-      name: 'Mukul Bhatt',
-      title: 'CSE Student',
-      company: 'Far Western University',
-      img: 'https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.0LvP1YUJ2stgbrp2srwnFQHaHa%26pid%3DApi&f=1&ipt=ddf716b3788446dcbd7f45a2832d3cc0fe2b87706fadfd17cc54c66862cbd968&ipo=images',
-      quoteTitle: 'Handwritten Notes Provider Second Batch',
-      quote: 'The handwritten notes provided by Mukul have been crucial in supporting our education.',
-      rating: 5
-    }
-  ];
+const TESTIMONIALS = [
+  {
+    name: 'Pradip Bhatt',
+    role: 'President, i-CEC',
+    batch: '4th Batch · CSE',
+    img: pradip,
+    quote: 'SOE Notes is a testament to our commitment to excellence and innovation in education. It brings everything a student needs — notes, mock tests, AI tools — into one place.',
+    rating: 5,
+    initials: 'PB',
+  },
+  {
+    name: 'Jelina Bhatt',
+    role: 'Contributor',
+    batch: '4th Batch · CSE',
+    img: jelina,
+    quote: 'SOE Notes brings a fresh perspective to education by providing essential resources exactly when students need them most. It has made learning so much more accessible.',
+    rating: 4,
+    initials: 'JB',
+  },
+  {
+    name: 'Bijay Saud',
+    role: 'Notes Provider',
+    batch: '2nd Batch · CSE',
+    img: null,
+    quote: 'The handwritten notes I contributed have helped countless students. Seeing them reach so many learners through this platform is incredibly rewarding.',
+    rating: 5,
+    initials: 'BS',
+  },
+  {
+    name: 'Mukul Bhatt',
+    role: 'Notes Provider',
+    batch: '2nd Batch · CSE',
+    img: null,
+    quote: 'Contributing my notes to SOE Notes has been a fulfilling experience. The platform makes quality resources freely accessible to everyone — exactly what education should be.',
+    rating: 5,
+    initials: 'MB',
+  },
+];
 
-  useEffect(() => {
-    // Initialize Swiper after component mounts
-    const swiper = new Swiper('.swiper', {
-      // Configure Swiper to use modules
-      modules: [Navigation, Pagination, Keyboard, Mousewheel],
-      spaceBetween: 30, // Gap between slides
-      slidesPerView: 1, // Number of slides to show at once
-      navigation: true, // Show navigation arrows
-      pagination: {
-        el: '.swiper-pagination',
-        clickable: true, // Make pagination dots clickable
-      },
-      autoplay: {
-        delay: 5000, // Auto slide delay (5 seconds)
-        disableOnInteraction: false, // Continue autoplay after user interaction
-      },
-      loop: true, // Infinite loop
-      keyboard: {
-        enabled: true, // Enable keyboard control
-      },
-      breakpoints: {
-        // Responsive breakpoints
-        640: {
-          slidesPerView: 1,
-        },
-        768: {
-          slidesPerView: 1,
-        },
-        1024:{
-          slidesPerView: 2,
-        }
-      },
-    });
+const INITIALS_BG = [
+  'bg-stone-600',
+  'bg-neutral-600',
+  'bg-slate-600',
+  'bg-zinc-600',
+];
 
-    return () => {
-      // Clean up Swiper instance on component unmount
-      swiper.destroy();
-    };
-  }, []);
+function Stars({ count }) {
+  return (
+    <div className="flex gap-0.5">
+      {Array.from({ length: 5 }).map((_, i) => (
+        <svg key={i} className={`w-3.5 h-3.5 ${i < count ? 'text-amber-500' : 'text-gray-200 dark:text-gray-700'}`} fill="currentColor" viewBox="0 0 20 20">
+          <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+        </svg>
+      ))}
+    </div>
+  );
+}
+
+export default function Testimonials() {
+  const [imgErrors, setImgErrors] = useState({});
 
   return (
-    <div
-  className="container mx-auto px-8 sm:mt-0 mt-0 border border-gray-100 dark:border-gray-700 rounded-lg shadow-lg"
-  style={{
-    background: 'linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(100, 200, 255, 0.5) 50%, rgba(255, 182, 193, 0.5))', // Softer neon gradient
-    color: 'white', // Ensuring text is readable on dark backgrounds
-  }}
->
-    <h1 className="text-4xl font-serif text-center mb-12 text-gray-900 dark:text-gray-100">Testimonials</h1>
-    <div className="swiper">
-      <div className="swiper-wrapper">
-        {testimonials.map((testimonial, index) => (
-          <div
-            key={index}
-            className="swiper-slide bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 rounded-lg p-6 shadow-lg mx-auto my-8 lg:my-12 transition-transform transform hover:scale-105"
-          >
-            <div className="overflow-hidden rounded-full w-24 h-24 mx-auto mb-6">
-              <img
-                src={testimonial.img}
-                alt={testimonial.name}
-                className="w-full h-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-110"
-              />
-            </div>
-            <div className="text-center">
-              <h4 className="text-lg font-semibold text-blue-600 dark:text-blue-400 hover:text-bringal transition-colors duration-300">
-                <span className="text-pink-900 dark:text-blue-300">{testimonial.name}</span>
-              </h4>
-              <p className="text-sm text-gray-700 dark:text-gray-300 mb-2">
-                <span className="text-black-900 dark:text-white">{testimonial.title}</span> | <span className="text-orange-900 dark:text-orange-400">{testimonial.company}</span>
-              </p>
-              <h2 className="italic text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
-                <span className="text-blue-600 dark:text-blue-300">{testimonial.quoteTitle}</span>
-              </h2>
-              <p className="text-sm text-gray-600 dark:text-gray-200 leading-relaxed">
-                {testimonial.quote}
-              </p>
-              <div className="flex justify-center mt-4">
-                {[...Array(testimonial.rating)].map((_, starIndex) => (
-                  <svg key={starIndex} className="w-5 h-5 fill-current text-yellow-500" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                ))}
-                {[...Array(5 - testimonial.rating)].map((_, starIndex) => (
-                  <svg key={starIndex} className="w-5 h-5 fill-current text-gray-500 dark:text-gray-600" viewBox="0 0 14 13" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="swiper-pagination"></div>
-    </div>
-  </div>
-  );
-};
+    <section className="bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 py-16 px-4">
+      <div className="max-w-5xl mx-auto">
 
-export default Testimonials;
+        {/* Header */}
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 dark:text-gray-500 mb-3">
+            Community Voices
+          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+            What Students Say
+          </h2>
+          <p className="text-sm text-gray-400 dark:text-gray-500 max-w-sm mx-auto">
+            From the people who built and use SOE Notes every day.
+          </p>
+        </div>
+
+        {/* Grid */}
+        <div className="grid sm:grid-cols-2 gap-5">
+          {TESTIMONIALS.map((t, i) => {
+            const showPhoto = t.img && !imgErrors[t.name];
+            return (
+              <div
+                key={t.name}
+                className="bg-gray-50 dark:bg-gray-800/70 border border-gray-200 dark:border-gray-700 rounded-2xl p-6 flex flex-col gap-5 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
+              >
+                {/* Top: stars + quote mark */}
+                <div className="flex items-start justify-between">
+                  <Stars count={t.rating} />
+                  <span className="text-4xl font-serif leading-none text-gray-200 dark:text-gray-700 select-none -mt-1" aria-hidden>
+                    "
+                  </span>
+                </div>
+
+                {/* Quote */}
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed flex-1">
+                  {t.quote}
+                </p>
+
+                {/* Person row */}
+                <div className="flex items-center gap-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                  {showPhoto ? (
+                    <img
+                      src={t.img}
+                      alt={t.name}
+                      onError={() => setImgErrors(e => ({ ...e, [t.name]: true }))}
+                      className="w-14 h-14 rounded-full object-cover ring-2 ring-gray-100 dark:ring-gray-700 shrink-0"
+                    />
+                  ) : (
+                    <div className={`w-14 h-14 rounded-full ${INITIALS_BG[i % INITIALS_BG.length]} flex items-center justify-center text-white text-base font-semibold ring-2 ring-gray-100 dark:ring-gray-700 shrink-0`}>
+                      {t.initials}
+                    </div>
+                  )}
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">{t.name}</p>
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{t.role}</p>
+                    <p className="text-xs text-gray-400 dark:text-gray-500">{t.batch}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

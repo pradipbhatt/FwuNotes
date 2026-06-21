@@ -4,6 +4,15 @@
 @tailwind components;
 @tailwind utilities;
 
+html, body, #root {
+  min-height: 100%;
+  background-color: #f3f4f6; /* gray-100 — light mode default */
+}
+
+html.dark, html.dark body, html.dark #root {
+  background-color: #0f172a; /* slate-900 — dark mode default */
+}
+
 body {
   font-family: "Poppins", sans-serif;
 }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { API_BASE_URL } from "../../config";
 
 const QuizResultForm = () => {
   const [quizResults, setQuizResults] = useState([]);
@@ -18,7 +19,7 @@ const QuizResultForm = () => {
   }, []);
 
   const fetchQuizResults = () => {
-    fetch('https://fwu-soe.vercel.app/api/quiz-results/')
+    fetch(`${API_BASE_URL}/api/quiz-results/`)
       .then(response => response.json())
       .then(data => {
         setQuizResults(data);
@@ -31,7 +32,7 @@ const QuizResultForm = () => {
 
     if (formMode === 'add') {
       // Add new quiz result
-      fetch('https://fwu-soe.vercel.app/api/quiz-results/', {
+      fetch(`${API_BASE_URL}/api/quiz-results/`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -46,7 +47,7 @@ const QuizResultForm = () => {
       .catch(error => console.error('Error submitting quiz result:', error));
     } else if (formMode === 'update' && selectedQuizResultId) {
       // Update existing quiz result
-      fetch(`https://fwu-soe.vercel.app/api/quiz-results/${selectedQuizResultId}`, {
+      fetch(`${API_BASE_URL}/api/quiz-results/${selectedQuizResultId}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
@@ -83,7 +84,7 @@ const QuizResultForm = () => {
   };
 
   const handleDeleteQuizResult = (id) => {
-    fetch(`https://fwu-soe.vercel.app/api/quiz-results/${id}`, {
+    fetch(`${API_BASE_URL}/api/quiz-results/${id}`, {
       method: 'DELETE',
     })
     .then(response => {
