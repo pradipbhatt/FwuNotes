@@ -1,83 +1,125 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { HiSearch, HiX } from 'react-icons/hi';
 
-const SearchComponent = ({ books, setFilteredBooks, setShowSuggestions, setSelectedBook }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+const SearchComponent = ({ books, setFilteredBooks, setSelectedBook }) => {
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
+  // Debounced filter — runs 300 ms after the user stops typing
   useEffect(() => {
-    if (searchQuery.trim() === '') {
-      setFilteredBooks(books);
-      setShowSuggestions(false);
-    } else {
-      const lowercasedQuery = searchQuery.toLowerCase();
-
-      const filtered = books
-        .filter(book => book.bookTitle.toLowerCase().includes(lowercasedQuery))
+    const id = setTimeout(() => {
+      const q = query.trim().toLowerCase();
+      if (!q) {
+        setFilteredBooks(books);
+        setOpen(false);
+        return;
+      }
+      const results = books
+        .filter(b => b.bookTitle.toLowerCase().includes(q))
         .sort((a, b) => {
-          const aTitle = a.bookTitle.toLowerCase();
-          const bTitle = b.bookTitle.toLowerCase();
-          
-          // Sort by whether title starts with the search query
-          const aStartsWithQuery = aTitle.startsWith(lowercasedQuery);
-          const bStartsWithQuery = bTitle.startsWith(lowercasedQuery);
-
-          if (aStartsWithQuery && !bStartsWithQuery) return -1;
-          if (!aStartsWithQuery && bStartsWithQuery) return 1;
-
-          // Sort alphabetically if both or neither start with the query
-          return aTitle.localeCompare(bTitle);
+          const aS = a.bookTitle.toLowerCase().startsWith(q);
+          const bS = b.bookTitle.toLowerCase().startsWith(q);
+          if (aS && !bS) return -1;
+          if (!aS && bS) return 1;
+          return a.bookTitle.localeCompare(b.bookTitle);
         });
+      setFilteredBooks(results);
+      setOpen(results.length > 0);
+    }, 300);
+    return () => clearTimeout(id);
+  }, [query, books, setFilteredBooks]);
 
-      setFilteredBooks(filtered);
-      setShowSuggestions(true);
-    }
-  }, [searchQuery, books, setFilteredBooks, setShowSuggestions]);
+  // Dropdown suggestions — same computation, memoised separately for the list
+  const suggestions = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return [];
+    return books
+      .filter(b => b.bookTitle.toLowerCase().includes(q))
+      .sort((a, b) => {
+        const aS = a.bookTitle.toLowerCase().startsWith(q);
+        const bS = b.bookTitle.toLowerCase().startsWith(q);
+        if (aS && !bS) return -1;
+        if (!aS && bS) return 1;
+        return a.bookTitle.localeCompare(b.bookTitle);
+      })
+      .slice(0, 8);
+  }, [query, books]);
 
-  const handleSelectBook = (book) => {
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handler = (e) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target)) setOpen(false);
+    };
+    document.addEventListener('mousedown', handler);
+    return () => document.removeEventListener('mousedown', handler);
+  }, []);
+
+  const handleSelect = (book) => {
     setSelectedBook(book);
-    setSearchQuery('');
-    setShowSuggestions(false);
+    setQuery('');
+    setOpen(false);
+  };
+
+  const clear = () => {
+    setQuery('');
+    setFilteredBooks(books);
+    setOpen(false);
   };
 
   return (
-    <div className="relative top-10 left-0 right-0 z-10 mt-16 sm:mt-20 md:mt-28 lg:my-4 max-w-2xl mx-auto">
-      <input
-        type="text"
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        placeholder="Search any Book..."
-        className="w-full px-4 py-2 border border-gray-300 rounded-md bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-400 transition duration-300 ease-in-out shadow-md dark:shadow-sm"
-      />
+    <div ref={wrapperRef} className="relative z-30 max-w-xl mx-auto mt-20 mb-6">
+      {/* Input */}
+      <div className="relative">
+        <HiSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400 pointer-events-none" />
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onFocus={() => suggestions.length > 0 && setOpen(true)}
+          placeholder="Search notes by title…"
+          className="w-full pl-10 pr-10 py-2.5 text-sm rounded-xl border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 shadow-sm transition"
+        />
+        {query && (
+          <button
+            onClick={clear}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 transition-colors"
+            aria-label="Clear search"
+          >
+            <HiX className="w-4 h-4" />
+          </button>
+        )}
+      </div>
 
-      {searchQuery && (
-        <ul className="absolute z-20 w-full mt-2 bg-white bg-opacity-70 backdrop-blur-md dark:bg-gray-800 dark:bg-opacity-70 shadow-lg rounded-lg border border-gray-300 dark:border-gray-600 h-64 overflow-auto ring-1 ring-gray-300 dark:ring-gray-600">
-          {books
-            .filter(book => book.bookTitle.toLowerCase().includes(searchQuery.toLowerCase()))
-            .sort((a, b) => {
-              const lowercasedQuery = searchQuery.toLowerCase();
-              const aTitle = a.bookTitle.toLowerCase();
-              const bTitle = b.bookTitle.toLowerCase();
-
-              // Sort by whether title starts with the search query
-              const aStartsWithQuery = aTitle.startsWith(lowercasedQuery);
-              const bStartsWithQuery = bTitle.startsWith(lowercasedQuery);
-
-              if (aStartsWithQuery && !bStartsWithQuery) return -1;
-              if (!aStartsWithQuery && bStartsWithQuery) return 1;
-
-              // Sort alphabetically if both or neither start with the query
-              return aTitle.localeCompare(bTitle);
-            })
-            .map((book) => (
-              <li
-                key={book._id}
-                className="px-4 py-3 text-sm cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-150 ease-in-out focus:outline-none text-gray-900 dark:text-white"
-                onClick={() => handleSelectBook(book)}
-                role="option"
-                aria-selected="false"
-              >
-                {book.bookTitle}
-              </li>
-            ))}
+      {/* Dropdown */}
+      {open && suggestions.length > 0 && (
+        <ul
+          role="listbox"
+          className="absolute top-full mt-1.5 w-full max-h-60 overflow-y-auto bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl shadow-xl divide-y divide-gray-50 dark:divide-gray-700"
+        >
+          {suggestions.map((book) => (
+            <li
+              key={book._id}
+              role="option"
+              aria-selected="false"
+              onClick={() => handleSelect(book)}
+              className="flex items-center gap-3 px-4 py-2.5 cursor-pointer hover:bg-blue-50 dark:hover:bg-gray-700 transition-colors"
+            >
+              {book.image && (
+                <img
+                  src={book.image}
+                  alt=""
+                  className="w-8 h-8 rounded object-cover shrink-0"
+                  loading="lazy"
+                  onError={(e) => { e.currentTarget.style.display = 'none'; }}
+                />
+              )}
+              <div className="min-w-0">
+                <p className="text-sm text-gray-900 dark:text-gray-100 truncate">{book.bookTitle}</p>
+                <p className="text-xs text-gray-400 dark:text-gray-500">Semester {book.semester}</p>
+              </div>
+            </li>
+          ))}
         </ul>
       )}
     </div>
